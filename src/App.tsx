@@ -98,36 +98,26 @@ export const AppContent = (): JSX.Element => {
         <main className="relative">
           <div className="relative">
             <Hero />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(10,10,10,0.8) 100%)'}} />
           </div>
           <div className="relative">
             <SelectedWorks />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.3) 50%, rgba(15,15,15,0.8) 100%)'}} />
           </div>
           <div className="relative">
             <SideProjects />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
           </div>
           <div className="relative" data-animate>
             <About />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
           </div>
           <div className="relative" data-animate>
             <Services />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
           </div>
           <div className="relative" data-animate>
             <PaymentTerms />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
           </div>
           <div className="relative" data-animate>
             <Contact />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
           </div>
         </main>
-        <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
-          {/* ...footer code... */}
-        </footer>
       </div>
     </>
   );

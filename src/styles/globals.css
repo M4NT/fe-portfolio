@@ -29,6 +29,17 @@ body {
   display: none;
 }
 
+/* Remove elementos brancos problemáticos */
+* {
+  box-shadow: none !important;
+}
+
+/* Remove glows brancos */
+*::before,
+*::after {
+  box-shadow: none !important;
+}
+
 /* Container principal sem overflow */
 #root {
   overflow-x: hidden;
