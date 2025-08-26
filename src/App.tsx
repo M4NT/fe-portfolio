@@ -9,6 +9,7 @@ import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
 import Contact from './components/Contact';
+import FAQ from './components/FAQ';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Footer from './components/Footer';
@@ -61,7 +62,7 @@ export const AppContent = (): JSX.Element => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const sections = ['home', 'works', 'projects', 'about', 'services', 'contact'];
+      const sections = ['home', 'works', 'projects', 'about', 'services', 'contact', 'faq'];
       
       sections.forEach((sectionId) => {
         const section = document.getElementById(sectionId);
@@ -116,6 +117,11 @@ export const AppContent = (): JSX.Element => {
           </div>
           <div className="relative" data-animate>
             <Contact />
+          </div>
+          
+          {/* FAQ Section */}
+          <div className="relative" data-animate>
+            <FAQ />
           </div>
         </main>
       </div>
