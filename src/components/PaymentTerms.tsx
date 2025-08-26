@@ -163,7 +163,7 @@ const PaymentTerms = () => {
     <section 
       id="payment-terms" 
       ref={containerRef}
-      className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32"
       style={{
         background: `
           linear-gradient(180deg, #0a0a0a 0%, #050505 50%, black 100%),
@@ -173,7 +173,7 @@ const PaymentTerms = () => {
       }}
     >
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0">
         <motion.div 
           className="absolute inset-0 opacity-[0.015] hidden md:block"
           style={{ y: backgroundY }}

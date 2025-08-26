@@ -121,7 +121,7 @@ const SideProjects = () => {
     <section 
       id="projects" 
       ref={containerRef}
-      className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32"
       style={{
         background: `
           linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 50%, black 100%),
@@ -131,7 +131,7 @@ const SideProjects = () => {
       }}
     >
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0">
         <motion.div 
           className="absolute inset-0 opacity-[0.03] hidden md:block"
           style={{ y: backgroundY }}

@@ -389,7 +389,7 @@ const Services = () => {
     <section 
       id="services" 
       ref={containerRef}
-      className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32"
       style={{
         background: `
           linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 50%, black 100%),
@@ -399,7 +399,7 @@ const Services = () => {
       }}
     >
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0">
         <motion.div 
           className="absolute inset-0 opacity-[0.02] hidden md:block"
           style={{ y: backgroundY }}

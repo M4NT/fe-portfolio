@@ -154,13 +154,13 @@ const SelectedWorks = () => {
       <section 
         id="works" 
         ref={containerRef}
-        className="relative min-h-screen py-16 sm:py-24 md:py-32 overflow-hidden"
+        className="relative min-h-screen py-16 sm:py-24 md:py-32"
         style={{
           background: 'linear-gradient(180deg, black 0%, #0a0a0a 50%, #1a1a1a 100%)'
         }}
       >
         {/* Morphing Background */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0">
           <motion.div 
             className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl"
             animate={{ 

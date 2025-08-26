@@ -8,6 +8,67 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Reset global de scroll e overflow */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Remove scrollbars duplicados */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Container principal sem overflow */
+#root {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Sistema de scroll único */
+main {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+section {
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Remove scrolls aninhados */
+.overflow-hidden {
+  overflow: visible !important;
+}
+
+/* Garante que apenas o body tenha scroll */
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Remove scrollbars duplicados de elementos específicos */
+.overflow-y-auto,
+.overflow-y-scroll {
+  overflow-y: visible !important;
+}
+
+/* Container de seções sem scroll próprio */
+.section-container {
+  overflow: visible !important;
+  position: relative;
+}
+
 :root {
   --font-size: 14px;
   --background: #000000;

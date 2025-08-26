@@ -62,10 +62,10 @@ const About = () => {
     <section 
       id="about" 
       ref={containerRef}
-      className="relative py-32 bg-black noise-bg overflow-hidden"
+      className="relative py-32 bg-black noise-bg"
     >
       {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0">
         <motion.div 
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-3xl"
           animate={{ 

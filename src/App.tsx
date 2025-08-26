@@ -20,18 +20,14 @@ export const AppContent = (): JSX.Element => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    // Revolutionary smooth scrolling with advanced easing
+    // Configuração de scroll único e fluido
     document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowY = 'auto';
 
-    // Removido efeito magnético para melhorar a movimentação do cursor
-
-    // Removido efeito de elementos flutuantes para melhorar a performance do cursor
-
-    document.body.style.overflow = 'hidden';
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.style.overflow = 'unset';
-    }, 4000); // agora 4 segundos
+    }, 4000);
 
     // Advanced intersection observer for skill demonstrations
     const observer = new IntersectionObserver(
@@ -94,7 +90,7 @@ export const AppContent = (): JSX.Element => {
   return (
     <>
       <Preloader visible={loading} />
-      <div className={`relative bg-black text-white overflow-x-hidden${loading ? ' pointer-events-none select-none' : ''}`} style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
+      <div className={`relative bg-black text-white${loading ? ' pointer-events-none select-none' : ''}`} style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
         <CustomCursor />
         <Navigation />
         {/* Global floating chat button */}

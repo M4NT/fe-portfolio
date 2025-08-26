@@ -139,7 +139,7 @@ const Contact = () => {
     <section 
       id="contact" 
       ref={containerRef}
-      className="relative py-20 sm:py-32 md:py-40 overflow-hidden"
+      className="relative py-20 sm:py-32 md:py-40"
       style={{
         background: `
           linear-gradient(180deg, transparent 0%, #000000 30%),
@@ -150,7 +150,7 @@ const Contact = () => {
       }}
     >
       {/* Advanced Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0">
         {/* Animated Gradient Mesh */}
         <motion.div 
           className="absolute inset-0"

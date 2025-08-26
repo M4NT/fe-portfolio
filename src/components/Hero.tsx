@@ -70,7 +70,7 @@ const Hero = () => {
     <section 
       id="home" 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
+      className="relative min-h-screen flex items-center justify-center pt-20 md:pt-0"
       style={{
         background: `
           radial-gradient(ellipse at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
@@ -81,7 +81,7 @@ const Hero = () => {
       }}
     >
       {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0">
         {/* Animated particle system */}
         {particles.map((particle) => (
           <motion.div
