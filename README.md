@@ -1,126 +1,79 @@
-# Portfolio Frontend Developer
+# Frontend Developer Portfolio
 
-Um portfólio moderno e responsivo desenvolvido com React, TypeScript e Vite, apresentando trabalhos selecionados e projetos pessoais de um desenvolvedor frontend.
+Um portfolio moderno e responsivo desenvolvido com React, TypeScript e Vite, demonstrando habilidades em desenvolvimento frontend.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias
 
-- **React 18** - Biblioteca JavaScript para interfaces de usuário
-- **TypeScript** - Superset do JavaScript com tipagem estática
-- **Vite** - Build tool rápido para desenvolvimento moderno
-- **Framer Motion** - Biblioteca de animações para React
-- **Radix UI** - Componentes acessíveis e customizáveis
+- **React 18** - Biblioteca JavaScript para interfaces
+- **TypeScript** - Superset tipado do JavaScript
+- **Vite** - Build tool rápida e moderna
 - **Tailwind CSS** - Framework CSS utilitário
+- **Framer Motion** - Animações fluidas
+- **Radix UI** - Componentes acessíveis e customizáveis
 
-## 📋 Pré-requisitos
+## ✨ Funcionalidades
 
-- Node.js (versão 18 ou superior)
+- Design responsivo e moderno
+- Animações suaves com Framer Motion
+- Componentes UI reutilizáveis
+- Suporte a múltiplos idiomas
+- Chat AI integrado
+- Navegação suave
+- Modo escuro/claro
+
+## 🛠️ Como executar
+
+### Pré-requisitos
+- Node.js 16+ 
 - npm ou yarn
 
-## 🛠️ Instalação
+### Instalação
+```bash
+# Clone o repositório
+git clone https://github.com/M4NT/fe-portfolio.git
 
-1. **Clone o repositório:**
-   ```bash
-   git clone <url-do-repositorio>
-   cd frontend-developer-portfolio
-   ```
+# Entre na pasta
+cd fe-portfolio
 
-2. **Instale as dependências:**
-   ```bash
-   npm install
-   ```
+# Instale as dependências
+npm install
 
-3. **Execute o projeto em modo de desenvolvimento:**
-   ```bash
-   npm run dev
-   ```
+# Execute em desenvolvimento
+npm run dev
 
-4. **Abra o navegador e acesse:**
-   ```
-   http://localhost:3000
-   ```
+# Build para produção
+npm run build
+```
 
-## 📁 Estrutura do Projeto
+## 📱 Deploy
+
+Este projeto está configurado para deploy automático na Vercel com as seguintes configurações:
+
+- **Framework**: Vite
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Node.js Version**: 18.x
+
+## 🎨 Estrutura do Projeto
 
 ```
 src/
-├── components/          # Componentes React reutilizáveis
-│   ├── ui/             # Componentes de interface (Radix UI)
-│   ├── About.tsx       # Seção Sobre
-│   ├── Contact.tsx     # Seção de Contato
-│   ├── FAQ.tsx         # Perguntas Frequentes
-│   ├── Hero.tsx        # Seção principal
-│   ├── Navigation.tsx  # Navegação
-│   ├── Projects.tsx    # Projetos
-│   └── Skills.tsx      # Habilidades
-├── styles/
-│   └── globals.css     # Estilos globais
-├── App.tsx             # Componente principal
-└── main.tsx            # Ponto de entrada
+├── components/          # Componentes React
+│   ├── ui/             # Componentes UI base
+│   └── ...             # Componentes específicos
+├── styles/              # Estilos globais
+├── lib/                 # Utilitários e configurações
+└── types/               # Definições TypeScript
 ```
-
-## 🎯 Funcionalidades
-
-- **Design Responsivo** - Adaptável a todos os dispositivos
-- **Animações Suaves** - Transições e efeitos visuais
-- **Suporte Multi-idioma** - Português, Inglês e Espanhol
-- **Navegação Intuitiva** - Menu de navegação com scroll suave
-- **Portfólio Interativo** - Apresentação de projetos com modais
-- **Formulário de Contato** - Integração para comunicação
-
-## 🚀 Scripts Disponíveis
-
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Cria a versão de produção
-- `npm run preview` - Visualiza a versão de produção
-- `npm run lint` - Executa o linter para verificar código
-
-## 🌐 Deploy
-
-Para fazer o deploy do projeto:
-
-1. **Construa a versão de produção:**
-   ```bash
-   npm run build
-   ```
-
-2. **Os arquivos estarão na pasta `dist/`**
-
-3. **Faça upload para seu serviço de hospedagem preferido**
-
-## 📱 Responsividade
-
-O projeto é totalmente responsivo e funciona perfeitamente em:
-- Desktop (1920px+)
-- Tablet (768px - 1024px)
-- Mobile (320px - 767px)
-
-## 🎨 Personalização
-
-Para personalizar o portfólio:
-
-1. **Edite os textos** nos arquivos de componentes
-2. **Modifique as cores** no arquivo `globals.css`
-3. **Adicione seus projetos** no componente `Projects.tsx`
-4. **Atualize as informações** de contato e sobre
-
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para:
-
-1. Fazer um fork do projeto
-2. Criar uma branch para sua feature
-3. Fazer commit das suas mudanças
-4. Fazer push para a branch
-5. Abrir um Pull Request
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## 📞 Contato
+## 👨‍💻 Autor
 
-Para dúvidas ou sugestões, entre em contato através da seção de contato do portfólio.
+Desenvolvido com ❤️ por [Seu Nome]
 
 ---
 
-**Desenvolvido com ❤️ usando React e TypeScript** 
+⭐ Se este projeto te ajudou, considere dar uma estrela!
