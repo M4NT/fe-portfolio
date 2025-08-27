@@ -39,7 +39,7 @@ export const AppContent = (): JSX.Element => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
-            
+
             // Add skill demonstration effects
             const skillElements = entry.target.querySelectorAll('[data-skill]');
             skillElements.forEach((skillEl, index) => {
@@ -50,7 +50,7 @@ export const AppContent = (): JSX.Element => {
           }
         });
       },
-      { 
+      {
         threshold: 0.1,
         rootMargin: '0px 0px -10% 0px'
       }
@@ -66,13 +66,13 @@ export const AppContent = (): JSX.Element => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const sections = ['home', 'works', 'projects', 'about', 'services', 'contact'];
-      
+
       sections.forEach((sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
           const rect = section.getBoundingClientRect();
           const isVisible = rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.4;
-          
+
           if (isVisible && currentSection !== sectionId) {
             currentSection = sectionId;
             // Trigger section transition effects
@@ -102,36 +102,36 @@ export const AppContent = (): JSX.Element => {
         <main className="relative">
           <div className="relative">
             <Hero />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(10,10,10,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(10,10,10,0.8) 100%)' }} />
           </div>
           <div className="relative">
             <SelectedWorks />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.3) 50%, rgba(15,15,15,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.3) 50%, rgba(15,15,15,0.8) 100%)' }} />
           </div>
           <div className="relative">
             <SideProjects />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
           </div>
           <div className="relative" data-animate>
             <About />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
           </div>
           <div className="relative" data-animate>
             <Services />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
           </div>
           <div className="relative" data-animate>
             <PaymentTerms />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
           </div>
           <div className="relative" data-animate>
             <Contact />
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)'}} />
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
           </div>
         </main>
-        <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
-          {/* ...footer code... */}
-        </footer>
+        {/* <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
+
+        </footer> */}
         <SpeedInsights />
       </div>
     </>
