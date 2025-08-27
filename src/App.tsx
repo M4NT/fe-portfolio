@@ -13,7 +13,7 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Footer from './components/Footer';
 import AISalesChat from './components/AISalesChat';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const AppContent = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
