@@ -93,6 +93,7 @@ export const AppContent = (): JSX.Element => {
 
   return (
     <>
+      <SpeedInsights />
       <Preloader visible={loading} />
       <div className={`relative bg-black text-white overflow-x-hidden${loading ? ' pointer-events-none select-none' : ''}`} style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
         <CustomCursor />
@@ -132,7 +133,6 @@ export const AppContent = (): JSX.Element => {
         {/* <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
 
         </footer> */}
-        <SpeedInsights />
       </div>
     </>
   );
