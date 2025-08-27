@@ -13,7 +13,7 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Footer from './components/Footer';
 import AISalesChat from './components/AISalesChat';
-import { SpeedInsights } from "@vercel/speed-insights/vue"
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export const AppContent = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
@@ -132,6 +132,7 @@ export const AppContent = (): JSX.Element => {
         <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
           {/* ...footer code... */}
         </footer>
+        <SpeedInsights />
       </div>
     </>
   );
