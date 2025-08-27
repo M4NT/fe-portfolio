@@ -1237,7 +1237,7 @@ a, button, [role="button"] {
   /* Prevent horizontal scroll */
   * {
     max-width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 }
 

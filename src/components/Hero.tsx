@@ -208,7 +208,7 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
         >
           <motion.h1 
-            className="font-inter font-light leading-none tracking-[-0.08em] text-white mb-6 md:mb-8 relative glow-text-soft"
+            className="font-inter font-light leading-none tracking-[-0.08em] text-white mb-6 md:mb-8 relative glow-text-soft overflow-hidden"
             style={{
               fontSize: 'clamp(3rem, 12vw, 12rem)',
               textShadow: '0 0 100px rgba(59, 130, 246, 0.3)'
@@ -223,7 +223,7 @@ const Hero = () => {
             transition={{ duration: 4, repeat: Infinity }}
           >
             <motion.span
-              className="inline-block"
+              className=""
               style={{
                 transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`
               }}
@@ -231,14 +231,14 @@ const Hero = () => {
               <span className="glow-text-soft">Yan</span>
             </motion.span>
             <motion.span 
-              className="text-white/40 inline-block mx-2 md:mx-4"
+              className="text-white/40 mx-2 md:mx-4"
               animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               —
             </motion.span>
             <motion.span
-              className="inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent glow-text-gradient"
+              className="bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent glow-text-gradient overflow-hidden"
               style={{
                 transform: `translate(${-mousePosition.x * 0.5}px, ${-mousePosition.y * 0.5}px)`
               }}
@@ -282,9 +282,9 @@ const Hero = () => {
               <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-purple-400" />
             </div>
             
-            <h2 className="font-inter font-light text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4">
+            <h2 className="font-inter font-light text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4 break-words">
               <motion.span
-                className="inline-block glow-text-soft"
+                className="glow-text-soft"
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity, delay: 0 }}
               >
@@ -292,7 +292,7 @@ const Hero = () => {
               </motion.span>
               <br />
               <motion.span
-                className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent glow-text-gradient"
+                className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent glow-text-gradient overflow-hidden "
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
               >
@@ -300,7 +300,7 @@ const Hero = () => {
               </motion.span>
             </h2>
 
-            <p className="text-white/60 text-sm sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-inter px-4">
+            <p className="text-white/60 text-sm sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-inter px-4 break-words">
               {t('hero.subtitle')}
             </p>
           </motion.div>
