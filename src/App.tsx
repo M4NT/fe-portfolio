@@ -13,7 +13,6 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Footer from './components/Footer';
 import AISalesChat from './components/AISalesChat';
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export const AppContent = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
@@ -93,7 +92,6 @@ export const AppContent = (): JSX.Element => {
 
   return (
     <>
-      <SpeedInsights />
       <Preloader visible={loading} />
       <div className={`relative bg-black text-white overflow-x-hidden${loading ? ' pointer-events-none select-none' : ''}`} style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
         <CustomCursor />
