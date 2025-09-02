@@ -1388,7 +1388,7 @@ a, button, [role="button"] {
 @media (max-width: 767px) {
   /* Optimize typography for mobile */
   h1 {
-    font-size: clamp(2.5rem, 10vw, 4rem) !important;
+    font-size: clamp(2rem, 20vw, 4rem) !important;
     line-height: 1 !important;
   }
   

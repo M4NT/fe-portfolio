@@ -39,7 +39,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-6">
             <div className="font-inter text-3xl font-light text-white/90 tracking-wider">
-              YAN.M
+              Yan.m
               <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-purple-500 mt-2" />
             </div>
             <p className="text-white/60 text-sm leading-relaxed max-w-md">

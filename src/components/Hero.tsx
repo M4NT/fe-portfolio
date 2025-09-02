@@ -67,8 +67,8 @@ const Hero = () => {
   }));
 
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
       style={{
@@ -110,7 +110,7 @@ const Hero = () => {
         {/* Floating geometric shapes */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-20 md:w-32 h-20 md:h-32 border border-white/10 rounded-lg hidden md:block"
-          animate={{ 
+          animate={{
             rotate: [0, 360],
             scale: [1, 1.1, 1]
           }}
@@ -119,10 +119,10 @@ const Hero = () => {
             transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-16 md:w-24 h-16 md:h-24 border border-white/10 rounded-full hidden md:block"
-          animate={{ 
+          animate={{
             rotate: [360, 0],
             scale: [1, 1.2, 1]
           }}
@@ -133,11 +133,11 @@ const Hero = () => {
         />
 
         {/* Dynamic grid */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-[0.02] hidden md:block"
           style={{ y }}
         >
-          <div 
+          <div
             className="w-full h-full"
             style={{
               backgroundImage: `
@@ -150,7 +150,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Enhanced noise texture */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.015] noise-bg hidden md:block"
           style={{
             backgroundImage: `
@@ -164,13 +164,13 @@ const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <motion.div 
+      <motion.div
         className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-12"
         style={{ opacity, scale }}
       >
         {/* Location & Time Info */}
-        <motion.div 
-          className="mb-8 md:mb-12 flex justify-center"
+        <motion.div
+          className="mt-16 md:mt-24 mb-8 md:mb-2 flex justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -194,23 +194,22 @@ const Hero = () => {
                 animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-                              <span className="text-green-400 font-inter hidden sm:inline">{t('contact.availableForWork')}</span>
+              <span className="text-green-400 font-inter hidden sm:inline">{t('contact.availableForWork')}</span>
               <span className="text-green-400 font-inter sm:hidden">Online</span>
             </div>
           </div>
         </motion.div>
 
         {/* Main Heading */}
-        <motion.div 
+        <motion.div
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
         >
-          <motion.h1 
-            className="font-inter font-light leading-none tracking-[-0.08em] text-white mb-6 md:mb-8 relative glow-text-soft overflow-hidden"
+          <motion.h1
+            className="font-inter font-light ... text-[5rem] md:text-[8rem] lg:text-[12rem] overflow-hidden"
             style={{
-              fontSize: 'clamp(3rem, 12vw, 12rem)',
               textShadow: '0 0 100px rgba(59, 130, 246, 0.3)'
             }}
             animate={{
@@ -230,7 +229,7 @@ const Hero = () => {
             >
               <span className="glow-text-soft">Yan</span>
             </motion.span>
-            <motion.span 
+            <motion.span
               className="text-white/40 mx-2 md:mx-4"
               animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -253,7 +252,7 @@ const Hero = () => {
             {/* Floating elements around text */}
             <motion.div
               className="absolute -top-4 md:-top-8 -left-4 md:-left-8 w-3 h-3 md:w-4 md:h-4 border border-blue-400/50 rounded-full hidden md:block"
-              animate={{ 
+              animate={{
                 rotate: [0, 360],
                 scale: [1, 1.5, 1]
               }}
@@ -261,7 +260,7 @@ const Hero = () => {
             />
             <motion.div
               className="absolute -bottom-4 md:-bottom-8 -right-4 md:-right-8 w-4 h-4 md:w-6 md:h-6 border border-purple-400/50 rounded-lg hidden md:block"
-              animate={{ 
+              animate={{
                 rotate: [360, 0],
                 scale: [1, 1.3, 1]
               }}
@@ -270,7 +269,7 @@ const Hero = () => {
           </motion.h1>
 
           {/* Enhanced subtitle */}
-          <motion.div 
+          <motion.div
             className="space-y-4 md:space-y-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -281,7 +280,7 @@ const Hero = () => {
               <Sparkles className="text-blue-400" size={14} />
               <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-purple-400" />
             </div>
-            
+
             <h2 className="font-inter font-light text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4 break-words">
               <motion.span
                 className="glow-text-soft"
@@ -307,7 +306,7 @@ const Hero = () => {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div 
+        <motion.div
           className="space-y-6 md:space-y-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -334,14 +333,14 @@ const Hero = () => {
                   →
                 </motion.div>
               </span>
-              
+
               {/* Hover effect */}
               <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
                 <motion.span
                   className="absolute -inset-1 bg-gradient-to-r from-white/30 via-white/60 to-white/30 opacity-0"
                   initial={{ x: '-120%' }}
                   whileHover={{ x: '120%', opacity: 1 }}
-                  transition={{ duration: 0.8, ease: [0.23,1,0.32,1] }}
+                  transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                   style={{ filter: 'blur(8px)' }}
                 />
               </span>
@@ -387,28 +386,28 @@ const Hero = () => {
 
       </motion.div>
       {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-4 md:bottom-12 left-1/2 transform -translate-x-1/2 hidden md:block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
+      <motion.div
+        className="absolute bottom-4 md:bottom-12 left-1/2 transform -translate-x-1/2 hidden md:block"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
+      >
+        <motion.button
+          onClick={scrollToNext}
+          className="flex flex-col items-center space-y-3 text-white/40 hover:text-white/60 transition-colors group"
+          whileHover={{ y: -2 }}
         >
-          <motion.button
-            onClick={scrollToNext}
-            className="flex flex-col items-center space-y-3 text-white/40 hover:text-white/60 transition-colors group"
-            whileHover={{ y: -2 }}
+          <span className="text-xs uppercase tracking-wider font-inter">
+            {t('hero.scroll')}
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
           >
-            <span className="text-xs uppercase tracking-wider font-inter">
-              {t('hero.scroll')}
-            </span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <ChevronDown size={20} />
-            </motion.div>
-          </motion.button>
-        </motion.div>
+            <ChevronDown size={20} />
+          </motion.div>
+        </motion.button>
+      </motion.div>
     </section>
   );
 };
