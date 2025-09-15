@@ -487,7 +487,7 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           <h3 className="text-white/80 text-xl sm:text-2xl font-medium mb-8">
-            Por que escolher YAN.M?
+            Por que você deveria trabalhar comigo?
           </h3>
 
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">

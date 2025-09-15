@@ -22,13 +22,13 @@ const translations: Translations = {
   // Navigation
   'nav.selectedWorks': {
     en: 'Works',
-    pt: 'Trabalhos Selecionados',
-    es: 'Trabajos Seleccionados'
+    pt: 'Trabalhos',
+    es: 'Trabajos'
   },
   'nav.sideProjects': {
     en: 'Projects',
-    pt: 'Projetos Pessoais',
-    es: 'Proyectos Personales'
+    pt: 'Projetos',
+    es: 'Proyectos'
   },
   'nav.services': {
     en: 'Services',
@@ -58,14 +58,14 @@ const translations: Translations = {
 
   // Hero Section
   'hero.title': {
-    en: 'YAN.M',
-    pt: 'YAN.M',
-    es: 'YAN.M'
+    en: 'Yan.M',
+    pt: 'Yan.M',
+    es: 'Yan.M'
   },
   'hero.subtitle': {
-    en: 'Frontend Developer & Digital Artist',
-    pt: 'Desenvolvedor Frontend & Artista Digital criando experiências imersivas que ultrapassam os limites da tecnologia web e narrativa visual.',
-    es: 'Desarrollador Frontend & Artista Digital creando experiencias inmersivas que empujan los límites de la tecnología web y la narrativa visual.'
+    en: 'Frontend Developer & Web Designer',
+    pt: 'Desenvolvedor Frontend & Web Designer',
+    es: 'Desarrollador frontend y diseñador web'
   },
   'hero.cta': {
     en: 'View Selected Works',
@@ -74,7 +74,7 @@ const translations: Translations = {
   },
   'hero.scroll': {
     en: 'Scroll',
-    pt: 'Rolar',
+    pt: 'Scroll',
     es: 'Desplazar'
   },
   'hero.creativeDeveloper': {
@@ -181,9 +181,9 @@ const translations: Translations = {
     es: 'ACERCA'
   },
   'about.subtitle': {
-    en: 'About — YAN.M',
-    pt: 'Sobre — YAN.M',
-    es: 'Acerca — YAN.M'
+    en: 'About — Yan Mantovani',
+    pt: 'Sobre — Yan Mantovani',
+    es: 'Acerca — Yan Mantovani'
   },
   'about.availableForWork': {
     en: 'Available for Work',
@@ -216,9 +216,9 @@ const translations: Translations = {
     es: 'Desarrollador Creativo & Artista Digital'
   },
   'about.description1': {
-    en: "I'm a frontend developer passionate about creating immersive digital experiences that push the boundaries of what's possible on the web. With a background in both computer science and digital arts, I bridge the gap between technology and creativity.",
-    pt: "Sou um desenvolvedor frontend apaixonado por criar experiências digitais imersivas que ultrapassam os limites do que é possível na web. Com formação em ciência da computação e artes digitais, faço a ponte entre tecnologia e criatividade.",
-    es: "Soy un desarrollador frontend apasionado por crear experiencias digitales inmersivas que empujan los límites de lo posible en la web. Con formación en ciencias de la computación y artes digitales, construyo puentes entre tecnología y creatividad."
+    en: "I'm a frontend developer passionate about creating immersive digital experiences that push the boundaries of what's possible on the web. With a background in both Internet Systems and digital arts, I bridge the gap between technology and creativity.",
+    pt: "Sou um desenvolvedor frontend apaixonado por criar experiências digitais imersivas que ultrapassam os limites do que é possível na web. Com formação em Sistemas para Internet e artes digitais, faço a ponte entre tecnologia e criatividade.",
+    es: "Soy un desarrollador frontend apasionado por crear experiencias digitales inmersivas que empujan los límites de lo posible en la web. Con formación en Sistemas de Internet y artes digitales, construyo puentes entre tecnología y creatividad."
   },
   'about.description2': {
     en: 'My work focuses on interactive installations, real-time graphics, and cutting-edge web technologies. I believe in the power of code as a creative medium and strive to create experiences that inspire and engage users on a deeper level.',

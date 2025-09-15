@@ -11,8 +11,9 @@ import PaymentTerms from './components/PaymentTerms';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
-import Footer from './components/Footer';
+import Footer from './components/Footer.old';
 import AISalesChat from './components/AISalesChat';
+import FAQ from './components/FAQ';
 
 export const AppContent = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
@@ -126,11 +127,12 @@ export const AppContent = (): JSX.Element => {
           <div className="relative" data-animate>
             <Contact />
             <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(15,15,15,0.3) 50%, rgba(20,20,20,0.8) 100%)' }} />
+            <FAQ />
           </div>
+          <footer className="relative py-16 sm:py-24 md:py-32 border-t border-white/5 overflow-hidden modal-stage">
+            <Footer />
+          </footer>
         </main>
-        {/* <footer className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-t from-black via-gray-900/40 to-transparent border-t border-white/5 overflow-hidden modal-stage">
-
-        </footer> */}
       </div>
     </>
   );

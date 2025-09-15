@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { MapPin, Calendar, Coffee, Award, ChevronLeft, ChevronRight } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { useLanguage } from './LanguageContext';
+import { ImageWithFallback } from './figma/ImageWithFallback'; // Ajuste o caminho se necessário
+import { useLanguage } from './LanguageContext'; // Ajuste o caminho se necessário
 
 const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,12 +41,10 @@ const About = () => {
     { name: "Motion Design", level: 78, category: "Design" }
   ];
 
-  // Auto-rotate images
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
     }, 3000);
-
     return () => clearInterval(interval);
   }, [profileImages.length]);
 
@@ -68,18 +66,12 @@ const About = () => {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-3xl"
-          animate={{ 
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.6, 0.3]
-          }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
           className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/5 to-teal-500/5 blur-3xl"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4]
-          }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
@@ -144,54 +136,67 @@ const About = () => {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 
-                {/* Carousel Controls */}
-                <motion.button
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ChevronLeft size={16} />
-                </motion.button>
-                
-                <motion.button
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ChevronRight size={16} />
-                </motion.button>
+                {/* Carousel Controls Container */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <motion.button
+                      onClick={prevImage}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ChevronLeft size={16} />
+                    </motion.button>
+                    
+                    <motion.button
+                      onClick={nextImage}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ChevronRight size={16} />
+                    </motion.button>
 
-                {/* Carousel Indicators */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                  {profileImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex 
-                          ? 'bg-white' 
-                          : 'bg-white/30 hover:bg-white/50'
-                      }`}
-                    />
-                  ))}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                      {profileImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentImageIndex 
+                              ? 'bg-white' 
+                              : 'bg-white/30 hover:bg-white/50'
+                          }`}
+                        />
+                      ))}
+                    </div>
                 </div>
                 
-                {/* Floating Badge */}
+                {/* Floating Badge with Blinking Dot */}
                 <motion.div 
-                  className="absolute top-6 right-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2"
+                  className="absolute top-6 right-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 flex items-center space-x-2"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
+                  <motion.div
+                    className="w-2 h-2 rounded-full bg-green-400"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [1, 0.7, 1],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
                   <span className="text-white text-xs font-medium uppercase tracking-wider font-inter">
                     {t('about.availableForWork')}
                   </span>
                 </motion.div>
               </motion.div>
 
-              {/* Decorative Elements */}
+              {/* Decorative Elements - CORRIGIDO */}
               <motion.div 
                 className="absolute -top-4 -left-4 w-24 h-24 border border-white/10"
                 initial={{ opacity: 0, rotate: -45 }}
@@ -218,21 +223,15 @@ const About = () => {
                   viewport={{ once: true }}
                 >
                   <div className="border border-white/10 p-6 hover:border-white/20 transition-all duration-300 group-hover:bg-white/5 relative overflow-hidden">
-                    {/* Animated Background */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       initial={{ x: '-100%' }}
                       whileHover={{ x: '100%' }}
                       transition={{ duration: 0.6 }}
                     />
-                    
                     <div className="flex items-center space-x-3 mb-3 relative z-10">
-                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
-                        {stat.icon}
-                      </div>
-                      <div className="text-white/40 text-xs uppercase tracking-wider font-inter">
-                        {stat.label}
-                      </div>
+                      <div className="text-white/40 group-hover:text-white/60 transition-colors">{stat.icon}</div>
+                      <div className="text-white/40 text-xs uppercase tracking-wider font-inter">{stat.label}</div>
                     </div>
                     <div className="font-inter font-light text-3xl text-white group-hover:scale-110 transition-transform duration-300 origin-left relative z-10">
                       {stat.number}
@@ -251,6 +250,7 @@ const About = () => {
             transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
             viewport={{ once: true }}
           >
+            {/* ... O resto do seu componente (About Text, Skills, CTA) permanece o mesmo ... */}
             {/* About Text */}
             <div className="space-y-8">
               <motion.div
@@ -331,7 +331,6 @@ const About = () => {
                         transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
                         viewport={{ once: true }}
                       />
-                      {/* Animated glow effect */}
                       <motion.div
                         className="absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-transparent via-white/50 to-transparent blur-sm"
                         initial={{ x: '-100%' }}
@@ -353,7 +352,6 @@ const About = () => {
               viewport={{ once: true }}
             >
               <div className="border border-white/20 p-8 hover:border-white/40 transition-colors duration-300 group cursor-pointer relative overflow-hidden">
-                {/* Animated background */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={{ x: '-100%' }}
@@ -384,6 +382,7 @@ const About = () => {
                 </div>
               </div>
             </motion.div>
+
           </motion.div>
         </div>
       </div>
