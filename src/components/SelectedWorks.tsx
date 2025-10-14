@@ -276,29 +276,50 @@ const SelectedWorks = () => {
               viewport={{ once: true }}
             >
               {/* Project Image */}
-              <motion.div 
+              <div 
                 className="relative aspect-[4/3] rounded-lg overflow-hidden group cursor-pointer"
                 onClick={() => openProjectModal(currentProject)}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4 }}
+                style={{
+                  overflow: 'hidden',
+                  contain: 'layout style paint'
+                }}
               >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentIndex}
                     className="absolute inset-0"
-                    initial={{ opacity: 0, scale: 1.1 }}
+                    initial={{ opacity: 0, scale: 1.02 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.8 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ 
+                      duration: 1.2,
+                      ease: [0.23, 1, 0.32, 1],
+                      scale: {
+                        duration: 1.0,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      },
+                      opacity: {
+                        duration: 0.8,
+                        ease: "easeOut"
+                      }
+                    }}
+                    style={{
+                      overflow: 'hidden',
+                      transformOrigin: 'center center'
+                    }}
                   >
                     <ImageWithFallback
                       src={currentProject.image}
                       alt={currentProject.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       width={800}
                       height={600}
                       loading="lazy"
                       fetchpriority="high"
+                      style={{
+                        transformOrigin: 'center center',
+                        willChange: 'transform'
+                      }}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -353,7 +374,7 @@ const SelectedWorks = () => {
                     key={progressKey}
                   />
                 </div>
-              </motion.div>
+              </div>
 
               {/* Navigation Controls */}
               <div className="flex items-center justify-between mt-4 sm:mt-6">

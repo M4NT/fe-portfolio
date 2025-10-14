@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import LiquidEther from './LiquidEther';
 
 const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -42,14 +43,6 @@ const Hero = () => {
   };
 
 
-  // Particle system - otimizado para 120fps (apenas 6 partículas)
-  const particles = Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 2,
-    duration: Math.random() * 25 + 15 // Animações mais lentas = menos recálculos
-  }));
 
   return (
     <section 
@@ -65,57 +58,33 @@ const Hero = () => {
         `
       }}
     >
-      {/* Dynamic Background Elements */}
-              <div className="absolute inset-0">
-        {/* Animated particle system - CSS only para 120fps */}
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute bg-white/20 rounded-full hidden md:block animate-float-particle"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: particle.size,
-              height: particle.size,
-              animationDuration: `${particle.duration}s`,
-              animationDelay: `${particle.id * 0.3}s`
-            }}
-          />
-        ))}
-
-        {/* Floating geometric shapes - completamente fixas para 120fps */}
-        <div
-          className="absolute top-1/4 left-1/4 w-20 md:w-32 h-20 md:h-32 border border-white/10 rounded-lg hidden md:block animate-spin-slow"
-        />
-        
-        <div
-          className="absolute bottom-1/4 right-1/4 w-16 md:w-24 h-16 md:h-24 border border-white/10 rounded-full hidden md:block animate-spin-reverse"
-        />
-
-        {/* Static grid - sem animação para 120fps */}
-        <div 
-          className="absolute inset-0 opacity-[0.015] hidden md:block"
-          style={{
-            backgroundImage: `
-              linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
-              linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)
-            `,
-            backgroundSize: '120px 120px',
+      {/* LiquidEther Background - Temporariamente desabilitado para debug */}
+      {/* <div className="absolute inset-0 z-0" style={{ pointerEvents: 'none' }}>
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+          mouseForce={15}
+          cursorSize={80}
+          isViscous={false}
+          viscous={20}
+          iterationsViscous={16}
+          iterationsPoisson={16}
+          resolution={0.3}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.3}
+          autoIntensity={1.5}
+          takeoverDuration={0.25}
+          autoResumeDelay={2000}
+          autoRampDuration={0.4}
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            position: 'absolute',
+            pointerEvents: 'none'
           }}
         />
+      </div> */}
 
-        {/* Simplified static noise - sem animação */}
-        <div 
-          className="absolute inset-0 opacity-[0.01] hidden md:block"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle at 25% 25%, white 1px, transparent 1px),
-              radial-gradient(circle at 75% 75%, white 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px, 140px 140px'
-          }}
-        />
-      </div>
 
       {/* Main Content */}
       <div 

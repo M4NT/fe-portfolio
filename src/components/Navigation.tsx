@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink, Github, Linkedin, Mail, Instagram } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import LanguageSelector from './LanguageSelector';
 
@@ -56,6 +56,33 @@ const Navigation = () => {
     { id: 'about', label: t('nav.about'), href: '#about' },
     { id: 'services', label: t('nav.services'), href: '#services' },
     { id: 'contact', label: t('nav.contact'), href: '#contact' }
+  ];
+
+  const socialLinks = [
+    {
+      icon: <Github className="w-5 h-5" />,
+      href: "https://github.com/yan-m",
+      label: "GitHub",
+      color: "from-gray-600 to-gray-800"
+    },
+    {
+      icon: <Linkedin className="w-5 h-5" />,
+      href: "https://linkedin.com/in/yan-m",
+      label: "LinkedIn",
+      color: "from-blue-500 to-blue-700"
+    },
+    {
+      icon: <Instagram className="w-5 h-5" />,
+      href: "https://instagram.com/yan.m",
+      label: "Instagram",
+      color: "from-pink-500 to-purple-600"
+    },
+    {
+      icon: <Mail className="w-5 h-5" />,
+      href: "mailto:hello@yan-m.dev",
+      label: "Email",
+      color: "from-violet-600 to-indigo-600"
+    }
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -292,6 +319,37 @@ const Navigation = () => {
                   <span>{t('nav.getInTouch')}</span>
                   <ExternalLink size={16} />
                 </motion.a>
+
+                {/* Social Links */}
+                <motion.div
+                  className="pt-6 mt-6 border-t border-white/10"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <p className="text-white/40 text-xs uppercase tracking-wider font-medium mb-4 text-center">
+                    Connect
+                  </p>
+                  <div className="flex items-center justify-center space-x-3">
+                    {socialLinks.map((social, index) => (
+                      <motion.a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`relative group w-12 h-12 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.6 + index * 0.1 }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {social.icon}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-30 rounded-xl blur-md transition-opacity duration-300`} />
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
