@@ -8,6 +8,7 @@ import ProjectModal from './ProjectModal';
 const SelectedWorks = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [progressKey, setProgressKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
@@ -129,10 +130,12 @@ const SelectedWorks = () => {
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
+    setProgressKey(prev => prev + 1); // Reset barra ao mudar manualmente
   };
 
   const prevProject = () => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    setProgressKey(prev => prev + 1); // Reset barra ao mudar manualmente
   };
 
   const openProjectModal = (project: any) => {
@@ -140,18 +143,35 @@ const SelectedWorks = () => {
   };
 
   useEffect(() => {
-    // Autoplay apenas se a seção estiver visível
+    // Tempo de autoplay fixo - 15 segundos
+    const AUTOPLAY_DURATION = 15000;
+    let interval: NodeJS.Timeout | null = null;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Inicia autoplay
-            const interval = setInterval(() => {
-              setCurrentIndex((prev) => (prev + 1) % projects.length);
-            }, 8000);
+            // Limpa interval anterior se existir
+            if (interval) clearInterval(interval);
             
-            // Cleanup quando sair da view
-            return () => clearInterval(interval);
+            // Reset da barra de progresso ao iniciar
+            setProgressKey(prev => prev + 1);
+            
+            // Inicia autoplay sincronizado
+            interval = setInterval(() => {
+              setCurrentIndex((prev) => {
+                const next = (prev + 1) % projects.length;
+                // Atualiza key da barra de progresso para reiniciar animação
+                setProgressKey(k => k + 1);
+                return next;
+              });
+            }, AUTOPLAY_DURATION);
+          } else {
+            // Para autoplay quando não visível
+            if (interval) {
+              clearInterval(interval);
+              interval = null;
+            }
           }
         });
       },
@@ -162,7 +182,10 @@ const SelectedWorks = () => {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (interval) clearInterval(interval);
+      observer.disconnect();
+    };
   }, [projects.length]);
 
   const currentProject = projects[currentIndex];
@@ -174,7 +197,10 @@ const SelectedWorks = () => {
         ref={containerRef}
         className="relative min-h-screen py-16 sm:py-24 md:py-32"
         style={{
-          background: 'linear-gradient(180deg, black 0%, #0a0a0a 50%, #1a1a1a 100%)'
+          background: 'linear-gradient(180deg, black 0%, #0a0a0a 50%, #1a1a1a 100%)',
+          overflow: 'visible',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
         }}
       >
         {/* Morphing Background */}
@@ -305,14 +331,26 @@ const SelectedWorks = () => {
                   ))}
                 </div>
 
-                {/* Progress Indicator */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">
+                {/* Progress Indicator - sincronizado com autoplay */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-white/10"
+                  style={{
+                    overflow: 'visible',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none'
+                  }}
+                >
                   <motion.div
                     className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                    style={{
+                      overflow: 'visible',
+                      scrollbarWidth: 'none',
+                      msOverflowStyle: 'none'
+                    }}
                     initial={{ width: '0%' }}
                     animate={{ width: '100%' }}
-                    transition={{ duration: 8, ease: "linear" }}
-                    key={currentIndex}
+                    transition={{ duration: 15, ease: "linear" }}
+                    key={progressKey}
                   />
                 </div>
               </motion.div>

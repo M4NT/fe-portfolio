@@ -56,18 +56,28 @@ const Preloader: React.FC<{ visible: boolean }> = ({ visible }) => {
               </div>
               
               {/* Linha animada abaixo do logo */}
-              <div className="absolute bottom-0 left-0 w-full h-[2px]">
+              <div className="absolute bottom-0 left-0 w-full h-[2px] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500" />
                 <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent
-                  ${visible ? 'animate-shimmer' : ''}`} />
+                  ${visible ? 'animate-shimmer' : ''}`}
+                  style={{
+                    transformOrigin: 'center center'
+                  }}
+                />
               </div>
             </div>
 
             {/* Indicador de progresso circular */}
-            <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-full">
-              <div className="relative h-1 w-full overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500
-                  ${visible ? 'animate-progressBar' : ''}`} />
+            <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-full px-2">
+              <div className="relative h-1 w-full overflow-hidden rounded-full bg-black/30">
+                <div 
+                  className={`h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-full
+                    ${visible ? 'animate-progressBar' : ''}`}
+                  style={{
+                    transformOrigin: 'left center',
+                    width: '100%'
+                  }}
+                />
               </div>
             </div>
           </div>

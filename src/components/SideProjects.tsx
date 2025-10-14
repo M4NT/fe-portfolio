@@ -127,7 +127,10 @@ const SideProjects = () => {
           linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 50%, black 100%),
           radial-gradient(circle at 30% 20%, rgba(59,130,246,0.1) 0%, transparent 50%),
           radial-gradient(circle at 70% 80%, rgba(147,51,234,0.1) 0%, transparent 50%)
-        `
+        `,
+        overflow: 'visible',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
       }}
     >
       {/* Animated Background Elements */}
@@ -249,6 +252,10 @@ const SideProjects = () => {
                 {/* Main Card */}
                 <motion.div
                   className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-lg overflow-hidden hover:border-white/20 transition-all duration-500"
+                  style={{
+                    overflow: 'hidden',
+                    contain: 'layout style paint'
+                  }}
                   whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ duration: 0.4 }}
                 >
@@ -257,7 +264,11 @@ const SideProjects = () => {
                     <ImageWithFallback
                       src={experiment.image}
                       alt={experiment.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      style={{
+                        transformOrigin: 'center center',
+                        willChange: 'transform'
+                      }}
                     />
                     
                     {/* Overlay */}

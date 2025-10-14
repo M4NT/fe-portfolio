@@ -395,7 +395,10 @@ const Services = () => {
           linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 50%, black 100%),
           radial-gradient(circle at 25% 25%, rgba(59,130,246,0.08) 0%, transparent 50%),
           radial-gradient(circle at 75% 75%, rgba(147,51,234,0.08) 0%, transparent 50%)
-        `
+        `,
+        overflow: 'visible',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
       }}
     >
       {/* Animated Background Elements */}

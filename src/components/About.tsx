@@ -77,12 +77,20 @@ const About = () => {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + profileImages.length) % profileImages.length);
   };
+  
+  // Previne layout shift
+  const [progressKey, setProgressKey] = useState(0);
 
   return (
     <section 
       id="about" 
       ref={containerRef}
       className="relative py-32 bg-black noise-bg"
+      style={{
+        overflow: 'visible',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
+      }}
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -118,7 +126,14 @@ const About = () => {
           >
             {t('about.subtitle')}
           </div>
-          <h2 className="font-inter font-light text-6xl lg:text-8xl leading-none tracking-[-0.03em] text-white">
+          <h2 
+            className="font-inter font-light text-6xl lg:text-8xl leading-none tracking-[-0.03em] text-white"
+            style={{
+              overflow: 'visible',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
             {t('about.title')}
           </h2>
         </motion.div>
@@ -135,7 +150,11 @@ const About = () => {
             {/* Profile Image Carousel */}
             <div className="relative group">
               <div 
-                className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black"
+                className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black rounded-lg"
+                style={{
+                  minHeight: '400px', // Previne CLS
+                  contain: 'layout style paint'
+                }}
               >
                 {/* Image Carousel */}
                 <div className="relative w-full h-full">
@@ -162,36 +181,44 @@ const About = () => {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 
-                {/* Carousel Controls */}
-                <motion.button
+                {/* Carousel Controls - CSS puro para evitar conflitos */}
+                <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="about-carousel-button left-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100"
                 >
                   <ChevronLeft size={16} />
-                </motion.button>
+                </button>
                 
-                <motion.button
+                <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="about-carousel-button right-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100"
                 >
                   <ChevronRight size={16} />
-                </motion.button>
+                </button>
 
-                {/* Carousel Indicators */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {/* Carousel Indicators - com transform inline para prevenir shift */}
+                <div 
+                  className="absolute bottom-4 left-1/2 flex space-x-2"
+                  style={{
+                    transform: 'translateX(-50%)',
+                    willChange: 'auto'
+                  }}
+                >
                   {profileImages.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => setCurrentImageIndex(index)}
+                      onClick={() => {
+                        setCurrentImageIndex(index);
+                        setProgressKey(prev => prev + 1);
+                      }}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
                         index === currentImageIndex 
                           ? 'bg-white' 
                           : 'bg-white/30 hover:bg-white/50'
                       }`}
+                      style={{
+                        backfaceVisibility: 'hidden'
+                      }}
                     />
                   ))}
                 </div>
@@ -280,7 +307,14 @@ const About = () => {
                 <h3 className="font-inter font-light text-3xl text-white mb-6 leading-tight">
                   {t('about.creativeDeveloper')}
                 </h3>
-                <p className="text-white/70 text-lg leading-relaxed font-inter">
+                <p 
+                  className="text-white/70 text-lg leading-relaxed font-inter"
+                  style={{
+                    overflow: 'visible',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none'
+                  }}
+                >
                   {t('about.description1')}
                 </p>
               </motion.div>
@@ -291,7 +325,14 @@ const About = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <p className="text-white/70 text-lg leading-relaxed font-inter">
+                <p 
+                  className="text-white/70 text-lg leading-relaxed font-inter"
+                  style={{
+                    overflow: 'visible',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none'
+                  }}
+                >
                   {t('about.description2')}
                 </p>
               </motion.div>
@@ -302,7 +343,14 @@ const About = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <p className="text-white/70 text-lg leading-relaxed font-inter">
+                <p 
+                  className="text-white/70 text-lg leading-relaxed font-inter"
+                  style={{
+                    overflow: 'visible',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none'
+                  }}
+                >
                   {t('about.description3')}
                 </p>
               </motion.div>

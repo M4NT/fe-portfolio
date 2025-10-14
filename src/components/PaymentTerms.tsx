@@ -169,7 +169,10 @@ const PaymentTerms = () => {
           linear-gradient(180deg, #0a0a0a 0%, #050505 50%, black 100%),
           radial-gradient(circle at 30% 30%, rgba(59,130,246,0.06) 0%, transparent 50%),
           radial-gradient(circle at 70% 70%, rgba(16,185,129,0.06) 0%, transparent 50%)
-        `
+        `,
+        overflow: 'visible',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
       }}
     >
       {/* Animated Background Elements */}

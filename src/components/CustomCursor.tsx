@@ -13,6 +13,9 @@ const CustomCursor = () => {
       return;
     }
 
+    // Garantir que o cursor seja visível inicialmente
+    setMousePosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
     const updateMousePosition = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       
@@ -104,21 +107,23 @@ const CustomCursor = () => {
   return (
     <div
       ref={cursorRef}
-      className="fixed pointer-events-none mix-blend-difference"
+      className="custom-cursor fixed pointer-events-none mix-blend-difference"
       style={{
         top: 0,
         left: 0,
         transform: `translate3d(${mousePosition.x - 10}px, ${mousePosition.y - 10}px, 0) scale(${isHovered ? 2 : 1})`,
-        zIndex: 99999,
+        zIndex: 999999,
         transition: 'transform 0.1s ease-out',
-        contain: 'layout style paint' // Isola rendering para melhor INP
+        contain: 'layout style paint',
+        willChange: 'transform'
       }}
     >
       <div 
         className="w-5 h-5 bg-white rounded-full"
         style={{
-          boxShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
-          backfaceVisibility: 'hidden'
+          boxShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.3)',
+          backfaceVisibility: 'hidden',
+          willChange: 'transform'
         }}
       />
     </div>

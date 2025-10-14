@@ -146,7 +146,10 @@ const Contact = () => {
           radial-gradient(circle at 25% 25%, rgba(59,130,246,0.15) 0%, transparent 70%),
           radial-gradient(circle at 75% 75%, rgba(147,51,234,0.12) 0%, transparent 70%),
           radial-gradient(circle at 50% 100%, rgba(16,185,129,0.08) 0%, transparent 70%)
-        `
+        `,
+        overflow: 'visible',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
       }}
     >
       {/* Advanced Background Effects */}
