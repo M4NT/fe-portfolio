@@ -158,6 +158,7 @@ export const AppContent = (): JSX.Element => {
             <FAQ />
           </div>
         </main>
+
       </div>
     </>
   );
