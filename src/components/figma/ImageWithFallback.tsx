@@ -5,23 +5,55 @@ const ERROR_IMG_SRC =
 
 export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElement>) {
   const [didError, setDidError] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const handleError = () => {
     setDidError(true)
   }
 
-  const { src, alt, style, className, ...rest } = props
+  const handleLoad = () => {
+    setIsLoaded(true)
+  }
+
+  const { src, alt, style, className, width, height, ...rest } = props
 
   return didError ? (
     <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
-      style={style}
+      className={`inline-block bg-gray-900 text-center align-middle ${className ?? ''}`}
+      style={{
+        ...style,
+        aspectRatio: width && height ? `${width}/${height}` : '16/9'
+      }}
     >
       <div className="flex items-center justify-center w-full h-full">
         <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
       </div>
     </div>
   ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
+    <>
+      {/* Skeleton placeholder para prevenir CLS */}
+      {!isLoaded && (
+        <div 
+          className={`absolute inset-0 bg-gray-900 loading-skeleton ${className ?? ''}`}
+          style={{
+            ...style,
+            aspectRatio: width && height ? `${width}/${height}` : '16/9'
+          }}
+        />
+      )}
+      <img 
+        src={src} 
+        alt={alt} 
+        className={className} 
+        style={style} 
+        width={width} 
+        height={height}
+        loading="lazy"
+        decoding="async"
+        {...rest} 
+        onError={handleError}
+        onLoad={handleLoad}
+      />
+    </>
   )
 }

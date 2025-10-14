@@ -4,7 +4,46 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect para fontes Google - melhora LCP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preconnect para Unsplash - melhora LCP de imagens -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    
+    <!-- Meta para melhor performance -->
+    <meta name="theme-color" content="#000000" />
+    
     <title>Yan.M | Design & Web Profissional</title>
+    
+    <!-- CSS crítico inline para eliminar CLS -->
+    <style>
+      /* Previne CLS durante carregamento */
+      html, body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        background: #000000;
+      }
+      
+      #root {
+        min-height: 100vh;
+        background: #000000;
+      }
+      
+      /* Skeleton para prevenir CLS */
+      .loading-skeleton {
+        background: linear-gradient(90deg, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

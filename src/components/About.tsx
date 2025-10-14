@@ -9,13 +9,13 @@ const About = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { t } = useLanguage();
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.2]);
+  // useScroll removido para scroll fluido em 60fps
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.2]);
 
   const profileImages = [
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
@@ -41,13 +41,33 @@ const About = () => {
     { name: "Motion Design", level: 78, category: "Design" }
   ];
 
-  // Auto-rotate images
+  // Auto-rotate images - apenas quando visível
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
-    }, 3000);
+    let interval: number;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            interval = window.setInterval(() => {
+              setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
+            }, 3000);
+          } else {
+            if (interval) clearInterval(interval);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+      observer.disconnect();
+    };
   }, [profileImages.length]);
 
   const nextImage = () => {
@@ -93,12 +113,11 @@ const About = () => {
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           viewport={{ once: true }}
         >
-          <motion.div 
+          <div 
             className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter"
-            style={{ y }}
           >
             {t('about.subtitle')}
-          </motion.div>
+          </div>
           <h2 className="font-inter font-light text-6xl lg:text-8xl leading-none tracking-[-0.03em] text-white">
             {t('about.title')}
           </h2>
@@ -115,9 +134,8 @@ const About = () => {
           >
             {/* Profile Image Carousel */}
             <div className="relative group">
-              <motion.div 
+              <div 
                 className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black"
-                style={{ scale }}
               >
                 {/* Image Carousel */}
                 <div className="relative w-full h-full">
@@ -189,7 +207,7 @@ const About = () => {
                     {t('about.availableForWork')}
                   </span>
                 </motion.div>
-              </motion.div>
+              </div>
 
               {/* Decorative Elements */}
               <motion.div 
@@ -391,4 +409,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default React.memo(About);

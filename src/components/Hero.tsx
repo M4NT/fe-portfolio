@@ -1,22 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // Mouse position removido para 120fps - sem parallax nas partículas
+  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.8]);
+  // Desabilitado scroll transforms para 120fps - muito custo de recálculo
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start start", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  // const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.8]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,20 +27,10 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: (e.clientX - rect.left - rect.width / 2) / 20,
-          y: (e.clientY - rect.top - rect.height / 2) / 20
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Mouse tracking removido completamente para 120fps
+  // useEffect(() => {
+  //   // Código de mouse tracking desabilitado
+  // }, []);
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('pt-BR', {
@@ -57,13 +48,13 @@ const Hero = () => {
     }
   };
 
-  // Particle system for background
-  const particles = Array.from({ length: 50 }, (_, i) => ({
+  // Particle system - otimizado para 120fps (apenas 6 partículas)
+  const particles = Array.from({ length: 6 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10
+    size: Math.random() * 3 + 2,
+    duration: Math.random() * 25 + 15 // Animações mais lentas = menos recálculos
   }));
 
   return (
@@ -82,91 +73,59 @@ const Hero = () => {
     >
       {/* Dynamic Background Elements */}
               <div className="absolute inset-0">
-        {/* Animated particle system */}
+        {/* Animated particle system - CSS only para 120fps */}
         {particles.map((particle) => (
-          <motion.div
+          <div
             key={particle.id}
-            className="absolute w-1 h-1 bg-white/20 rounded-full hidden md:block"
+            className="absolute bg-white/20 rounded-full hidden md:block animate-float-particle"
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
               width: particle.size,
-              height: particle.size
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              x: [-10, 10, -10],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.5, 1.5, 0.5]
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              ease: "easeInOut"
+              height: particle.size,
+              animationDuration: `${particle.duration}s`,
+              animationDelay: `${particle.id * 0.3}s`
             }}
           />
         ))}
 
-        {/* Floating geometric shapes */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-20 md:w-32 h-20 md:h-32 border border-white/10 rounded-lg hidden md:block"
-          animate={{ 
-            rotate: [0, 360],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`
-          }}
+        {/* Floating geometric shapes - completamente fixas para 120fps */}
+        <div
+          className="absolute top-1/4 left-1/4 w-20 md:w-32 h-20 md:h-32 border border-white/10 rounded-lg hidden md:block animate-spin-slow"
         />
         
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-16 md:w-24 h-16 md:h-24 border border-white/10 rounded-full hidden md:block"
-          animate={{ 
-            rotate: [360, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        <div
+          className="absolute bottom-1/4 right-1/4 w-16 md:w-24 h-16 md:h-24 border border-white/10 rounded-full hidden md:block animate-spin-reverse"
+        />
+
+        {/* Static grid - sem animação para 120fps */}
+        <div 
+          className="absolute inset-0 opacity-[0.015] hidden md:block"
           style={{
-            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`
+            backgroundImage: `
+              linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+              linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)
+            `,
+            backgroundSize: '120px 120px',
           }}
         />
 
-        {/* Dynamic grid */}
-        <motion.div 
-          className="absolute inset-0 opacity-[0.02] hidden md:block"
-          style={{ y }}
-        >
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: '100px 100px',
-            }}
-          />
-        </motion.div>
-
-        {/* Enhanced noise texture */}
+        {/* Simplified static noise - sem animação */}
         <div 
-          className="absolute inset-0 opacity-[0.015] noise-bg hidden md:block"
+          className="absolute inset-0 opacity-[0.01] hidden md:block"
           style={{
             backgroundImage: `
               radial-gradient(circle at 25% 25%, white 1px, transparent 1px),
-              radial-gradient(circle at 75% 75%, white 1px, transparent 1px),
-              radial-gradient(circle at 50% 50%, white 0.5px, transparent 0.5px)
+              radial-gradient(circle at 75% 75%, white 1px, transparent 1px)
             `,
-            backgroundSize: '80px 80px, 120px 120px, 60px 60px'
+            backgroundSize: '100px 100px, 140px 140px'
           }}
         />
       </div>
 
       {/* Main Content */}
-      <motion.div 
+      <div 
         className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-12"
-        style={{ opacity, scale }}
       >
         {/* Location & Time Info */}
         <motion.div 
@@ -222,14 +181,9 @@ const Hero = () => {
             }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <motion.span
-              className="inline-block"
-              style={{
-                transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`
-              }}
-            >
+            <span className="inline-block">
               <span className="glow-text-soft">Yan</span>
-            </motion.span>
+            </span>
             <motion.span 
               className="text-white/40 inline-block mx-2 md:mx-4"
               animate={{ opacity: [0.4, 0.8, 0.4] }}
@@ -237,18 +191,11 @@ const Hero = () => {
             >
               —
             </motion.span>
-            <motion.span
+            <span
               className="inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent glow-text-gradient"
-              style={{
-                transform: `translate(${-mousePosition.x * 0.5}px, ${-mousePosition.y * 0.5}px)`
-              }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-              }}
-              transition={{ duration: 5, repeat: Infinity }}
             >
               .m
-            </motion.span>
+            </span>
 
             {/* Floating elements around text */}
             <motion.div
@@ -385,7 +332,7 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-      </motion.div>
+      </div>
       {/* Scroll Indicator */}
         <motion.div 
           className="absolute bottom-4 md:bottom-12 left-1/2 transform -translate-x-1/2 hidden md:block"
@@ -413,4 +360,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default React.memo(Hero);

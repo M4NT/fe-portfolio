@@ -24,13 +24,13 @@ const Contact = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isNearButton, setIsNearButton] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // useScroll removido para scroll fluido em 60fps
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   // Magnetic effect for the main CTA button
   const magneticX = useMotionValue(0);
@@ -154,7 +154,6 @@ const Contact = () => {
         {/* Animated Gradient Mesh */}
         <motion.div 
           className="absolute inset-0"
-          style={{ y: backgroundY }}
         >
           <motion.div 
             className="absolute top-1/4 left-1/4 w-[800px] h-[800px] rounded-full opacity-[0.06] blur-3xl"
@@ -188,7 +187,6 @@ const Contact = () => {
         {/* Premium Grid Pattern */}
         <motion.div 
           className="absolute inset-0 opacity-[0.015] hidden lg:block"
-          style={{ y: backgroundY }}
         >
           <div 
             className="w-full h-full"
@@ -252,7 +250,6 @@ const Contact = () => {
 
       <motion.div 
         className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
-        style={{ y }}
       >
         {/* Header Section */}
         <motion.div 

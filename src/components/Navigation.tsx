@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ExternalLink } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
@@ -11,7 +11,9 @@ const Navigation = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+    
+    const updateNavigation = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Update active section based on scroll position
@@ -29,10 +31,18 @@ const Navigation = () => {
       }
 
       setActiveSection(current);
+      ticking = false;
+    };
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateNavigation);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial call
+    updateNavigation(); // Initial call
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -291,4 +301,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default React.memo(Navigation);

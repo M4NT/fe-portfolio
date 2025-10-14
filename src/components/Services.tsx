@@ -8,13 +8,13 @@ const Services = () => {
   const { t } = useLanguage();
   const [selectedCurrency, setSelectedCurrency] = useState<'BRL' | 'USD' | 'EUR'>('BRL');
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  // useScroll removido para scroll fluido em 60fps
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   const currencies = {
     BRL: { symbol: 'R$', name: 'Real' },
@@ -402,7 +402,6 @@ const Services = () => {
               <div className="absolute inset-0">
         <motion.div 
           className="absolute inset-0 opacity-[0.02] hidden md:block"
-          style={{ y: backgroundY }}
         >
           <div 
             className="w-full h-full"
@@ -436,7 +435,6 @@ const Services = () => {
 
       <motion.div 
         className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
-        style={{ y }}
       >
         {/* Section Header */}
         <motion.div 
@@ -605,4 +603,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default React.memo(Services);

@@ -11,13 +11,13 @@ const SelectedWorks = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // useScroll removido para scroll fluido em 60fps
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   // Enhanced project data focusing on technical skills
   const projects = [
@@ -140,11 +140,29 @@ const SelectedWorks = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % projects.length);
-    }, 8000);
+    // Autoplay apenas se a seção estiver visível
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Inicia autoplay
+            const interval = setInterval(() => {
+              setCurrentIndex((prev) => (prev + 1) % projects.length);
+            }, 8000);
+            
+            // Cleanup quando sair da view
+            return () => clearInterval(interval);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
-    return () => clearInterval(interval);
+    return () => observer.disconnect();
   }, [projects.length]);
 
   const currentProject = projects[currentIndex];
@@ -180,10 +198,9 @@ const SelectedWorks = () => {
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           />
 
-          {/* Dynamic Grid */}
-          <motion.div 
+          {/* Static Grid - sem animação para 60fps */}
+          <div 
             className="absolute inset-0 opacity-[0.02] hidden md:block"
-            style={{ y }}
           >
             <div 
               className="w-full h-full"
@@ -195,12 +212,11 @@ const SelectedWorks = () => {
                 backgroundSize: '80px 80px',
               }}
             />
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div 
+        <div 
           className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
-          style={{ opacity }}
         >
           {/* Section Header */}
           <motion.div 
@@ -210,12 +226,11 @@ const SelectedWorks = () => {
             transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
             viewport={{ once: true }}
           >
-            <motion.div 
+            <div 
               className="text-white/40 text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4 font-inter text-center md:text-left"
-              style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
             >
               {t('works.subtitle')} — Technical Showcase
-            </motion.div>
+            </div>
             <h2 className="font-inter font-light text-3xl sm:text-5xl lg:text-6xl xl:text-8xl leading-none tracking-[-0.03em] text-white mb-4 sm:mb-6 text-center md:text-left">
               SKILL DEMONSTRATION
             </h2>
@@ -254,6 +269,10 @@ const SelectedWorks = () => {
                       src={currentProject.image}
                       alt={currentProject.title}
                       className="w-full h-full object-cover"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      fetchpriority="high"
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -478,7 +497,7 @@ const SelectedWorks = () => {
               </motion.div>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Project Modal */}
@@ -491,4 +510,4 @@ const SelectedWorks = () => {
   );
 };
 
-export default SelectedWorks;
+export default React.memo(SelectedWorks);

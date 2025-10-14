@@ -34,12 +34,12 @@ const AISalesChat = () => {
   // Start session tracking and controlled proactive hints (throttled, humanized)
   useEffect(() => {
     trackerRef.current = new YanAiTracker();
-    // Check once per second instead of rAF to reduce noise
+    // Check a cada 3 segundos ao invés de 1 para reduzir uso de CPU
     intervalRef.current = window.setInterval(() => {
       if (isOpen) return; // nunca incomodar quando o chat está aberto
       const now = performance.now();
-      if (now - startTimeRef.current < 8000) return; // aguarda 8s antes do 1º hint
-      if (now - lastHintAtRef.current < 45000) return; // cooldown de 45s entre hints
+      if (now - startTimeRef.current < 12000) return; // aguarda 12s antes do 1º hint
+      if (now - lastHintAtRef.current < 60000) return; // cooldown de 60s entre hints
 
       const tracker = trackerRef.current!;
       const snap = tracker.getSnapshot();
@@ -84,7 +84,7 @@ const AISalesChat = () => {
         ...prev,
         { id: Date.now().toString(), content, sender: 'ai', timestamp: new Date() },
       ]);
-    }, 1000) as unknown as number;
+    }, 3000) as unknown as number; // 3 segundos ao invés de 1
     return () => {
       if (proactiveTimerRef.current) window.clearTimeout(proactiveTimerRef.current);
       if (intervalRef.current) window.clearInterval(intervalRef.current);
@@ -171,12 +171,14 @@ const AISalesChat = () => {
       {/* Chat Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed z-[60] rounded-full flex items-center justify-center shadow-lg bg-gradient-to-r from-blue-600 to-purple-600 w-12 h-12 bottom-5 right-5 md:w-14 md:h-14 md:bottom-8 md:right-8"
+        className="fixed z-[100] rounded-full flex items-center justify-center shadow-lg bg-gradient-to-r from-blue-600 to-purple-600 w-12 h-12 bottom-5 right-5 md:w-14 md:h-14 md:bottom-8 md:right-8 cursor-pointer"
         style={{
           right: 'max(1.0rem, env(safe-area-inset-right))',
           bottom: 'max(1.0rem, env(safe-area-inset-bottom))',
+          pointerEvents: 'auto'
         }}
         whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
         <MessageCircle className="text-white" size={24} />
       </motion.button>
@@ -184,7 +186,7 @@ const AISalesChat = () => {
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[150] flex items-center justify-center p-4" style={{ pointerEvents: 'auto' }}>
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
             
             <motion.div
@@ -289,4 +291,4 @@ const AISalesChat = () => {
   );
 };
 
-export default AISalesChat;
+export default React.memo(AISalesChat);

@@ -28,28 +28,34 @@ export const AppContent = (): JSX.Element => {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 1500); // Reduzido de 4s para 1.5s para melhorar LCP
 
-    // Advanced intersection observer for skill demonstrations
+    // IntersectionObserver otimizado para scroll fluido
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
             
-            // Add skill demonstration effects
-            const skillElements = entry.target.querySelectorAll('[data-skill]');
-            skillElements.forEach((skillEl, index) => {
-              (skillEl as HTMLElement).style.setProperty('--delay', `${index * 0.2}s`);
-              (skillEl as HTMLElement).style.setProperty('--duration', '3s');
-              skillEl.classList.add('skill-demo');
-            });
+            // Add skill demonstration effects - apenas uma vez
+            if (!entry.target.getAttribute('data-animated')) {
+              const skillElements = entry.target.querySelectorAll('[data-skill]');
+              skillElements.forEach((skillEl, index) => {
+                (skillEl as HTMLElement).style.setProperty('--delay', `${index * 0.2}s`);
+                (skillEl as HTMLElement).style.setProperty('--duration', '3s');
+                skillEl.classList.add('skill-demo');
+              });
+              entry.target.setAttribute('data-animated', 'true');
+              
+              // Unobserve após animar para economizar recursos
+              observer.unobserve(entry.target);
+            }
           }
         });
       },
       { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -10% 0px'
+        threshold: 0.05, // Reduzido para disparar mais cedo
+        rootMargin: '50px 0px 50px 0px' // Maior margem para animações mais suaves
       }
     );
 
@@ -57,10 +63,20 @@ export const AppContent = (): JSX.Element => {
     const observedElements = document.querySelectorAll('[data-animate]');
     observedElements.forEach((el) => observer.observe(el));
 
-    // Revolutionary scroll-based section morphing
+    // Section tracking otimizado - apenas para navegação, sem efeitos visuais pesados
     let currentSection = 'home';
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
+    let ticking = false;
+    let lastScrollTime = 0;
+    const scrollThrottle = 150; // Aumentado para 150ms para performance
+    
+    const updateSection = () => {
+      const now = performance.now();
+      if (now - lastScrollTime < scrollThrottle) {
+        ticking = false;
+        return;
+      }
+      
+      lastScrollTime = now;
       const windowHeight = window.innerHeight;
       const sections = ['home', 'works', 'projects', 'about', 'services', 'contact', 'faq'];
       
@@ -72,17 +88,28 @@ export const AppContent = (): JSX.Element => {
           
           if (isVisible && currentSection !== sectionId) {
             currentSection = sectionId;
-            // Trigger section transition effects
+            // Atualiza classe apenas se mudou de seção
             document.body.className = `section-${sectionId}`;
           }
         }
       });
+      
+      ticking = false;
+    };
+    
+    const handleScroll = () => {
+      // Throttle usando requestAnimationFrame + time-based
+      if (!ticking) {
+        requestAnimationFrame(updateSection);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial call
+    updateSection(); // Initial call
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
@@ -91,11 +118,18 @@ export const AppContent = (): JSX.Element => {
   return (
     <>
       <Preloader visible={loading} />
-      <div className={`relative bg-black text-white${loading ? ' pointer-events-none select-none' : ''}`} style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
-        <CustomCursor />
+      {/* Cursor e Chat sempre visíveis e fora do container principal */}
+      <CustomCursor />
+      {!loading && <AISalesChat />}
+      <div 
+        className={`relative bg-black text-white${loading ? ' pointer-events-none select-none' : ''}`} 
+        style={{ 
+          opacity: loading ? 0 : 1, 
+          transition: 'opacity 0.5s',
+          minHeight: '100vh' // Previne CLS
+        }}
+      >
         <Navigation />
-        {/* Global floating chat button */}
-        <AISalesChat />
         <main className="relative">
           <div className="relative">
             <Hero />

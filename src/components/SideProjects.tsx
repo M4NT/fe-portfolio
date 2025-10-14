@@ -10,13 +10,13 @@ const SideProjects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [150, -150]);
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // useScroll removido para scroll fluido em 60fps
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
+  // const y = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   // Technical experiments and tools
   const experiments = [
@@ -134,7 +134,6 @@ const SideProjects = () => {
               <div className="absolute inset-0">
         <motion.div 
           className="absolute inset-0 opacity-[0.03] hidden md:block"
-          style={{ y: backgroundY }}
         >
           <div 
             className="w-full h-full"
@@ -178,7 +177,6 @@ const SideProjects = () => {
 
       <motion.div 
         className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
-        style={{ y }}
       >
         {/* Section Header */}
         <motion.div 
@@ -421,4 +419,4 @@ const SideProjects = () => {
   );
 };
 
-export default SideProjects;
+export default React.memo(SideProjects);
