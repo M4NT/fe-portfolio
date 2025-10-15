@@ -69,6 +69,14 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Section: Testimonials -->
+  <url>
+    <loc>https://yan-m.dev/#testimonials</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Section: Contact -->
   <url>
     <loc>https://yan-m.dev/#contact</loc>

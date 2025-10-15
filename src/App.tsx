@@ -10,6 +10,7 @@ import SideProjects from './components/SideProjects';
 import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import CustomCursor from './components/CustomCursor';
@@ -150,6 +151,9 @@ export const AppContent = (): JSX.Element => {
           </div>
           <div className="relative" data-animate>
             <PaymentTerms />
+          </div>
+          <div className="relative" data-animate>
+            <Testimonials />
           </div>
           <div className="relative" data-animate>
             <Contact />

@@ -72,7 +72,7 @@ MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## 👨‍💻 Autor
 
-Desenvolvido com ❤️ por [Seu Nome]
+Desenvolvido com ❤️ por Yan Mantovani.
 
 ---
 
