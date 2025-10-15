@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, HelpCircle, MessageCircle, ArrowRight } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import AnimatedBackground from './AnimatedBackground';
 
 interface FAQItem {
   id: number;
@@ -115,11 +116,8 @@ const FAQ = () => {
 
   return (
     <section id="faq" className="relative py-20 sm:py-24 bg-black overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse-slow-reverse" />
-      </div>
+      {/* Animated Background */}
+      <AnimatedBackground variant="subtle" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}

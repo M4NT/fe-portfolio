@@ -6,7 +6,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import SelectedWorks from './components/SelectedWorks';
-// import SideProjects from './components/SideProjects';
 import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
@@ -20,6 +19,7 @@ import AISalesChat from './components/AISalesChat';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import CookieConsent from './components/CookieConsent';
+import SectionDivider from './components/SectionDivider';
 
 
 export const AppContent = (): JSX.Element => {
@@ -148,9 +148,10 @@ export const AppContent = (): JSX.Element => {
           <div className="relative">
             <SelectedWorks />
           </div>
-          <div className="relative">
-            {/* <SideProjects /> */}
-          </div>
+          
+          {/* Section Divider */}
+          <SectionDivider />
+          
           <div className="relative" data-animate>
             <About />
           </div>
@@ -166,6 +167,9 @@ export const AppContent = (): JSX.Element => {
           <div className="relative" data-animate>
             <Contact />
           </div>
+          
+          {/* Section Divider */}
+          <SectionDivider />
           
           {/* FAQ Section */}
           <div className="relative" data-animate>

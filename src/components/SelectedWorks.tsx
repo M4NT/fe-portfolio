@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ExternalLink, Code, Zap, Layers, Cpu, Smartphone } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ArrowRight, ExternalLink, Code, Zap, Layers, Cpu, CheckCircle2, Github } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from './LanguageContext';
 import ProjectModal from './ProjectModal';
@@ -11,14 +11,6 @@ const SelectedWorks = () => {
   const [progressKey, setProgressKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
-
-  // useScroll removido para scroll fluido em 60fps
-  // const { scrollYProgress } = useScroll({
-  //   target: containerRef,
-  //   offset: ["start end", "end start"]
-  // });
-  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  // const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   // Enhanced project data focusing on technical skills
   const projects = [
@@ -46,7 +38,9 @@ const SelectedWorks = () => {
         'Implementing efficient state management for large datasets'
       ],
       category: 'fullstack' as const,
-      skillsShowcased: ['Performance Optimization', 'Real-time Systems', 'Data Visualization', 'TypeScript']
+      skillsShowcased: ['Performance Optimization', 'Real-time Systems', 'Data Visualization', 'TypeScript'],
+      icon: <Layers className="w-6 h-6" />,
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       id: '2',
@@ -72,7 +66,9 @@ const SelectedWorks = () => {
         'Implementing complex shader effects while maintaining 60fps'
       ],
       category: 'web' as const,
-      skillsShowcased: ['WebGL/Three.js', 'GLSL Shaders', '3D Mathematics', 'Performance Engineering']
+      skillsShowcased: ['WebGL/Three.js', 'GLSL Shaders', '3D Mathematics', 'Performance Engineering'],
+      icon: <Cpu className="w-6 h-6" />,
+      color: 'from-purple-500 to-pink-500'
     },
     {
       id: '3',
@@ -98,7 +94,9 @@ const SelectedWorks = () => {
         'Building responsive admin interfaces'
       ],
       category: 'fullstack' as const,
-      skillsShowcased: ['Full-Stack Development', 'Payment Integration', 'Database Design', 'State Management']
+      skillsShowcased: ['Full-Stack Development', 'Payment Integration', 'Database Design', 'State Management'],
+      icon: <Code className="w-6 h-6" />,
+      color: 'from-green-500 to-emerald-500'
     },
     {
       id: '4',
@@ -124,18 +122,20 @@ const SelectedWorks = () => {
         'Creating extensible plugin architecture'
       ],
       category: 'web' as const,
-      skillsShowcased: ['AI Integration', 'Real-time Collaboration', 'Editor Development', 'WebSocket Programming']
+      skillsShowcased: ['AI Integration', 'Real-time Collaboration', 'Editor Development', 'WebSocket Programming'],
+      icon: <Zap className="w-6 h-6" />,
+      color: 'from-yellow-500 to-orange-500'
     }
   ];
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
-    setProgressKey(prev => prev + 1); // Reset barra ao mudar manualmente
+    setProgressKey(prev => prev + 1);
   };
 
   const prevProject = () => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-    setProgressKey(prev => prev + 1); // Reset barra ao mudar manualmente
+    setProgressKey(prev => prev + 1);
   };
 
   const openProjectModal = (project: any) => {
@@ -143,7 +143,6 @@ const SelectedWorks = () => {
   };
 
   useEffect(() => {
-    // Tempo de autoplay fixo - 15 segundos
     const AUTOPLAY_DURATION = 15000;
     let interval: NodeJS.Timeout | null = null;
     
@@ -151,31 +150,16 @@ const SelectedWorks = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Limpa interval anterior se existir
-            if (interval) clearInterval(interval);
-            
-            // Reset da barra de progresso ao iniciar
-            setProgressKey(prev => prev + 1);
-            
-            // Inicia autoplay sincronizado
             interval = setInterval(() => {
-              setCurrentIndex((prev) => {
-                const next = (prev + 1) % projects.length;
-                // Atualiza key da barra de progresso para reiniciar animação
-                setProgressKey(k => k + 1);
-                return next;
-              });
+              setCurrentIndex((prev) => (prev + 1) % projects.length);
+              setProgressKey(prev => prev + 1);
             }, AUTOPLAY_DURATION);
           } else {
-            // Para autoplay quando não visível
-            if (interval) {
-              clearInterval(interval);
-              interval = null;
-            }
+            if (interval) clearInterval(interval);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.3 }
     );
     
     if (containerRef.current) {
@@ -191,382 +175,285 @@ const SelectedWorks = () => {
   const currentProject = projects[currentIndex];
 
   return (
-    <>
-      <section 
-        id="works" 
-        ref={containerRef}
-        className="relative min-h-screen py-16 sm:py-24 md:py-32"
-        style={{
-          background: 'linear-gradient(180deg, black 0%, #0a0a0a 50%, #1a1a1a 100%)',
-          overflow: 'visible',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}
-      >
-        {/* Morphing Background */}
-        <div className="absolute inset-0">
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl"
-            animate={{ 
-              scale: [1, 1.5, 1.2],
-              x: [-100, 100, -50],
-              y: [-50, 50, -25]
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-48 md:w-64 h-48 md:h-64 rounded-full bg-gradient-to-r from-green-500/10 to-teal-500/10 blur-3xl"
-            animate={{ 
-              scale: [1.2, 1, 1.3],
-              x: [50, -100, 75],
-              y: [25, -50, 0]
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          />
+    <section 
+      id="works" 
+      ref={containerRef}
+      className="relative py-16 md:py-24 bg-black"
+    >
+      {/* Subtle Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black" />
 
-          {/* Static Grid - sem animação para 60fps */}
-          <div 
-            className="absolute inset-0 opacity-[0.02] hidden md:block"
-          >
-            <div 
-              className="w-full h-full"
-              style={{
-                backgroundImage: `
-                  linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                  linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)
-                `,
-                backgroundSize: '80px 80px',
-              }}
-            />
-          </div>
-        </div>
-
-        <div 
-          className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          {/* Section Header */}
+          <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
+            {t('works.subtitle')} — Technical Showcase
+          </div>
+          <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
+            SKILL DEMONSTRATION
+          </h2>
+          <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
+            Experience frontend mastery through interactive projects. Each piece demonstrates specific technical skills and modern development practices.
+          </p>
+        </motion.div>
+
+        {/* Main Project Display */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Project Image */}
           <motion.div 
-            className="mb-12 sm:mb-16 md:mb-20"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+            className="relative group order-2 lg:order-1"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div 
-              className="text-white/40 text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4 font-inter text-center md:text-left"
-            >
-              {t('works.subtitle')} — Technical Showcase
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ImageWithFallback
+                  src={currentProject.image}
+                  alt={currentProject.title}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                {/* Project Icon Badge */}
+                <motion.div 
+                  className={`absolute top-6 left-6 p-3 bg-gradient-to-br ${currentProject.color} rounded-xl shadow-lg`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <div className="text-white">
+                    {currentProject.icon}
+                  </div>
+                </motion.div>
+
+                {/* Quick Actions */}
+                <div className="absolute bottom-6 right-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <motion.a
+                    href={currentProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ExternalLink className="w-5 h-5 text-white" />
+                  </motion.a>
+                  <motion.a
+                    href={currentProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Github className="w-5 h-5 text-white" />
+                  </motion.a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Controls */}
+            <div className="flex items-center justify-between mt-6">
+              <button
+                onClick={prevProject}
+                className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+              >
+                <ArrowLeft className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+              </button>
+
+              {/* Progress Bar */}
+              <div className="flex-1 mx-6 h-1 bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  key={progressKey}
+                  className={`h-full bg-gradient-to-r ${currentProject.color} rounded-full`}
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 15, ease: 'linear' }}
+                />
+              </div>
+
+              <button
+                onClick={nextProject}
+                className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+              >
+                <ArrowRight className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+              </button>
             </div>
-            <h2 className="font-inter font-light text-3xl sm:text-5xl lg:text-6xl xl:text-8xl leading-none tracking-[-0.03em] text-white mb-4 sm:mb-6 text-center md:text-left">
-              SKILL DEMONSTRATION
-            </h2>
-            <p className="text-white/60 text-base sm:text-lg md:text-xl max-w-3xl text-center md:text-left mx-auto md:mx-0">
-              Experience frontend mastery through interactive projects. Each piece demonstrates specific technical skills and modern development practices.
-            </p>
+
+            {/* Project Indicators */}
+            <div className="flex justify-center gap-2 mt-4">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setProgressKey(prev => prev + 1);
+                  }}
+                  className={`h-1 rounded-full transition-all duration-300 ${
+                    index === currentIndex 
+                      ? 'w-8 bg-white' 
+                      : 'w-1 bg-white/30 hover:bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
           </motion.div>
 
-          {/* Main Project Display */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-            {/* Project Showcase */}
-            <motion.div
-              className="relative order-2 lg:order-1"
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true }}
-            >
-              {/* Project Image */}
-              <div 
-                className="relative aspect-[4/3] rounded-lg overflow-hidden group cursor-pointer"
-                onClick={() => openProjectModal(currentProject)}
-                style={{
-                  overflow: 'hidden',
-                  contain: 'layout style paint'
-                }}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentIndex}
-                    className="absolute inset-0"
-                    initial={{ opacity: 0, scale: 1.02 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ 
-                      duration: 1.2,
-                      ease: [0.23, 1, 0.32, 1],
-                      scale: {
-                        duration: 1.0,
-                        ease: [0.25, 0.46, 0.45, 0.94]
-                      },
-                      opacity: {
-                        duration: 0.8,
-                        ease: "easeOut"
-                      }
-                    }}
-                    style={{
-                      overflow: 'hidden',
-                      transformOrigin: 'center center'
-                    }}
-                  >
-                    <ImageWithFallback
-                      src={currentProject.image}
-                      alt={currentProject.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      width={800}
-                      height={600}
-                      loading="lazy"
-                      fetchpriority="high"
-                      style={{
-                        transformOrigin: 'center center',
-                        willChange: 'transform'
-                      }}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Overlay Effects */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Floating Action Button */}
-                <motion.div
-                  className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ExternalLink size={16} className="sm:w-[18px] sm:h-[18px] text-white" />
-                </motion.div>
-
-                {/* Skills Tags */}
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 flex flex-wrap gap-1 sm:gap-2">
-                  {currentProject.skillsShowcased.slice(0, 3).map((skill, index) => (
-                    <motion.span
-                      key={skill}
-                      className="px-2 sm:px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 rounded-full text-xs text-white font-medium"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-
-                {/* Progress Indicator - sincronizado com autoplay */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-white/10"
-                  style={{
-                    overflow: 'visible',
-                    scrollbarWidth: 'none',
-                    msOverflowStyle: 'none'
-                  }}
-                >
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                    style={{
-                      overflow: 'visible',
-                      scrollbarWidth: 'none',
-                      msOverflowStyle: 'none'
-                    }}
-                    initial={{ width: '0%' }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 15, ease: "linear" }}
-                    key={progressKey}
-                  />
-                </div>
-              </div>
-
-              {/* Navigation Controls */}
-              <div className="flex items-center justify-between mt-4 sm:mt-6">
-                <motion.button
-                  onClick={prevProject}
-                  className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-white/5 border border-white/20 rounded hover:bg-white/10 transition-colors magnetic"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ArrowLeft size={14} className="sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm hidden sm:inline">{t('works.previous')}</span>
-                  <span className="text-xs sm:hidden">Prev</span>
-                </motion.button>
-
-                <div className="flex space-x-2">
-                  {projects.map((_, index) => (
-                    <motion.button
-                      key={index}
-                      onClick={() => setCurrentIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === currentIndex ? 'bg-white' : 'bg-white/30'
-                      }`}
-                      whileHover={{ scale: 1.2 }}
-                      whileTap={{ scale: 0.8 }}
-                    />
-                  ))}
-                </div>
-
-                <motion.button
-                  onClick={nextProject}
-                  className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-white/5 border border-white/20 rounded hover:bg-white/10 transition-colors magnetic"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-xs sm:text-sm hidden sm:inline">{t('works.next')}</span>
-                  <span className="text-xs sm:hidden">Next</span>
-                  <ArrowRight size={14} className="sm:w-4 sm:h-4" />
-                </motion.button>
-              </div>
-            </motion.div>
-
-            {/* Project Details */}
-            <motion.div
-              className="space-y-6 sm:space-y-8 order-1 lg:order-2"
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.6 }}
-                  className="space-y-4 sm:space-y-6"
-                >
-                  {/* Project Title */}
-                  <div>
-                    <motion.div 
-                      className="text-white/40 text-xs sm:text-sm uppercase tracking-wider mb-2 font-inter"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      Project {String(currentIndex + 1).padStart(2, '0')}
-                    </motion.div>
-                    <h3 className="font-inter font-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white leading-tight">
-                      {currentProject.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-white/70 text-sm sm:text-base lg:text-lg leading-relaxed">
-                    {currentProject.description}
-                  </p>
-
-                  {/* Technology Stack */}
-                  <div className="space-y-3 sm:space-y-4">
-                    <h4 className="text-white font-medium text-xs sm:text-sm uppercase tracking-wider flex items-center space-x-2">
-                      <Code size={14} className="sm:w-4 sm:h-4" />
-                      <span>Technology Stack</span>
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {currentProject.technologies.map((tech, index) => (
-                        <motion.span
-                          key={tech}
-                          className="px-2 sm:px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs sm:text-sm text-white/80 hover:bg-white/15 transition-colors cursor-default"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.05 }}
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Key Features */}
-                  <div className="space-y-3 sm:space-y-4">
-                    <h4 className="text-white font-medium text-xs sm:text-sm uppercase tracking-wider flex items-center space-x-2">
-                      <Zap size={14} className="sm:w-4 sm:h-4" />
-                      <span>Key Features</span>
-                    </h4>
-                    <ul className="space-y-2">
-                      {currentProject.features.slice(0, 3).map((feature, index) => (
-                        <motion.li
-                          key={index}
-                          className="text-white/70 text-xs sm:text-sm flex items-start space-x-3"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <span className="text-green-400 mt-1 flex-shrink-0">•</span>
-                          <span>{feature}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-                    <motion.button
-                      onClick={() => openProjectModal(currentProject)}
-                      className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded hover:from-blue-500 hover:to-purple-500 transition-all magnetic"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Layers size={14} className="sm:w-4 sm:h-4" />
-                      <span className="text-sm sm:text-base">Explore Project</span>
-                    </motion.button>
-                    
-                    <motion.a
-                      href={currentProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 border border-white/20 text-white rounded hover:bg-white/10 transition-colors magnetic"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-                      <span className="text-sm sm:text-base">Live Demo</span>
-                    </motion.a>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
-          </div>
-
-          {/* Skills Demonstration Grid */}
-          <motion.div
-            className="mt-16 sm:mt-24 md:mt-32 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, staggerChildren: 0.1 }}
+          {/* Right - Project Info */}
+          <motion.div 
+            className="space-y-6 order-1 lg:order-2"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            {[
-              { icon: <Code size={20} className="sm:w-6 sm:h-6" />, title: 'Clean Code', desc: 'Maintainable & Scalable' },
-              { icon: <Zap size={20} className="sm:w-6 sm:h-6" />, title: 'Performance', desc: 'Optimized & Fast' },
-              { icon: <Layers size={20} className="sm:w-6 sm:h-6" />, title: 'Architecture', desc: 'Well-structured' },
-              { icon: <Smartphone size={20} className="sm:w-6 sm:h-6" />, title: 'Responsive', desc: 'All Devices' }
-            ].map((item, index) => (
+            <AnimatePresence mode="wait">
               <motion.div
-                key={index}
-                className="p-4 sm:p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors group cursor-default"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="space-y-6"
               >
-                <div className="text-white/60 group-hover:text-white transition-colors mb-2 sm:mb-3">
-                  {item.icon}
+                {/* Category Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-white/70 text-sm uppercase tracking-wider font-inter">
+                    {currentProject.category}
+                  </span>
                 </div>
-                <h4 className="text-white font-medium mb-1 text-sm sm:text-base">{item.title}</h4>
-                <p className="text-white/60 text-xs sm:text-sm">{item.desc}</p>
+
+                {/* Title */}
+                <h3 className="font-inter font-light text-4xl lg:text-5xl text-white leading-tight">
+                  {currentProject.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-white/70 text-lg leading-relaxed">
+                  {currentProject.description}
+                </p>
+
+                {/* Skills Showcased */}
+                <div>
+                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                    Skills Showcased
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {currentProject.skillsShowcased.map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/80 text-sm hover:bg-white/10 hover:border-white/20 transition-all"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {skill}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Technologies */}
+                <div>
+                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                    Technologies Used
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {currentProject.technologies.map((tech, index) => (
+                      <motion.div
+                        key={index}
+                        className={`px-3 py-1.5 bg-gradient-to-r ${currentProject.color} bg-opacity-10 border border-white/20 rounded-lg text-white text-sm`}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {tech}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Key Features */}
+                <div>
+                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                    Key Features
+                  </h4>
+                  <div className="space-y-2">
+                    {currentProject.features.slice(0, 3).map((feature, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-white/70 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <motion.button
+                  onClick={() => openProjectModal(currentProject)}
+                  className="group/cta relative inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="text-white font-medium">View Full Details</span>
+                  <ArrowRight className="w-5 h-5 text-white/70 group-hover/cta:text-white group-hover/cta:translate-x-1 transition-all" />
+                </motion.button>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </motion.div>
         </div>
-      </section>
+
+        {/* Project Stats */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          {[
+            { label: 'Projects Completed', value: '4', color: 'from-blue-500 to-cyan-500' },
+            { label: 'Technologies Used', value: '20+', color: 'from-purple-500 to-pink-500' },
+            { label: 'Skills Demonstrated', value: '15+', color: 'from-green-500 to-emerald-500' },
+            { label: 'Performance Score', value: '98%', color: 'from-yellow-500 to-orange-500' }
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all"
+              whileHover={{ y: -4, scale: 1.02 }}
+            >
+              <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                {stat.value}
+              </div>
+              <div className="text-white/60 text-sm uppercase tracking-wider font-inter">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
       {/* Project Modal */}
-      <ProjectModal
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-        project={selectedProject || projects[0]}
-      />
-    </>
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
+    </section>
   );
 };
 
-export default React.memo(SelectedWorks);
+export default SelectedWorks;
