@@ -1059,6 +1059,23 @@ a, button, [role="button"] {
   position: relative;
 }
 
+/* Navbar glass effect - more transparent */
+.navbar-glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 @media (min-width: 768px) {
   .glass::before {
     content: '';

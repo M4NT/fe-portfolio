@@ -11,13 +11,12 @@ const Navigation = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    let ticking = false;
-    
-    const updateNavigation = () => {
-      setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
 
       // Update active section based on scroll position
-      const sections = ['works', 'projects', 'services', 'about', 'contact'];
+      const sections = ['works', 'about', 'services', 'contact'];
       let current = 'home';
 
       for (const section of sections) {
@@ -31,18 +30,10 @@ const Navigation = () => {
       }
 
       setActiveSection(current);
-      ticking = false;
-    };
-    
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(updateNavigation);
-        ticking = true;
-      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    updateNavigation(); // Initial call
+    handleScroll(); // Initial call
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -50,12 +41,10 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    // { id: 'home', label: t('nav.home'), href: '#home' },
-    { id: 'works', label: t('nav.selectedWorks'), href: '#works' },
-    { id: 'projects', label: t('nav.sideProjects'), href: '#projects' },
-    { id: 'about', label: t('nav.about'), href: '#about' },
-    { id: 'services', label: t('nav.services'), href: '#services' },
-    { id: 'contact', label: t('nav.contact'), href: '#contact' }
+    { id: 'works', label: 'Projetos', href: '#works' },
+    { id: 'about', label: 'Sobre', href: '#about' },
+    { id: 'services', label: 'Serviços', href: '#services' },
+    { id: 'contact', label: 'Contato', href: '#contact' }
   ];
 
   const socialLinks = [
@@ -100,46 +89,31 @@ const Navigation = () => {
   return (
     <>
       {/* Main Navigation */}
-      <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 navbar-glass border-b border-white/10"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          display: 'block',
+          visibility: 'visible',
+          opacity: 1
+        }}
         role="navigation"
         aria-label="Navegação principal"
       >
-        {/* Top-only blur that fades to 0% near 80% height */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              WebkitBackdropFilter: 'blur(14px)',
-              backdropFilter: 'blur(14px)',
-              WebkitMaskImage:
-                'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)',
-              maskImage:
-                'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)'
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%)'
-            }}
-          />
-        </div>
-        <div className="max-w-screen-2xl mx-auto px-3 lg:px-6">
-          <div className="flex items-center justify-between h-20 max-w-7xl mx-auto w-full">
+        <div className="max-w-screen-2xl mx-auto px-4 lg:px-6">
+          <div className="flex items-center justify-between h-16 max-w-7xl mx-auto w-full">
             {/* Logo */}
             <motion.div 
-              className="relative group cursor-pointer mr-auto"
+              className="relative group cursor-pointer"
               whileHover={{ scale: 1.05 }}
               onClick={() => scrollToSection('home')}
             >
               <motion.h1 
-                className="font-inter font-light text-2xl lg:text-3xl text-white tracking-wider"
+                className="font-display text-2xl lg:text-3xl text-white tracking-wider"
                 animate={{ 
                   textShadow: isScrolled 
                     ? 'none' 
@@ -147,7 +121,7 @@ const Navigation = () => {
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                YAN.M
+                YAN<span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">.M</span>
               </motion.h1>
               {/* Subtle underline effect */}
               <motion.div
@@ -159,68 +133,89 @@ const Navigation = () => {
               />
             </motion.div>
 
-            {/* Right group: nav + CTA, aligned right with glassmorphism */}
-            <div className="hidden lg:flex items-center gap-3 ml-auto">
-              <motion.div
-                className="glass rounded-full px-2 py-2 flex items-center gap-1 border border-white/10"
-                initial={{ opacity: 0, y: -12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {/* Navigation Links */}
+              <div className="flex items-center gap-1">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.id;
                   return (
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-colors ${
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
                         isActive
-                          ? 'text-white bg-white/10 border border-white/10'
-                          : 'text-white/75 hover:text-white hover:bg-white/5'
+                          ? 'text-white'
+                          : 'text-white/70 hover:text-white'
                       }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.75 + index * 0.06 }}
+                      transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+                      whileHover={{ y: -1 }}
                     >
-                      {isActive && <span className="inline-block w-1.5 h-1.5 rounded-full bg-white" />}
-                      <span>{item.label}</span>
+                      {item.label}
+                      {isActive && (
+                        <motion.div
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"
+                          layoutId="activeIndicator"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
                     </motion.button>
                   );
                 })}
-                {/* Contact CTA inside pill */}
-                <motion.a
-                  href="mailto:hello@yan-m.dev"
-                  className="ml-2 flex items-center gap-2 pl-5 pr-4 py-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium border border-white/10 glow-button"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.95 }}
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="glow-text">{t('nav.getInTouch')}</span>
-                  <ExternalLink size={14} />
-                </motion.a>
-              </motion.div>
+              </div>
 
-              {/* Language Selector - compact glass pill */}
+              {/* CTA Button */}
+              <motion.a
+                href="https://wa.me/5516992233365"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-medium rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 1.0 }}
+                whileHover={{ y: -2, scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Falar no WhatsApp</span>
+                <ExternalLink size={14} />
+              </motion.a>
+
+              {/* Language Selector */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1.0 }}
+                transition={{ duration: 0.4, delay: 1.1 }}
               >
                 <LanguageSelector />
               </motion.div>
             </div>
 
-            {/* Right Actions (mobile): only burger visible */}
-            <div className="flex items-center space-x-3 lg:hidden">
-              {/* Mobile Menu Button */}
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-3 lg:hidden">
+              {/* WhatsApp CTA Mobile */}
+              <motion.a
+                href="https://wa.me/5516992233365"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-medium rounded-full"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 1.2 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>WhatsApp</span>
+              </motion.a>
+
+              {/* Menu Button */}
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.6 }}
+                transition={{ duration: 0.5, delay: 1.3 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={isMobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
@@ -254,7 +249,7 @@ const Navigation = () => {
             </div>
           </div>
         </div>
-      </motion.nav>
+        </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -316,15 +311,17 @@ const Navigation = () => {
 
                 {/* Mobile CTA */}
                 <motion.a
-                  href="mailto:hello@yan-m.dev"
-                  className="flex items-center justify-center space-x-2 w-full p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium mt-6"
+                  href="https://wa.me/5516992233365"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center space-x-2 w-full p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium mt-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>{t('nav.getInTouch')}</span>
+                  <span>Falar no WhatsApp</span>
                   <ExternalLink size={16} />
                 </motion.a>
 
