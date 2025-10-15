@@ -1,5 +1,6 @@
 # robots.txt for yanmantovani.com
-# Allow all crawlers to access all content
+# Optimized for Search Engines and AI Crawlers
+# Desenvolvedor Frontend Freelancer | Landing Pages de Alta Conversão
 
 User-agent: *
 Allow: /
@@ -10,16 +11,14 @@ Sitemap: https://yanmantovani.com/sitemap.xml
 # Crawl-delay for respectful crawling
 Crawl-delay: 0
 
-# Disallow admin or private paths (if any in the future)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Allow specific bots
+# Search Engine Bots
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Slurp
 Allow: /
@@ -33,9 +32,57 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
+# Social Media Crawlers
 User-agent: facebot
 Allow: /
 
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# AI Crawlers (ChatGPT, Claude, Gemini, etc.)
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 0
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Archive Bots
 User-agent: ia_archiver
 Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+# Disallow admin or private paths (if any in the future)
+# Disallow: /admin/
+# Disallow: /private/
 

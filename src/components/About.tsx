@@ -119,7 +119,7 @@ const About = () => {
             {t('about.title')}
           </h2>
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            Desenvolvedor frontend especializado em criar experiências digitais que convertem visitantes em clientes.
+            <span className="text-white font-medium">5+ anos</span> criando soluções web para empresas e profissionais que querem <span className="text-green-400 font-medium">resultados reais</span>. Cada projeto é desenvolvido com foco em performance, SEO e conversão.
           </p>
         </motion.div>
 

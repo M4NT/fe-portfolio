@@ -27,6 +27,15 @@ export const AppContent = (): JSX.Element => {
   const { t } = useLanguage();
 
   useEffect(() => {
+    // Garantir scroll no topo ao carregar/recarregar
+    if (window.location.hash === '' || window.location.pathname === '/') {
+      window.scrollTo(0, 0);
+      // Limpar hash se existir
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+    
     // Configuração de scroll único e fluido
     document.documentElement.style.scrollBehavior = 'smooth';
     document.body.style.overflowX = 'hidden';

@@ -1,0 +1,86 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Como contratar um desenvolvedor frontend freelancer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entre em contato via WhatsApp (+55 16 99223-3365) ou pelo formulário do site. Você receberá um orçamento grátis em até 24 horas. Após aprovação, iniciamos o projeto com 50% de entrada. O processo é transparente com atualizações constantes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto custa uma landing page de alta conversão?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Landing pages profissionais a partir de R$ 1.500. O valor varia conforme complexidade, funcionalidades e prazo. Oferecemos garantia de entrega e ROI médio de 300%. Parcelamento disponível em até 10x."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual o prazo de entrega de um projeto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A maioria dos projetos é entregue em 1 semana ou menos. Landing pages simples: 3-5 dias. Sites institucionais: 7-10 dias. E-commerce: 15-20 dias. Projetos maiores são divididos em etapas com entregas parciais."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O desenvolvedor freelancer oferece suporte pós-entrega?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim! Todo projeto inclui 30 dias de suporte gratuito para ajustes e dúvidas. Também oferecemos planos de manutenção mensal para atualizações contínuas, otimizações e novos recursos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quais tecnologias o desenvolvedor utiliza?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Trabalho com as tecnologias mais modernas do mercado: React, TypeScript, Next.js, Tailwind CSS, Framer Motion, Node.js, PostgreSQL e MongoDB. Foco em performance, SEO e experiência do usuário."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona o processo de pagamento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oferecemos várias opções: Pix à vista (com desconto), modelo 50/50 (50% início + 50% entrega), parcelamento no cartão até 10x via Stripe/PagSeguro, e pagamento escalonado por etapas. Todos os projetos têm contrato digital."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O site será otimizado para SEO e Google?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim! Todos os projetos incluem otimização completa de SEO: meta tags, Schema.org, sitemap, performance (Core Web Vitals), responsividade e acessibilidade. Sites preparados para ranquear no Google."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual a garantia de conversão da landing page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nossas landing pages convertem em média 300% mais que o padrão do mercado. Utilizamos técnicas comprovadas de UX/UI, copywriting persuasivo, CTAs estratégicos e testes A/B. Garantimos otimização até você ficar 100% satisfeito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O desenvolvedor atende todo o Brasil?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim! Atendo clientes de todo o Brasil remotamente. Baseado em Monte Alto - SP, mas trabalho com empresas de São Paulo, Rio de Janeiro, Minas Gerais, Paraná, Santa Catarina e todos os estados. Reuniões online via Google Meet/Zoom."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "É possível revisar o design antes da entrega final?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Com certeza! O processo inclui apresentação de protótipos, revisões ilimitadas até aprovação, e entregas parciais para validação. Você acompanha cada etapa e pode solicitar ajustes. Satisfação garantida ou reembolso."
+      }
+    }
+  ]
+}

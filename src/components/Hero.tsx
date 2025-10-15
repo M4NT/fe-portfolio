@@ -270,6 +270,12 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
+              {/* Subtítulo profissional */}
+              <div className="text-white/60 text-sm lg:text-base uppercase tracking-wider mb-4 font-inter">
+                Desenvolvedor Frontend Freelancer
+              </div>
+              
+              {/* Nome/Marca principal */}
               <h1 className="font-inter font-light text-6xl lg:text-8xl leading-none tracking-tight mb-6">
                 <span className="text-white">Yan</span>
                 <span className="mx-2 text-white/40">—</span>
@@ -277,8 +283,10 @@ const Hero = () => {
                   .m
                 </span>
               </h1>
+              
+              {/* Proposta de valor */}
               <p className="text-white/70 text-xl lg:text-2xl leading-relaxed max-w-2xl">
-                Desenvolvedor frontend especializado em criar experiências digitais que <span className="text-white font-medium">convertem visitantes em clientes</span>.
+                <span className="text-white font-semibold">Landing Pages que Convertem 300% Mais.</span> Transformo sua ideia em um site profissional de alta performance. <span className="text-green-400 font-medium">Orçamento grátis em 24h</span>.
               </p>
             </motion.div>
 
@@ -346,7 +354,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <span className="relative bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent font-bold group-hover/btn:from-black group-hover/btn:via-black group-hover/btn:to-gray-600 transition-all duration-300">
-                  Ver Meu Trabalho
+                  Solicitar Orçamento Grátis
                 </span>
                 <ArrowRight className="w-5 h-5 text-black group-hover/btn:translate-x-1 transition-transform" />
               </motion.a>
@@ -361,7 +369,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <span className="relative bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent font-bold group-hover/btn:from-white group-hover/btn:via-white group-hover/btn:to-gray-300 transition-all duration-300">
-                  Falar no WhatsApp
+                  Falar com Especialista (24h)
                 </span>
                 <MessageCircle className="w-5 h-5 text-white/80 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
               </motion.a>
