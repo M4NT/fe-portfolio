@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { LanguageProvider, useLanguage } from './components/LanguageContext';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -167,6 +168,7 @@ export const AppContent = (): JSX.Element => {
 export const App = (): JSX.Element => (
   <LanguageProvider>
     <AppContent />
+    <Analytics />
   </LanguageProvider>
 );
 
