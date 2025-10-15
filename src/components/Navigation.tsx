@@ -105,6 +105,8 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
+        role="navigation"
+        aria-label="Navegação principal"
       >
         {/* Top-only blur that fades to 0% near 80% height */}
         <div className="absolute inset-0 pointer-events-none">
@@ -221,6 +223,9 @@ const Navigation = () => {
                 transition={{ duration: 0.5, delay: 1.6 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label={isMobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 <AnimatePresence mode="wait">
                   {isMobileMenuOpen ? (
@@ -272,11 +277,14 @@ const Navigation = () => {
 
             {/* Menu Content */}
             <motion.div
+              id="mobile-menu"
               className="absolute top-20 left-6 right-6 bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden"
               initial={{ scale: 0.95, y: -20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: -20, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              role="menu"
+              aria-label="Menu de navegação mobile"
             >
               <div className="p-6 space-y-4">
                 {navItems.map((item, index) => (

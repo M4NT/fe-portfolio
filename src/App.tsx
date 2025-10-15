@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { LanguageProvider, useLanguage } from './components/LanguageContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import SelectedWorks from './components/SelectedWorks';
@@ -131,7 +132,7 @@ export const AppContent = (): JSX.Element => {
         }}
       >
         <Navigation />
-        <main className="relative">
+        <main id="main-content" className="relative" role="main">
           <div className="relative">
             <Hero />
           </div>
@@ -166,10 +167,12 @@ export const AppContent = (): JSX.Element => {
 };
 
 export const App = (): JSX.Element => (
-  <LanguageProvider>
-    <AppContent />
-    <Analytics />
-  </LanguageProvider>
+  <ErrorBoundary>
+    <LanguageProvider>
+      <AppContent />
+      <Analytics />
+    </LanguageProvider>
+  </ErrorBoundary>
 );
 
 export default App;

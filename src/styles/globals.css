@@ -1,13 +1,115 @@
-/* Fontes otimizadas com font-display: swap para melhor LCP */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Fontes carregadas via HTML com preload e display=swap para melhor LCP */
+/* @import removidos - fontes agora carregam de forma otimizada via <link> no index.html */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @custom-variant dark (&:is(.dark *));
+
+/* ========================================
+   ACESSIBILIDADE (A11Y)
+   ======================================== */
+
+/* Skip to content - visível apenas no foco (teclado) */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  padding: 1rem 2rem;
+  background: #5227FF;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0;
+  transition: top 0.3s ease;
+  box-shadow: 0 4px 12px rgba(82, 39, 255, 0.5);
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid #FF9FFC;
+  outline-offset: 2px;
+}
+
+/* Focus visible melhorado para todos os elementos interativos */
+*:focus-visible {
+  outline: 3px solid #5227FF;
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #5227FF;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(82, 39, 255, 0.2);
+}
+
+/* Remove outline padrão apenas quando não é via teclado */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Screen reader only - esconde visualmente mas mantém acessível */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Melhor contraste para textos */
+.text-low-contrast {
+  color: #a1a1a1;
+}
+
+/* Indicador de foco para navegação por teclado */
+body.keyboard-navigation *:focus {
+  outline: 3px solid #5227FF !important;
+  outline-offset: 3px !important;
+}
+
+/* Reduzir movimento para usuários com preferência */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Alto contraste para usuários com baixa visão */
+@media (prefers-contrast: high) {
+  :root {
+    --foreground: #ffffff;
+    --background: #000000;
+  }
+  
+  * {
+    border-color: #ffffff !important;
+  }
+  
+  button,
+  a {
+    border: 2px solid currentColor !important;
+  }
+}
 
 /* Reset global de scroll e overflow */
 /* Sistema de scroll ultra otimizado para 60fps */
