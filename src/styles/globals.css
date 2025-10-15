@@ -321,6 +321,35 @@ section {
   perspective: 1000px;
 }
 
+/* Fix para imagens do carrossel About */
+.about-carousel {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.about-carousel img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  z-index: 1 !important;
+}
+
+/* Fix para botões do carrossel About */
+.about-carousel button {
+  position: absolute !important;
+  transform: translateY(-50%) !important;
+  transition: opacity 0.2s, background-color 0.2s !important;
+}
+
+.about-carousel button:hover {
+  transform: translateY(-50%) !important;
+}
+
 
   /* Project cards image overflow fix */
   .group:hover img,

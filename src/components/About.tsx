@@ -11,11 +11,10 @@ const About = () => {
   const { t } = useLanguage();
 
   const profileImages = [
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=600&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=600&fit=crop&crop=face"
+    "/images/about/photo-1.png",
+    "/images/about/photo-2.png", 
+    "/images/about/photo-3.png",
+    "/images/about/photo-4.png"
   ];
 
   const stats = [
@@ -135,7 +134,7 @@ const About = () => {
           >
             {/* Profile Image Carousel */}
             <div className="relative group">
-              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black rounded-xl">
+              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black rounded-xl w-full about-carousel" style={{ minHeight: '400px' }}>
                 {/* Image Carousel */}
                 <div className="relative w-full h-full">
                   {profileImages.map((image, index) => (
@@ -149,10 +148,21 @@ const About = () => {
                       }}
                       transition={{ duration: 0.8, ease: "easeInOut" }}
                     >
-                      <ImageWithFallback
+                      <img
                         src={image}
                         alt={`YAN.M Profile ${index + 1}`}
-                        className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
+                        className="w-full h-full object-cover object-center filter grayscale hover:grayscale-0 transition-all duration-700"
+                        style={{
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          width: '100%',
+                          height: '100%',
+                          minHeight: '100%',
+                          display: 'block'
+                        }}
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face';
+                        }}
                       />
                     </motion.div>
                   ))}
@@ -164,14 +174,14 @@ const About = () => {
                 {/* Carousel Controls */}
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-colors duration-200 opacity-0 group-hover:opacity-100"
                 >
                   <ChevronLeft size={16} />
                 </button>
                 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-colors duration-200 opacity-0 group-hover:opacity-100"
                 >
                   <ChevronRight size={16} />
                 </button>
