@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import LiquidEther from './LiquidEther';
+import { trackCTAClick } from '../lib/analytics';
 
 const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -270,6 +271,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 px-4">
             <motion.a
               href="#works"
+              onClick={() => trackCTAClick('view_works', 'hero', '#works')}
               className="group relative w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium tracking-wide overflow-hidden magnetic text-center glow-button text-base md:text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -298,6 +300,7 @@ const Hero = () => {
 
             <motion.a
               href="https://wa.me/5516992233365"
+              onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
               target="_blank"
               rel="noopener noreferrer"
               className="group w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 border border-white/30 text-white rounded-full font-medium tracking-wide hover:bg-white/10 transition-all duration-300 magnetic text-center text-base md:text-lg"

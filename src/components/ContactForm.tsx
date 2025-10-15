@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { trackFormStart, trackFormSubmit, trackFormError } from '../lib/analytics';
 
 // Schema de validação com Zod
 const contactSchema = z.object({
@@ -43,6 +44,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
   const onSubmit = async (data: ContactFormData) => {
     setSubmitStatus('loading');
     setErrorMessage('');
+    
+    // Track form start
+    trackFormStart('contact');
 
     try {
       // CONFIGURAÇÃO ATUAL: Formspree (temporário até configurar Hostinger)
@@ -77,6 +81,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
       }
 
       setSubmitStatus('success');
+      
+      // Track successful submission
+      trackFormSubmit('contact', true);
+      
       reset();
       onSuccess?.();
 
@@ -88,6 +96,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);
       setSubmitStatus('error');
+      
+      // Track form error
+      trackFormError('contact', error instanceof Error ? error.message : 'unknown');
       
       // Mensagem de erro mais amigável
       if (error instanceof Error && error.message.includes('fetch')) {

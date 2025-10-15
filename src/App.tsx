@@ -17,6 +17,9 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Footer from './components/Footer';
 import AISalesChat from './components/AISalesChat';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
+import CookieConsent from './components/CookieConsent';
 
 
 export const AppContent = (): JSX.Element => {
@@ -121,6 +124,11 @@ export const AppContent = (): JSX.Element => {
   return (
     <>
       <Preloader visible={loading} />
+      {/* Scroll Progress & Back to Top */}
+      {!loading && <ScrollProgress />}
+      {!loading && <BackToTop />}
+      {/* Cookie Consent */}
+      {!loading && <CookieConsent />}
       {/* Cursor e Chat sempre visíveis e fora do container principal */}
       <CustomCursor />
       {!loading && <AISalesChat />}
@@ -164,6 +172,9 @@ export const AppContent = (): JSX.Element => {
             <FAQ />
           </div>
         </main>
+
+        {/* Footer */}
+        <Footer />
 
       </div>
     </>
