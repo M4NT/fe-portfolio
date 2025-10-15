@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Heart, Instagram, MapPin, Clock, ExternalLink, Sparkles } from 'lucide-react';
 import { trackSocialClick, trackCTAClick } from '../lib/analytics';
@@ -75,7 +75,7 @@ const Footer = () => {
               viewport={{ once: true }}
             >
               {/* Logo */}
-              <div className="font-inter text-4xl font-light text-white tracking-wider mb-4">
+              <div className="font-section-title text-4xl text-white mb-4">
                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                   YAN.M
                 </span>
@@ -83,7 +83,7 @@ const Footer = () => {
               </div>
 
               {/* Description */}
-              <p className="text-white/70 text-base leading-relaxed max-w-md">
+              <p className="font-text text-white/70 text-base max-w-md">
                 Frontend Developer & Digital Artist criando experiências web imersivas e performáticas. 
                 Especializado em React, TypeScript, WebGL e design de interfaces modernas.
               </p>
@@ -105,9 +105,9 @@ const Footer = () => {
 
               {/* Social Links */}
               <div className="flex flex-wrap gap-3 pt-8">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <motion.a
-                    key={index}
+                    key={social.label}
                     href={social.href}
                     onClick={() => trackSocialClick(social.label.toLowerCase(), 'footer')}
                     target="_blank"
@@ -140,11 +140,11 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-white/40 text-xs uppercase tracking-wider font-medium">
+            <h3 className="font-label text-white/40 text-xs font-medium">
               Navegação
             </h3>
             <nav className="space-y-3">
-              {navigationLinks.map((item, index) => (
+              {navigationLinks.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
@@ -167,7 +167,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-white/40 text-xs uppercase tracking-wider font-medium">
+            <h3 className="font-label text-white/40 text-xs font-medium">
               Contato
             </h3>
             <div className="space-y-4">

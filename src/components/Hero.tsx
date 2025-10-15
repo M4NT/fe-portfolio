@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
-import LiquidEther from './LiquidEther';
+// import LiquidEther from './LiquidEther';
 import { trackCTAClick } from '../lib/analytics';
 
 const Hero = () => {
@@ -142,7 +142,7 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
         >
           <motion.h1 
-            className="font-inter font-light leading-none tracking-[-0.08em] text-white mb-8 md:mb-10 relative"
+            className="font-section-title leading-none text-white mb-8 md:mb-10 relative"
             style={{
               fontSize: 'clamp(3rem, 16vw, 12rem)',
               textShadow: '0 0 100px rgba(59, 130, 246, 0.3)',
@@ -151,8 +151,7 @@ const Hero = () => {
               maxWidth: '100%',
               wordBreak: 'keep-all',
               hyphens: 'none',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
+              scrollbarWidth: 'none'
             }}
             onMouseEnter={(e) => {
               // Remove scrollbars de todos os elementos filhos
@@ -160,7 +159,7 @@ const Hero = () => {
               allElements.forEach(el => {
                 (el as HTMLElement).style.overflow = 'visible';
                 (el as HTMLElement).style.scrollbarWidth = 'none';
-                (el as HTMLElement).style.msOverflowStyle = 'none';
+                // (el as HTMLElement).style.msOverflowStyle = 'none'; // TypeScript error
               });
             }}
             animate={{
@@ -236,7 +235,7 @@ const Hero = () => {
               <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-purple-400" />
             </div>
             
-            <h2 className="font-inter font-light text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4">
+            <h2 className="font-body text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4">
               <motion.span
                 className="inline-block glow-text-soft"
                 animate={{ opacity: [0.8, 1, 0.8] }}

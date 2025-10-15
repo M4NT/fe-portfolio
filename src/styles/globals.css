@@ -276,11 +276,44 @@ section {
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
-    font-family: 'Inter', sans-serif;
+    @apply bg-background text-foreground overflow-x-hidden font-inter;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  /* ========================================
+     SISTEMA DE FONTES PADRONIZADO
+     ======================================== */
+  
+  /* Títulos principais - Orbitron para destaque */
+  .font-display {
+    @apply font-orbitron;
+  }
+  
+  /* Texto principal - Inter para legibilidade */
+  .font-body {
+    @apply font-inter;
+  }
+  
+  /* Código e monospace - Geist Mono */
+  .font-mono {
+    @apply font-geist-mono;
+  }
+  
+  /* Títulos de seção - Inter com tracking específico */
+  .font-section-title {
+    @apply font-inter font-light tracking-[-0.03em];
+  }
+  
+  /* Subtítulos e labels - Inter com tracking */
+  .font-label {
+    @apply font-inter text-xs uppercase tracking-wider;
+  }
+  
+  /* Texto de corpo - Inter com line-height otimizado */
+  .font-text {
+    @apply font-inter leading-relaxed;
   }
 
   /* Custom cursor - desktop only */
