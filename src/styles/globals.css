@@ -311,10 +311,15 @@ section {
     @apply font-inter text-xs uppercase tracking-wider;
   }
   
-  /* Texto de corpo - Inter com line-height otimizado */
-  .font-text {
-    @apply font-inter leading-relaxed;
-  }
+/* Texto de corpo - Inter com line-height otimizado */
+.font-text {
+  @apply font-inter leading-relaxed;
+}
+
+/* Perspectiva 3D para carrossel */
+.perspective-1000 {
+  perspective: 1000px;
+}
 
   /* Custom cursor - desktop only */
   @media (min-width: 769px) {

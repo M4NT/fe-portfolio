@@ -1,7 +1,7 @@
 {
-  "name": "Yan.M - Frontend Developer & Digital Artist",
-  "short_name": "Yan.M",
-  "description": "Portfolio profissional de Yan.M - Frontend Developer especializado em React, TypeScript, WebGL e experiências web imersivas.",
+  "name": "Yan Mantovani - Frontend Developer & Digital Artist",
+  "short_name": "Yan Mantovani",
+  "description": "Portfólio de Yan Mantovani — React, TypeScript, animações e performance.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

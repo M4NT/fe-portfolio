@@ -5,41 +5,41 @@
   
   <!-- Homepage - Portuguese (Default) -->
   <url>
-    <loc>https://yan-m.dev/</loc>
+    <loc>https://yanmantovani.com/</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yan-m.dev/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yan-m.dev/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yan-m.dev/es" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://yan-m.dev/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yanmantovani.com/" />
   </url>
   
   <!-- Homepage - English -->
   <url>
-    <loc>https://yan-m.dev/en</loc>
+    <loc>https://yanmantovani.com/en</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yan-m.dev/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yan-m.dev/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yan-m.dev/es" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
   </url>
   
   <!-- Homepage - Spanish -->
   <url>
-    <loc>https://yan-m.dev/es</loc>
+    <loc>https://yanmantovani.com/es</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yan-m.dev/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yan-m.dev/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yan-m.dev/es" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
   </url>
   
   <!-- Section: Selected Works -->
   <url>
-    <loc>https://yan-m.dev/#works</loc>
+    <loc>https://yanmantovani.com/#works</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -47,7 +47,7 @@
   
   <!-- Section: Side Projects -->
   <url>
-    <loc>https://yan-m.dev/#projects</loc>
+    <loc>https://yanmantovani.com/#projects</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -55,7 +55,7 @@
   
   <!-- Section: About -->
   <url>
-    <loc>https://yan-m.dev/#about</loc>
+    <loc>https://yanmantovani.com/#about</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -63,7 +63,7 @@
   
   <!-- Section: Services -->
   <url>
-    <loc>https://yan-m.dev/#services</loc>
+    <loc>https://yanmantovani.com/#services</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -71,7 +71,7 @@
   
   <!-- Section: Testimonials -->
   <url>
-    <loc>https://yan-m.dev/#testimonials</loc>
+    <loc>https://yanmantovani.com/#testimonials</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -79,7 +79,7 @@
   
   <!-- Section: Contact -->
   <url>
-    <loc>https://yan-m.dev/#contact</loc>
+    <loc>https://yanmantovani.com/#contact</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -87,7 +87,7 @@
   
   <!-- Section: FAQ -->
   <url>
-    <loc>https://yan-m.dev/#faq</loc>
+    <loc>https://yanmantovani.com/#faq</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
