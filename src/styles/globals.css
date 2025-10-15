@@ -321,20 +321,6 @@ section {
   perspective: 1000px;
 }
 
-  /* Custom cursor - desktop only */
-  @media (min-width: 769px) {
-    * {
-      cursor: none !important;
-    }
-    
-    /* Custom cursor visibility */
-    .custom-cursor {
-      position: fixed !important;
-      pointer-events: none !important;
-      z-index: 999999 !important;
-      mix-blend-mode: difference !important;
-    }
-  }
 
   /* Project cards image overflow fix */
   .group:hover img,
@@ -1075,6 +1061,7 @@ a, button, [role="button"] {
   opacity: 1 !important;
   transform: none !important;
 }
+
 
 @media (min-width: 768px) {
   .glass::before {
