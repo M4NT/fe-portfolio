@@ -1,5 +1,7 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, Heart, Instagram, MapPin, Clock, ExternalLink, Sparkles } from 'lucide-react';
+import { trackSocialClick, trackCTAClick } from '../lib/analytics';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -7,125 +9,265 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <Github className="w-5 h-5" />,
-      href: "https://github.com",
+      href: "https://github.com/yan-m",
       label: "GitHub",
-      color: "from-gray-600 to-gray-700"
+      color: "from-gray-600 to-gray-800",
+      username: "@yan-m"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
-      href: "https://linkedin.com/in/johndeveloper",
+      href: "https://linkedin.com/in/yan-m",
       label: "LinkedIn",
-      color: "from-blue-500 to-blue-600"
+      color: "from-blue-500 to-blue-700",
+      username: "/yan-m"
+    },
+    {
+      icon: <Instagram className="w-5 h-5" />,
+      href: "https://instagram.com/yan.m",
+      label: "Instagram",
+      color: "from-pink-500 to-purple-600",
+      username: "@yan.m"
     },
     {
       icon: <Mail className="w-5 h-5" />,
-      href: "mailto:john.developer@email.com",
+      href: "mailto:hello@yanmantovani.com",
       label: "Email",
-      color: "from-purple-500 to-purple-600"
+      color: "from-violet-600 to-indigo-600",
+      username: "hello@yanmantovani.com"
     }
+  ];
+
+  const navigationLinks = [
+    { id: 'works', label: 'Trabalhos Selecionados' },
+    { id: 'projects', label: 'Projetos Pessoais' },
+    { id: 'about', label: 'Sobre' },
+    { id: 'services', label: 'Serviços' },
+    { id: 'testimonials', label: 'Depoimentos' },
+    { id: 'contact', label: 'Contato' }
   ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      trackCTAClick(`footer_nav_${sectionId}`, 'footer', `#${sectionId}`);
     }
   };
 
   return (
-    <footer className="relative min-h-[400px] w-full bg-gradient-to-b from-black via-black to-black/90 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div className="space-y-6">
-            <div className="font-inter text-3xl font-light text-white/90 tracking-wider">
-              YAN.M
-              <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-purple-500 mt-2" />
-            </div>
-            <p className="text-white/60 text-sm leading-relaxed max-w-md">
-              Frontend Developer especializado em React, TypeScript e tecnologias web modernas. 
-              Criando experiências digitais que fazem a diferença.
-            </p>
-            <div className="flex space-x-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative group transform hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${social.color} opacity-80 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center`}>
-                    {social.icon}
-                  </div>
-                  <div className={`absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover:opacity-20 rounded-lg blur transition-opacity duration-300`} />
-                </a>
-              ))}
-            </div>
+    <footer className="relative w-full bg-black border-t border-white/10 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20 relative">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-2 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              {/* Logo */}
+              <div className="font-inter text-4xl font-light text-white tracking-wider mb-4">
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  YAN.M
+                </span>
+                <div className="h-1 w-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mt-2 rounded-full" />
+              </div>
+
+              {/* Description */}
+              <p className="text-white/70 text-base leading-relaxed max-w-md">
+                Frontend Developer & Digital Artist criando experiências web imersivas e performáticas. 
+                Especializado em React, TypeScript, WebGL e design de interfaces modernas.
+              </p>
+
+              {/* Location & Availability */}
+              <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 text-sm mt-4">
+                <div className="flex items-center gap-2 text-white/60">
+                  <MapPin className="w-4 h-4 text-blue-400" />
+                  <span>Monte Alto, SP - Brasil</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/60">
+                  <Clock className="w-4 h-4 text-green-400" />
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                    Disponível para projetos
+                  </span>
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex flex-wrap gap-3 pt-8">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    onClick={() => trackSocialClick(social.label.toLowerCase(), 'footer')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label={social.label}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all`}>
+                      {social.icon}
+                    </div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-30 rounded-xl blur-md transition-opacity`} />
+                    
+                    {/* Tooltip */}
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black border border-white/20 rounded-lg text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                      {social.username}
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-6">
-            <h3 className="text-white/40 text-xs uppercase tracking-wider font-inter">
+          {/* Navigation Column */}
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-white/40 text-xs uppercase tracking-wider font-medium">
               Navegação
             </h3>
             <nav className="space-y-3">
-              {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item, index) => (
+              {navigationLinks.map((item, index) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="flex items-center space-x-3 text-white/60 hover:text-white transition-all duration-300 group hover:translate-x-2 w-full text-left"
-                  style={{animationDelay: `${index * 100}ms`}}
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="flex items-center gap-3 text-white/60 hover:text-white transition-all duration-300 group w-full text-left"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white/40 transition-colors duration-300" />
-                  <span className="font-light group-hover:tracking-wider transition-all duration-300">
-                    {item}
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300" />
+                  <span className="font-light text-sm group-hover:translate-x-1 transition-transform duration-300">
+                    {item.label}
                   </span>
                 </button>
               ))}
             </nav>
-          </div>
+          </motion.div>
 
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <h3 className="text-white/40 text-xs uppercase tracking-wider font-inter">
+          {/* Contact Column */}
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-white/40 text-xs uppercase tracking-wider font-medium">
               Contato
             </h3>
             <div className="space-y-4">
-              <div className="p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-colors duration-300 group">
-                <p className="text-white/90 text-sm font-medium mb-1">
-                  Vamos conversar?
+              {/* Email Card */}
+              <motion.a
+                href="mailto:hello@yanmantovani.com"
+                onClick={() => trackCTAClick('email', 'footer', 'mailto:hello@yanmantovani.com')}
+                className="block p-4 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-xl hover:border-white/20 transition-all group"
+                whileHover={{ y: -2 }}
+              >
+                <div className="flex items-center gap-2 text-white/90 text-sm font-medium mb-2">
+                  <Mail className="w-4 h-4 text-blue-400" />
+                  <span>Email</span>
+                </div>
+                <p className="text-white/60 text-xs">
+                  hello@yanmantovani.com
                 </p>
-                <p className="text-white/60 text-xs leading-relaxed">
-                  Entre em contato para discutirmos seu projeto ou ideia.
+              </motion.a>
+
+              {/* WhatsApp Card */}
+              <motion.a
+                href="https://wa.me/5516992233365"
+                onClick={() => trackCTAClick('whatsapp', 'footer', 'https://wa.me/5516992233365')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-4 bg-gradient-to-br from-green-500/10 to-green-600/10 backdrop-blur-sm border border-green-500/20 rounded-xl hover:border-green-500/40 transition-all group"
+                whileHover={{ y: -2 }}
+              >
+                <div className="flex items-center gap-2 text-white/90 text-sm font-medium mb-2">
+                  <ExternalLink className="w-4 h-4 text-green-400" />
+                  <span>WhatsApp</span>
+                </div>
+                <p className="text-white/60 text-xs">
+                  Resposta rápida
                 </p>
-                <a href="mailto:hello@yan-m.dev" 
-                   className="flex items-center space-x-2 text-white/70 hover:text-white mt-3 group cursor-pointer">
-                  <Mail className="w-4 h-4" />
-                  <span className="text-xs group-hover:tracking-wider transition-all duration-300">
-                    hello@yan-m.dev
-                  </span>
-                </a>
-              </div>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
+        {/* Divider */}
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-          <div className="flex items-center space-x-6 text-white/40 text-sm">
-            <span>© {currentYear} YAN.M</span>
-            <div className="flex items-center space-x-2">
-              <span className="text-xs">Sales-Optimized Experience</span>
-            </div>
+        <motion.div
+          className="flex flex-col sm:flex-row justify-between items-center gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          {/* Copyright */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-white/40 text-sm">
+            <span>© {currentYear} Yan.M</span>
+            <div className="hidden sm:block w-1 h-1 bg-white/20 rounded-full" />
+            <span className="text-xs">Todos os direitos reservados</span>
           </div>
-          <div className="flex items-center space-x-2 text-white/40 text-xs">
-            <span>Made with</span>
-            <Heart className="w-3 h-3 text-white/40 hover:text-red-500 hover:fill-red-500 transition-colors duration-300" />
-            <span>by Yan Miranda</span>
+
+          {/* Made with love */}
+          <div className="flex items-center gap-2 text-white/40 text-sm">
+            <span>Desenvolvido com</span>
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+            </motion.div>
+            <span>por</span>
+            <span className="text-white/60 font-medium">Yan Mantovani</span>
           </div>
-        </div>
+
+          {/* Tech Stack Badge */}
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
+            <Sparkles className="w-3 h-3 text-purple-400" />
+            <span className="text-white/50 text-xs">
+              React + TypeScript + Tailwind
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Legal Links */}
+        <motion.div
+          className="mt-8 flex flex-wrap justify-center gap-6 text-white/30 text-xs"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <a href="#privacy" className="hover:text-white/60 transition-colors">
+            Política de Privacidade
+          </a>
+          <span>•</span>
+          <a href="#terms" className="hover:text-white/60 transition-colors">
+            Termos de Uso
+          </a>
+          <span>•</span>
+          <a href="#cookies" className="hover:text-white/60 transition-colors">
+            Política de Cookies
+          </a>
+        </motion.div>
       </div>
     </footer>
   );
