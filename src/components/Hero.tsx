@@ -142,134 +142,231 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Main Content - Original */}
+      {/* Main Content - Layout 2 colunas com cards */}
       <div 
-        className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 hero-mobile-spacing"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 hero-mobile-spacing"
         style={{ overflow: 'visible', maxWidth: '100vw', paddingTop: '2rem', paddingBottom: '3rem' }}
       >
-        <motion.div 
-          className="mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-        >
-          <motion.h1 
-            className="font-section-title leading-none text-white mb-8 md:mb-10 relative"
-            style={{
-              fontSize: 'clamp(3rem, 16vw, 12rem)',
-              textShadow: '0 0 100px rgba(59, 130, 246, 0.3)',
-              overflow: 'visible',
-              whiteSpace: 'nowrap',
-              maxWidth: '100%',
-              wordBreak: 'keep-all',
-              hyphens: 'none',
-              scrollbarWidth: 'none'
-            }}
-            animate={{
-              textShadow: [
-                '0 0 100px rgba(59, 130, 246, 0.3)',
-                '0 0 150px rgba(147, 51, 234, 0.4)',
-                '0 0 100px rgba(59, 130, 246, 0.3)'
-              ]
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <span className="inline-block">
-              <span className="glow-text-soft">Yan</span>
-            </span>
-            <motion.span 
-              className="text-white/40 inline-block mx-2 md:mx-4"
-              animate={{ opacity: [0.4, 0.8, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Coluna esquerda - Apresentação */}
+          <div className="text-left">
+            <motion.h1 
+              className="font-section-title leading-none text-white mb-8 relative"
+              style={{
+                fontSize: 'clamp(2.5rem, 12vw, 8rem)',
+                textShadow: '0 0 100px rgba(59, 130, 246, 0.3)',
+                overflow: 'visible'
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
             >
-              —
-            </motion.span>
-            <span
-              className="inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent glow-text-gradient"
-            >
-              .m
-            </span>
-
-            <motion.div
-              className="absolute -top-2 md:-top-4 -left-2 md:-left-4 w-2 h-2 md:w-3 md:h-3 border border-blue-400/50 rounded-full"
-              animate={{ rotate: [0, 360], scale: [1, 1.5, 1] }}
-              transition={{ duration: 8, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-2 md:-bottom-4 -right-2 md:-right-4 w-3 h-3 md:w-4 md:h-4 border border-purple-400/50 rounded-lg"
-              animate={{ rotate: [360, 0], scale: [1, 1.3, 1] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
-          </motion.h1>
-
-          <motion.div 
-            className="space-y-6 md:space-y-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
-            <div className="flex items-center justify-center space-x-4 md:space-x-6 mb-6 md:mb-8">
-              <div className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-blue-400" />
-              <Sparkles className="text-blue-400" size={16} />
-              <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-purple-400" />
-            </div>
-            
-            <h2 className="font-body text-lg sm:text-2xl lg:text-4xl text-white/80 leading-relaxed max-w-4xl mx-auto px-4">
-              <motion.span className="inline-block glow-text-soft" animate={{ opacity: [0.8, 1, 0.8] }} transition={{ duration: 2, repeat: Infinity, delay: 0 }}>
-                {t('hero.subtitle')}
+              <span className="inline-block">
+                <span className="glow-text-soft">Yan</span>
+              </span>
+              <motion.span 
+                className="text-white/40 inline-block mx-2 md:mx-4"
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                —
               </motion.span>
-              <br />
-              <motion.span className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent glow-text-gradient" animate={{ opacity: [0.8, 1, 0.8] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
-                {t('hero.creativeDeveloper')}
-              </motion.span>
-            </h2>
-          </motion.div>
-        </motion.div>
+              <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent glow-text-gradient">
+                .m
+              </span>
+            </motion.h1>
 
-        <motion.div 
-          className="space-y-8 md:space-y-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 px-4">
-            <motion.a
-              href="#works"
-              onClick={() => trackCTAClick('view_works', 'hero', '#works')}
-              className="group relative w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium tracking-wide overflow-hidden magnetic text-center glow-button text-base md:text-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.p 
+              className="font-text text-white/70 text-lg sm:text-xl max-w-2xl leading-relaxed mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <span className="relative z-10 flex items-center justify-center space-x-2">
-                <span>{t('hero.cta')}</span>
-                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.div>
-              </span>
-              <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
-                <motion.span className="absolute -inset-1 bg-gradient-to-r from-white/30 via-white/60 to-white/30 opacity-0" initial={{ x: '-120%' }} whileHover={{ x: '120%', opacity: 1 }} transition={{ duration: 0.8, ease: [0.23,1,0.32,1] }} style={{ filter: 'blur(8px)' }} />
-              </span>
-            </motion.a>
+              {t('hero.subtitle')}
+            </motion.p>
 
-            <motion.a
-              href="https://wa.me/5516992233365"
-              onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 border border-white/30 text-white rounded-full font-medium tracking-wide hover:bg-white/10 transition-all duration-300 magnetic text-center text-base md:text-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+            {/* CTAs */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <span className="flex items-center justify-center space-x-2">
-                <MessageCircle size={16} />
-                <span>{t('nav.getInTouch')}</span>
-              </span>
-            </motion.a>
+              <motion.a
+                href="#works"
+                onClick={() => trackCTAClick('view_works', 'hero', '#works')}
+                className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium tracking-wide overflow-hidden magnetic text-center glow-button"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="relative z-10 flex items-center justify-center space-x-2">
+                  <span>{t('hero.cta')}</span>
+                  <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.div>
+                </span>
+              </motion.a>
+
+              <motion.a
+                href="https://wa.me/5516992233365"
+                onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto px-8 py-4 border border-white/30 text-white rounded-full font-medium tracking-wide hover:bg-white/10 transition-all duration-300 magnetic text-center"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="flex items-center justify-center space-x-2">
+                  <MessageCircle size={16} />
+                  <span>{t('nav.getInTouch')}</span>
+                </span>
+              </motion.a>
+            </motion.div>
           </div>
 
-          <motion.div className="flex items-center justify-center space-x-3 md:space-x-4 text-white/60 px-4 mt-8 md:mt-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
-            <motion.div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-400 rounded-full" animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} />
-            <span className="text-xs md:text-sm text-center leading-relaxed">Chat with YAN.AI to learn about my work & methodology</span>
-            <motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="hidden md:block">→</motion.div>
-          </motion.div>
+          {/* Coluna direita - Cards informativos */}
+          <div className="space-y-6">
+            {/* Card 1: Performance */}
+            <motion.div
+              className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-white/80 text-sm font-medium">Performance</span>
+                <motion.span 
+                  className="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300 border border-green-500/30 font-medium"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  LCP &lt; 2s
+                </motion.span>
+              </div>
+              
+              <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-4">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-blue-500 to-green-500"
+                  initial={{ width: 0 }}
+                  animate={{ width: '78%' }}
+                  transition={{ duration: 2, delay: 1 }}
+                />
+              </div>
+              
+              <div className="flex gap-2 flex-wrap">
+                {['React', 'TypeScript', 'Framer Motion'].map((tech, index) => (
+                  <motion.span 
+                    key={tech}
+                    className="px-3 py-1 text-xs rounded-full bg-white/10 text-white/80 font-medium"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.5 + index * 0.1 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Card 2: Stats */}
+            <motion.div
+              className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-white/80 text-sm font-medium">Experience</span>
+                <motion.div 
+                  className="w-2 h-2 bg-blue-400 rounded-full"
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-white/60 text-sm">Projects Delivered</span>
+                  <motion.span 
+                    className="text-white font-semibold"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2 }}
+                  >
+                    20+
+                  </motion.span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/60 text-sm">Years Experience</span>
+                  <motion.span 
+                    className="text-white font-semibold"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.4 }}
+                  >
+                    5+
+                  </motion.span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/60 text-sm">Client Satisfaction</span>
+                  <motion.span 
+                    className="text-green-400 font-semibold"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.6 }}
+                  >
+                    100%
+                  </motion.span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3: Tech Stack animado */}
+            <motion.div
+              className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-white/80 text-sm font-medium">Tech Stack</span>
+                <motion.div 
+                  className="flex space-x-1"
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                >
+                  <div className="w-1 h-1 bg-blue-400 rounded-full" />
+                  <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                  <div className="w-1 h-1 bg-green-400 rounded-full" />
+                </motion.div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2">
+                {['React', 'Next.js', 'TypeScript', 'Tailwind', 'Framer Motion', 'Node.js'].map((tech, index) => (
+                  <motion.div
+                    key={tech}
+                    className="px-3 py-2 text-xs rounded-lg bg-white/5 text-white/70 text-center border border-white/10"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                  >
+                    {tech}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Linha de chat */}
+        <motion.div 
+          className="flex items-center justify-center space-x-3 md:space-x-4 text-white/60 px-4 mt-12" 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ delay: 2 }}
+        >
+          <motion.div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-400 rounded-full" animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} />
+          <span className="text-xs md:text-sm text-center leading-relaxed">Chat with YAN.AI to learn about my work & methodology</span>
+          <motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="hidden md:block">→</motion.div>
         </motion.div>
       </div>
 
