@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type Language = 'en' | 'pt' | 'es';
 
@@ -359,7 +359,80 @@ const translations: Translations = {
 };
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('pt');
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Detecta idioma automaticamente na inicialização
+  useEffect(() => {
+    const detectLanguage = (): Language => {
+      // 1. Verifica URL path
+      const path = window.location.pathname;
+      const urlLang = path.split('/')[1];
+      
+      if (urlLang === 'en' || urlLang === 'es' || urlLang === 'pt') {
+        return urlLang;
+      }
+
+      // 2. Verifica localStorage
+      const savedLang = localStorage.getItem('preferred-language') as Language;
+      if (savedLang && ['pt', 'en', 'es'].includes(savedLang)) {
+        return savedLang;
+      }
+
+      // 3. Detecta idioma do navegador
+      const browserLang = navigator.language || (navigator as any).userLanguage || 'pt-BR';
+
+      // Mapeia códigos de idioma do navegador
+      const langMap: { [key: string]: Language } = {
+        'pt': 'pt',
+        'pt-BR': 'pt',
+        'pt-PT': 'pt',
+        'en': 'en',
+        'en-US': 'en',
+        'en-GB': 'en',
+        'es': 'es',
+        'es-ES': 'es',
+        'es-MX': 'es',
+        'es-AR': 'es'
+      };
+
+      return langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'pt';
+    };
+
+    const detected = detectLanguage();
+    setLanguage(detected);
+    setIsInitialized(true);
+    
+    // Salva preferência
+    localStorage.setItem('preferred-language', detected);
+  }, []);
+
+  // Atualiza URL quando idioma muda
+  useEffect(() => {
+    if (!isInitialized) return;
+
+    const currentPath = window.location.pathname;
+    const currentLang = currentPath.split('/')[1];
+    
+    // Remove idioma atual da URL se existir
+    let newPath = currentPath;
+    if (['pt', 'en', 'es'].includes(currentLang)) {
+      newPath = currentPath.replace(`/${currentLang}`, '');
+    }
+    
+    // Adiciona novo idioma (exceto para português que é o padrão)
+    if (language !== 'pt') {
+      newPath = `/${language}${newPath || '/'}`;
+    }
+    
+    // Atualiza URL sem recarregar a página
+    if (newPath !== currentPath) {
+      window.history.replaceState({}, '', newPath);
+    }
+    
+    // Salva preferência
+    localStorage.setItem('preferred-language', language);
+  }, [language, isInitialized]);
 
   const t = (key: string): string => {
     return translations[key]?.[language] || key;

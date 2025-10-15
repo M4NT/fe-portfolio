@@ -16,6 +16,7 @@ import {
   Users
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import ContactForm from './ContactForm';
 
 const Contact = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -478,12 +479,34 @@ const Contact = () => {
           ))}
         </motion.div>
 
+        {/* Contact Form Section */}
+        <motion.div
+          className="max-w-2xl mx-auto mb-16 sm:mb-20"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-white text-2xl sm:text-3xl font-medium mb-3">
+              Ou envie uma mensagem diretamente
+            </h3>
+            <p className="text-white/60 text-sm sm:text-base">
+              Preencha o formulário abaixo e responderei o mais breve possível
+            </p>
+          </div>
+          
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8">
+            <ContactForm />
+          </div>
+        </motion.div>
+
         {/* Guarantees Section */}
         <motion.div 
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          transition={{ duration: 1, delay: 0.8 }}
           viewport={{ once: true }}
         >
           <h3 className="text-white/80 text-xl sm:text-2xl font-medium mb-8">

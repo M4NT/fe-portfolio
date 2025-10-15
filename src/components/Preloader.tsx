@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 
 const Preloader: React.FC<{ visible: boolean }> = ({ visible }) => {
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentMessage, setCurrentMessage] = useState(0);
+
+  const messages = [
+    "Carregando assets",
+    "Preparando interface",
+    "Iniciando sistemas",
+    "Quase pronto"
+  ];
 
   useEffect(() => {
     if (!visible) {
@@ -9,7 +18,36 @@ const Preloader: React.FC<{ visible: boolean }> = ({ visible }) => {
       return () => clearTimeout(timer);
     }
     setAnimationComplete(false);
+    setProgress(0);
+    setCurrentMessage(0);
   }, [visible]);
+
+  // Simula progresso real de carregamento
+  useEffect(() => {
+    if (!visible) return;
+
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(progressInterval);
+          return 100;
+        }
+        // Progresso mais rápido no início, mais lento no final
+        const increment = prev < 50 ? 15 : prev < 80 ? 8 : 3;
+        return Math.min(prev + increment, 100);
+      });
+    }, 150);
+
+    // Atualiza mensagens baseado no progresso
+    const messageInterval = setInterval(() => {
+      setCurrentMessage(prev => (prev + 1) % messages.length);
+    }, 400);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearInterval(messageInterval);
+    };
+  }, [visible, messages.length]);
 
   if (!visible && animationComplete) return null;
 
@@ -67,17 +105,20 @@ const Preloader: React.FC<{ visible: boolean }> = ({ visible }) => {
               </div>
             </div>
 
-            {/* Indicador de progresso circular */}
+            {/* Indicador de progresso com porcentagem real */}
             <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-full px-2">
               <div className="relative h-1 w-full overflow-hidden rounded-full bg-black/30">
                 <div 
-                  className={`h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-full
-                    ${visible ? 'animate-progressBar' : ''}`}
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
                   style={{
                     transformOrigin: 'left center',
-                    width: '100%'
+                    width: `${progress}%`
                   }}
                 />
+              </div>
+              {/* Porcentagem */}
+              <div className="absolute -bottom-6 right-0 text-white/40 text-xs font-mono">
+                {progress}%
               </div>
             </div>
           </div>
@@ -94,14 +135,10 @@ const Preloader: React.FC<{ visible: boolean }> = ({ visible }) => {
             </span>
           </div>
           
-          {/* Mensagens de status rotativas */}
-          <div className="h-5 overflow-hidden">
-            <div className={`text-white/30 text-xs tracking-wider text-center transition-transform
-              ${visible ? 'animate-statusMessages' : ''}`}>
-              <div className="py-1">Carregando assets</div>
-              <div className="py-1">Preparando interface</div>
-              <div className="py-1">Iniciando sistemas</div>
-              <div className="py-1">Quase pronto</div>
+          {/* Mensagens de status baseadas no progresso */}
+          <div className="h-5">
+            <div className="text-white/30 text-xs tracking-wider text-center transition-opacity duration-300">
+              {messages[currentMessage]}
             </div>
           </div>
         </div>
