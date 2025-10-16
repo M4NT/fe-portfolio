@@ -1,78 +1,57 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
+  <rect width="1200" height="630" fill="#000000"/>
+  
+  <!-- Gradient overlay -->
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#1a1a2e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#5227FF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#FF9FFC;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#B19EEF;stop-opacity:1" />
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
     </linearGradient>
-    <radialGradient id="glow1">
-      <stop offset="0%" style="stop-color:#5227FF;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#5227FF;stop-opacity:0" />
-    </radialGradient>
-    <radialGradient id="glow2">
-      <stop offset="0%" style="stop-color:#FF9FFC;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#FF9FFC;stop-opacity:0" />
-    </radialGradient>
   </defs>
   
-  <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
   
-  <!-- Decorative circles -->
-  <circle cx="200" cy="150" r="250" fill="url(#glow1)" opacity="0.4"/>
-  <circle cx="1000" cy="480" r="300" fill="url(#glow2)" opacity="0.4"/>
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="3" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="1100" cy="150" r="4" fill="#8b5cf6" opacity="0.5"/>
+  <circle cx="200" cy="500" r="2" fill="#ec4899" opacity="0.7"/>
+  <circle cx="1000" cy="450" r="3" fill="#06b6d4" opacity="0.6"/>
   
-  <!-- Grid pattern -->
-  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-  </pattern>
-  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Main title -->
+  <text x="600" y="200" text-anchor="middle" fill="url(#textGradient)" font-family="Arial, sans-serif" font-size="64" font-weight="bold">
+    YAN.M
+  </text>
   
-  <!-- Main content -->
-  <g>
-    <!-- Title -->
-    <text x="600" y="240" font-family="Inter, system-ui, sans-serif" font-size="120" font-weight="300" text-anchor="middle" fill="url(#textGrad)" letter-spacing="-2">
-      YAN.M
-    </text>
-    
-    <!-- Subtitle -->
-    <text x="600" y="320" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="400" text-anchor="middle" fill="#FFFFFF" opacity="0.8">
-      Frontend Developer &amp; Digital Artist
-    </text>
-    
-    <!-- Description -->
-    <text x="600" y="380" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="300" text-anchor="middle" fill="#FFFFFF" opacity="0.6">
-      Criando experiências web imersivas com React, TypeScript &amp; WebGL
-    </text>
-    
-    <!-- Tech stack badges -->
-    <g transform="translate(350, 450)">
-      <rect width="100" height="36" rx="18" fill="rgba(82, 39, 255, 0.2)" stroke="rgba(82, 39, 255, 0.5)" stroke-width="1"/>
-      <text x="50" y="24" font-family="Inter" font-size="14" font-weight="500" text-anchor="middle" fill="#FFFFFF">React</text>
-    </g>
-    <g transform="translate(470, 450)">
-      <rect width="120" height="36" rx="18" fill="rgba(82, 39, 255, 0.2)" stroke="rgba(82, 39, 255, 0.5)" stroke-width="1"/>
-      <text x="60" y="24" font-family="Inter" font-size="14" font-weight="500" text-anchor="middle" fill="#FFFFFF">TypeScript</text>
-    </g>
-    <g transform="translate(610, 450)">
-      <rect width="100" height="36" rx="18" fill="rgba(82, 39, 255, 0.2)" stroke="rgba(82, 39, 255, 0.5)" stroke-width="1"/>
-      <text x="50" y="24" font-family="Inter" font-size="14" font-weight="500" text-anchor="middle" fill="#FFFFFF">WebGL</text>
-    </g>
-    <g transform="translate(730, 450)">
-      <rect width="120" height="36" rx="18" fill="rgba(82, 39, 255, 0.2)" stroke="rgba(82, 39, 255, 0.5)" stroke-width="1"/>
-      <text x="60" y="24" font-family="Inter" font-size="14" font-weight="500" text-anchor="middle" fill="#FFFFFF">Tailwind CSS</text>
-    </g>
-    
-    <!-- Website URL -->
-    <text x="600" y="560" font-family="Inter" font-size="18" font-weight="400" text-anchor="middle" fill="#FFFFFF" opacity="0.5">
-      yanmantovani.com
-    </text>
-  </g>
+  <!-- Subtitle -->
+  <text x="600" y="280" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="32" font-weight="300">
+    Desenvolvedor Frontend Freelancer
+  </text>
+  
+  <!-- Description -->
+  <text x="600" y="350" text-anchor="middle" fill="#a1a1aa" font-family="Arial, sans-serif" font-size="24">
+    Landing Pages de Alta Conversão • ROI 300%
+  </text>
+  
+  <!-- Features -->
+  <text x="600" y="420" text-anchor="middle" fill="#d1d5db" font-family="Arial, sans-serif" font-size="20">
+    React • TypeScript • Orçamento Grátis em 24h
+  </text>
+  
+  <!-- Location -->
+  <text x="600" y="480" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif" font-size="18">
+    Monte Alto, SP • Atendo Todo Brasil
+  </text>
+  
+  <!-- CTA -->
+  <rect x="450" y="520" width="300" height="60" rx="30" fill="url(#textGradient)"/>
+  <text x="600" y="560" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
+    Solicitar Orçamento Grátis
+  </text>
 </svg>
-

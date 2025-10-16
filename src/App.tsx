@@ -44,8 +44,8 @@ function AppContent() {
     <>
       <Preloader visible={isLoading} />
       <div className="min-h-screen bg-black text-white overflow-x-hidden">
-        <ScrollProgress />
-        <Navigation />
+        {!isLoading && <ScrollProgress />}
+        {!isLoading && <Navigation />}
         
         <Routes>
           {/* Main Portfolio Route */}
@@ -74,8 +74,8 @@ function AppContent() {
           <Route path="/cookie-policy" element={<CookiePolicy />} />
         </Routes>
         
-        <BackToTop />
-        <CookieConsent />
+        {!isLoading && <BackToTop />}
+        {!isLoading && <CookieConsent />}
       </div>
     </>
   );
