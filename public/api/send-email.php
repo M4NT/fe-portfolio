@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // ========================================
 
 // Email que receberá as mensagens
-define('RECIPIENT_EMAIL', 'hello@yanmantovani.com');
+define('RECIPIENT_EMAIL', 'hi@yanmantovani.com');
 
 // Nome do remetente (seu nome/empresa)
 define('RECIPIENT_NAME', 'Yan.M Portfolio');

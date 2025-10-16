@@ -56,7 +56,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
       
       const API_ENDPOINT = USE_PHP_BACKEND 
         ? '/api/send-email.php'  // Backend PHP (Hostinger)
-        : 'https://formspree.io/f/hello@yanmantovani.com'; // Formspree (temporário)
+        : 'https://formspree.io/f/hi@yanmantovani.com'; // Formspree (temporário)
       
       const response = await fetch(API_ENDPOINT, {
         method: 'POST',

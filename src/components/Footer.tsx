@@ -10,31 +10,31 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <Github className="w-5 h-5" />,
-      href: "https://github.com/yan-m",
+      href: "https://github.com/M4NT",
       label: "GitHub",
       color: "from-gray-600 to-gray-800",
-      username: "@yan-m"
+      username: "@M4NT"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
-      href: "https://linkedin.com/in/yan-m",
+      href: "https://www.linkedin.com/in/yan-mantovani/",
       label: "LinkedIn",
       color: "from-blue-500 to-blue-700",
-      username: "/yan-m"
+      username: "/yan-mantovani"
     },
     {
       icon: <Instagram className="w-5 h-5" />,
-      href: "https://instagram.com/yan.m",
+      href: "https://www.instagram.com/yan.mantovani",
       label: "Instagram",
       color: "from-pink-500 to-purple-600",
-      username: "@yan.m"
+      username: "@yan.mantovani"
     },
     {
       icon: <Mail className="w-5 h-5" />,
-      href: "mailto:hello@yanmantovani.com",
+      href: "mailto:hi@yanmantovani.com",
       label: "Email",
       color: "from-violet-600 to-indigo-600",
-      username: "hello@yanmantovani.com"
+      username: "hi@yanmantovani.com"
     }
   ];
 
@@ -79,10 +79,10 @@ const Footer = () => {
               {/* Logo */}
               <div className="font-section-title text-4xl text-white mb-4">
                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  YAN.M
+              YAN.M
                 </span>
                 <div className="h-1 w-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mt-2 rounded-full" />
-              </div>
+            </div>
 
               {/* Description */}
               <p className="font-text text-white/70 text-base max-w-md">
@@ -110,18 +110,18 @@ const Footer = () => {
                 {socialLinks.map((social) => (
                   <motion.a
                     key={social.label}
-                    href={social.href}
+                  href={social.href}
                     onClick={() => trackSocialClick(social.label.toLowerCase(), 'footer')}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                     className="group relative"
-                    aria-label={social.label}
+                  aria-label={social.label}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                  >
+                >
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all`}>
-                      {social.icon}
-                    </div>
+                    {social.icon}
+                  </div>
                     <div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-30 rounded-xl blur-md transition-opacity`} />
                     
                     {/* Tooltip */}
@@ -129,8 +129,8 @@ const Footer = () => {
                       {social.username}
                     </div>
                   </motion.a>
-                ))}
-              </div>
+              ))}
+            </div>
             </motion.div>
           </div>
 
@@ -175,8 +175,8 @@ const Footer = () => {
             <div className="space-y-4">
               {/* Email Card */}
               <motion.a
-                href="mailto:hello@yanmantovani.com"
-                onClick={() => trackCTAClick('email', 'footer', 'mailto:hello@yanmantovani.com')}
+                href="mailto:hi@yanmantovani.com"
+                onClick={() => trackCTAClick('email', 'footer', 'mailto:hi@yanmantovani.com')}
                 className="block p-4 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-xl hover:border-white/20 transition-all group"
                 whileHover={{ y: -2 }}
               >
@@ -185,13 +185,13 @@ const Footer = () => {
                   <span>Email</span>
                 </div>
                 <p className="text-white/60 text-xs">
-                  hello@yanmantovani.com
+                  hi@yanmantovani.com
                 </p>
               </motion.a>
 
               {/* WhatsApp Card */}
               <motion.a
-                href="https://wa.me/5516992233365"
+                href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
                 onClick={() => trackCTAClick('whatsapp', 'footer', 'https://wa.me/5516992233365')}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -206,7 +206,7 @@ const Footer = () => {
                   Resposta rápida
                 </p>
               </motion.a>
-            </div>
+              </div>
           </motion.div>
 
         </div>
@@ -227,7 +227,7 @@ const Footer = () => {
             <span>© {currentYear} Yan.M</span>
             <div className="hidden sm:block w-1 h-1 bg-white/20 rounded-full" />
             <span className="text-xs">Todos os direitos reservados</span>
-          </div>
+            </div>
 
           {/* Made with love */}
           <div className="flex items-center gap-2 text-white/40 text-sm">

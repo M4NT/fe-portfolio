@@ -94,7 +94,16 @@ const CookieConsent: React.FC = () => {
             >
               {!showSettings ? (
                 // Main Banner
-                <div className="p-6 sm:p-8">
+                <div className="p-6 sm:p-8 relative">
+                  {/* Close Button */}
+                  <button
+                    onClick={rejectAll}
+                    className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors"
+                    aria-label="Fechar"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                  
                   <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
                     {/* Icon & Content */}
                     <div className="flex-1">
@@ -130,13 +139,6 @@ const CookieConsent: React.FC = () => {
                       >
                         <Settings className="w-4 h-4" />
                         <span className="text-sm font-medium">Configurar</span>
-                      </button>
-                      <button
-                        onClick={rejectAll}
-                        className="flex items-center justify-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white/80 hover:bg-white/10 transition-all"
-                      >
-                        <X className="w-4 h-4" />
-                        <span className="text-sm font-medium">Rejeitar</span>
                       </button>
                       <button
                         onClick={acceptAll}

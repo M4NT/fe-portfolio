@@ -122,8 +122,8 @@ class ErrorBoundary extends Component<Props, State> {
               {/* Informação adicional */}
               <p className="text-white/40 text-sm text-center mt-8">
                 Se o problema persistir, entre em contato: 
-                <a href="mailto:hello@yan-m.dev" className="text-blue-400 hover:text-blue-300 ml-1 underline">
-                  hello@yan-m.dev
+                <a href="mailto:hi@yanmantovani.com" className="text-blue-400 hover:text-blue-300 ml-1 underline">
+                  hi@yanmantovani.com
                 </a>
               </p>
             </div>

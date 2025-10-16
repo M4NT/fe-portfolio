@@ -34,11 +34,11 @@ const Contact = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
+
       if (magneticButtonRef.current) {
-        const rect = magneticButtonRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+      const rect = magneticButtonRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
         const distance = Math.sqrt(
           Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
         );
@@ -50,9 +50,9 @@ const Contact = () => {
           const strength = (threshold - distance) / threshold;
           magneticX.set((e.clientX - centerX) * strength * 0.3);
           magneticY.set((e.clientY - centerY) * strength * 0.3);
-        } else {
-          magneticX.set(0);
-          magneticY.set(0);
+      } else {
+        magneticX.set(0);
+        magneticY.set(0);
         }
       }
     };
@@ -79,21 +79,22 @@ const Contact = () => {
   const contactOptions = [
     {
       icon: <MessageCircle className="w-6 h-6" />,
-      title: 'Chat com YAN.AI',
-      description: 'Pré-qualificação inteligente em 5 minutos',
-      action: 'Iniciar Chat',
-      color: 'from-blue-500 to-cyan-500',
+      title: 'WhatsApp Direto',
+      description: 'Resposta rápida e personalizada',
+      action: 'Iniciar Conversa',
+      color: 'from-green-500 to-emerald-500',
       priority: 'primary',
-      badge: 'Recomendado'
+      badge: 'Recomendado',
+      href: 'https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!'
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email Direto',
       description: 'Resposta em até 24h úteis',
-      action: 'hello@yanmantovani.com',
+      action: 'hi@yanmantovani.com',
       color: 'from-purple-500 to-pink-500',
       priority: 'secondary',
-      href: 'mailto:hello@yanmantovani.com'
+      href: 'mailto:hi@yanmantovani.com'
     }
   ];
 
@@ -145,13 +146,13 @@ const Contact = () => {
         >
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {contactOptions.map((option, index) => (
-              <motion.div
-                key={index}
+            <motion.div
+              key={index}
                 className="group relative"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
+              viewport={{ once: true }}
               >
                 {/* Contact Card */}
                 <div className={`relative bg-white/5 backdrop-blur-sm border rounded-xl p-8 hover:border-white/20 transition-all duration-300 ${
@@ -173,14 +174,14 @@ const Contact = () => {
                     <div className={`p-4 rounded-lg bg-gradient-to-br ${option.color} shadow-lg`}>
                       <div className="text-white">
                         {option.icon}
-                      </div>
-                    </div>
+              </div>
+              </div>
 
                     {/* Content */}
                     <div className="flex-1">
                       <h3 className="text-white font-semibold text-xl mb-2">
                         {option.title}
-                      </h3>
+            </h3>
                       <p className="text-white/70 text-sm mb-6 leading-relaxed">
                         {option.description}
                       </p>
@@ -188,6 +189,8 @@ const Contact = () => {
                       {/* CTA Button */}
                       <a
                         href={option.href || '#contact'}
+                        target={option.href?.startsWith('http') ? '_blank' : undefined}
+                        rel={option.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className={`group/btn relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${option.color} text-white rounded-lg font-semibold overflow-hidden transition-all hover:shadow-lg hover:shadow-${option.color.split('-')[1]}-500/20`}
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}
@@ -200,7 +203,7 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+            </motion.div>
             ))}
           </div>
         </motion.div>
@@ -220,13 +223,13 @@ const Contact = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
+            <motion.div
+              key={index}
                 className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:border-white/20 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                  viewport={{ once: true }}
               >
                 <div className={`w-12 h-12 mx-auto mb-4 bg-gradient-to-br ${stat.color} rounded-lg flex items-center justify-center`}>
                   <div className="text-white">
@@ -235,8 +238,8 @@ const Contact = () => {
                 </div>
                 <div className="text-white text-2xl font-bold mb-1">{stat.value}</div>
                 <div className="text-white/60 text-sm">{stat.label}</div>
-              </motion.div>
-            ))}
+            </motion.div>
+          ))}
           </div>
         </motion.div>
 
@@ -255,25 +258,25 @@ const Contact = () => {
 
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-6">
-              {guarantees.map((guarantee, index) => (
-                <motion.div
-                  key={index}
+            {guarantees.map((guarantee, index) => (
+              <motion.div
+                key={index}
                   className="flex items-start gap-3 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:border-white/20 transition-all duration-300"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                viewport={{ once: true }}
                 >
                   <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                   <span className="text-white/80 text-sm">{guarantee}</span>
-                </motion.div>
-              ))}
+              </motion.div>
+            ))}
             </div>
           </div>
         </motion.div>
 
         {/* Contact Form */}
-        <motion.div
+          <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}

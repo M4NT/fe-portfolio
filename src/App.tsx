@@ -82,25 +82,12 @@ function AppContent() {
 }
 
 function App() {
-  // Detecta se é página legal
-  const isLegalPage = typeof window !== 'undefined' && (
-    window.location.pathname.startsWith('/privacy-policy') ||
-    window.location.pathname.startsWith('/terms-of-use') ||
-    window.location.pathname.startsWith('/cookie-policy')
-  );
-
   return (
     <ErrorBoundary>
       <Router>
-        {isLegalPage ? (
-          // Para páginas legais, SEM LanguageProvider
+        <LanguageProvider>
           <AppContent />
-        ) : (
-          // Para outras páginas, COM LanguageProvider
-          <LanguageProvider>
-            <AppContent />
-          </LanguageProvider>
-        )}
+        </LanguageProvider>
       </Router>
     </ErrorBoundary>
   );

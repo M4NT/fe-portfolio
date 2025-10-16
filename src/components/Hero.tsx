@@ -120,14 +120,14 @@ const Hero = () => {
           const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
           
           return (
-            <motion.div
+          <motion.div
               key={i}
               className={`absolute ${sizeClass} ${randomColor} rounded-full ${blurClass}`}
-              style={{
+            style={{
                 left: position.left,
                 top: position.top,
-              }}
-              animate={{
+            }}
+            animate={{
                 opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
                 scale: [0, 1, 1, 1, 1, 0],
                 y: [0, -10, -20, -30, -40, -50],
@@ -151,13 +151,13 @@ const Hero = () => {
             rotate: [45, 405, 45],
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.5, 0.2]
-          }}
-          transition={{
+            }}
+            transition={{
             duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         
         <motion.div
           className="absolute bottom-1/3 right-1/6 w-24 h-24 border-2 border-purple-400/20 rounded-full"
@@ -191,7 +191,7 @@ const Hero = () => {
         {/* Animated lines - More colorful */}
         <motion.div
           className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
-          animate={{
+          animate={{ 
             x: [-100, 100],
             opacity: [0, 1, 0]
           }}
@@ -201,10 +201,10 @@ const Hero = () => {
             ease: "easeInOut"
           }}
         />
-
+        
         <motion.div
           className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-purple-400/20 to-transparent"
-          animate={{
+          animate={{ 
             y: [-100, 100],
             opacity: [0, 1, 0]
           }}
@@ -216,7 +216,7 @@ const Hero = () => {
           }}
         />
 
-        <motion.div
+        <motion.div 
           className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-400/15 to-transparent"
           animate={{
             x: [100, -100],
@@ -266,7 +266,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Column - Main Content */}
-          <motion.div 
+      <motion.div 
             className="space-y-4 lg:space-y-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -285,15 +285,15 @@ const Hero = () => {
 
             {/* Main Title */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               {/* Subtítulo profissional - Hidden on mobile */}
               <div className="hidden sm:block text-white/60 text-sm lg:text-base uppercase tracking-wider mb-4 font-inter">
                 Desenvolvedor Frontend Freelancer
-              </div>
-              
+            </div>
+            
               {/* Nome/Marca principal */}
               <h1 className="font-inter font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
                 <span className="text-white">Yan</span>
@@ -308,13 +308,13 @@ const Hero = () => {
                 <span className="text-white font-semibold">Desenvolvedor Frontend Freelancer especializado em Landing Pages de alta conversão.</span>
                 <span className="text-green-400 font-medium"> Orçamento grátis em 24h</span>.
               </p>
-            </motion.div>
+        </motion.div>
 
             {/* Stats - SEO Optimized */}
-            <motion.div
+        <motion.div 
               className="flex flex-wrap gap-4 sm:gap-6"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               {stats.map((stat, index) => (
@@ -367,13 +367,13 @@ const Hero = () => {
                 <span className="relative bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent font-bold group-hover/btn:from-black group-hover/btn:via-black group-hover/btn:to-gray-600 transition-all duration-300">
                   <span className="hidden sm:inline">Solicitar Orçamento Grátis</span>
                   <span className="sm:hidden">Orçamento Grátis</span>
-                </span>
+              </span>
                 <ArrowRight className="w-5 h-5 text-black group-hover/btn:translate-x-1 transition-transform" />
-              </motion.a>
+            </motion.a>
 
               {/* Secondary CTA - Hidden on mobile to reduce clutter */}
               <motion.a
-                href="https://wa.me/5516992233365"
+                href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
                 onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -383,9 +383,9 @@ const Hero = () => {
               >
                 <span className="relative bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent font-bold group-hover/btn:from-white group-hover/btn:via-white group-hover/btn:to-gray-300 transition-all duration-300">
                   Falar com Especialista (24h)
-                </span>
+              </span>
                 <MessageCircle className="w-5 h-5 text-white/80 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-              </motion.a>
+            </motion.a>
             </motion.div>
 
             {/* Location & Time - Hidden on mobile to reduce clutter */}
@@ -473,25 +473,25 @@ const Hero = () => {
                 <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </motion.div>
 
-              {/* Hide some floating elements on mobile to reduce clutter */}
+              {/* Floating Elements - Visible on all screens */}
               <motion.div
-                className="hidden sm:absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg"
+                className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
                 whileHover={{ scale: 1.1, rotate: -10 }}
               >
-                <Target className="w-6 h-6 text-white" />
-              </motion.div>
+                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        </motion.div>
 
               <motion.div
-                className="hidden sm:absolute top-1/2 -left-8 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg"
+                className="absolute top-1/2 -left-4 sm:-left-8 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.4 }}
                 whileHover={{ scale: 1.1, rotate: 15 }}
               >
-                <Star className="w-4 h-4 text-white" />
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </motion.div>
             </div>
 
@@ -510,11 +510,11 @@ const Hero = () => {
                 />
               </div>
             </div>
-          </motion.div>
+      </motion.div>
         </div>
 
         {/* Bottom Indicator */}
-        <motion.div
+        <motion.div 
           className="absolute -bottom-12 sm:-bottom-16 left-1/2 -translate-x-1/2 z-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -530,7 +530,7 @@ const Hero = () => {
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-          </motion.div>
+            </motion.div>
         </motion.div>
       </div>
     </section>
