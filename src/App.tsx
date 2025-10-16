@@ -1,204 +1,109 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Analytics } from '@vercel/analytics/react';
-import { LanguageProvider, useLanguage } from './components/LanguageContext';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
+import Preloader from './components/Preloader';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import SelectedWorks from './components/SelectedWorks';
 import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
-import Preloader from './components/Preloader';
 import Footer from './components/Footer';
-import AISalesChat from './components/AISalesChat';
+import SelectedWorks from './components/SelectedWorks';
+import SectionDivider from './components/SectionDivider';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import CookieConsent from './components/CookieConsent';
-import SectionDivider from './components/SectionDivider';
 
+// Import pages
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
+import CookiePolicy from './pages/CookiePolicy';
 
-export const AppContent = (): JSX.Element => {
-  const [loading, setLoading] = useState(true);
-  const { t } = useLanguage();
+function AppContent() {
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Garantir scroll no topo ao carregar/recarregar
-    if (window.location.hash === '' || window.location.pathname === '/') {
-      window.scrollTo(0, 0);
-      // Limpar hash se existir
-      if (window.location.hash) {
-        window.history.replaceState(null, '', window.location.pathname);
-      }
+    // Force scroll to top and clear URL hash on load/reload
+    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
     }
-    
-    // Configuração de scroll único e fluido
-    document.documentElement.style.scrollBehavior = 'smooth';
-    document.body.style.overflowX = 'hidden';
-    document.body.style.overflowY = 'auto';
 
+    // Simula carregamento inicial
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // Reduzido de 4s para 1.5s para melhorar LCP
+      setIsLoading(false);
+    }, 2000); // 2 segundos de preloader
 
-    // IntersectionObserver otimizado para scroll fluido
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            
-            // Add skill demonstration effects - apenas uma vez
-            if (!entry.target.getAttribute('data-animated')) {
-              const skillElements = entry.target.querySelectorAll('[data-skill]');
-              skillElements.forEach((skillEl, index) => {
-                (skillEl as HTMLElement).style.setProperty('--delay', `${index * 0.2}s`);
-                (skillEl as HTMLElement).style.setProperty('--duration', '3s');
-                skillEl.classList.add('skill-demo');
-              });
-              entry.target.setAttribute('data-animated', 'true');
-              
-              // Unobserve após animar para economizar recursos
-              observer.unobserve(entry.target);
-            }
-          }
-        });
-      },
-      { 
-        threshold: 0.05, // Reduzido para disparar mais cedo
-        rootMargin: '50px 0px 50px 0px' // Maior margem para animações mais suaves
-      }
-    );
-
-    // Enhanced performance monitoring
-    const observedElements = document.querySelectorAll('[data-animate]');
-    observedElements.forEach((el) => observer.observe(el));
-
-    // Section tracking otimizado - apenas para navegação, sem efeitos visuais pesados
-    let currentSection = 'home';
-    let ticking = false;
-    let lastScrollTime = 0;
-    const scrollThrottle = 150; // Aumentado para 150ms para performance
-    
-    const updateSection = () => {
-      const now = performance.now();
-      if (now - lastScrollTime < scrollThrottle) {
-        ticking = false;
-        return;
-      }
-      
-      lastScrollTime = now;
-      const windowHeight = window.innerHeight;
-      const sections = ['home', 'works', 'projects', 'about', 'services', 'contact', 'faq'];
-      
-      sections.forEach((sectionId) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.4;
-          
-          if (isVisible && currentSection !== sectionId) {
-            currentSection = sectionId;
-            // Atualiza classe apenas se mudou de seção
-            document.body.className = `section-${sectionId}`;
-          }
-        }
-      });
-      
-      ticking = false;
-    };
-    
-    const handleScroll = () => {
-      // Throttle usando requestAnimationFrame + time-based
-      if (!ticking) {
-        requestAnimationFrame(updateSection);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateSection(); // Initial call
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      <Preloader visible={loading} />
-      {/* Scroll Progress & Back to Top */}
-      {!loading && <ScrollProgress />}
-      {!loading && <BackToTop />}
-      {/* Cookie Consent */}
-      {!loading && <CookieConsent />}
-      {/* Cursor e Chat sempre visíveis e fora do container principal */}
-      {!loading && <AISalesChat />}
-      <div 
-        className={`relative bg-black text-white${loading ? ' pointer-events-none select-none' : ''}`} 
-        style={{ 
-          opacity: loading ? 0 : 1, 
-          transition: 'opacity 0.5s',
-          minHeight: '100vh' // Previne CLS
-        }}
-      >
+      <Preloader visible={isLoading} />
+      <div className="min-h-screen bg-black text-white overflow-x-hidden">
+        <ScrollProgress />
         <Navigation />
-        <main id="main-content" className="relative" role="main">
-          <div className="relative">
-            <Hero />
-          </div>
-          <div className="relative">
-            <SelectedWorks />
-          </div>
+        
+        <Routes>
+          {/* Main Portfolio Route */}
+          <Route path="/" element={
+            <>
+              <Hero />
+              <SectionDivider />
+              <SelectedWorks />
+              <SectionDivider />
+              <About />
+              <SectionDivider />
+              <Services />
+              <SectionDivider />
+              <PaymentTerms />
+              <SectionDivider />
+              <Contact />
+              <SectionDivider />
+              <FAQ />
+              <Footer />
+            </>
+          } />
           
-          {/* Section Divider */}
-          <SectionDivider />
-          
-          <div className="relative" data-animate>
-            <About />
-          </div>
-          <div className="relative" data-animate>
-            <Services />
-          </div>
-          <div className="relative" data-animate>
-            <PaymentTerms />
-          </div>
-          <div className="relative" data-animate>
-            <Testimonials />
-          </div>
-          <div className="relative" data-animate>
-            <Contact />
-          </div>
-          
-          {/* Section Divider */}
-          <SectionDivider />
-          
-          {/* FAQ Section */}
-          <div className="relative" data-animate>
-            <FAQ />
-          </div>
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
+          {/* Legal Pages */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+        </Routes>
+        
+        <BackToTop />
+        <CookieConsent />
       </div>
     </>
   );
-};
+}
 
-export const App = (): JSX.Element => (
-  <ErrorBoundary>
-    <LanguageProvider>
-      <AppContent />
-      <Analytics />
-    </LanguageProvider>
-  </ErrorBoundary>
-);
+function App() {
+  // Detecta se é página legal
+  const isLegalPage = typeof window !== 'undefined' && (
+    window.location.pathname.startsWith('/privacy-policy') ||
+    window.location.pathname.startsWith('/terms-of-use') ||
+    window.location.pathname.startsWith('/cookie-policy')
+  );
+
+  return (
+    <ErrorBoundary>
+      <Router>
+        {isLegalPage ? (
+          // Para páginas legais, SEM LanguageProvider
+          <AppContent />
+        ) : (
+          // Para outras páginas, COM LanguageProvider
+          <LanguageProvider>
+            <AppContent />
+          </LanguageProvider>
+        )}
+      </Router>
+    </ErrorBoundary>
+  );
+}
 
 export default App;

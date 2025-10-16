@@ -365,21 +365,29 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Detecta idioma automaticamente na inicialização
   useEffect(() => {
     const detectLanguage = (): Language => {
-      // 1. Verifica URL path
+      // 1. Verifica se é página legal - NÃO REDIRECIONA
       const path = window.location.pathname;
-      const urlLang = path.split('/')[1];
+      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
+      const isLegalPage = legalPages.some(page => path.startsWith(page));
       
+      if (isLegalPage) {
+        // Para páginas legais, força PT e NÃO altera URL
+        return 'pt';
+      }
+
+      // 2. Verifica URL path
+      const urlLang = path.split('/')[1];
       if (urlLang === 'en' || urlLang === 'es' || urlLang === 'pt') {
         return urlLang;
       }
 
-      // 2. Verifica localStorage
+      // 3. Verifica localStorage
       const savedLang = localStorage.getItem('preferred-language') as Language;
       if (savedLang && ['pt', 'en', 'es'].includes(savedLang)) {
         return savedLang;
       }
 
-      // 3. Detecta idioma do navegador
+      // 4. Detecta idioma do navegador
       const browserLang = navigator.language || (navigator as any).userLanguage || 'pt-BR';
 
       // Mapeia códigos de idioma do navegador
@@ -403,8 +411,14 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     setLanguage(detected);
     setIsInitialized(true);
     
-    // Salva preferência
-    localStorage.setItem('preferred-language', detected);
+    // Salva preferência APENAS se não for página legal
+    const path = window.location.pathname;
+    const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
+    const isLegalPage = legalPages.some(page => path.startsWith(page));
+    
+    if (!isLegalPage) {
+      localStorage.setItem('preferred-language', detected);
+    }
   }, []);
 
   // Atualiza URL quando idioma muda
@@ -412,6 +426,15 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     if (!isInitialized) return;
 
     const currentPath = window.location.pathname;
+    const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
+    const isLegalPage = legalPages.some(page => currentPath.startsWith(page));
+    
+    // NUNCA altera URL para páginas legais - BLOQUEIA COMPLETAMENTE
+    if (isLegalPage) {
+      console.log('Legal page detected - blocking URL changes');
+      return;
+    }
+
     const currentLang = currentPath.split('/')[1];
     
     // Remove idioma atual da URL se existir

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Calendar, Coffee, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, Star, Zap, Target, TrendingUp } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from './LanguageContext';
@@ -81,7 +81,7 @@ const About = () => {
       if (interval) clearInterval(interval);
       observer.disconnect();
     };
-  }, [profileImages.length]);
+  }, []);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
@@ -134,39 +134,31 @@ const About = () => {
           >
             {/* Profile Image Carousel */}
             <div className="relative group">
-              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black rounded-xl w-full about-carousel" style={{ minHeight: '400px' }}>
-                {/* Image Carousel */}
-                <div className="relative w-full h-full">
-                  {profileImages.map((image, index) => (
-                    <motion.div
-                      key={index}
-                      className="absolute inset-0"
-                      initial={{ opacity: 0, scale: 1.1 }}
-                      animate={{ 
-                        opacity: index === currentImageIndex ? 1 : 0,
-                        scale: index === currentImageIndex ? 1 : 1.1
+              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden bg-gradient-to-br from-gray-900 to-black rounded-xl">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentImageIndex}
+                    className="absolute inset-0 w-full h-full"
+                    initial={{ opacity: 0, scale: 1.05, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                    transition={{ 
+                      duration: 0.8, 
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                      scale: { duration: 0.6, ease: "easeOut" },
+                      opacity: { duration: 0.4, ease: "easeInOut" }
+                    }}
+                  >
+                    <img
+                      src={profileImages[currentImageIndex]}
+                      alt={`YAN.M Profile ${currentImageIndex + 1}`}
+                      className="w-full h-full object-cover object-center filter grayscale hover:grayscale-0 transition-all duration-700"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face';
                       }}
-                      transition={{ duration: 0.8, ease: "easeInOut" }}
-                    >
-                      <img
-                        src={image}
-                        alt={`YAN.M Profile ${index + 1}`}
-                        className="w-full h-full object-cover object-center filter grayscale hover:grayscale-0 transition-all duration-700"
-                        style={{
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          width: '100%',
-                          height: '100%',
-                          minHeight: '100%',
-                          display: 'block'
-                        }}
-                        onError={(e) => {
-                          e.currentTarget.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face';
-                        }}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -186,20 +178,6 @@ const About = () => {
                   <ChevronRight size={16} />
                 </button>
 
-                {/* Indicators */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                  {profileImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex 
-                          ? 'bg-white' 
-                          : 'bg-white/30 hover:bg-white/50'
-                      }`}
-                    />
-                  ))}
-                </div>
                 
                 {/* Floating Badge */}
                 <motion.div 
@@ -212,6 +190,49 @@ const About = () => {
                     {t('about.availableForWork')}
                   </span>
                 </motion.div>
+              </div>
+
+              {/* Navigation Controls */}
+              <div className="flex items-center justify-between mt-6">
+                <button
+                  onClick={prevImage}
+                  className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                >
+                  <ChevronLeft className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+                </button>
+
+                {/* Progress Bar */}
+                <div className="flex-1 mx-6 h-1 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    key={currentImageIndex}
+                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 5, ease: 'linear' }}
+                  />
+                </div>
+
+                <button
+                  onClick={nextImage}
+                  className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                >
+                  <ChevronRight className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+                </button>
+              </div>
+
+              {/* Indicators - Below Progress Bar */}
+              <div className="flex justify-center gap-2 mt-4">
+                {profileImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex 
+                        ? 'bg-white w-6' 
+                        : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
 

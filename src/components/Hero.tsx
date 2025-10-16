@@ -22,15 +22,12 @@ const Hero = () => {
   };
 
   const stats = [
-    { icon: <Star className="w-4 h-4" />, label: 'Projetos', value: '50+', color: 'from-yellow-400 to-orange-500' },
     { icon: <TrendingUp className="w-4 h-4" />, label: 'ROI Médio', value: '300%', color: 'from-green-400 to-emerald-500' },
-    { icon: <Target className="w-4 h-4" />, label: 'Sucesso', value: '98%', color: 'from-blue-400 to-cyan-500' }
+    { icon: <Star className="w-4 h-4" />, label: 'Projetos Entregues', value: '50+', color: 'from-yellow-400 to-orange-500' }
   ];
 
   const highlights = [
-    'Landing pages que convertem 300% mais',
-    'Sites que carregam em menos de 2 segundos',
-    'ROI comprovado de 300% em 6 meses'
+    'Landing Pages que convertem 300% mais que a média do mercado'
   ];
 
   return (
@@ -43,20 +40,20 @@ const Hero = () => {
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient orbs - More vibrant */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-blue-500/25 to-purple-500/25 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
           animate={{ 
             scale: [1, 1.3, 1],
-            opacity: [0.4, 0.7, 0.4],
+            opacity: [0.3, 0.6, 0.3],
             x: [0, 20, 0],
             y: [0, -10, 0]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-pink-500/25 to-orange-500/25 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.5, 0.8, 0.5],
+            opacity: [0.4, 0.7, 0.4],
             x: [0, -15, 0],
             y: [0, 15, 0]
           }}
@@ -98,27 +95,20 @@ const Hero = () => {
         />
 
         {/* Floating particles - Fixed positions with smooth movement and blur */}
-        {[...Array(15)].map((_, i) => {
+        {[...Array(8)].map((_, i) => {
           const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
           const randomColor = colors[Math.floor(Math.random() * colors.length)];
           
           // Posições mais controladas (não totalmente aleatórias)
           const positions = [
             { left: '10%', top: '20%' },
-            { left: '15%', top: '25%' },
             { left: '85%', top: '70%' },
-            { left: '80%', top: '75%' },
             { left: '20%', top: '60%' },
             { left: '75%', top: '30%' },
             { left: '50%', top: '15%' },
             { left: '30%', top: '80%' },
             { left: '90%', top: '40%' },
-            { left: '5%', top: '50%' },
-            { left: '60%', top: '85%' },
-            { left: '40%', top: '10%' },
-            { left: '95%', top: '20%' },
-            { left: '25%', top: '45%' },
-            { left: '70%', top: '60%' }
+            { left: '60%', top: '85%' }
           ];
           
           const position = positions[i % positions.length];
@@ -273,18 +263,18 @@ const Hero = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Column - Main Content */}
           <motion.div 
-            className="space-y-8"
+            className="space-y-4 lg:space-y-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           >
-            {/* Badge */}
+            {/* Badge - Hidden on mobile to reduce clutter */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/80 text-sm"
+              className="hidden sm:inline-flex items-center gap-2 px-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/80 text-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -299,29 +289,30 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* Subtítulo profissional */}
-              <div className="text-white/60 text-sm lg:text-base uppercase tracking-wider mb-4 font-inter">
+              {/* Subtítulo profissional - Hidden on mobile */}
+              <div className="hidden sm:block text-white/60 text-sm lg:text-base uppercase tracking-wider mb-4 font-inter">
                 Desenvolvedor Frontend Freelancer
               </div>
               
               {/* Nome/Marca principal */}
-              <h1 className="font-inter font-light text-6xl lg:text-8xl leading-none tracking-tight mb-6">
+              <h1 className="font-inter font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
                 <span className="text-white">Yan</span>
-                <span className="mx-2 text-white/40">—</span>
+                <span className="mx-1 sm:mx-2 text-white/40">—</span>
                 <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   .m
                 </span>
               </h1>
               
-              {/* Proposta de valor */}
-              <p className="text-white/70 text-xl lg:text-2xl leading-relaxed max-w-2xl">
-                <span className="text-white font-semibold">Landing Pages que Convertem 300% Mais.</span> Transformo sua ideia em um site profissional de alta performance. <span className="text-green-400 font-medium">Orçamento grátis em 24h</span>.
+              {/* Proposta de valor - SEO Optimized */}
+              <p className="text-white/70 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-2xl">
+                <span className="text-white font-semibold">Desenvolvedor Frontend Freelancer especializado em Landing Pages de alta conversão.</span>
+                <span className="text-green-400 font-medium"> Orçamento grátis em 24h</span>.
               </p>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats - SEO Optimized */}
             <motion.div
-              className="flex flex-wrap gap-6"
+              className="flex flex-wrap gap-4 sm:gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -340,60 +331,53 @@ const Hero = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="text-white text-lg font-semibold">{stat.value}</div>
-                    <div className="text-white/60 text-sm">{stat.label}</div>
+                    <div className="text-white text-base sm:text-lg font-semibold">{stat.value}</div>
+                    <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Highlights */}
+            {/* Highlights - SEO Optimized */}
             <motion.div
-              className="space-y-3"
+              className="flex items-center gap-2 sm:gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              {highlights.map((highlight, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                >
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-white/80 text-sm">{highlight}</span>
-                </motion.div>
-              ))}
+              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
+              <span className="text-white/80 text-sm sm:text-base">{highlights[0]}</span>
             </motion.div>
 
-            {/* CTAs */}
+            {/* CTAs - Simplified for mobile */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
+              {/* Primary CTA - Always visible */}
               <motion.a
                 href="#contact"
                 onClick={() => trackCTAClick('contact', 'hero', '#contact')}
-                className="group/btn relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-semibold overflow-hidden transition-all hover:shadow-lg hover:shadow-white/20"
+                className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-4 sm:px-8 sm:py-4 bg-white text-black rounded-lg font-semibold overflow-hidden transition-all hover:shadow-lg hover:shadow-white/20 text-base sm:text-base"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span className="relative bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent font-bold group-hover/btn:from-black group-hover/btn:via-black group-hover/btn:to-gray-600 transition-all duration-300">
-                  Solicitar Orçamento Grátis
+                  <span className="hidden sm:inline">Solicitar Orçamento Grátis</span>
+                  <span className="sm:hidden">Orçamento Grátis</span>
                 </span>
                 <ArrowRight className="w-5 h-5 text-black group-hover/btn:translate-x-1 transition-transform" />
               </motion.a>
 
+              {/* Secondary CTA - Hidden on mobile to reduce clutter */}
               <motion.a
                 href="https://wa.me/5516992233365"
                 onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/btn relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 text-white rounded-lg font-semibold overflow-hidden transition-all hover:border-gray-600 hover:shadow-lg hover:shadow-gray-500/20"
+                className="hidden sm:inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 text-white rounded-lg font-semibold overflow-hidden transition-all hover:border-gray-600 hover:shadow-lg hover:shadow-gray-500/20 text-base"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -404,9 +388,9 @@ const Hero = () => {
               </motion.a>
             </motion.div>
 
-            {/* Location & Time */}
+            {/* Location & Time - Hidden on mobile to reduce clutter */}
             <motion.div
-              className="flex items-center gap-6 text-white/60 text-sm"
+              className="hidden sm:flex items-center gap-6 text-white/60 text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.4 }}
@@ -424,16 +408,16 @@ const Hero = () => {
 
           {/* Right Column - Visual Elements */}
           <motion.div 
-            className="relative"
+            className="relative mt-6 lg:mt-0"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             {/* Floating Cards */}
-            <div className="relative">
+            <div className="relative max-w-xs sm:max-w-sm mx-auto lg:max-w-none">
               {/* Main Card */}
               <motion.div
-                className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl overflow-hidden"
+                className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl overflow-hidden"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
@@ -451,21 +435,21 @@ const Hero = () => {
                 
                 <div className="relative z-10 text-center">
                   <motion.div 
-                    className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg"
+                    className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg"
                     animate={{ 
                       rotate: [0, 5, -5, 0],
                       scale: [1, 1.05, 1]
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <Sparkles className="w-10 h-10 text-white" />
+                    <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                   </motion.div>
-                  <h3 className="text-white text-xl font-semibold mb-2">Especialista em Conversão</h3>
-                  <p className="text-white/70 text-sm mb-4">
+                  <h3 className="text-white text-lg sm:text-xl font-semibold mb-2">Especialista em Conversão</h3>
+                  <p className="text-white/70 text-xs sm:text-sm mb-3 sm:mb-4">
                     Landing pages que transformam visitantes em clientes
                   </p>
                   <motion.div 
-                    className="text-green-400 text-2xl font-bold"
+                    className="text-green-400 text-xl sm:text-2xl font-bold"
                     animate={{ 
                       scale: [1, 1.1, 1],
                       color: ["#10b981", "#34d399", "#10b981"]
@@ -478,19 +462,20 @@ const Hero = () => {
                 </div>
               </motion.div>
 
-              {/* Floating Elements */}
+              {/* Floating Elements - Simplified for mobile */}
               <motion.div
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
+                className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
                 whileHover={{ scale: 1.1, rotate: 10 }}
               >
-                <Zap className="w-8 h-8 text-white" />
+                <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </motion.div>
 
+              {/* Hide some floating elements on mobile to reduce clutter */}
               <motion.div
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg"
+                className="hidden sm:absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
@@ -500,7 +485,7 @@ const Hero = () => {
               </motion.div>
 
               <motion.div
-                className="absolute top-1/2 -left-8 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg"
+                className="hidden sm:absolute top-1/2 -left-8 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.4 }}
@@ -530,19 +515,19 @@ const Hero = () => {
 
         {/* Bottom Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute -bottom-12 sm:-bottom-16 left-1/2 -translate-x-1/2 z-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.6 }}
         >
           <motion.div
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-            animate={{ y: [0, 8, 0] }}
+            className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center bg-black/20 backdrop-blur-sm"
+            animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <motion.div
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
+              className="w-1 h-2 sm:h-3 bg-white/60 rounded-full mt-1 sm:mt-2"
+              animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.div>

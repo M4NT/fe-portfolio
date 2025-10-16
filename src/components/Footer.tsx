@@ -1,5 +1,6 @@
 // import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, Heart, Instagram, MapPin, Clock, ExternalLink, Sparkles } from 'lucide-react';
 import { trackSocialClick, trackCTAClick } from '../lib/analytics';
 
@@ -45,6 +46,7 @@ const Footer = () => {
     { id: 'testimonials', label: 'Depoimentos' },
     { id: 'contact', label: 'Contato' }
   ];
+
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -206,6 +208,7 @@ const Footer = () => {
               </motion.a>
             </div>
           </motion.div>
+
         </div>
 
         {/* Divider */}
@@ -256,17 +259,17 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <a href="#privacy" className="hover:text-white/60 transition-colors">
+          <Link to="/privacy-policy" className="hover:text-white/60 transition-colors">
             Política de Privacidade
-          </a>
+          </Link>
           <span>•</span>
-          <a href="#terms" className="hover:text-white/60 transition-colors">
+          <Link to="/terms-of-use" className="hover:text-white/60 transition-colors">
             Termos de Uso
-          </a>
+          </Link>
           <span>•</span>
-          <a href="#cookies" className="hover:text-white/60 transition-colors">
+          <Link to="/cookie-policy" className="hover:text-white/60 transition-colors">
             Política de Cookies
-          </a>
+          </Link>
         </motion.div>
       </div>
     </footer>
