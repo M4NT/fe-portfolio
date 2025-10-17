@@ -9,63 +9,47 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-featured e-commerce platform built with React, TypeScript, and Stripe integration. Features include product catalog, shopping cart, user authentication, and order management.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Stripe", "MongoDB"],
-      liveUrl: "#",
+      title: "Goombo - Sistema de Gestão para Restaurantes",
+      description: "Sistema completo para hamburguerias e bares com gestão de pedidos, cardápio digital e delivery integrado. Inclui System Design, Design UI/UX, MVP Frontend em React/TypeScript e aplicativo mobile.",
+      image: "/images/projects/projeto-1.png",
+      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "React Native", "Node.js"],
+      liveUrl: "https://goombo.com.br",
       githubUrl: "#",
-      featured: true
+      featured: true,
+      color: "#DC4F00"
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      technologies: ["React", "Firebase", "Material-UI", "React DnD"],
-      liveUrl: "#",
+      title: "Canora Tropical - Landing Page de Alto Padrão",
+      description: "Landing Page sofisticada para hospedagem premium em Palhoça-SC. Design elegante com sistema de reservas, galeria profissional e otimização SEO local para conversão máxima.",
+      image: "/images/projects/projeto-2.png",
+      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "SEO"],
+      liveUrl: "https://canoratropical.com.br",
       githubUrl: "#",
-      featured: true
+      featured: true,
+      color: "#10b981"
     },
     {
       id: 3,
-      title: "Weather Dashboard",
-      description: "A responsive weather dashboard that displays current weather conditions, forecasts, and location-based weather data using external APIs.",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop",
-      technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
-      liveUrl: "#",
+      title: "Agross do Brasil - Landing Page Agronegócio",
+      description: "Design completo de landing page para empresa de equipamentos agrícolas. Layout institucional B2B com catálogo de produtos, blog técnico e integração com WhatsApp.",
+      image: "/images/projects/projeto-3.png",
+      technologies: ["UI/UX Design", "Figma", "Landing Page", "B2B Design"],
+      liveUrl: "https://agrossdobrasil.com.br",
       githubUrl: "#",
-      featured: false
+      featured: false,
+      color: "#22c55e"
     },
     {
       id: 4,
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio website showcasing projects and skills with smooth animations and optimized performance.",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop",
-      technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
-      liveUrl: "#",
+      title: "Protocolo Raiz - Landing Page de Conversão",
+      description: "Design de landing page de alta conversão para venda de infoprodutos. WordPress personalizado com copywriting estratégico e funil de vendas otimizado.",
+      image: "/images/projects/projeto-4.png",
+      technologies: ["WordPress", "UI/UX Design", "Landing Page", "Conversion Design"],
+      liveUrl: "https://protocoloraiz.com.br",
       githubUrl: "#",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Social Media Dashboard",
-      description: "An analytics dashboard for social media management with data visualization, scheduling features, and performance metrics.",
-      image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop",
-      technologies: ["React", "D3.js", "Node.js", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Recipe Finder App",
-      description: "A recipe discovery application with search functionality, favorite recipes, and meal planning features using recipe APIs.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
-      technologies: ["React", "Redux", "Styled Components", "Recipe API"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false
+      featured: false,
+      color: "#f59e0b"
     }
   ];
 
@@ -99,6 +83,17 @@ const Projects = () => {
                   <h3 className="font-orbitron text-2xl font-semibold mb-4">
                     {project.title}
                   </h3>
+                  {project.color && (
+                    <div className="flex items-center gap-2 mb-3">
+                      <div 
+                        className="w-4 h-4 rounded-full border-2 border-white/20" 
+                        style={{ backgroundColor: project.color }}
+                      ></div>
+                      <span className="font-geist-mono text-sm text-muted-foreground">
+                        Projeto em Destaque
+                      </span>
+                    </div>
+                  )}
                   <p className="font-geist-mono text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>

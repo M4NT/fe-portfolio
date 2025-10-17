@@ -8,6 +8,28 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
+   FORÇAR CORES CONSISTENTES EM TODOS OS DISPOSITIVOS
+   ======================================== */
+
+/* Força o color-scheme padrão para evitar alterações do sistema */
+:root {
+  color-scheme: dark;
+  -webkit-color-scheme: dark;
+}
+
+/* Desabilita ajustes automáticos de cor do navegador/sistema */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Força as cores exatas sem ajustes do sistema operacional */
+html {
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
+}
+
+/* ========================================
    ACESSIBILIDADE (A11Y)
    ======================================== */
 

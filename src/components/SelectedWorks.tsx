@@ -15,116 +15,116 @@ const SelectedWorks = () => {
   // Enhanced project data focusing on technical skills
   const projects = [
     {
-      id: '1',
-      title: 'Real-Time Analytics Dashboard',
-      description: 'Advanced data visualization with WebSocket integration and real-time updates.',
-      longDescription: 'A comprehensive analytics dashboard showcasing real-time data processing, interactive charts, and responsive design. Built with modern frontend technologies and optimized for performance across all devices.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-      liveUrl: 'https://analytics-demo.vercel.app',
-      githubUrl: 'https://github.com/demo/analytics',
-      technologies: ['React', 'TypeScript', 'D3.js', 'WebSocket', 'Tailwind CSS', 'Framer Motion'],
+      id: '0',
+      title: 'Goombo - Sistema de Gestão para Restaurantes',
+      description: 'Sistema completo para hamburguerias e bares com gestão de pedidos, cardápio digital e delivery integrado.',
+      longDescription: 'Sistema completo de gestão para restaurantes incluindo System Design, Design UI/UX, MVP Frontend em React/TypeScript e aplicativo mobile. Plataforma robusta com gestão de pedidos em tempo real, cardápio digital interativo, delivery integrado e aplicativo para garçons.',
+      image: '/images/projects/projeto-1.png',
+      liveUrl: 'https://goombo.com.br',
+      githubUrl: '#',
+      technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'React Native', 'Node.js'],
       features: [
-        'Real-time data streaming with WebSocket connections',
-        'Interactive charts and data visualizations',
-        'Responsive design for all screen sizes',
-        'Advanced filtering and search capabilities',
-        'Dark/light theme toggle',
-        'Export data functionality'
+        'Gestão completa de pedidos com lançamentos em tempo real',
+        'Cardápio digital interativo e moderno para clientes',
+        'Sistema de delivery integrado com checkout online',
+        'Aplicativo mobile para garçons com sincronização em tempo real',
+        'Impressão automática de pedidos na cozinha',
+        'Transferência de mesas e fechamento de contas'
       ],
       challenges: [
-        'Optimizing real-time data rendering for 60fps performance',
-        'Managing WebSocket connections and reconnection logic',
-        'Creating responsive chart layouts across devices',
-        'Implementing efficient state management for large datasets'
+        'Arquitetura de System Design para escalabilidade',
+        'Design UI/UX intuitivo para diferentes perfis de usuário',
+        'Sincronização em tempo real entre app mobile e sistema web',
+        'Otimização de performance para uso em ambiente de alta demanda'
       ],
       category: 'fullstack' as const,
-      skillsShowcased: ['Performance Optimization', 'Real-time Systems', 'Data Visualization', 'TypeScript'],
+      skillsShowcased: ['System Design', 'Full-Stack Development', 'React Native', 'Real-time Systems'],
+      icon: <Zap className="w-6 h-6" />,
+      color: 'from-orange-600 to-orange-400'
+    },
+    {
+      id: '1',
+      title: 'Canora Tropical - Landing Page de Alto Padrão',
+      description: 'Landing Page sofisticada para hospedagem premium em Palhoça-SC, com foco em conversão e experiência do usuário.',
+      longDescription: 'Landing Page de conversão para propriedade de alto padrão na Pedra Branca, Palhoça-SC. Design elegante e sofisticado com integração de sistema de reservas, galeria profissional e otimização para SEO local. Focada em conversão de visitantes em reservas.',
+      image: '/images/projects/projeto-2.png',
+      liveUrl: 'https://canoratropical.com.br',
+      githubUrl: '#',
+      technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'SEO'],
+      features: [
+        'Design sofisticado e elegante com paleta de cores naturais',
+        'Sistema de reservas integrado com formulário de contato',
+        'Galeria de fotos profissional com lightbox interativo',
+        'Seção de depoimentos com avaliações de hóspedes',
+        'Otimização SEO local para Florianópolis e região',
+        'Responsivo e otimizado para dispositivos móveis'
+      ],
+      challenges: [
+        'Criar design sofisticado que transmita exclusividade',
+        'Otimizar imagens de alta qualidade mantendo performance',
+        'Implementar estratégia de conversão eficiente',
+        'SEO local para turismo na região de Florianópolis'
+      ],
+      category: 'web' as const,
+      skillsShowcased: ['UI/UX Design', 'Landing Page', 'SEO Optimization', 'Conversion Focus'],
       icon: <Layers className="w-6 h-6" />,
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-emerald-500 to-teal-500'
     },
     {
       id: '2',
-      title: 'Interactive 3D Portfolio',
-      description: 'WebGL-powered 3D experience with custom shaders and particle systems.',
-      longDescription: 'An immersive 3D portfolio experience showcasing advanced WebGL techniques, custom GLSL shaders, and interactive particle systems. Demonstrates mastery of 3D graphics programming and performance optimization.',
-      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop',
-      liveUrl: 'https://3d-portfolio-demo.vercel.app',
-      githubUrl: 'https://github.com/demo/3d-portfolio',
-      technologies: ['Three.js', 'React', 'GLSL', 'WebGL', 'Cannon.js', 'Framer Motion'],
+      title: 'Agross do Brasil - Landing Page Agronegócio',
+      description: 'Design completo de landing page para empresa de equipamentos agrícolas, focada em conversão B2B e experiência do produtor rural.',
+      longDescription: 'Design profissional de landing page para Agross do Brasil, fabricante de equipamentos para agricultura e pecuária. Projeto focado em conversão B2B com layout institucional, catálogo de produtos, blog técnico e integração com WhatsApp para vendas. Design pensado para o público do agronegócio.',
+      image: '/images/projects/projeto-3.png',
+      liveUrl: 'https://agrossdobrasil.com.br',
+      githubUrl: '#',
+      technologies: ['UI/UX Design', 'Figma', 'Landing Page', 'B2B Design', 'Conversion Design'],
       features: [
-        'Custom GLSL shaders for visual effects',
-        'Physics-based animations and interactions',
-        'Responsive 3D scenes across devices',
-        'Performance monitoring and optimization',
-        'Progressive loading and asset optimization',
-        'Touch and mouse interaction support'
+        'Design profissional focado em B2B e agronegócio',
+        'Layout institucional com catálogo de produtos completo',
+        'Seções estratégicas: Agricultura, Pecuária, Blog e Eventos',
+        'Integração com WhatsApp para contato direto com vendedores',
+        'Blog técnico com conteúdo especializado para produtores',
+        'Design responsivo pensado para o público rural'
       ],
       challenges: [
-        'Optimizing 3D performance for mobile devices',
-        'Creating responsive 3D layouts',
-        'Managing GPU memory and texture streaming',
-        'Implementing complex shader effects while maintaining 60fps'
+        'Criar design que transmita confiança e robustez',
+        'Organizar catálogo extenso de produtos de forma intuitiva',
+        'Adaptar linguagem visual para o público B2B rural',
+        'Equilibrar informação técnica com usabilidade'
       ],
       category: 'web' as const,
-      skillsShowcased: ['WebGL/Three.js', 'GLSL Shaders', '3D Mathematics', 'Performance Engineering'],
-      icon: <Cpu className="w-6 h-6" />,
-      color: 'from-purple-500 to-pink-500'
+      skillsShowcased: ['UI/UX Design', 'B2B Landing Page', 'Figma', 'Conversion Design'],
+      icon: <Layers className="w-6 h-6" />,
+      color: 'from-green-600 to-lime-500'
     },
     {
       id: '3',
-      title: 'E-commerce Platform',
-      description: 'Full-stack e-commerce solution with advanced cart logic and payment integration.',
-      longDescription: 'A complete e-commerce platform featuring advanced shopping cart functionality, secure payment processing, and admin dashboard. Showcases full-stack development skills and modern web architecture.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-      liveUrl: 'https://ecommerce-demo.vercel.app',
-      githubUrl: 'https://github.com/demo/ecommerce',
-      technologies: ['Next.js', 'TypeScript', 'Stripe', 'Prisma', 'PostgreSQL', 'Redux Toolkit'],
+      title: 'Protocolo Raiz - Landing Page de Conversão',
+      description: 'Design de landing page de alta conversão para venda de infoprodutos, incluindo livro físico e sistema digital com videoaulas.',
+      longDescription: 'Landing Page de captura e conversão para Protocolo Raiz, projeto focado em vendas de infoprodutos sobre desenvolvimento pessoal e riqueza. Design completo desenvolvido em WordPress, com estratégia de copywriting persuasivo, funil de vendas otimizado e layout pensado para maximizar conversões. Inclui seções estratégicas para captura de leads e vendas.',
+      image: '/images/projects/projeto-4.png',
+      liveUrl: 'https://protocoloraiz.com.br',
+      githubUrl: '#',
+      technologies: ['WordPress', 'UI/UX Design', 'Figma', 'Landing Page', 'Conversion Design', 'Copywriting'],
       features: [
-        'Advanced product filtering and search',
-        'Shopping cart with persistent state',
-        'Secure payment processing with Stripe',
-        'User authentication and profile management',
-        'Admin dashboard with analytics',
-        'Inventory management system'
+        'Design de alta conversão focado em vendas de infoprodutos',
+        'Landing page otimizada para captura de leads',
+        'Layout persuasivo com copywriting estratégico',
+        'Seções de benefícios e prova social',
+        'Integração com sistema de pagamento para produtos físicos e digitais',
+        'Estrutura de funil de vendas otimizada'
       ],
       challenges: [
-        'Implementing complex cart logic with various discount types',
-        'Optimizing database queries for large product catalogs',
-        'Creating secure payment flows',
-        'Building responsive admin interfaces'
-      ],
-      category: 'fullstack' as const,
-      skillsShowcased: ['Full-Stack Development', 'Payment Integration', 'Database Design', 'State Management'],
-      icon: <Code className="w-6 h-6" />,
-      color: 'from-green-500 to-emerald-500'
-    },
-    {
-      id: '4',
-      title: 'AI-Powered Code Editor',
-      description: 'Smart code editor with AI suggestions, syntax highlighting, and collaborative features.',
-      longDescription: 'An intelligent code editor featuring AI-powered code suggestions, real-time collaboration, and advanced syntax highlighting. Demonstrates integration of AI services and real-time communication technologies.',
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop',
-      liveUrl: 'https://ai-editor-demo.vercel.app',
-      githubUrl: 'https://github.com/demo/ai-editor',
-      technologies: ['React', 'Monaco Editor', 'OpenAI API', 'Socket.io', 'Node.js', 'Redis'],
-      features: [
-        'AI-powered code completion and suggestions',
-        'Real-time collaborative editing',
-        'Advanced syntax highlighting for 20+ languages',
-        'Integrated terminal and file explorer',
-        'Theme customization and extensions',
-        'Version control integration'
-      ],
-      challenges: [
-        'Integrating AI APIs with low latency requirements',
-        'Implementing real-time collaborative editing conflicts resolution',
-        'Optimizing editor performance for large files',
-        'Creating extensible plugin architecture'
+        'Criar design que transmita confiança e credibilidade',
+        'Estruturar funil de vendas eficiente para infoprodutos',
+        'Desenvolver copywriting persuasivo alinhado ao design',
+        'Otimizar taxa de conversão em WordPress personalizado'
       ],
       category: 'web' as const,
-      skillsShowcased: ['AI Integration', 'Real-time Collaboration', 'Editor Development', 'WebSocket Programming'],
+      skillsShowcased: ['Landing Page Design', 'WordPress', 'Conversion Optimization', 'Sales Funnel'],
       icon: <Zap className="w-6 h-6" />,
-      color: 'from-yellow-500 to-orange-500'
+      color: 'from-amber-500 to-yellow-500'
     }
   ];
 
@@ -253,16 +253,18 @@ const SelectedWorks = () => {
                   >
                     <ExternalLink className="w-5 h-5 text-white" />
                   </motion.a>
-                  <motion.a
-                    href={currentProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Github className="w-5 h-5 text-white" />
-                  </motion.a>
+                  {currentProject.githubUrl !== '#' && (
+                    <motion.a
+                      href={currentProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Github className="w-5 h-5 text-white" />
+                    </motion.a>
+                  )}
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -424,9 +426,9 @@ const SelectedWorks = () => {
           viewport={{ once: true }}
         >
           {[
-            { label: 'Projects Completed', value: '4', color: 'from-blue-500 to-cyan-500' },
-            { label: 'Technologies Used', value: '20+', color: 'from-purple-500 to-pink-500' },
-            { label: 'Skills Demonstrated', value: '15+', color: 'from-green-500 to-emerald-500' },
+            { label: 'Projects Completed', value: '30+', color: 'from-blue-500 to-cyan-500' },
+            { label: 'Technologies Used', value: '15+', color: 'from-purple-500 to-pink-500' },
+            { label: 'Skills Demonstrated', value: '12+', color: 'from-green-500 to-emerald-500' },
             { label: 'Performance Score', value: '98%', color: 'from-yellow-500 to-orange-500' }
           ].map((stat, index) => (
             <motion.div
