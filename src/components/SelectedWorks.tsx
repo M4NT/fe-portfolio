@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ExternalLink, Code, Zap, Layers, Cpu, CheckCircle2, Github } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ArrowLeft, ArrowRight, ExternalLink, Zap, Layers, CheckCircle2, Github } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import ProjectModal from './ProjectModal';
 
@@ -9,6 +8,7 @@ const SelectedWorks = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [progressKey, setProgressKey] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
@@ -16,6 +16,35 @@ const SelectedWorks = () => {
   const projects = [
     {
       id: '0',
+      title: 'Porto Sião - Sistema de Consórcios',
+      description: 'Plataforma completa para consórcios imobiliários e veículos pesados, oferecendo soluções sem juros para aquisição de bens de alto valor.',
+      longDescription: 'Sistema robusto para Porto Sião, empresa especializada em consórcios imobiliários e veículos pesados. Plataforma completa com simuladores, gestão de clientes, sistema de contemplação e painel administrativo. Focada em transparência e facilidade de uso para clientes que buscam alternativas aos financiamentos tradicionais.',
+      image: '/images/projects/projeto-5.png',
+      liveUrl: 'https://portosiao.com.br',
+      githubUrl: '#',
+      technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
+      features: [
+        'Simulador de consórcios imobiliários e veículos pesados',
+        'Sistema de gestão de clientes e contemplações',
+        'Painel administrativo completo para gestão',
+        'Sistema de parcelas sem juros transparente',
+        'Relatórios e analytics para tomada de decisão',
+        'Integração com sistemas de pagamento'
+      ],
+      challenges: [
+        'Desenvolvimento de algoritmos complexos para simulação',
+        'Interface intuitiva para diferentes perfis de usuário',
+        'Sistema de contemplação justo e transparente',
+        'Otimização para grandes volumes de dados'
+      ],
+      category: 'web' as const,
+      skillsShowcased: ['Full-Stack Development', 'Financial Systems', 'Data Management', 'User Experience'],
+      icon: <Layers className="w-6 h-6" />,
+      color: 'from-blue-600 to-cyan-500',
+      badge: '🏆 DESTAQUE - R$ 100M+ em Consórcios'
+    },
+    {
+      id: '1',
       title: 'Goombo - Sistema de Gestão para Restaurantes',
       description: 'Sistema completo para hamburguerias e bares com gestão de pedidos, cardápio digital e delivery integrado.',
       longDescription: 'Sistema completo de gestão para restaurantes incluindo System Design, Design UI/UX, MVP Frontend em React/TypeScript e aplicativo mobile. Plataforma robusta com gestão de pedidos em tempo real, cardápio digital interativo, delivery integrado e aplicativo para garçons.',
@@ -43,7 +72,7 @@ const SelectedWorks = () => {
       color: 'from-orange-600 to-orange-400'
     },
     {
-      id: '1',
+      id: '2',
       title: 'Canora Tropical - Landing Page de Alto Padrão',
       description: 'Landing Page sofisticada para hospedagem premium em Palhoça-SC, com foco em conversão e experiência do usuário.',
       longDescription: 'Landing Page de conversão para propriedade de alto padrão na Pedra Branca, Palhoça-SC. Design elegante e sofisticado com integração de sistema de reservas, galeria profissional e otimização para SEO local. Focada em conversão de visitantes em reservas.',
@@ -71,7 +100,7 @@ const SelectedWorks = () => {
       color: 'from-emerald-500 to-teal-500'
     },
     {
-      id: '2',
+      id: '3',
       title: 'Agross do Brasil - Landing Page Agronegócio',
       description: 'Design completo de landing page para empresa de equipamentos agrícolas, focada em conversão B2B e experiência do produtor rural.',
       longDescription: 'Design profissional de landing page para Agross do Brasil, fabricante de equipamentos para agricultura e pecuária. Projeto focado em conversão B2B com layout institucional, catálogo de produtos, blog técnico e integração com WhatsApp para vendas. Design pensado para o público do agronegócio.',
@@ -99,7 +128,7 @@ const SelectedWorks = () => {
       color: 'from-green-600 to-lime-500'
     },
     {
-      id: '3',
+      id: '4',
       title: 'Protocolo Raiz - Landing Page de Conversão',
       description: 'Design de landing page de alta conversão para venda de infoprodutos, incluindo livro físico e sistema digital com videoaulas.',
       longDescription: 'Landing Page de captura e conversão para Protocolo Raiz, projeto focado em vendas de infoprodutos sobre desenvolvimento pessoal e riqueza. Design completo desenvolvido em WordPress, com estratégia de copywriting persuasivo, funil de vendas otimizado e layout pensado para maximizar conversões. Inclui seções estratégicas para captura de leads e vendas.',
@@ -129,11 +158,13 @@ const SelectedWorks = () => {
   ];
 
   const nextProject = () => {
+    setImageLoading(true);
     setCurrentIndex((prev) => (prev + 1) % projects.length);
     setProgressKey(prev => prev + 1);
   };
 
   const prevProject = () => {
+    setImageLoading(true);
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
     setProgressKey(prev => prev + 1);
   };
@@ -142,8 +173,25 @@ const SelectedWorks = () => {
     setSelectedProject(project);
   };
 
+  // Preload images to prevent loading issues
   useEffect(() => {
-    const AUTOPLAY_DURATION = 15000;
+    const preloadImages = () => {
+      projects.forEach(project => {
+        const img = new Image();
+        img.src = project.image;
+        img.onload = () => {
+          if (project.id === projects[currentIndex].id) {
+            setImageLoading(false);
+          }
+        };
+      });
+    };
+    
+    preloadImages();
+  }, [currentIndex, projects]);
+
+  useEffect(() => {
+    const AUTOPLAY_DURATION = 25000; // Aumentado de 15s para 25s
     let interval: NodeJS.Timeout | null = null;
     
     const observer = new IntersectionObserver(
@@ -171,6 +219,7 @@ const SelectedWorks = () => {
       observer.disconnect();
     };
   }, [projects.length]);
+
 
   const currentProject = projects[currentIndex];
 
@@ -204,7 +253,7 @@ const SelectedWorks = () => {
         </motion.div>
 
         {/* Main Project Display */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Left - Project Image */}
           <motion.div 
             className="relative group order-2 lg:order-1"
@@ -216,53 +265,74 @@ const SelectedWorks = () => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.5 }}
+                className="selected-works-image-container relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl group-hover:shadow-3xl transition-shadow duration-500"
+                style={{
+                  background: 'transparent',
+                  backgroundColor: 'transparent'
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <ImageWithFallback
-                  src={currentProject.image}
-                  alt={currentProject.title}
-                  className="w-full h-full object-cover"
-                />
+                {imageLoading ? (
+                  <div className="absolute inset-0 w-full h-full bg-gray-800 animate-pulse flex items-center justify-center">
+                    <div className="text-white/50 text-sm">Carregando...</div>
+                  </div>
+                ) : (
+                  <img
+                    src={currentProject.image}
+                    alt={currentProject.title}
+                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      display: 'block'
+                    }}
+                    onLoad={() => setImageLoading(false)}
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/placeholder.jpg';
+                      setImageLoading(false);
+                    }}
+                  />
+                )}
                 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
                 
                 {/* Project Icon Badge */}
                 <motion.div 
-                  className={`absolute top-6 left-6 p-3 bg-gradient-to-br ${currentProject.color} rounded-xl shadow-lg`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className={`absolute top-4 left-4 p-2 bg-gradient-to-br ${currentProject.color} rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 ease-out`}
+                  whileHover={{ scale: 1.05, rotate: 3 }}
                 >
-                  <div className="text-white">
+                  <div className="text-white group-hover:text-white/90 transition-colors duration-300">
                     {currentProject.icon}
                   </div>
                 </motion.div>
 
-                {/* Quick Actions */}
-                <div className="absolute bottom-6 right-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Quick Actions - Inside Image Frame */}
+                <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
                   <motion.a
                     href={currentProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
-                    whileHover={{ scale: 1.1 }}
+                    className="p-2 bg-black/40 backdrop-blur-sm border border-white/30 rounded-lg hover:bg-black/60 hover:border-white/50 hover:scale-105 transition-all duration-300 ease-out"
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <ExternalLink className="w-5 h-5 text-white" />
+                    <ExternalLink className="w-4 h-4 text-white" />
                   </motion.a>
                   {currentProject.githubUrl !== '#' && (
                     <motion.a
                       href={currentProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
-                      whileHover={{ scale: 1.1 }}
+                      className="p-2 bg-black/40 backdrop-blur-sm border border-white/30 rounded-lg hover:bg-black/60 hover:border-white/50 hover:scale-105 transition-all duration-300 ease-out"
+                      whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Github className="w-5 h-5 text-white" />
+                      <Github className="w-4 h-4 text-white" />
                     </motion.a>
                   )}
                 </div>
@@ -279,13 +349,13 @@ const SelectedWorks = () => {
               </button>
 
               {/* Progress Bar */}
-              <div className="flex-1 mx-6 h-1 bg-white/10 rounded-full overflow-hidden">
+              <div className="flex-1 mx-6 h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   key={progressKey}
-                  className={`h-full bg-gradient-to-r ${currentProject.color} rounded-full`}
+                  className={`h-full bg-gradient-to-r ${currentProject.color} rounded-full shadow-lg`}
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
-                  transition={{ duration: 15, ease: 'linear' }}
+                  transition={{ duration: 25, ease: 'linear' }}
                 />
               </div>
 
@@ -298,7 +368,7 @@ const SelectedWorks = () => {
             </div>
 
             {/* Project Indicators */}
-            <div className="flex justify-center gap-2 mt-4">
+            <div className="flex justify-center gap-3 mt-6">
               {projects.map((_, index) => (
                 <button
                   key={index}
@@ -306,10 +376,10 @@ const SelectedWorks = () => {
                     setCurrentIndex(index);
                     setProgressKey(prev => prev + 1);
                   }}
-                  className={`h-1 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-500 ${
                     index === currentIndex 
-                      ? 'w-8 bg-white' 
-                      : 'w-1 bg-white/30 hover:bg-white/50'
+                      ? 'w-10 bg-white shadow-lg' 
+                      : 'w-2 bg-white/30 hover:bg-white/50 hover:w-3'
                   }`}
                 />
               ))}
@@ -330,7 +400,7 @@ const SelectedWorks = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="space-y-6"
               >
                 {/* Category Badge */}
@@ -340,6 +410,16 @@ const SelectedWorks = () => {
                     {currentProject.category}
                   </span>
                 </div>
+
+                {/* Achievement Badge */}
+                {currentProject.badge && (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                    <span className="text-yellow-300 text-sm font-semibold tracking-wider">
+                      {currentProject.badge}
+                    </span>
+                  </div>
+                )}
 
                 {/* Title */}
                 <h3 className="font-inter font-light text-4xl lg:text-5xl text-white leading-tight">
@@ -426,7 +506,7 @@ const SelectedWorks = () => {
           viewport={{ once: true }}
         >
           {[
-            { label: 'Projects Completed', value: '30+', color: 'from-blue-500 to-cyan-500' },
+            { label: 'Projects Completed', value: '5', color: 'from-blue-500 to-cyan-500' },
             { label: 'Technologies Used', value: '15+', color: 'from-purple-500 to-pink-500' },
             { label: 'Skills Demonstrated', value: '12+', color: 'from-green-500 to-emerald-500' },
             { label: 'Performance Score', value: '98%', color: 'from-yellow-500 to-orange-500' }
@@ -451,6 +531,7 @@ const SelectedWorks = () => {
       {selectedProject && (
         <ProjectModal
           project={selectedProject}
+          isOpen={!!selectedProject}
           onClose={() => setSelectedProject(null)}
         />
       )}

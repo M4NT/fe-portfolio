@@ -30,6 +30,40 @@ html {
 }
 
 /* ========================================
+   CORREÇÃO DE IMAGENS NO CARROSSEL
+   ======================================== */
+
+/* Força a imagem a preencher corretamente o container */
+.selected-works-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  transform-origin: center !important;
+  min-height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Remove qualquer background escuro do container da imagem */
+.selected-works-image-container {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background-size: auto !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* Força o container a não ter background escuro */
+.selected-works-image-container::before,
+.selected-works-image-container::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* ========================================
    ACESSIBILIDADE (A11Y)
    ======================================== */
 
