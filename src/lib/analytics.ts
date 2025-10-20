@@ -1,5 +1,20 @@
 import { track } from '@vercel/analytics';
 
+// ========================================
+// GA4 WRAPPER (usa gtag se disponível)
+// ========================================
+
+const gtagSafe = (name: string, params?: Record<string, unknown>) => {
+  // Evita erros em SSR/ambientes sem gtag
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', name, params || {});
+  }
+};
+
+export const trackGAEvent = (name: string, params?: Record<string, unknown>) => {
+  gtagSafe(name, params);
+};
+
 /**
  * Utilitário para rastreamento de eventos com Vercel Analytics
  * Centraliza todos os eventos do site para fácil manutenção

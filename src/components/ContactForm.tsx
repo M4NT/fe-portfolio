@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import { trackFormStart, trackFormSubmit, trackFormError } from '../lib/analytics';
+import { trackFormStart, trackFormSubmit, trackFormError, trackGAEvent } from '../lib/analytics';
 
 // Schema de validação com Zod
 const contactSchema = z.object({
@@ -45,8 +45,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     setSubmitStatus('loading');
     setErrorMessage('');
     
-    // Track form start
+    // Track form start (Vercel + GA4)
     trackFormStart('contact');
+    trackGAEvent('form_start', { form_type: 'contact' });
 
     try {
       // CONFIGURAÇÃO ATUAL: Formspree (temporário até configurar Hostinger)
@@ -84,6 +85,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
       
       // Track successful submission
       trackFormSubmit('contact', true);
+      trackGAEvent('form_submit', { form_type: 'contact', success: true });
       
       reset();
       onSuccess?.();
@@ -99,6 +101,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
       
       // Track form error
       trackFormError('contact', error instanceof Error ? error.message : 'unknown');
+      trackGAEvent('form_error', { form_type: 'contact' });
       
       // Mensagem de erro mais amigável
       if (error instanceof Error && error.message.includes('fetch')) {
