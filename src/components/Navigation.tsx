@@ -44,6 +44,7 @@ const Navigation = () => {
     { id: 'works', label: 'Projetos', href: '#works' },
     { id: 'about', label: 'Sobre', href: '#about' },
     { id: 'services', label: 'Serviços', href: '#services' },
+    { id: 'affiliates', label: 'Indique e ganhe', href: '#affiliates' },
     { id: 'contact', label: 'Contato', href: '#contact' }
   ];
 
