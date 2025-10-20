@@ -8,7 +8,7 @@ export default function BlogIndex() {
   const { language } = useLanguage();
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Enhanced Animated Background */}
+      {/* Enhanced Animated Background - EXACT COPY FROM HERO */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient orbs - More vibrant */}
         <motion.div 
@@ -66,22 +66,96 @@ export default function BlogIndex() {
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Floating particles */}
-        {[...Array(6)].map((_, i) => {
+        {/* Animated lines - EXACT COPY FROM HERO */}
+        <motion.div
+          className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent"
+          animate={{ 
+            y: [-100, 100],
+            opacity: [0, 1, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-purple-400/20 to-transparent"
+          animate={{ 
+            y: [-100, 100],
+            opacity: [0, 1, 0]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+
+        <motion.div 
+          className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-400/15 to-transparent"
+          animate={{
+            x: [100, -100],
+            opacity: [0, 0.8, 0]
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4
+          }}
+        />
+        
+        {/* Subtle grid pattern - EXACT COPY FROM HERO */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div 
+            className="w-full h-full"
+            style={{
+              backgroundImage: `
+                linear-gradient(30deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(150deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px'
+            }}
+          />
+        </div>
+
+        {/* Animated gradient overlay - EXACT COPY FROM HERO */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10"
+          animate={{
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Floating particles - EXACT COPY FROM HERO */}
+        {[...Array(8)].map((_, i) => {
           const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
           const randomColor = colors[Math.floor(Math.random() * colors.length)];
           
+          // Posições mais controladas (não totalmente aleatórias)
           const positions = [
             { left: '10%', top: '20%' },
             { left: '85%', top: '70%' },
             { left: '20%', top: '60%' },
             { left: '75%', top: '30%' },
             { left: '50%', top: '15%' },
-            { left: '30%', top: '80%' }
+            { left: '30%', top: '80%' },
+            { left: '90%', top: '40%' },
+            { left: '60%', top: '85%' }
           ];
           
           const position = positions[i % positions.length];
-          const duration = 12 + Math.random() * 6;
+          const duration = 12 + Math.random() * 6; // 12-18 segundos
+          
+          // Aplicar blur em 40% das bolinhas (índices pares)
           const shouldBlur = i % 2 === 0;
           const blurClass = shouldBlur ? 'blur-sm' : '';
           const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
