@@ -687,210 +687,126 @@ O segredo está na preparação. Quanto melhor planejarmos, mais rápido e efici
 
 You have a brilliant idea for a site, but don't know where to start? Or have you tried developing something before and got lost in the process? This guide will show you exactly how to transform any idea into a professional and functional site, following a proven methodology.
 
-## 🎯 Why follow a structured process?
+## Why follow a structured process?
 
-Before we dive into the steps, it's important to understand why a well-defined process is crucial:
+Before we dive into the steps, it's important to understand why a well-defined process is crucial. A structured process reduces risks of rework and delays, ensures quality at each stage, facilitates communication between all parties, accelerates development with clear checkpoints and maximizes conversions with user focus.
 
-- **Reduces risks** of rework and delays
-- **Ensures quality** at each stage
-- **Facilitates communication** between all parties
-- **Accelerates development** with clear checkpoints
-- **Maximizes conversions** with user focus
+## Step 1: Discovery and Strategy
 
-## 📋 Step 1: Discovery and Strategy
-
-### **What happens here:**
 This is the most important phase of the project. This is where we define the foundations of everything that will come after.
 
-### **Main activities:**
+### Detailed Briefing
 
-#### **1.1 Detailed Briefing**
-- **Project objectives**: What do you want to achieve?
-- **Target audience**: Who will use the site?
-- **Features**: What resources are essential?
-- **Timeline**: When does it need to be live?
-- **Budget**: What investment is available?
+We need to understand your project objectives (what do you want to achieve?), target audience (who will use the site?), features (what resources are essential?), timeline (when does it need to be live?) and budget (what investment is available?).
 
-#### **1.2 Market Research**
-- **Competition analysis**: What are others doing?
-- **Industry trends**: What's working?
-- **Opportunity gaps**: Where can we innovate?
+### Market Research
 
-#### **1.3 Persona Definition**
-- **Demographic profile**: Age, gender, location
-- **Online behavior**: How do they navigate the internet?
-- **Pain points and needs**: What problems do they want to solve?
-- **User journey**: How do they reach you?
+We analyze the competition (what are others doing?), industry trends (what's working?) and opportunity gaps (where can we innovate?).
 
-#### **1.4 Content Strategy**
-- **Tone of voice**: How will we talk to the audience?
-- **Information structure**: What's most important?
-- **Call-to-actions**: Where do we want them to click?
+### Persona Definition
 
-### **Deliverables:**
-- Complete briefing document
-- Detailed personas
-- Content strategy
-- Preliminary timeline
+We create detailed personas including demographic profile (age, gender, location), online behavior (how do they navigate the internet?), pain points and needs (what problems do they want to solve?) and user journey (how do they reach you?).
 
-### **Duration:** 3-5 business days
+### Content Strategy
 
----
+We define the tone of voice (how will we talk to the audience?), information structure (what's most important?) and call-to-actions (where do we want them to click?).
 
-## 🎨 Step 2: Proposal and Planning
+**Deliverables:**
+Complete briefing document, detailed personas, content strategy and preliminary timeline.
 
-### **What happens here:**
+**Duration:** 3-5 business days
+
+## Step 2: Proposal and Planning
+
 We transform all discovery into a concrete and detailed plan.
 
-### **Main activities:**
+### Information Architecture
 
-#### **2.1 Information Architecture**
-- **Site map**: Page and section structure
-- **Content hierarchy**: What comes first?
-- **Navigation**: How will the user move around?
+We create the site map with page and section structure, content hierarchy (what comes first?) and navigation (how will the user move around?).
 
-#### **2.2 Detailed Wireframes**
-- **Each page layout**: Where does each element go?
-- **Conversion flow**: Path to desired action
-- **Responsiveness**: How does it look on mobile/tablet?
+### Detailed Wireframes
 
-#### **2.3 Visual Proposal**
-- **Color palette**: Consistent visual identity
-- **Typography**: Fonts that convey trust
-- **Graphic elements**: Icons, illustrations, photos
+We develop wireframes showing each page layout (where does each element go?), conversion flow (path to desired action) and responsiveness (how does it look on mobile/tablet?).
 
-#### **2.4 Detailed Timeline**
-- **Project milestones**: Important checkpoints
-- **Responsibilities**: Who does what and when
-- **Dependencies**: What needs to be done before
+### Visual Proposal
 
-### **Deliverables:**
-- Information architecture
-- Approved wireframes
-- Visual proposal
-- Final timeline
-- Detailed budget
+We define the color palette for consistent visual identity, typography with fonts that convey trust and graphic elements including icons, illustrations and photos.
 
-### **Duration:** 5-7 business days
+### Detailed Timeline
 
----
+We establish project milestones (important checkpoints), responsibilities (who does what and when) and dependencies (what needs to be done before).
 
-## ⚡ Step 3: Execution and Development
+**Deliverables:**
+Information architecture, approved wireframes, visual proposal, final timeline and detailed budget.
 
-### **What happens here:**
+**Duration:** 5-7 business days
+
+## Step 3: Execution and Development
+
 Time to roll up our sleeves and transform everything into functional code.
 
-### **Main activities:**
+### Final Design
 
-#### **3.1 Final Design**
-- **High-fidelity mockups**: Exact visual of the site
-- **Technical specifications**: Colors, spacing, sizes
-- **Prepared assets**: Optimized images, vector icons
+We create high-fidelity mockups showing the exact visual of the site, with technical specifications (colors, spacing, sizes) and prepared assets including optimized images and vector icons.
 
-#### **3.2 Frontend Development**
-- **Semantic HTML**: Accessible and SEO-friendly structure
-- **Modern CSS**: Responsive and performant design
-- **Interactive JavaScript**: Animations and features
+### Frontend Development
 
-#### **3.3 Integrations**
-- **Forms**: Connected to your CRM/email
-- **Analytics**: Google Analytics, Facebook Pixel
-- **Payments**: Payment gateways (if needed)
-- **Chat**: WhatsApp, chatbots, support
+We develop using semantic HTML for accessible and SEO-friendly structure, modern CSS for responsive and performant design, and interactive JavaScript for animations and features.
 
-#### **3.4 Optimizations**
-- **Performance**: Fast loading
-- **SEO**: Meta tags, structure, sitemap
-- **Accessibility**: Keyboard navigation, screen readers
-- **Testing**: Working on different browsers
+### Integrations
 
-### **Quality checkpoints:**
-- **Week 1**: Design approved
-- **Week 2**: Development 50% complete
-- **Week 3**: Integrations working
-- **Week 4**: Final tests and adjustments
+We connect forms to your CRM/email, set up analytics including Google Analytics and Facebook Pixel, configure payment gateways when needed, and implement chat solutions like WhatsApp and chatbots.
 
-### **Duration:** 15-20 business days
+### Optimizations
 
----
+We apply performance optimizations for fast loading, SEO with meta tags, structure and sitemap, accessibility with keyboard navigation and screen readers, and testing across different browsers.
 
-## 🚀 Step 4: Go-live and Support
+**Quality checkpoints:**
+Week 1: Design approved
+Week 2: Development 50% complete
+Week 3: Integrations working
+Week 4: Final tests and adjustments
 
-### **What happens here:**
+**Duration:** 15-20 business days
+
+## Step 4: Go-live and Support
+
 The most exciting moment: putting the site live and ensuring everything works perfectly.
 
-### **Main activities:**
+### Launch Preparation
 
-#### **4.1 Launch Preparation**
-- **Hosting**: Server configured and optimized
-- **Domain**: DNS configured correctly
-- **SSL**: Security certificate active
-- **Backup**: Backup system configured
+We configure hosting with optimized server, set up domain DNS correctly, activate SSL security certificate and configure backup system.
 
-#### **4.2 Final Tests**
-- **Features**: All resources tested
-- **Responsiveness**: Mobile, tablet, desktop
-- **Performance**: Loading speed
-- **SEO**: Meta tags, sitemap, robots.txt
+### Final Tests
 
-#### **4.3 Launch**
-- **Deploy**: Site goes live
-- **Monitoring**: Tracking metrics
-- **Adjustments**: Immediate fixes if needed
+We test all features, check responsiveness on mobile, tablet and desktop, verify loading speed and validate SEO elements including meta tags, sitemap and robots.txt.
 
-#### **4.4 Post-Launch Support**
-- **30 days of support**: Fixes and adjustments
-- **Training**: How to use admin panel
-- **Reports**: Performance metrics
-- **Optimizations**: Improvements based on data
+### Launch
 
-### **Deliverables:**
-- 100% functional site
-- Technical documentation
-- Training completed
-- Performance reports
+We deploy the site to make it live, start monitoring metrics and apply immediate fixes if needed.
 
-### **Duration:** 2-3 business days + 30 days support
+### Post-Launch Support
 
----
+We offer 30 days of support including fixes and adjustments, training on how to use admin panel, performance metrics reports and optimizations based on real usage data.
 
-## 📊 Success Metrics
+**Deliverables:**
+100% functional site, technical documentation, training completed and performance reports
 
-### **During development:**
-- **Timeline**: Deliveries on time
-- **Quality**: Approval at each checkpoint
-- **Communication**: Constant feedback
+**Duration:** 2-3 business days + 30 days support
 
-### **After launch:**
-- **Performance**: Loading < 3 seconds
-- **Conversions**: Conversion rate > 2%
-- **Usability**: Intuitive navigation
-- **SEO**: Organic positioning
+## Success Metrics
 
-## 🎯 Tips to Maximize Success
+During development, we track timeline (deliveries on time), quality (approval at each checkpoint) and communication (constant feedback). After launch, we measure performance (loading under 3 seconds), conversions (conversion rate over 2%), usability (intuitive navigation) and SEO (organic positioning).
 
-### **1. Be specific in requirements**
-The more detailed the briefing, the better the final result.
+## Tips to Maximize Success
 
-### **2. Participate actively in the process**
-Your feedback is essential for project success.
+Be specific in requirements - the more detailed the briefing, the better the final result. Participate actively in the process, as your feedback is essential for project success. Test on different devices to ensure it works well on all devices. Monitor metrics and use data to continuously optimize. Keep content updated, as outdated sites lose credibility.
 
-### **3. Test on different devices**
-Ensure it works well on all devices.
-
-### **4. Monitor metrics**
-Use data to continuously optimize.
-
-### **5. Keep content updated**
-Outdated sites lose credibility.
-
-## 💡 Conclusion
+## Conclusion
 
 Transforming an idea into a professional site doesn't have to be complicated. With a structured and transparent process, you can be sure the final result will be exactly what you imagined.
 
-**The secret is in preparation. The better we plan, the faster and more efficient development will be.**
-
----
+The secret is in preparation. The better we plan, the faster and more efficient development will be.
 
 *Ready to transform your idea into reality? [Let's talk](https://yanmantovani.com/contact) about your project!*`,
       es: `# Del boceto al lanzamiento: 4 pasos para publicar tu sitio con éxito
@@ -899,53 +815,34 @@ Transforming an idea into a professional site doesn't have to be complicated. Wi
 
 ¿Tienes una idea genial para un sitio, pero no sabes por dónde empezar? ¿O ya intentaste desarrollar algo antes y te perdiste en el proceso? Esta guía te mostrará exactamente cómo transformar cualquier idea en un sitio profesional y funcional, siguiendo una metodología probada.
 
-## 🎯 ¿Por qué seguir un proceso estructurado?
+## ¿Por qué seguir un proceso estructurado?
 
-Antes de sumergirnos en los pasos, es importante entender por qué un proceso bien definido es crucial:
+Antes de sumergirnos en los pasos, es importante entender por qué un proceso bien definido es crucial. Un proceso estructurado reduce riesgos de retrabajo y retrasos, garantiza calidad en cada etapa, facilita comunicación entre todas las partes, acelera desarrollo con checkpoints claros y maximiza conversiones con enfoque en el usuario.
 
-- **Reduce riesgos** de retrabajo y retrasos
-- **Garantiza calidad** en cada etapa
-- **Facilita comunicación** entre todas las partes
-- **Acelera desarrollo** con checkpoints claros
-- **Maximiza conversiones** con enfoque en el usuario
+## Paso 1: Descubrimiento y Estrategia
 
-## 📋 Paso 1: Descubrimiento y Estrategia
-
-### **Qué pasa aquí:**
 Esta es la fase más importante del proyecto. Aquí es donde definimos los cimientos de todo lo que vendrá después.
 
-### **Actividades principales:**
+### Briefing Detallado
 
-#### **1.1 Briefing Detallado**
-- **Objetivos del proyecto**: ¿Qué quieres lograr?
-- **Audiencia objetivo**: ¿Quién va a usar el sitio?
-- **Funcionalidades**: ¿Qué recursos son esenciales?
-- **Plazo**: ¿Cuándo necesita estar en línea?
-- **Presupuesto**: ¿Qué inversión está disponible?
+Necesitamos entender los objetivos del proyecto (¿qué quieres lograr?), audiencia objetivo (¿quién va a usar el sitio?), funcionalidades (¿qué recursos son esenciales?), plazo (¿cuándo necesita estar en línea?) y presupuesto (¿qué inversión está disponible?).
 
-#### **1.2 Investigación de Mercado**
-- **Análisis de competencia**: ¿Qué están haciendo otros?
-- **Tendencias del sector**: ¿Qué está funcionando?
-- **Brechas de oportunidad**: ¿Dónde podemos innovar?
+### Investigación de Mercado
 
-#### **1.3 Definición de Personas**
-- **Perfil demográfico**: Edad, género, ubicación
-- **Comportamiento online**: ¿Cómo navegan en internet?
-- **Dolores y necesidades**: ¿Qué problemas quieren resolver?
-- **Jornada del usuario**: ¿Cómo llegan hasta ti?
+Analizamos la competencia (¿qué están haciendo otros?), tendencias del sector (¿qué está funcionando?) y brechas de oportunidad (¿dónde podemos innovar?).
 
-#### **1.4 Estrategia de Contenido**
-- **Tono de voz**: ¿Cómo vamos a hablar con la audiencia?
-- **Estructura de información**: ¿Qué es más importante?
-- **Call-to-actions**: ¿Dónde queremos que hagan clic?
+### Definición de Personas
 
-### **Entregables:**
-- Documento de briefing completo
-- Personas detalladas
-- Estrategia de contenido
-- Cronograma preliminar
+Creamos personas detalladas incluyendo perfil demográfico (edad, género, ubicación), comportamiento online (¿cómo navegan en internet?), dolores y necesidades (¿qué problemas quieren resolver?) y jornada del usuario (¿cómo llegan hasta ti?).
 
-### **Duración:** 3-5 días hábiles
+### Estrategia de Contenido
+
+Definimos el tono de voz (¿cómo vamos a hablar con la audiencia?), estructura de información (¿qué es más importante?) y call-to-actions (¿dónde queremos que hagan clic?).
+
+**Entregables:**
+Documento de briefing completo, personas detalladas, estrategia de contenido y cronograma preliminar.
+
+**Duración:** 3-5 días hábiles
 
 ---
 
