@@ -67,6 +67,25 @@ function AppContent() {
               <Footer />
             </>
           } />
+          {/* Language-prefixed routes for EN/ES */}
+          <Route path=":lang(en|es)" element={
+            <>
+              <Hero />
+              <SectionDivider />
+              <SelectedWorks />
+              <SectionDivider />
+              <About />
+              <SectionDivider />
+              <Services />
+              <SectionDivider />
+              <PaymentTerms />
+              <SectionDivider />
+              <Contact />
+              <SectionDivider />
+              <FAQ />
+              <Footer />
+            </>
+          } />
           
           {/* Legal Pages */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
