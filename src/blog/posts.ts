@@ -27,27 +27,25 @@ export const posts: BlogPost[] = [
     content: {
       pt: `# Quanto custa uma Landing Page em 2025? Guia completo de investimento e ROI
 
-> **A verdade sobre investimento em landing pages que ninguém te conta.**
+**A verdade sobre investimento em landing pages que ninguém te conta.**
 
-Se você está pensando em investir em uma landing page para seu negócio, provavelmente já se perguntou: **"Quanto isso vai custar?"** 
+Se você está pensando em investir em uma landing page para seu negócio, provavelmente já se perguntou: "Quanto isso vai custar?" 
 
 E a resposta não é simples. O preço varia drasticamente dependendo de vários fatores que vamos explorar neste guia completo.
 
----
+## Por que investir em uma Landing Page?
 
-## 🎯 Por que investir em uma Landing Page?
+Antes de falarmos de preços, é importante entender o valor real de uma landing page bem estruturada.
 
-Antes de falarmos de preços, é importante entender o **valor real** de uma landing page bem estruturada.
+Uma landing page profissional pode gerar conversões até 3 vezes maiores que páginas institucionais tradicionais, com ROI médio de 300% em campanhas de marketing digital. 
 
-Uma landing page profissional pode gerar conversões até **3 vezes maiores** que páginas institucionais tradicionais, com ROI médio de **300%** em campanhas de marketing digital. 
+Além disso, ela reduz em 40% o custo por lead qualificado e aumenta em 25% a taxa de conversão geral do seu negócio.
 
-Além disso, ela reduz em **40%** o custo por lead qualificado e aumenta em **25%** a taxa de conversão geral do seu negócio.
+O investimento em uma landing page não é um gasto, é um investimento estratégico que se paga rapidamente.
 
-> 💡 **Dica:** O investimento em uma landing page não é um gasto, é um investimento estratégico que se paga rapidamente.
+## Fatores que influenciam o preço
 
-## 💰 Fatores que influenciam o preço
-
-O investimento em uma landing page depende de **quatro fatores principais** que determinam o valor final:
+O investimento em uma landing page depende de quatro fatores principais que determinam o valor final:
 
 ### 1. **Escopo e Complexidade** 🏗️
 

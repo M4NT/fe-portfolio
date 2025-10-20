@@ -8,7 +8,7 @@ export default function BlogIndex() {
     <section id="blog" className="relative py-24 md:py-32 bg-black min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-16">
-          <h1 className="text-white text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-white text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-red-500 to-purple-500 bg-clip-text text-transparent">
             {language === 'pt' ? 'Blog' : language === 'en' ? 'Blog' : 'Blog'}
           </h1>
           <p className="text-white/70 text-lg md:text-xl max-w-3xl">
@@ -23,7 +23,7 @@ export default function BlogIndex() {
             <Link 
               key={p.slug} 
               to={`/blog/${p.slug}`} 
-              className="group block rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] overflow-hidden hover:border-cyan-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10"
+              className="group block rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] overflow-hidden hover:border-amber-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/10"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {p.cover && (
@@ -38,7 +38,7 @@ export default function BlogIndex() {
               )}
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-cyan-400 text-sm font-medium">
+                  <span className="text-amber-400 text-sm font-medium">
                     {new Date(p.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
                       year: 'numeric', 
                       month: 'short', 
@@ -49,7 +49,7 @@ export default function BlogIndex() {
                   <span className="text-white/50 text-sm">{p.tags[0]}</span>
                 </div>
                 
-                <h2 className="text-white text-2xl md:text-3xl font-bold mb-3 leading-tight group-hover:text-cyan-400 transition-colors">
+                <h2 className="text-white text-2xl md:text-3xl font-bold mb-3 leading-tight group-hover:text-amber-400 transition-colors">
                   {p.title[language]}
                 </h2>
                 
@@ -57,7 +57,7 @@ export default function BlogIndex() {
                   {p.excerpt[language]}
                 </p>
                 
-                <div className="flex items-center gap-2 text-cyan-400 font-medium group-hover:gap-3 transition-all">
+                <div className="flex items-center gap-2 text-amber-400 font-medium group-hover:gap-3 transition-all">
                   <span>{language === 'pt' ? 'Ler artigo' : language === 'en' ? 'Read article' : 'Leer artículo'}</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>

@@ -91,7 +91,7 @@ export default function BlogPost() {
         .blog-h1 {
           font-size: 2.75rem;
           font-weight: 700;
-          background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+          background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #8b5cf6 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -109,21 +109,21 @@ export default function BlogPost() {
           top: 0;
           bottom: 0;
           width: 5px;
-          background: linear-gradient(180deg, #06b6d4 0%, #3b82f6 100%);
+          background: linear-gradient(180deg, #f59e0b 0%, #ef4444 50%, #8b5cf6 100%);
           border-radius: 3px;
         }
         
         .blog-h2 {
           font-size: 2.25rem;
           font-weight: 700;
-          background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+          background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           margin-top: 4rem;
           margin-bottom: 1.75rem;
           padding-bottom: 1rem;
-          border-bottom: 3px solid rgba(6, 182, 212, 0.25);
+          border-bottom: 3px solid rgba(245, 158, 11, 0.25);
           line-height: 1.3;
           position: relative;
         }
@@ -135,19 +135,19 @@ export default function BlogPost() {
           left: 0;
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
+          background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
           border-radius: 3px;
         }
         
         .blog-h3 {
           font-size: 1.625rem;
           font-weight: 600;
-          color: #06b6d4;
+          color: #f59e0b;
           margin-top: 2.5rem;
           margin-bottom: 1.25rem;
           line-height: 1.4;
           padding-left: 1rem;
-          border-left: 3px solid #06b6d4;
+          border-left: 3px solid #f59e0b;
         }
         
         .blog-p {
@@ -171,7 +171,7 @@ export default function BlogPost() {
         .blog-bold {
           font-weight: 700;
           color: rgba(255, 255, 255, 1);
-          background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
           padding: 0.125rem 0.375rem;
           border-radius: 4px;
         }
@@ -185,8 +185,8 @@ export default function BlogPost() {
           margin: 2rem 0;
           padding-left: 0;
           list-style: none;
-          background: rgba(6, 182, 212, 0.03);
-          border-left: 3px solid rgba(6, 182, 212, 0.3);
+          background: rgba(245, 158, 11, 0.03);
+          border-left: 3px solid rgba(245, 158, 11, 0.3);
           padding: 1.5rem 1rem 1.5rem 2rem;
           border-radius: 0 8px 8px 0;
         }
@@ -203,36 +203,36 @@ export default function BlogPost() {
           content: '◆';
           position: absolute;
           left: 0.5rem;
-          color: #06b6d4;
+          color: #f59e0b;
           font-weight: bold;
           font-size: 0.875rem;
         }
         
         .blog-content a {
-          color: #06b6d4;
+          color: #f59e0b;
           text-decoration: underline;
-          text-decoration-color: rgba(6, 182, 212, 0.3);
+          text-decoration-color: rgba(245, 158, 11, 0.3);
           text-underline-offset: 3px;
           transition: all 0.3s ease;
         }
         
         .blog-content a:hover {
-          color: #0ea5e9;
-          text-decoration-color: #0ea5e9;
+          color: #ef4444;
+          text-decoration-color: #ef4444;
         }
         
         /* Efeito de reading progress */
         .blog-content::selection {
-          background: rgba(6, 182, 212, 0.3);
+          background: rgba(245, 158, 11, 0.3);
           color: white;
         }
         
         /* Destaque para citações */
         .blog-content blockquote {
-          border-left: 4px solid #06b6d4;
+          border-left: 4px solid #f59e0b;
           padding: 1.5rem 2rem;
           margin: 2rem 0;
-          background: rgba(6, 182, 212, 0.05);
+          background: rgba(245, 158, 11, 0.05);
           border-radius: 0 8px 8px 0;
           font-style: italic;
           color: rgba(255, 255, 255, 0.95);
@@ -276,7 +276,7 @@ export default function BlogPost() {
           <span className="text-white/70">{post.title[language]}</span>
         </nav>
         
-        <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+        <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-amber-400 via-red-500 to-purple-500 bg-clip-text text-transparent">
           {post.title[language]}
         </h1>
         
@@ -305,8 +305,8 @@ export default function BlogPost() {
         <div className="blog-content" dangerouslySetInnerHTML={renderContent(post.content[language])} />
         
         {/* CTA Section */}
-        <div className="mt-16 mb-12 p-8 md:p-10 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 border border-cyan-500/20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+        <div className="mt-16 mb-12 p-8 md:p-10 rounded-2xl bg-gradient-to-br from-amber-500/10 via-red-500/10 to-purple-500/10 border border-amber-500/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.1),transparent_50%)]"></div>
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {language === 'pt' ? 'Pronto para transformar sua ideia em realidade?' : 
@@ -321,13 +321,13 @@ export default function BlogPost() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
                 to="/#contact" 
-                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:from-cyan-400 hover:to-blue-400 transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-amber-500 to-red-500 text-white font-semibold rounded-xl hover:from-amber-400 hover:to-red-400 transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105"
               >
                 {language === 'pt' ? 'Iniciar Projeto' : language === 'en' ? 'Start Project' : 'Iniciar Proyecto'}
               </Link>
               <Link 
                 to="/#works" 
-                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-cyan-500/50"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-amber-500/50"
               >
                 {language === 'pt' ? 'Ver Portfólio' : language === 'en' ? 'View Portfolio' : 'Ver Portafolio'}
               </Link>
@@ -339,14 +339,14 @@ export default function BlogPost() {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
-              <span key={tag} className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm border border-cyan-500/20 hover:bg-cyan-500/20 transition-colors cursor-pointer">
+              <span key={tag} className="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-full text-sm border border-amber-500/20 hover:bg-amber-500/20 transition-colors cursor-pointer">
                 #{tag}
               </span>
             ))}
           </div>
           <Link 
             to="/blog" 
-            className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium flex items-center gap-2 group"
+            className="text-amber-400 hover:text-red-400 transition-colors font-medium flex items-center gap-2 group"
           >
             <span className="group-hover:-translate-x-1 transition-transform">←</span>
             {language === 'pt' ? 'Voltar para o blog' : language === 'en' ? 'Back to blog' : 'Volver al blog'}
