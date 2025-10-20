@@ -8,6 +8,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
+import Affiliates from './components/Affiliates';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -58,6 +59,8 @@ function AppContent() {
               <About />
               <SectionDivider />
               <Services />
+              <SectionDivider />
+              <Affiliates />
               <SectionDivider />
               <PaymentTerms />
               <SectionDivider />
