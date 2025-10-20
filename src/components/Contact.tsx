@@ -194,10 +194,8 @@ const Contact = () => {
                       </p>
 
                       {/* CTA Button */}
-                      <a
-                        href={option.href || '#contact'}
-                        target={option.href?.startsWith('http') ? '_blank' : undefined}
-                        rel={option.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      <motion.button
+                        type="button"
                         className={`group/btn relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${option.color} text-white rounded-lg font-semibold overflow-hidden transition-all hover:shadow-lg hover:shadow-${option.color.split('-')[1]}-500/20`}
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}
@@ -222,7 +220,7 @@ const Contact = () => {
                           {option.action}
                         </span>
                         <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
-                      </a>
+                      </motion.button>
                     </div>
                   </div>
                 </div>
