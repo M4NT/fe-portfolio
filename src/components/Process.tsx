@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ClipboardCheck, FileText, Rocket, ShieldCheck } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import { trackGAEvent } from '../lib/analytics';
 
 type Step = {
   icon: JSX.Element;
@@ -88,6 +89,34 @@ export default function Process() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-10"
+        >
+          <button
+            onClick={() => {
+              const el = document.getElementById('contact');
+              if (el) {
+                const nav = document.querySelector('nav') as HTMLElement | null;
+                const offset = nav?.offsetHeight ? nav.offsetHeight : 80;
+                const rect = el.getBoundingClientRect();
+                const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop) - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+                trackGAEvent('cta_click', { location: 'process_section', label: 'start_now_scroll_contact' });
+              }
+            }}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold transition-all hover:shadow-[0_0_40px_-15px_rgba(99,102,241,0.7)]"
+          >
+            {language === 'pt' && 'Começar agora'}
+            {language === 'en' && 'Start now'}
+            {language === 'es' && 'Empezar ahora'}
+            <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+          </button>
+        </motion.div>
       </div>
     </section>
   );
