@@ -136,9 +136,9 @@ Para empresas que querem maximizar suas conversões, este tier oferece:
 Calcular o retorno sobre investimento de uma landing page é fundamental para justificar o investimento.
 
 ### **Fórmula básica:**
-```
+\`\`\`
 ROI = (Receita gerada - Investimento) / Investimento × 100
-```
+\`\`\`
 
 ### **Exemplo prático:**
 
