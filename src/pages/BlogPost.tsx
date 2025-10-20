@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getPost } from '../blog/posts';
@@ -8,8 +8,26 @@ import Footer from '../components/Footer';
 export default function BlogPost() {
   const { slug } = useParams();
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const post = getPost(slug || '');
   if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
+
+  const handleNavigation = (path: string) => {
+    if (path === '/') {
+      navigate('/');
+    } else if (path.startsWith('/#')) {
+      // Para âncoras, navegar para home e depois scroll
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(path.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      navigate(path);
+    }
+  };
 
   const ld = {
     '@context': 'https://schema.org',
@@ -274,31 +292,31 @@ export default function BlogPost() {
       <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
-            <a 
-              href="/" 
+            <button 
+              onClick={() => handleNavigation('/')}
               className="text-white font-bold text-xl hover:text-white/80 transition-colors"
             >
               Yan Mantovani
-            </a>
+            </button>
             <div className="flex items-center gap-6">
-              <a 
-                href="/#works" 
+              <button 
+                onClick={() => handleNavigation('/#works')}
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
-              </a>
+              </button>
               <Link 
                 to="/blog" 
                 className="text-white/70 hover:text-white transition-colors"
               >
                 Blog
               </Link>
-              <a 
-                href="/#contact" 
+              <button 
+                onClick={() => handleNavigation('/#contact')}
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
-              </a>
+              </button>
             </div>
           </div>
         </div>
