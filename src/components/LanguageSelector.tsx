@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Globe } from 'lucide-react';
 import { useLanguage, Language } from './LanguageContext';
@@ -70,16 +71,16 @@ const LanguageSelector = () => {
       </motion.button>
 
       <AnimatePresence>
-        {isOpen && (
+        {isOpen && menuPos && createPortal(
           <motion.div
-            className="fixed z-[99999] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right bg-black/90 text-white shadow-xl"
-            style={{ top: menuPos?.top ?? 64, right: menuPos?.right ?? 16 }}
+            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right bg-black/90 text-white shadow-xl"
+            style={{ top: menuPos.top, right: menuPos.right }}
             initial={{ opacity: 0, scale: 0.96, y: -4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -4 }}
             transition={{ duration: 0.15, ease: [0.23,1,0.32,1] }}
           >
-            <div className="max-h-[50vh] overflow-auto">
+            <div className="max-h-[60vh] overflow-auto">
               {languages.map((lang) => (
                 <motion.button
                   key={lang.code}
@@ -107,8 +108,8 @@ const LanguageSelector = () => {
                 </motion.button>
               ))}
             </div>
-          </motion.div>
-        )}
+          </motion.div>, document.body)
+        }
       </AnimatePresence>
     </div>
   );
