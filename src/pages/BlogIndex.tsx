@@ -8,16 +8,31 @@ export default function BlogIndex() {
   const { language } = useLanguage();
   const navigate = useNavigate();
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
     console.log('Navegando para:', path); // Debug
     
     if (path === '/') {
+      // Navega para home e vai pro topo
       window.location.href = '/';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (path.startsWith('/#')) {
-      // Para âncoras, usar window.location para garantir que funcione
-      window.location.href = path;
-    } else {
-      navigate(path);
+      // Para âncoras, primeiro vai pra home
+      const anchor = path.substring(2); // Remove /#
+      window.location.href = '/';
+      // Aguarda o carregamento e depois faz scroll
+      setTimeout(() => {
+        const element = document.getElementById(anchor);
+        if (element) {
+          const navHeight = 80; // Altura da navbar
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+    } else if (path === '/blog') {
+      navigate('/blog');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -204,26 +219,26 @@ export default function BlogIndex() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <button 
-              onClick={() => handleNavigation('/')}
+              onClick={(e) => handleNavigation(e, '/')}
               className="text-white font-bold text-xl hover:text-white transition-colors"
             >
               Yan Mantovani
             </button>
             <div className="flex items-center gap-6">
               <button 
-                onClick={() => handleNavigation('/#works')}
+                onClick={(e) => handleNavigation(e, '/#works')}
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
               </button>
-              <Link 
-                to="/blog" 
+              <button 
+                onClick={(e) => handleNavigation(e, '/blog')}
                 className="text-white/70 hover:text-white transition-colors"
               >
                 Blog
-              </Link>
+              </button>
               <button 
-                onClick={() => handleNavigation('/#contact')}
+                onClick={(e) => handleNavigation(e, '/#contact')}
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
