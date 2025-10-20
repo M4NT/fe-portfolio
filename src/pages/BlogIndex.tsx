@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { posts } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
@@ -8,16 +9,19 @@ export default function BlogIndex() {
   const { language } = useLanguage();
   const navigate = useNavigate();
 
+  // Força scroll ao topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleNavigation = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Navegando para:', path); // Debug
     
     if (path === '/') {
-      // Navega para home e vai pro topo
-      window.location.href = '/';
+      navigate('/');
     } else if (path.startsWith('/#')) {
-      // Para âncoras, usar window.location diretamente
+      // Para âncoras na home, usar window.location diretamente
       window.location.href = path;
     } else if (path === '/blog') {
       navigate('/blog');

@@ -10,18 +10,22 @@ export default function BlogPost() {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const post = getPost(slug || '');
+  
+  // Força scroll ao topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+  
   if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
 
   const handleNavigation = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Navegando para:', path); // Debug
     
     if (path === '/') {
-      // Navega para home e vai pro topo
-      window.location.href = '/';
+      navigate('/');
     } else if (path.startsWith('/#')) {
-      // Para âncoras, usar window.location diretamente
+      // Para âncoras na home, usar window.location diretamente
       window.location.href = path;
     } else if (path === '/blog') {
       navigate('/blog');
@@ -61,7 +65,7 @@ export default function BlogPost() {
     });
     
     // Process HTML tables
-    html = html.replace(/<div class="blog-table">([\s\S]*?)<\/div>/g, (match, tableContent) => {
+    html = html.replace(/<div class="blog-table">([\s\S]*?)<\/div>/g, (_match, tableContent) => {
       return `<div class="blog-table">${tableContent}</div>`;
     });
     
