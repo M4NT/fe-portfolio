@@ -10,16 +10,10 @@ export default function BlogIndex() {
 
   const handleNavigation = (path: string) => {
     if (path === '/') {
-      navigate('/');
+      window.location.href = '/';
     } else if (path.startsWith('/#')) {
-      // Para âncoras, navegar para home e depois scroll
-      navigate('/');
-      setTimeout(() => {
-        const element = document.querySelector(path.substring(1));
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      // Para âncoras, usar window.location para garantir que funcione
+      window.location.href = path;
     } else {
       navigate(path);
     }
