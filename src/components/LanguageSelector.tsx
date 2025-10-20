@@ -39,7 +39,12 @@ const LanguageSelector = () => {
 
   // Open/close with immediate position computation
   const toggleOpen = () => {
-    if (!isOpen) computeMenuPos();
+    if (!isOpen) {
+      computeMenuPos();
+      // Firefox/Zen: garante cálculo após pintura
+      requestAnimationFrame(() => computeMenuPos());
+      setTimeout(() => computeMenuPos(), 50);
+    }
     setIsOpen((v) => !v);
   };
 
@@ -96,10 +101,10 @@ const LanguageSelector = () => {
       </motion.button>
 
       <AnimatePresence>
-        {isOpen && menuPos && createPortal(
+        {isOpen && createPortal(
           <motion.div
-            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl"
-            style={{ top: menuPos.top, left: menuPos.left }}
+            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl pointer-events-auto"
+            style={{ top: (menuPos?.top ?? 64), left: (menuPos?.left ?? 16) }}
             initial={{ opacity: 0, scale: 0.96, y: -4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -4 }}
