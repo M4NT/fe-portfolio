@@ -14,29 +14,17 @@ export default function BlogPost() {
 
   const handleNavigation = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
+    e.stopPropagation();
     console.log('Navegando para:', path); // Debug
     
     if (path === '/') {
       // Navega para home e vai pro topo
       window.location.href = '/';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (path.startsWith('/#')) {
-      // Para âncoras, primeiro vai pra home
-      const anchor = path.substring(2); // Remove /#
-      window.location.href = '/';
-      // Aguarda o carregamento e depois faz scroll
-      setTimeout(() => {
-        const element = document.getElementById(anchor);
-        if (element) {
-          const navHeight = 80; // Altura da navbar
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - navHeight;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      }, 100);
+      // Para âncoras, usar window.location diretamente
+      window.location.href = path;
     } else if (path === '/blog') {
       navigate('/blog');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -300,31 +288,31 @@ export default function BlogPost() {
         })}
       </div>
       {/* Navigation Header - Same as main site */}
-      <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+      <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10 pointer-events-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
             <button 
               onClick={(e) => handleNavigation(e, '/')}
-              className="text-white font-bold text-xl hover:text-white/80 transition-colors"
+              className="text-white font-bold text-xl hover:text-white/80 transition-colors cursor-pointer relative z-10"
             >
               Yan Mantovani
             </button>
             <div className="flex items-center gap-6">
               <button 
                 onClick={(e) => handleNavigation(e, '/#works')}
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
               >
                 {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
               </button>
               <button 
                 onClick={(e) => handleNavigation(e, '/blog')}
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
               >
                 Blog
               </button>
               <button 
                 onClick={(e) => handleNavigation(e, '/#contact')}
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
               >
                 {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
               </button>

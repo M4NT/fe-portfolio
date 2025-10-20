@@ -18,7 +18,12 @@ export default function LatestPosts() {
               {/* Cover */}
               <div className="relative h-36 md:h-40 w-full overflow-hidden">
                 {p.cover ? (
-                  <img src={p.cover} alt={p.title[language]} className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" />
+                  <img 
+                    src={p.cover} 
+                    alt={p.title[language]} 
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300" 
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                  />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-blue-600/30 to-purple-600/30" />
                 )}
