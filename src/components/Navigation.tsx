@@ -77,6 +77,12 @@ const Navigation = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
+    // Se for "home", navegar para a home
+    if (sectionId === 'home') {
+      window.location.href = '/';
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       // calcula altura real do header para evitar "pular" posições
@@ -87,6 +93,9 @@ const Navigation = () => {
       const targetTop = rect.top + scrollTop - headerOffset;
       window.scrollTo({ top: targetTop, behavior: 'smooth' });
       setIsMobileMenuOpen(false);
+    } else {
+      // Se o elemento não existe (estamos em outra página), navegar para a home com âncora
+      window.location.href = `/#${sectionId}`;
     }
   };
 
@@ -94,7 +103,7 @@ const Navigation = () => {
     <>
       {/* Main Navigation */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 navbar-glass border-b border-white/10"
+        className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10"
         style={{
           position: 'fixed',
           top: 0,
@@ -117,13 +126,9 @@ const Navigation = () => {
               onClick={() => scrollToSection('home')}
             >
               <motion.h1 
-                className="font-display text-2xl lg:text-3xl text-white tracking-wider"
-                animate={{ 
-                  textShadow: isScrolled 
-                    ? 'none' 
-                    : ['0 0 20px rgba(59,130,246,0.3)', '0 0 30px rgba(147,51,234,0.4)', '0 0 20px rgba(59,130,246,0.3)']
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
+                className="text-2xl lg:text-3xl text-white font-light tracking-wider"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
                 YAN<span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">.M</span>
               </motion.h1>

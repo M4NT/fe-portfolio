@@ -1,37 +1,23 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { posts } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
+import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function BlogIndex() {
   const { language } = useLanguage();
-  const navigate = useNavigate();
 
   // Força scroll ao topo quando a página carrega
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleNavigation = (e: React.MouseEvent, path: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (path === '/') {
-      navigate('/');
-    } else if (path.startsWith('/#')) {
-      // Para âncoras na home, usar window.location diretamente
-      window.location.href = path;
-    } else if (path === '/blog') {
-      navigate('/blog');
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Enhanced Animated Background - EXACT COPY FROM HERO */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Main gradient orbs - More vibrant */}
         <motion.div 
           className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
@@ -206,39 +192,8 @@ export default function BlogIndex() {
           );
         })}
       </div>
-      {/* Navigation Header */}
-      <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10 pointer-events-auto">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <button 
-              onClick={(e) => handleNavigation(e, '/')}
-              className="text-white font-bold text-xl hover:text-white transition-colors cursor-pointer relative z-10"
-            >
-              Yan Mantovani
-            </button>
-            <div className="flex items-center gap-6">
-              <button 
-                onClick={(e) => handleNavigation(e, '/#works')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
-              </button>
-              <button 
-                onClick={(e) => handleNavigation(e, '/blog')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                Blog
-              </button>
-              <button 
-                onClick={(e) => handleNavigation(e, '/#contact')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      
+      <Navigation />
 
     <section id="blog" className="relative py-24 md:py-32 bg-black min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">

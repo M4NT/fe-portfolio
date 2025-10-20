@@ -1,14 +1,14 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getPost } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
+import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function BlogPost() {
   const { slug } = useParams();
   const { language } = useLanguage();
-  const navigate = useNavigate();
   const post = getPost(slug || '');
   
   // Força scroll ao topo quando a página carrega
@@ -17,20 +17,6 @@ export default function BlogPost() {
   }, [slug]);
   
   if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
-
-  const handleNavigation = (e: React.MouseEvent, path: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (path === '/') {
-      navigate('/');
-    } else if (path.startsWith('/#')) {
-      // Para âncoras na home, usar window.location diretamente
-      window.location.href = path;
-    } else if (path === '/blog') {
-      navigate('/blog');
-    }
-  };
 
   const ld = {
     '@context': 'https://schema.org',
@@ -116,7 +102,7 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Enhanced Animated Background - EXACT COPY FROM HERO */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Main gradient orbs - More vibrant */}
         <motion.div 
           className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
@@ -291,39 +277,8 @@ export default function BlogPost() {
           );
         })}
       </div>
-      {/* Navigation Header - Same as main site */}
-      <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10 pointer-events-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex items-center justify-between h-16">
-            <button 
-              onClick={(e) => handleNavigation(e, '/')}
-              className="text-white font-bold text-xl hover:text-white/80 transition-colors cursor-pointer relative z-10"
-            >
-              Yan Mantovani
-            </button>
-            <div className="flex items-center gap-6">
-              <button 
-                onClick={(e) => handleNavigation(e, '/#works')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
-              </button>
-              <button 
-                onClick={(e) => handleNavigation(e, '/blog')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                Blog
-              </button>
-              <button 
-                onClick={(e) => handleNavigation(e, '/#contact')}
-                className="text-white/70 hover:text-white transition-colors cursor-pointer relative z-10"
-              >
-                {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      
+      <Navigation />
 
       <article className="relative py-16 md:py-24 bg-black">
       <style dangerouslySetInnerHTML={{ __html: `
@@ -341,8 +296,8 @@ export default function BlogPost() {
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
         }
         
         .blog-h2 {
@@ -352,8 +307,8 @@ export default function BlogPost() {
           margin-top: 3rem;
           margin-bottom: 1.25rem;
           line-height: 1.3;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
         }
         
         .blog-h3 {
@@ -363,8 +318,8 @@ export default function BlogPost() {
           margin-top: 2rem;
           margin-bottom: 1rem;
           line-height: 1.4;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
         }
         
         .blog-p {
@@ -517,13 +472,13 @@ export default function BlogPost() {
       `}} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <nav className="mb-8 text-white/50 text-sm">
+        <nav className="mb-8 text-white/50 text-sm break-words">
           <Link to="/blog" className="hover:text-white transition-colors">Blog</Link> 
           <span className="mx-2">/</span> 
-          <span className="text-white/70">{post.title[language]}</span>
+          <span className="text-white/70 break-words">{post.title[language]}</span>
         </nav>
         
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6">
+        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 break-words">
           {post.title[language]}
         </h1>
         
