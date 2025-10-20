@@ -16,7 +16,7 @@ const Navigation = () => {
       setIsScrolled(scrollY > 50);
 
       // Update active section based on scroll position
-      const sections = ['works', 'about', 'services', 'contact'];
+      const sections = ['works', 'about', 'services', 'affiliates', 'contact'];
       let current = 'home';
 
       for (const section of sections) {
@@ -78,7 +78,9 @@ const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 80; // approximate navbar height
+      // calcula altura real do header para evitar "pular" posições
+      const nav = document.querySelector('nav');
+      const headerOffset = nav ? (nav as HTMLElement).offsetHeight || 80 : 80;
       const rect = element.getBoundingClientRect();
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const targetTop = rect.top + scrollTop - headerOffset;

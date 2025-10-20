@@ -100,9 +100,16 @@ export default function Affiliates() {
         >
           <button
             onClick={handleWhatsApp}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold hover:opacity-95 transition-shadow shadow-[0_0_40px_-15px_rgba(255,100,0,0.6)]"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold transition-all shadow-[0_0_40px_-15px_rgba(255,100,0,0.6)] hover:shadow-[0_0_50px_-12px_rgba(255,100,0,0.8)]"
           >
-            Falar no WhatsApp
+            <span className="relative">
+              Falar no WhatsApp
+              {/* foguinho + dinheiro animados no hover */}
+              <span className="pointer-events-none absolute -right-8 -top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="inline-block animate-bounce">🔥</span>
+                <span className="inline-block animate-pulse ml-1">💸</span>
+              </span>
+            </span>
             <ArrowRight className="w-4 h-4" />
           </button>
           <span className="text-white/50 text-sm">Informe quem indicou no primeiro contato</span>
