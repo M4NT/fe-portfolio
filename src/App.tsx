@@ -9,6 +9,7 @@ import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
 import Affiliates from './components/Affiliates';
+import Process from './components/Process';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -61,6 +62,8 @@ function AppContent() {
               <Services />
               <SectionDivider />
               <Affiliates />
+              <SectionDivider />
+              <Process />
               <SectionDivider />
               <PaymentTerms />
               <SectionDivider />
