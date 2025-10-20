@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Globe } from 'lucide-react';
 import { useLanguage, Language } from './LanguageContext';
@@ -6,6 +6,8 @@ import { useLanguage, Language } from './LanguageContext';
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [menuPos, setMenuPos] = useState<{ top: number; right: number } | null>(null);
 
   const languages = [
     { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
@@ -20,9 +22,35 @@ const LanguageSelector = () => {
     setIsOpen(false);
   };
 
+  // Position menu using fixed coordinates to avoid clipping by overflow/parents
+  useEffect(() => {
+    if (isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setMenuPos({ top: rect.bottom + 8, right: window.innerWidth - rect.right });
+    }
+  }, [isOpen]);
+
+  // Close on outside click / ESC
+  useEffect(() => {
+    if (!isOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (buttonRef.current && !buttonRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpen(false); };
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [isOpen]);
+
   return (
     <div className="relative">
       <motion.button
+        ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
         className="glass rounded-full pl-3 pr-2 py-2 flex items-center gap-2 border border-white/10 hover:bg-white/10"
         whileHover={{ scale: 1.03 }}
@@ -44,7 +72,8 @@ const LanguageSelector = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute top-full right-0 mt-2 min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right"
+            className="fixed z-[99999] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right"
+            style={{ top: menuPos?.top ?? 64, right: menuPos?.right ?? 16 }}
             initial={{ opacity: 0, scale: 0.96, y: -4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -4 }}
