@@ -90,7 +90,7 @@ Esta faixa é perfeita para quem está começando no marketing digital. O invest
 - ✅ 1 revisão de design
 - ✅ Suporte por 30 dias
 
-> **Perfeito para:** Consultores, freelancers e prestadores de serviços locais que precisam de uma presença online profissional sem grandes investimentos.
+**Perfeito para:** Consultores, freelancers e prestadores de serviços locais que precisam de uma presença online profissional sem grandes investimentos.
 
 ---
 
@@ -108,7 +108,7 @@ Empresas em crescimento encontram neste tier o equilíbrio ideal entre investime
 - ✅ 2-3 revisões de design
 - ✅ Suporte por 60 dias
 
-> **Perfeito para:** E-commerces, empresas SaaS e agências que buscam resultados consistentes.
+**Perfeito para:** E-commerces, empresas SaaS e agências que buscam resultados consistentes.
 
 ---
 
@@ -127,7 +127,7 @@ Para empresas que querem maximizar suas conversões, este tier oferece:
 - ✅ Suporte por 90 dias
 - ✅ Relatórios detalhados de performance
 
-> **Perfeito para:** Grandes empresas, marketplaces e produtos digitais de alto valor.
+**Perfeito para:** Grandes empresas, marketplaces e produtos digitais de alto valor.
 
 ## 🧮 Como calcular o ROI da sua Landing Page
 
@@ -142,17 +142,48 @@ ROI = (Receita gerada - Investimento) / Investimento × 100
 
 Imagine que você investiu **R$ 3.000** em uma landing page:
 
-| Métrica | Valor |
-|---------|-------|
-| **Leads gerados por mês** | 50 |
-| **Taxa de conversão** | 8% |
-| **Ticket médio** | R$ 500 |
-| **Receita mensal** | R$ 2.000 |
-| **ROI primeiro mês** | **-33%** ❌ |
-| **Receita após 3 meses** | R$ 6.000 |
-| **ROI após 3 meses** | **100%** ✅ |
+<div class="blog-table">
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Leads gerados por mês</strong></td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Taxa de conversão</strong></td>
+<td>8%</td>
+</tr>
+<tr>
+<td><strong>Ticket médio</strong></td>
+<td>R$ 500</td>
+</tr>
+<tr>
+<td><strong>Receita mensal</strong></td>
+<td>R$ 2.000</td>
+</tr>
+<tr>
+<td><strong>ROI primeiro mês</strong></td>
+<td><strong>-33%</strong> ❌</td>
+</tr>
+<tr>
+<td><strong>Receita após 3 meses</strong></td>
+<td>R$ 6.000</td>
+</tr>
+<tr>
+<td><strong>ROI após 3 meses</strong></td>
+<td><strong>100%</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+</div>
 
-> 💡 **Resultado:** O investimento se paga rapidamente, demonstrando que landing pages são investimentos de longo prazo com excelente retorno.
+**Resultado:** O investimento se paga rapidamente, demonstrando que landing pages são investimentos de longo prazo com excelente retorno.
 
 ## ⚡ O que diferencia uma landing page cara de uma barata?
 
@@ -206,17 +237,13 @@ Para garantir o melhor retorno possível:
 4. **Monitore métricas** regularmente
 5. **Otimize continuamente** baseado nos dados
 
-> ⚠️ **Importante:** Uma landing page não é um projeto único, mas sim uma ferramenta que deve evoluir constantemente.
+**Importante:** Uma landing page não é um projeto único, mas sim uma ferramenta que deve evoluir constantemente.
 
----
-
-## 💡 Conclusão
+## Conclusão
 
 O investimento em uma landing page não é um gasto, é um **investimento estratégico**. Com ROI médio de 300%, é uma das ferramentas mais eficazes para gerar leads e vendas.
 
-> **A pergunta certa não é "quanto custa?", mas sim "quanto posso ganhar?"**
-
----
+**A pergunta certa não é "quanto custa?", mas sim "quanto posso ganhar?"**
 
 *Precisa de uma landing page que converte? [Entre em contato](https://yanmantovani.com/contact) e vamos criar algo incrível juntos.*`,
       en: `# How much does a Landing Page cost in 2025? Complete investment and ROI guide
@@ -1076,9 +1103,9 @@ Antes de mergulharmos nas soluções, vamos entender os principais problemas:
 - **Certificações** e prêmios
 
 **Exemplo:**
-> "Aumentamos nossas vendas em 400% em apenas 2 meses. O investimento se pagou em 15 dias." 
-> 
-> *- Maria Silva, CEO da TechCorp*
+**"Aumentamos nossas vendas em 400% em apenas 2 meses. O investimento se pagou em 15 dias."** 
+
+*- Maria Silva, CEO da TechCorp*
 
 ### **5. Design limpo e focado**
 
@@ -1300,9 +1327,9 @@ Before we dive into solutions, let's understand the main problems:
 - **Certifications** and awards
 
 **Example:**
-> "We increased our sales by 400% in just 2 months. The investment paid for itself in 15 days." 
-> 
-> *- Maria Silva, CEO of TechCorp*
+**"We increased our sales by 400% in just 2 months. The investment paid for itself in 15 days."** 
+
+*- Maria Silva, CEO of TechCorp*
 
 ### **5. Clean and focused design**
 

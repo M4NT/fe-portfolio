@@ -42,6 +42,11 @@ export default function BlogPost() {
       return `<ul class="blog-ul">${match}</ul>`;
     });
     
+    // Process HTML tables
+    html = html.replace(/<div class="blog-table">([\s\S]*?)<\/div>/g, (match, tableContent) => {
+      return `<div class="blog-table">${tableContent}</div>`;
+    });
+    
     return { __html: html };
   };
 
@@ -224,6 +229,43 @@ export default function BlogPost() {
           background: rgba(255, 255, 255, 0.02);
           font-style: italic;
           color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .blog-table {
+          margin: 2rem 0;
+          overflow-x: auto;
+        }
+        
+        .blog-table table {
+          width: 100%;
+          border-collapse: collapse;
+          background: rgba(255, 255, 255, 0.02);
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .blog-table th {
+          background: rgba(255, 255, 255, 0.05);
+          color: white;
+          font-weight: 600;
+          padding: 1rem;
+          text-align: left;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .blog-table td {
+          color: rgba(255, 255, 255, 0.8);
+          padding: 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .blog-table tr:last-child td {
+          border-bottom: none;
+        }
+        
+        .blog-table tr:hover {
+          background: rgba(255, 255, 255, 0.02);
         }
         
         @media (max-width: 768px) {
