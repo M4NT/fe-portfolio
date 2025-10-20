@@ -83,103 +83,188 @@ export default function BlogPost() {
       <style dangerouslySetInnerHTML={{ __html: `
         .blog-content {
           font-size: 1.125rem;
-          line-height: 1.875rem;
-          color: rgba(255, 255, 255, 0.85);
+          line-height: 2rem;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 400;
         }
         
         .blog-h1 {
-          font-size: 2.5rem;
+          font-size: 2.75rem;
           font-weight: 700;
           background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          margin-top: 3rem;
-          margin-bottom: 1.5rem;
+          margin-top: 4rem;
+          margin-bottom: 2rem;
           line-height: 1.2;
+          position: relative;
+          padding-left: 1.5rem;
+        }
+        
+        .blog-h1::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 5px;
+          background: linear-gradient(180deg, #06b6d4 0%, #3b82f6 100%);
+          border-radius: 3px;
         }
         
         .blog-h2 {
-          font-size: 2rem;
-          font-weight: 600;
+          font-size: 2.25rem;
+          font-weight: 700;
           background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          margin-top: 3rem;
-          margin-bottom: 1.25rem;
-          padding-bottom: 0.75rem;
-          border-bottom: 2px solid rgba(6, 182, 212, 0.2);
+          margin-top: 4rem;
+          margin-bottom: 1.75rem;
+          padding-bottom: 1rem;
+          border-bottom: 3px solid rgba(6, 182, 212, 0.25);
           line-height: 1.3;
+          position: relative;
+        }
+        
+        .blog-h2::after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
+          border-radius: 3px;
         }
         
         .blog-h3 {
-          font-size: 1.5rem;
+          font-size: 1.625rem;
           font-weight: 600;
           color: #06b6d4;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
+          margin-top: 2.5rem;
+          margin-bottom: 1.25rem;
           line-height: 1.4;
+          padding-left: 1rem;
+          border-left: 3px solid #06b6d4;
         }
         
         .blog-p {
-          margin-bottom: 1.5rem;
-          color: rgba(255, 255, 255, 0.85);
-          line-height: 1.875rem;
+          margin-bottom: 1.75rem;
+          color: rgba(255, 255, 255, 0.9);
+          line-height: 2rem;
+          text-align: justify;
+          hyphens: auto;
         }
         
         .blog-p:empty {
           display: none;
         }
         
-        .blog-bold {
-          font-weight: 600;
+        .blog-p:first-of-type {
+          font-size: 1.25rem;
           color: rgba(255, 255, 255, 0.95);
+          margin-bottom: 2rem;
+        }
+        
+        .blog-bold {
+          font-weight: 700;
+          color: rgba(255, 255, 255, 1);
+          background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+          padding: 0.125rem 0.375rem;
+          border-radius: 4px;
         }
         
         .blog-italic {
           font-style: italic;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.8);
         }
         
         .blog-ul {
-          margin: 1.5rem 0;
+          margin: 2rem 0;
           padding-left: 0;
           list-style: none;
+          background: rgba(6, 182, 212, 0.03);
+          border-left: 3px solid rgba(6, 182, 212, 0.3);
+          padding: 1.5rem 1rem 1.5rem 2rem;
+          border-radius: 0 8px 8px 0;
         }
         
         .blog-li {
-          margin-bottom: 0.75rem;
+          margin-bottom: 1rem;
           padding-left: 2rem;
           position: relative;
-          color: rgba(255, 255, 255, 0.85);
-          line-height: 1.75rem;
+          color: rgba(255, 255, 255, 0.9);
+          line-height: 1.875rem;
         }
         
         .blog-li::before {
-          content: '▸';
+          content: '◆';
           position: absolute;
           left: 0.5rem;
           color: #06b6d4;
           font-weight: bold;
+          font-size: 0.875rem;
+        }
+        
+        .blog-content a {
+          color: #06b6d4;
+          text-decoration: underline;
+          text-decoration-color: rgba(6, 182, 212, 0.3);
+          text-underline-offset: 3px;
+          transition: all 0.3s ease;
+        }
+        
+        .blog-content a:hover {
+          color: #0ea5e9;
+          text-decoration-color: #0ea5e9;
+        }
+        
+        /* Efeito de reading progress */
+        .blog-content::selection {
+          background: rgba(6, 182, 212, 0.3);
+          color: white;
+        }
+        
+        /* Destaque para citações */
+        .blog-content blockquote {
+          border-left: 4px solid #06b6d4;
+          padding: 1.5rem 2rem;
+          margin: 2rem 0;
+          background: rgba(6, 182, 212, 0.05);
+          border-radius: 0 8px 8px 0;
+          font-style: italic;
+          color: rgba(255, 255, 255, 0.95);
         }
         
         @media (max-width: 768px) {
           .blog-content {
-            font-size: 1rem;
-            line-height: 1.75rem;
+            font-size: 1.0625rem;
+            line-height: 1.875rem;
           }
           
           .blog-h1 {
             font-size: 2rem;
+            margin-top: 3rem;
           }
           
           .blog-h2 {
-            font-size: 1.625rem;
+            font-size: 1.75rem;
+            margin-top: 3rem;
           }
           
           .blog-h3 {
-            font-size: 1.25rem;
+            font-size: 1.375rem;
+            margin-top: 2rem;
+          }
+          
+          .blog-p {
+            text-align: left;
+          }
+          
+          .blog-p:first-of-type {
+            font-size: 1.125rem;
           }
         }
       `}} />
@@ -219,19 +304,52 @@ export default function BlogPost() {
         
         <div className="blog-content" dangerouslySetInnerHTML={renderContent(post.content[language])} />
         
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        {/* CTA Section */}
+        <div className="mt-16 mb-12 p-8 md:p-10 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 border border-cyan-500/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+          <div className="relative z-10">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              {language === 'pt' ? 'Pronto para transformar sua ideia em realidade?' : 
+               language === 'en' ? 'Ready to turn your idea into reality?' : 
+               '¿Listo para convertir tu idea en realidad?'}
+            </h3>
+            <p className="text-white/80 text-lg mb-6 max-w-2xl">
+              {language === 'pt' ? 'Vamos criar juntos uma solução digital que realmente converte e impressiona seus clientes.' : 
+               language === 'en' ? "Let's create together a digital solution that truly converts and impresses your clients." : 
+               'Creemos juntos una solución digital que realmente convierte e impresiona a tus clientes.'}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                to="/#contact" 
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:from-cyan-400 hover:to-blue-400 transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105"
+              >
+                {language === 'pt' ? 'Iniciar Projeto' : language === 'en' ? 'Start Project' : 'Iniciar Proyecto'}
+              </Link>
+              <Link 
+                to="/#works" 
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-cyan-500/50"
+              >
+                {language === 'pt' ? 'Ver Portfólio' : language === 'en' ? 'View Portfolio' : 'Ver Portafolio'}
+              </Link>
+            </div>
+          </div>
+        </div>
+        
+        {/* Tags and Navigation */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
-              <span key={tag} className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full text-sm border border-cyan-500/20">
+              <span key={tag} className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm border border-cyan-500/20 hover:bg-cyan-500/20 transition-colors cursor-pointer">
                 #{tag}
               </span>
             ))}
           </div>
           <Link 
             to="/blog" 
-            className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium flex items-center gap-2"
+            className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium flex items-center gap-2 group"
           >
-            ← {language === 'pt' ? 'Voltar para o blog' : language === 'en' ? 'Back to blog' : 'Volver al blog'}
+            <span className="group-hover:-translate-x-1 transition-transform">←</span>
+            {language === 'pt' ? 'Voltar para o blog' : language === 'en' ? 'Back to blog' : 'Volver al blog'}
           </Link>
         </div>
       </div>
