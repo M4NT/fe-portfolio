@@ -9,6 +9,8 @@ export default function BlogIndex() {
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
+    console.log('Navegando para:', path); // Debug
+    
     if (path === '/') {
       window.location.href = '/';
     } else if (path.startsWith('/#')) {

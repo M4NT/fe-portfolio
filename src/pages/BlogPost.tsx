@@ -13,6 +13,8 @@ export default function BlogPost() {
   if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
 
   const handleNavigation = (path: string) => {
+    console.log('Navegando para:', path); // Debug
+    
     if (path === '/') {
       window.location.href = '/';
     } else if (path.startsWith('/#')) {
