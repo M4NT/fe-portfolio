@@ -274,12 +274,12 @@ export default function BlogPost() {
       <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between h-16">
-            <Link 
-              to="/" 
+            <a 
+              href="/" 
               className="text-white font-bold text-xl hover:text-white/80 transition-colors"
             >
               Yan Mantovani
-            </Link>
+            </a>
             <div className="flex items-center gap-6">
               <a 
                 href="/#works" 

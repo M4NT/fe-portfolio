@@ -188,12 +188,12 @@ export default function BlogIndex() {
       <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link 
-              to="/" 
-              className="text-white font-bold text-xl hover:text-blue-400 transition-colors"
+            <a 
+              href="/" 
+              className="text-white font-bold text-xl hover:text-white transition-colors"
             >
               Yan Mantovani
-            </Link>
+            </a>
             <div className="flex items-center gap-6">
               <a 
                 href="/#works" 
