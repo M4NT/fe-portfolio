@@ -23,12 +23,29 @@ const LanguageSelector = () => {
     setIsOpen(false);
   };
 
-  // Position menu using fixed coordinates to avoid clipping by overflow/parents
+  const computeMenuPos = () => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    setMenuPos({ top: rect.bottom + 8, right: window.innerWidth - rect.right });
+  };
+
+  // Open/close with immediate position computation
+  const toggleOpen = () => {
+    if (!isOpen) computeMenuPos();
+    setIsOpen((v) => !v);
+  };
+
+  // Update position on resize/scroll while open
   useEffect(() => {
-    if (isOpen && buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      setMenuPos({ top: rect.bottom + 8, right: window.innerWidth - rect.right });
-    }
+    if (!isOpen) return;
+    const onUpdate = () => computeMenuPos();
+    window.addEventListener('resize', onUpdate, { passive: true });
+    window.addEventListener('scroll', onUpdate, { passive: true });
+    onUpdate();
+    return () => {
+      window.removeEventListener('resize', onUpdate);
+      window.removeEventListener('scroll', onUpdate);
+    };
   }, [isOpen]);
 
   // Close on outside click / ESC
@@ -52,7 +69,7 @@ const LanguageSelector = () => {
     <div className="relative">
       <motion.button
         ref={buttonRef}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         className="glass rounded-full pl-3 pr-2 py-2 flex items-center gap-2 border border-white/10 hover:bg-white/10"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
