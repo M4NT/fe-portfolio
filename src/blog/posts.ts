@@ -539,275 +539,146 @@ Invertir en una landing page no es un gasto, es una **inversión estratégica**.
     content: {
       pt: `# Do rascunho à realidade: as 4 etapas para lançar seu site com sucesso
 
-> **A metodologia que transforma ideias em sites que realmente convertem.**
+**A metodologia que transforma ideias em sites que realmente convertem.**
 
 Você tem uma ideia genial para um site, mas não sabe por onde começar? Ou já tentou desenvolver algo antes e se perdeu no processo? 
 
 Este guia vai te mostrar exatamente como transformar qualquer ideia em um site profissional e funcional, seguindo uma metodologia comprovada.
 
----
-
-## 🎯 Por que seguir um processo estruturado?
+## Por que seguir um processo estruturado?
 
 Antes de mergulharmos nas etapas, é importante entender por que um processo bem definido é crucial para o sucesso do seu projeto.
 
-Um processo estruturado:
-- ✅ **Reduz riscos** de retrabalho e atrasos
-- ✅ **Garante qualidade** em cada etapa do desenvolvimento  
-- ✅ **Facilita comunicação** entre todas as partes envolvidas
-- ✅ **Acelera desenvolvimento** com checkpoints claros
-- ✅ **Maximiza conversões** ao manter o foco no usuário final
+Um processo estruturado reduz riscos de retrabalho e atrasos, garante qualidade em cada etapa do desenvolvimento, facilita comunicação entre todas as partes envolvidas, acelera desenvolvimento com checkpoints claros e maximiza conversões ao manter o foco no usuário final.
 
----
+## Etapa 1: Descoberta e Estratégia
 
-## 📋 Etapa 1: Descoberta e Estratégia
+Esta é a fase mais importante do projeto, onde definimos os alicerces de tudo que virá depois. É aqui que transformamos sua ideia em um plano concreto e executável.
 
-Esta é a **fase mais importante** do projeto, onde definimos os alicerces de tudo que virá depois. É aqui que transformamos sua ideia em um plano concreto e executável.
+### Briefing Detalhado
 
-### 🔍 **Briefing Detalhado**
+O primeiro passo é realizar um briefing detalhado para entender completamente seus objetivos. Precisamos saber o que você quer alcançar com o site, quem é seu público-alvo, quais funcionalidades são essenciais, quando o projeto precisa estar no ar e qual o investimento disponível.
 
-O primeiro passo é realizar um briefing detalhado para entender completamente seus objetivos. Precisamos saber:
+Quanto mais informações coletarmos nesta fase, mais preciso será o resultado final.
 
-- O que você quer alcançar com o site?
-- Quem é seu público-alvo?
-- Quais funcionalidades são essenciais?
-- Quando o projeto precisa estar no ar?
-- Qual o investimento disponível?
+### Pesquisa de Mercado
 
-> 💡 **Dica:** Quanto mais informações coletarmos nesta fase, mais preciso será o resultado final.
-
-### 📊 **Pesquisa de Mercado**
-
-Em seguida, realizamos uma análise completa do mercado:
-
-- Investigamos o que a concorrência está fazendo
-- Identificamos tendências do setor que estão funcionando
-- Buscamos gaps de oportunidade onde podemos inovar
+Em seguida, realizamos uma análise completa do mercado. Investigamos o que a concorrência está fazendo, identificamos tendências do setor que estão funcionando e buscamos gaps de oportunidade onde podemos inovar.
 
 Esta pesquisa nos permite posicionar seu site de forma única e competitiva.
 
-### 👥 **Definição de Personas**
+### Definição de Personas
 
-Criamos personas detalhadas do seu público-alvo, incluindo:
-
-- **Perfil demográfico:** idade, gênero, localização
-- **Comportamento online:** como navegam na internet
-- **Dores e necessidades:** quais problemas querem resolver
-- **Jornada do usuário:** como chegam até você
+Criamos personas detalhadas do seu público-alvo, incluindo perfil demográfico (idade, gênero, localização), comportamento online (como navegam na internet), dores e necessidades (quais problemas querem resolver) e jornada do usuário (como chegam até você).
 
 Essas personas guiarão todas as decisões de design e conteúdo.
 
-### 📝 **Estratégia de Conteúdo**
+### Estratégia de Conteúdo
 
-Por fim, definimos a estratégia de conteúdo, determinando:
+Por fim, definimos a estratégia de conteúdo, determinando o tom de voz adequado para falar com seu público, a estrutura de informações (o que é mais importante) e onde posicionar os call-to-actions para maximizar conversões.
 
-- O tom de voz adequado para falar com seu público
-- A estrutura de informações (o que é mais importante)
-- Onde posicionar os call-to-actions para maximizar conversões
+**Entregáveis da Etapa 1:**
+Documento de briefing completo, personas detalhadas, estratégia de conteúdo e cronograma preliminar.
 
----
+**Duração:** 3-5 dias úteis
 
-### 📦 **Entregáveis da Etapa 1:**
-- Documento de briefing completo
-- Personas detalhadas
-- Estratégia de conteúdo
-- Cronograma preliminar
+## Etapa 2: Proposta e Planejamento
 
-**⏰ Duração:** 3-5 dias úteis
+Nesta etapa, transformamos toda a descoberta da fase anterior em um plano concreto e detalhado que servirá como guia para todo o desenvolvimento.
 
----
+### Arquitetura de Informação
 
-## 🎨 Etapa 2: Proposta e Planejamento
-
-Nesta etapa, transformamos toda a descoberta da fase anterior em um **plano concreto e detalhado** que servirá como guia para todo o desenvolvimento.
-
-### 🗺️ **Arquitetura de Informação**
-
-Criamos o mapa completo do site, definindo:
-
-- A estrutura de páginas e seções
-- A hierarquia de conteúdo (o que vem primeiro)
-- Como o usuário vai navegar pelo site
+Criamos o mapa completo do site, definindo a estrutura de páginas e seções, a hierarquia de conteúdo (o que vem primeiro) e como o usuário vai navegar pelo site.
 
 Esta arquitetura garante que a informação flua de forma lógica e intuitiva, facilitando a experiência do usuário.
 
-### 📐 **Wireframes Detalhados**
+### Wireframes Detalhados
 
-Desenvolvemos wireframes detalhados mostrando:
+Desenvolvemos wireframes detalhados mostrando o layout de cada página, onde cada elemento ficará posicionado, como será o fluxo de conversão até a ação desejada e como tudo ficará em dispositivos móveis e tablets.
 
-- O layout de cada página
-- Onde cada elemento ficará posicionado
-- Como será o fluxo de conversão até a ação desejada
-- Como tudo ficará em dispositivos móveis e tablets
+Planejamos responsividade desde o início para garantir uma experiência perfeita em todos os dispositivos.
 
-> 📱 **Importante:** Planejamos responsividade desde o início para garantir uma experiência perfeita em todos os dispositivos.
+### Proposta Visual
 
-### 🎨 **Proposta Visual**
+Definimos a identidade visual completa, incluindo paleta de cores que transmita a personalidade da sua marca, tipografia que inspire confiança e elementos gráficos como ícones, ilustrações e fotos.
 
-Definimos a identidade visual completa, incluindo:
+### Cronograma Detalhado
 
-- **Paleta de cores** que transmita a personalidade da sua marca
-- **Tipografia** que inspire confiança
-- **Elementos gráficos** como ícones, ilustrações e fotos
-
-### 📅 **Cronograma Detalhado**
-
-Estabelecemos:
-
-- Marcos importantes do projeto
-- Responsabilidades (quem faz o quê e quando)
-- Dependências (o que precisa ser feito antes)
+Estabelecemos marcos importantes do projeto, definimos responsabilidades (quem faz o quê e quando) e identificamos dependências (o que precisa ser feito antes).
 
 Este cronograma garante que todos os envolvidos saibam exatamente o que esperar e quando.
 
----
+**Entregáveis da Etapa 2:**
+Arquitetura de informação, wireframes aprovados, proposta visual, cronograma final e orçamento detalhado.
 
-### 📦 **Entregáveis da Etapa 2:**
-- Arquitetura de informação
-- Wireframes aprovados
-- Proposta visual
-- Cronograma final
-- Orçamento detalhado
+**Duração:** 5-7 dias úteis
 
-**⏰ Duração:** 5-7 dias úteis
+## Etapa 3: Execução e Desenvolvimento
 
----
+É hora de colocar a mão na massa e transformar todo o planejamento em código funcional. Esta é a fase onde a magia acontece e sua ideia ganha vida.
 
-## ⚡ Etapa 3: Execução e Desenvolvimento
+### Design Final
 
-É hora de colocar a mão na massa e transformar todo o planejamento em código funcional. Esta é a fase onde a **magia acontece** e sua ideia ganha vida.
+Criamos mockups de alta fidelidade que mostram exatamente como o site ficará, com especificações técnicas detalhadas (cores, espaçamentos, tamanhos), assets preparados com imagens otimizadas e ícones vetoriais para garantir qualidade e performance.
 
-### 🎨 **Design Final**
+### Desenvolvimento Frontend
 
-Criamos mockups de alta fidelidade que mostram exatamente como o site ficará:
+Desenvolvemos o código usando HTML semântico para estrutura acessível e SEO-friendly, CSS moderno para design responsivo e performático, e JavaScript interativo para animações e funcionalidades.
 
-- Especificações técnicas detalhadas (cores, espaçamentos, tamanhos)
-- Assets preparados com imagens otimizadas
-- Ícones vetoriais para garantir qualidade e performance
+### Integrações
 
-### 💻 **Desenvolvimento Frontend**
+Conectamos e configuramos formulários ao seu CRM e sistema de email, Google Analytics e Facebook Pixel para tracking, gateways de pagamento quando necessário e soluções de chat como WhatsApp e chatbots.
 
-Desenvolvemos o código usando:
+### Otimizações
 
-- **HTML semântico** para estrutura acessível e SEO-friendly
-- **CSS moderno** para design responsivo e performático
-- **JavaScript interativo** para animações e funcionalidades
+Aplicamos otimizações de performance para carregamento rápido, SEO com meta tags, estrutura semântica e sitemap, acessibilidade com navegação por teclado e compatibilidade com diferentes navegadores.
 
-### 🔗 **Integrações**
+**Checkpoints de Qualidade:**
+Semana 1: Design aprovado
+Semana 2: Desenvolvimento 50% concluído
+Semana 3: Integrações funcionando
+Semana 4: Testes finais e ajustes
 
-Conectamos e configuramos:
+**Duração:** 15-20 dias úteis
 
-- Formulários ao seu CRM e sistema de email
-- Google Analytics e Facebook Pixel para tracking
-- Gateways de pagamento (quando necessário)
-- Soluções de chat (WhatsApp, chatbots)
+## Etapa 4: Go-live e Suporte
 
-### ⚡ **Otimizações**
+O momento mais emocionante: colocar o site no ar e garantir que tudo funcione perfeitamente. Esta etapa é crucial para o sucesso do projeto.
 
-Aplicamos otimizações de:
+### Preparação para Lançamento
 
-- **Performance** para carregamento rápido
-- **SEO** com meta tags, estrutura semântica e sitemap
-- **Acessibilidade** com navegação por teclado
-- **Compatibilidade** com diferentes navegadores
+Configuramos hospedagem com servidor otimizado para performance, DNS do domínio corretamente, certificado SSL para segurança e sistema de backup automático.
 
----
+### Testes Finais
 
-### 📊 **Checkpoints de Qualidade:**
-- **Semana 1:** Design aprovado
-- **Semana 2:** Desenvolvimento 50% concluído
-- **Semana 3:** Integrações funcionando
-- **Semana 4:** Testes finais e ajustes
+Realizamos testes completos de todas as funcionalidades, responsividade em mobile, tablet e desktop, velocidade de carregamento e elementos de SEO incluindo meta tags, sitemap e robots.txt.
 
-**⏰ Duração:** 15-20 dias úteis
+### Lançamento
 
----
+Fazemos o deploy do site colocando-o no ar, iniciamos o monitoramento contínuo de métricas e aplicamos correções imediatas se necessário. Este momento é acompanhado de perto para garantir que tudo funcione perfeitamente.
 
-## 🚀 Etapa 4: Go-live e Suporte
+### Suporte Pós-Lançamento
 
-O momento mais emocionante: colocar o site no ar e garantir que tudo funcione perfeitamente. Esta etapa é **crucial para o sucesso** do projeto.
+Oferecemos 30 dias de suporte completo incluindo correções e ajustes, treinamento para usar o painel administrativo, relatórios detalhados de métricas de performance e otimizações baseadas em dados reais de uso.
 
-### 🔧 **Preparação para Lançamento**
+**Entregáveis da Etapa 4:**
+Site funcionando 100%, documentação técnica, treinamento realizado e relatórios de performance.
 
-Configuramos:
+**Duração:** 2-3 dias úteis + 30 dias de suporte
 
-- Hospedagem com servidor otimizado para performance
-- DNS do domínio corretamente
-- Certificado SSL para segurança
-- Sistema de backup automático
+## Métricas de Sucesso
 
-### 🧪 **Testes Finais**
+Durante o desenvolvimento, acompanhamos entregas no prazo, aprovação em cada checkpoint e comunicação constante. Após o lançamento, medimos performance (carregamento menor que 3 segundos), conversões (taxa maior que 2%), usabilidade (navegação intuitiva) e SEO (posicionamento orgânico).
 
-Realizamos testes completos de:
+## Dicas para Maximizar o Sucesso
 
-- Todas as funcionalidades
-- Responsividade (mobile, tablet, desktop)
-- Velocidade de carregamento
-- Elementos de SEO (meta tags, sitemap, robots.txt)
+Seja específico nos requisitos - quanto mais detalhado o briefing, melhor o resultado final. Participe ativamente do processo, pois seu feedback é essencial para o sucesso. Teste em diferentes dispositivos para garantir que funcione bem em todos os aparelhos. Monitore as métricas regularmente e use os dados para otimizar continuamente. Mantenha o conteúdo atualizado, pois sites desatualizados perdem credibilidade.
 
-### 🚀 **Lançamento**
-
-Fazemos:
-
-- Deploy do site colocando-o no ar
-- Monitoramento contínuo de métricas
-- Correções imediatas se necessário
-
-> 🎉 **Momento especial:** Este momento é acompanhado de perto para garantir que tudo funcione perfeitamente.
-
-### 🛠️ **Suporte Pós-Lançamento**
-
-Oferecemos 30 dias de suporte completo:
-
-- Correções e ajustes
-- Treinamento para usar o painel administrativo
-- Relatórios detalhados de métricas de performance
-- Otimizações baseadas em dados reais de uso
-
----
-
-### 📦 **Entregáveis da Etapa 4:**
-- Site funcionando 100%
-- Documentação técnica
-- Treinamento realizado
-- Relatórios de performance
-
-**⏰ Duração:** 2-3 dias úteis + 30 dias de suporte
-
----
-
-## 📊 Métricas de Sucesso
-
-### **Durante o desenvolvimento:**
-- ✅ Entregas no prazo
-- ✅ Aprovação em cada checkpoint
-- ✅ Comunicação constante
-
-### **Após o lançamento:**
-- ⚡ Performance: carregamento < 3 segundos
-- 📈 Conversões: taxa > 2%
-- 🎯 Usabilidade: navegação intuitiva
-- 🔍 SEO: posicionamento orgânico
-
----
-
-## 🎯 Dicas para Maximizar o Sucesso
-
-1. **Seja específico nos requisitos** - quanto mais detalhado o briefing, melhor o resultado final
-2. **Participe ativamente do processo** - seu feedback é essencial para o sucesso
-3. **Teste em diferentes dispositivos** - garanta que funcione bem em todos os aparelhos
-4. **Monitore as métricas regularmente** - use os dados para otimizar continuamente
-5. **Mantenha o conteúdo atualizado** - sites desatualizados perdem credibilidade
-
----
-
-## 💡 Conclusão
+## Conclusão
 
 Transformar uma ideia em um site profissional não precisa ser complicado. Com um processo estruturado e transparente, você pode ter certeza de que o resultado final será exatamente o que você imaginou.
 
-> **O segredo está na preparação. Quanto melhor planejarmos, mais rápido e eficiente será o desenvolvimento.**
-
----
+O segredo está na preparação. Quanto melhor planejarmos, mais rápido e eficiente será o desenvolvimento.
 
 *Pronto para transformar sua ideia em realidade? [Vamos conversar](https://yanmantovani.com/contact) sobre seu projeto!*`,
       en: `# From sketch to launch: the 4 steps to successfully ship your site
