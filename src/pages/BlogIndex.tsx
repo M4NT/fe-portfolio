@@ -121,24 +121,24 @@ export default function BlogIndex() {
               Yan Mantovani
             </Link>
             <div className="flex items-center gap-6">
-              <Link 
-                to="/#works" 
-                className="text-white/70 hover:text-blue-400 transition-colors"
+              <a 
+                href="/#works" 
+                className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
-              </Link>
+              </a>
               <Link 
                 to="/blog" 
-                className="text-white/70 hover:text-blue-400 transition-colors"
+                className="text-white/70 hover:text-white transition-colors"
               >
                 Blog
               </Link>
-              <Link 
-                to="/#contact" 
-                className="text-white/70 hover:text-blue-400 transition-colors"
+              <a 
+                href="/#contact" 
+                className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
-              </Link>
+              </a>
             </div>
           </div>
         </div>

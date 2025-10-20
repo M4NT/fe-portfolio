@@ -207,24 +207,24 @@ export default function BlogPost() {
               Yan Mantovani
             </Link>
             <div className="flex items-center gap-6">
-              <Link 
-                to="/#works" 
+              <a 
+                href="/#works" 
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Portfólio' : language === 'en' ? 'Portfolio' : 'Portafolio'}
-              </Link>
+              </a>
               <Link 
                 to="/blog" 
                 className="text-white/70 hover:text-white transition-colors"
               >
                 Blog
               </Link>
-              <Link 
-                to="/#contact" 
+              <a 
+                href="/#contact" 
                 className="text-white/70 hover:text-white transition-colors"
               >
                 {language === 'pt' ? 'Contato' : language === 'en' ? 'Contact' : 'Contacto'}
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -242,37 +242,34 @@ export default function BlogPost() {
         .blog-h1 {
           font-size: 2.5rem;
           font-weight: 600;
-          background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           line-height: 1.2;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         .blog-h2 {
           font-size: 2rem;
           font-weight: 600;
-          background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
           margin-top: 3rem;
           margin-bottom: 1.25rem;
           line-height: 1.3;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         .blog-h3 {
           font-size: 1.5rem;
           font-weight: 600;
-          background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
           margin-top: 2rem;
           margin-bottom: 1rem;
           line-height: 1.4;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         .blog-p {
@@ -293,10 +290,7 @@ export default function BlogPost() {
         
         .blog-bold {
           font-weight: 600;
-          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
         }
         
         .blog-italic {
@@ -305,18 +299,12 @@ export default function BlogPost() {
         }
         
         .blog-highlight {
-          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: #60a5fa;
           font-weight: 600;
         }
         
         .blog-important {
-          background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: #f59e0b;
           font-weight: 600;
         }
         
