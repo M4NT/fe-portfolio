@@ -147,7 +147,7 @@ const Navigation = () => {
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                      className={`group relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
                         isActive
                           ? 'text-white'
                           : 'text-white/70 hover:text-white'
@@ -157,7 +157,15 @@ const Navigation = () => {
                       transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
                       whileHover={{ y: -1 }}
                     >
-                      {item.label}
+                      <span className="relative">
+                        {item.label}
+                        {item.id === 'affiliates' && (
+                          <span className="pointer-events-none absolute -right-4 -top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="inline-block animate-bounce">🔥</span>
+                            <span className="inline-block animate-pulse ml-1">💸</span>
+                          </span>
+                        )}
+                      </span>
                       {isActive && (
                         <motion.div
                           className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"
