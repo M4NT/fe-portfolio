@@ -21,7 +21,7 @@ export const posts: BlogPost[] = [
       en: 'Discover the factors that define landing page investment, real price ranges and how to calculate returns. Updated data for 2025.',
       es: 'Descubre los factores que definen la inversión en landing pages, rangos de precio reales y cómo calcular el retorno. Datos actualizados para 2025.',
     },
-    date: '2024-10-20T10:00:00.000Z',
+    date: '2025-01-20T10:00:00.000Z',
     tags: ['landing-page', 'preco', 'roi', 'conversao', 'marketing-digital'],
     cover: '/images/blog/quanto-custa-landing-page-2025.jpg',
     content: {
@@ -558,7 +558,7 @@ Invertir en una landing page no es un gasto, es una **inversión estratégica**.
       en: 'Proven methodology to transform ideas into converting sites. Transparent process with no surprises.',
       es: 'Metodología probada para transformar ideas en sitios que convierten. Proceso transparente sin sorpresas.',
     },
-    date: '2024-10-19T14:30:00.000Z',
+    date: '2025-01-19T14:30:00.000Z',
     tags: ['processo', 'metodologia', 'desenvolvimento', 'design', 'conversao'],
     cover: '/images/blog/etapas-para-lancar-seu-site.jpg',
     content: {
@@ -1041,7 +1041,7 @@ Transformar una idea en un sitio profesional no tiene que ser complicado. Con un
       en: 'Advanced optimization techniques that can double your conversions. Real data and practical examples.',
       es: 'Técnicas avanzadas de optimización que pueden duplicar tus conversiones. Datos reales y ejemplos prácticos.',
     },
-    date: '2024-10-18T09:15:00.000Z',
+    date: '2025-01-18T09:15:00.000Z',
     tags: ['conversao', 'otimizacao', 'landing-page', 'marketing', 'ux'],
     cover: '/images/blog/como-aumentar-conversoes-landing-page.jpg',
     content: {
@@ -1731,7 +1731,7 @@ Aumentar conversiones en landing pages no es suerte - es ciencia. Con las estrat
       en: 'Complete stack for developers: frameworks, libraries, design tools and productivity that every dev needs to know.',
       es: 'Stack completo para desarrolladores: frameworks, librerías, herramientas de diseño y productividad que todo dev necesita conocer.',
     },
-    date: '2024-10-17T16:45:00.000Z',
+    date: '2025-01-17T16:45:00.000Z',
     tags: ['ferramentas', 'desenvolvimento', 'produtividade', 'tecnologia'],
     cover: '/images/blog/melhores-ferramentas-desenvolvimento-web-2025.jpg',
     content: {
