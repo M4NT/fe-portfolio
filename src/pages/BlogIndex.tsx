@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { posts } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
 import Footer from '../components/Footer';
@@ -6,7 +7,109 @@ import Footer from '../components/Footer';
 export default function BlogIndex() {
   const { language } = useLanguage();
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Enhanced Animated Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Main gradient orbs - More vibrant */}
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 20, 0],
+            y: [0, -10, 0]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4],
+            x: [0, -15, 0],
+            y: [0, 15, 0]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        
+        {/* Additional accent orbs */}
+        <motion.div 
+          className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-gradient-to-r from-green-500/20 to-teal-500/20 blur-2xl"
+          animate={{ 
+            scale: [1, 1.4, 1],
+            opacity: [0.3, 0.6, 0.3],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Additional colorful orbs */}
+        <motion.div 
+          className="absolute top-1/6 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.5, 0.2],
+            x: [0, 30, 0],
+            y: [0, 20, 0]
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.div 
+          className="absolute bottom-1/6 left-1/3 w-72 h-72 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl"
+          animate={{ 
+            scale: [1.1, 1, 1.1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, -25, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(6)].map((_, i) => {
+          const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          
+          const positions = [
+            { left: '10%', top: '20%' },
+            { left: '85%', top: '70%' },
+            { left: '20%', top: '60%' },
+            { left: '75%', top: '30%' },
+            { left: '50%', top: '15%' },
+            { left: '30%', top: '80%' }
+          ];
+          
+          const position = positions[i % positions.length];
+          const duration = 12 + Math.random() * 6;
+          const shouldBlur = i % 2 === 0;
+          const blurClass = shouldBlur ? 'blur-sm' : '';
+          const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
+          
+          return (
+            <motion.div
+              key={i}
+              className={`absolute ${sizeClass} ${randomColor} rounded-full ${blurClass}`}
+              style={{
+                left: position.left,
+                top: position.top,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
+                scale: [0, 1, 1, 1, 1, 0],
+                y: [0, -10, -20, -30, -40, -50],
+                x: [0, Math.random() * 20 - 10, Math.random() * 30 - 15, Math.random() * 40 - 20, Math.random() * 50 - 25, Math.random() * 60 - 30]
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                delay: Math.random() * 8,
+                ease: "easeInOut"
+              }}
+            />
+          );
+        })}
+      </div>
       {/* Navigation Header */}
       <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

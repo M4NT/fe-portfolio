@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { getPost } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
 import Footer from '../components/Footer';
@@ -27,7 +28,7 @@ export default function BlogPost() {
       .replace(/^###\s+(.*)$/gm, '<h3 class="blog-h3">$1</h3>')
       .replace(/^##\s+(.*)$/gm, '<h2 class="blog-h2">$1</h2>')
       .replace(/^#\s+(.*)$/gm, '<h1 class="blog-h1">$1</h1>')
-      .replace(/\*\*\*(.+?)\*\*\*/g, '<strong class="text-cyan-400">$1</strong>')
+      .replace(/\*\*\*(.+?)\*\*\*/g, '<strong class="blog-important">$1</strong>')
       .replace(/\*\*(.+?)\*\*/g, '<strong class="blog-bold">$1</strong>')
       .replace(/\*(.+?)\*/g, '<em class="blog-italic">$1</em>')
       .replace(/^\-\s+(.*)$/gm, '<li class="blog-li">$1</li>')
@@ -46,6 +47,13 @@ export default function BlogPost() {
     html = html.replace(/<div class="blog-table">([\s\S]*?)<\/div>/g, (match, tableContent) => {
       return `<div class="blog-table">${tableContent}</div>`;
     });
+    
+    // Add highlight classes to important phrases
+    html = html.replace(/(ROI médio de 300%)/g, '<span class="blog-highlight">$1</span>');
+    html = html.replace(/(investimento estratégico)/g, '<span class="blog-highlight">$1</span>');
+    html = html.replace(/(conversões até 3 vezes maiores)/g, '<span class="blog-highlight">$1</span>');
+    html = html.replace(/(reduz em 40%)/g, '<span class="blog-highlight">$1</span>');
+    html = html.replace(/(aumenta em 25%)/g, '<span class="blog-highlight">$1</span>');
     
     return { __html: html };
   };
@@ -85,7 +93,109 @@ export default function BlogPost() {
   }, [language, post]);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Enhanced Animated Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Main gradient orbs - More vibrant */}
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 20, 0],
+            y: [0, -10, 0]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4],
+            x: [0, -15, 0],
+            y: [0, 15, 0]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        
+        {/* Additional accent orbs */}
+        <motion.div 
+          className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-gradient-to-r from-green-500/20 to-teal-500/20 blur-2xl"
+          animate={{ 
+            scale: [1, 1.4, 1],
+            opacity: [0.3, 0.6, 0.3],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Additional colorful orbs */}
+        <motion.div 
+          className="absolute top-1/6 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.5, 0.2],
+            x: [0, 30, 0],
+            y: [0, 20, 0]
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.div 
+          className="absolute bottom-1/6 left-1/3 w-72 h-72 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl"
+          animate={{ 
+            scale: [1.1, 1, 1.1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, -25, 0],
+            y: [0, -20, 0]
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(6)].map((_, i) => {
+          const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          
+          const positions = [
+            { left: '10%', top: '20%' },
+            { left: '85%', top: '70%' },
+            { left: '20%', top: '60%' },
+            { left: '75%', top: '30%' },
+            { left: '50%', top: '15%' },
+            { left: '30%', top: '80%' }
+          ];
+          
+          const position = positions[i % positions.length];
+          const duration = 12 + Math.random() * 6;
+          const shouldBlur = i % 2 === 0;
+          const blurClass = shouldBlur ? 'blur-sm' : '';
+          const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
+          
+          return (
+            <motion.div
+              key={i}
+              className={`absolute ${sizeClass} ${randomColor} rounded-full ${blurClass}`}
+              style={{
+                left: position.left,
+                top: position.top,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
+                scale: [0, 1, 1, 1, 1, 0],
+                y: [0, -10, -20, -30, -40, -50],
+                x: [0, Math.random() * 20 - 10, Math.random() * 30 - 15, Math.random() * 40 - 20, Math.random() * 50 - 25, Math.random() * 60 - 30]
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                delay: Math.random() * 8,
+                ease: "easeInOut"
+              }}
+            />
+          );
+        })}
+      </div>
       {/* Navigation Header - Same as main site */}
       <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -132,7 +242,10 @@ export default function BlogPost() {
         .blog-h1 {
           font-size: 2.5rem;
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           line-height: 1.2;
@@ -141,7 +254,10 @@ export default function BlogPost() {
         .blog-h2 {
           font-size: 2rem;
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin-top: 3rem;
           margin-bottom: 1.25rem;
           line-height: 1.3;
@@ -150,7 +266,10 @@ export default function BlogPost() {
         .blog-h3 {
           font-size: 1.5rem;
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin-top: 2rem;
           margin-bottom: 1rem;
           line-height: 1.4;
@@ -174,12 +293,31 @@ export default function BlogPost() {
         
         .blog-bold {
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         
         .blog-italic {
           font-style: italic;
           color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .blog-highlight {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 600;
+        }
+        
+        .blog-important {
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 600;
         }
         
         .blog-ul {
@@ -246,12 +384,12 @@ export default function BlogPost() {
         }
         
         .blog-table th {
-          background: rgba(255, 255, 255, 0.05);
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
           color: white;
           font-weight: 600;
           padding: 1rem;
           text-align: left;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(59, 130, 246, 0.3);
         }
         
         .blog-table td {
