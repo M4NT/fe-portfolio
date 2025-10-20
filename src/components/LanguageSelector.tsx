@@ -72,7 +72,7 @@ const LanguageSelector = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed z-[99999] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right"
+            className="fixed z-[99999] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right bg-black/90 text-white shadow-xl"
             style={{ top: menuPos?.top ?? 64, right: menuPos?.right ?? 16 }}
             initial={{ opacity: 0, scale: 0.96, y: -4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
