@@ -10,6 +10,9 @@ import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
 import Affiliates from './components/Affiliates';
 import Process from './components/Process';
+import LatestPosts from './components/LatestPosts';
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -67,6 +70,7 @@ function AppContent() {
               <SectionDivider />
               <PaymentTerms />
               <SectionDivider />
+              <LatestPosts />
               <Contact />
               <SectionDivider />
               <FAQ />
@@ -97,6 +101,9 @@ function AppContent() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          {/* Blog */}
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
         
         {!isLoading && <BackToTop />}
