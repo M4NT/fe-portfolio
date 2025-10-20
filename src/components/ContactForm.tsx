@@ -20,8 +20,7 @@ const contactSchema = z.object({
   message: z.string()
     .min(20, 'Mensagem deve ter pelo menos 20 caracteres')
     .max(2000, 'Mensagem muito longa'),
-  referrer: z.string().optional(), // Quem indicou (se houver)
-  referral_name: z.string().optional() // Quem você indica
+  referrer: z.string().optional() // Quem indicou (se houver)
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -34,6 +33,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const urlParamsRef = React.useRef<string | undefined>(undefined);
+  const [referrerState, setReferrerState] = useState<string>('');
 
   const {
     register,
@@ -50,6 +50,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     const ref = params.get('ref') || undefined;
     if (ref) {
       urlParamsRef.current = ref;
+      setReferrerState(ref);
+      try { localStorage.setItem('referrer', ref); } catch {}
+    }
+    // carrega do localStorage se não houver query
+    if (!ref && typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('referrer') || '';
+        if (saved) setReferrerState(saved);
+      } catch {}
     }
   }, []);
 
@@ -64,12 +73,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     try {
       // Se houver referral, registra a intenção
       const referrerFromField = (data as any).referrer as string | undefined;
-      const referralName = (data as any).referral_name as string | undefined;
       const refParam = urlParamsRef.current;
-      if (referrerFromField || refParam || referralName) {
+      if (referrerFromField || refParam) {
         trackReferralIntent({
           referrer: referrerFromField || refParam,
-          referral_name: referralName,
           channel: 'form'
         });
       }
@@ -94,7 +101,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           subject: data.subject,
           message: data.message,
           referrer: data.referrer || urlParamsRef.current,
-          referral_name: data.referral_name,
           _replyto: data.email, // Formspree usa isso para reply-to
           _subject: `Novo contato: ${data.subject}` // Assunto do email
         })
@@ -292,33 +298,23 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         </AnimatePresence>
       </div>
 
-      {/* Quem indicou / Quem você indica */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label htmlFor="referrer" className="block text-white/80 text-sm font-medium">
-            Quem indicou? (opcional)
-          </label>
-          <input
-            {...register('referrer')}
-            id="referrer"
-            type="text"
-            placeholder="Nome de quem indicou"
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label htmlFor="referral_name" className="block text-white/80 text-sm font-medium">
-            Quem você indica? (opcional)
-          </label>
-          <input
-            {...register('referral_name')}
-            id="referral_name"
-            type="text"
-            placeholder="Nome e WhatsApp da pessoa"
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
-          />
-        </div>
+      {/* Quem indicou */}
+      <div className="space-y-2">
+        <label htmlFor="referrer" className="block text-white/80 text-sm font-medium">
+          Quem indicou? (opcional)
+        </label>
+        <input
+          {...register('referrer')}
+          id="referrer"
+          type="text"
+          placeholder="Nome de quem indicou"
+          defaultValue={referrerState}
+          onChange={(e) => {
+            setReferrerState(e.target.value);
+            try { localStorage.setItem('referrer', e.target.value); } catch {}
+          }}
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
+        />
       </div>
 
       {/* Submit Button */}

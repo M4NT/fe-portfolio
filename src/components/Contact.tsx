@@ -203,10 +203,18 @@ const Contact = () => {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => {
                           if (option.title === 'WhatsApp Direto') {
-                            trackGAEvent('whatsapp_click', {
-                              location: 'contact_section',
-                              label: 'whatsapp_cta'
-                            });
+                            // Monta mensagem com "Quem indicou?" se houver no localStorage ou query
+                            let ref = '';
+                            try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                            if (!ref && typeof window !== 'undefined') {
+                              const p = new URLSearchParams(window.location.search); ref = p.get('ref') || '';
+                            }
+                            const base = 'https://wa.me/5516992233365';
+                            const msg = `Olá, fui indicado por ${ref || '___'} e gostaria de fechar um projeto de Landing Page/Site Institucional.\nPodemos avançar com uma proposta hoje?`;
+                            const url = `${base}?text=${encodeURIComponent(msg)}`;
+                            trackGAEvent('whatsapp_click', { location: 'contact_section', label: 'whatsapp_cta', ref });
+                            window.open(url, '_blank');
+                            return;
                           }
                         }}
                       >
