@@ -42,11 +42,11 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { id: 'works', label: 'Projetos', href: '#works' },
-    { id: 'about', label: 'Sobre', href: '#about' },
-    { id: 'services', label: 'Serviços', href: '#services' },
-    { id: 'affiliates', label: 'Indique e ganhe', href: '#affiliates' },
-    { id: 'contact', label: 'Contato', href: '#contact' }
+    { id: 'works', label: t('nav.selectedWorks'), href: '#works' },
+    { id: 'about', label: t('nav.about'), href: '#about' },
+    { id: 'services', label: t('nav.services'), href: '#services' },
+    { id: 'affiliates', label: t('nav.affiliates'), href: '#affiliates' },
+    { id: 'contact', label: t('nav.contact'), href: '#contact' }
   ];
 
   const socialLinks = [

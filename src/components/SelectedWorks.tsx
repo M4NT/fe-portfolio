@@ -242,13 +242,13 @@ const SelectedWorks = () => {
           viewport={{ once: true }}
         >
           <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
-            {t('works.subtitle')} — Technical Showcase
+            {t('works.subtitle')}
           </div>
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
-            SKILL DEMONSTRATION
+            {t('works.title')}
           </h2>
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            Experience frontend mastery through interactive projects. Each piece demonstrates specific technical skills and modern development practices.
+            {t('works.description') || (t('works.title') && '')}
           </p>
         </motion.div>
 

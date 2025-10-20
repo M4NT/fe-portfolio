@@ -35,6 +35,11 @@ const translations: Translations = {
     pt: 'Serviços',
     es: 'Services'
   },
+  'nav.affiliates': {
+    en: 'Refer & Save',
+    pt: 'Indique e ganhe',
+    es: 'Indica y gana'
+  },
   'nav.about': {
     en: 'About',
     pt: 'Sobre',
@@ -130,6 +135,11 @@ const translations: Translations = {
     en: 'Portfolio — Selected Works',
     pt: 'Portfólio — Trabalhos Selecionados',
     es: 'Portafolio — Trabajos Seleccionados'
+  },
+  'works.description': {
+    en: 'Experience frontend mastery through projects that highlight modern practices and measurable results.',
+    pt: 'Experimente domínio de frontend por meio de projetos que destacam práticas modernas e resultados mensuráveis.',
+    es: 'Experimenta dominio de frontend a través de proyectos que destacan prácticas modernas y resultados medibles.'
   },
   'works.liveProject': {
     en: 'Live Project',
