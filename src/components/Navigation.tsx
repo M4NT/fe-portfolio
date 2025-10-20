@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ExternalLink, Github, Linkedin, Mail, Instagram } from 'lucide-react';
+import { trackGAEvent } from '../lib/analytics';
 import { useLanguage } from './LanguageContext';
 import LanguageSelector from './LanguageSelector';
 
@@ -170,20 +171,31 @@ const Navigation = () => {
               </div>
 
               {/* CTA Button */}
-              <motion.a
-                href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-medium rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              <motion.button
+                onClick={() => {
+                  let ref = '';
+                  try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                  const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e gostaria de avançar com um projeto de Landing Page/Site Institucional. Podemos conversar agora?`;
+                  const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
+                  trackGAEvent('whatsapp_click', { location: 'navbar', label: 'whatsapp_nav', ref });
+                  window.open(url, '_blank');
+                }}
+                className="group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:from-green-600 hover:to-emerald-700"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 1.0 }}
                 whileHover={{ y: -2, scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>Falar no WhatsApp</span>
+                <span className="relative">
+                  Falar no WhatsApp
+                  <span className="pointer-events-none absolute -right-6 -top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="inline-block animate-bounce">🔥</span>
+                    <span className="inline-block animate-pulse ml-1">💸</span>
+                  </span>
+                </span>
                 <ExternalLink size={14} />
-              </motion.a>
+              </motion.button>
 
               {/* Language Selector */}
               <motion.div
@@ -198,19 +210,27 @@ const Navigation = () => {
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-3 lg:hidden">
               {/* WhatsApp CTA Mobile */}
-              <motion.a
-                href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-medium rounded-full"
+              <motion.button
+                onClick={() => {
+                  let ref = '';
+                  try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                  const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e quero fechar um projeto (Landing Page/Site). Podemos falar?`;
+                  const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
+                  trackGAEvent('whatsapp_click', { location: 'navbar_mobile', label: 'whatsapp_nav_mobile', ref });
+                  window.open(url, '_blank');
+                }}
+                className="group flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-medium rounded-full"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 1.2 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span>WhatsApp</span>
-              </motion.a>
+                <span className="relative">
+                  WhatsApp
+                  <span className="pointer-events-none absolute -right-4 -top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">🔥</span>
+                </span>
+              </motion.button>
 
               {/* Menu Button */}
               <motion.button
@@ -313,20 +333,28 @@ const Navigation = () => {
                 ))}
 
                 {/* Mobile CTA */}
-                <motion.a
-                  href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-2 w-full p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium mt-6"
+                <motion.button
+                  onClick={() => {
+                    let ref = '';
+                    try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                    const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e quero fechar um projeto (Landing Page/Site). Podemos falar?`;
+                    const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
+                    trackGAEvent('whatsapp_click', { location: 'navbar_mobile_menu', label: 'whatsapp_nav_mobile_menu', ref });
+                    window.open(url, '_blank');
+                  }}
+                  className="group flex items-center justify-center space-x-2 w-full p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium mt-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Falar no WhatsApp</span>
+                  <span className="relative">
+                    Falar no WhatsApp
+                    <span className="pointer-events-none absolute -right-6 -top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">🔥</span>
+                  </span>
                   <ExternalLink size={16} />
-                </motion.a>
+                </motion.button>
 
                 {/* Social Links */}
                 <motion.div
