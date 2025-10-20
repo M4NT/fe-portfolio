@@ -103,7 +103,7 @@ const AISalesChat = () => {
         const section = trackerRef.current?.getSnapshot().lastSectionId || 'home';
         const greeting = {
           home: 'Opa, e ai! 👋 Sou o Yan.AI. Quer que eu te guie pelos destaques ou te ajude a estimar valores?',
-          works: 'Opa! Vejo que está nos trabalhos selecionados. Quer saber o impacto/stack de algum projeto ou iniciar um projeto?',
+          works: 'Opa! Vejo que está nos Trabalhos. Quer saber o impacto/stack de algum projeto ou iniciar um projeto?',
           projects: 'E ai! Aqui estão experiments e ferramentas. Posso sugerir algo pro seu objetivo?',
           services: 'Opa! Quer um orçamento baseado no que precisa? Posso orientar agora 🙂',
           about: 'E ai! Posso explicar rapidamente meu processo, prazos e como começamos.',

@@ -22,7 +22,7 @@ const translations: Translations = {
   // Navigation
   'nav.selectedWorks': {
     en: 'Works',
-    pt: 'Trabalhos Selecionados',
+    pt: 'Trabalhos',
     es: 'Trabajos Seleccionados'
   },
   'nav.sideProjects': {
@@ -74,7 +74,7 @@ const translations: Translations = {
   },
   'hero.cta': {
     en: 'View Selected Works',
-    pt: 'Ver Trabalhos Selecionados',
+    pt: 'Ver Trabalhos',
     es: 'Ver Trabajos Seleccionados'
   },
   'hero.scroll': {
@@ -128,12 +128,12 @@ const translations: Translations = {
   // Selected Works
   'works.title': {
     en: 'SELECTED WORKS',
-    pt: 'TRABALHOS SELECIONADOS',
+    pt: 'Trabalhos',
     es: 'TRABAJOS SELECCIONADOS'
   },
   'works.subtitle': {
     en: 'Portfolio — Selected Works',
-    pt: 'Portfólio — Trabalhos Selecionados',
+    pt: 'Portfólio — Trabalhos',
     es: 'Portafolio — Trabajos Seleccionados'
   },
   'works.description': {

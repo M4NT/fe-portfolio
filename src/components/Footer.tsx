@@ -39,7 +39,7 @@ const Footer = () => {
   ];
 
   const navigationLinks = [
-    { id: 'works', label: 'Trabalhos Selecionados' },
+    { id: 'works', label: 'Trabalhos' },
     { id: 'projects', label: 'Projetos Pessoais' },
     { id: 'about', label: 'Sobre' },
     { id: 'services', label: 'Serviços' },
