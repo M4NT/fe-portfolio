@@ -15,6 +15,20 @@ export const trackGAEvent = (name: string, params?: Record<string, unknown>) => 
   gtagSafe(name, params);
 };
 
+// ========================================
+// REFERRAL EVENTS (Indicações)
+// ========================================
+
+export const trackReferralView = (ref: string) => {
+  track('referral_view', { ref });
+  trackGAEvent('referral_view', { ref });
+};
+
+export const trackReferralIntent = (payload: { referrer?: string; referral_name?: string; channel: 'whatsapp' | 'form' }) => {
+  track('referral_intent', payload);
+  trackGAEvent('referral_intent', payload as Record<string, unknown>);
+};
+
 /**
  * Utilitário para rastreamento de eventos com Vercel Analytics
  * Centraliza todos os eventos do site para fácil manutenção

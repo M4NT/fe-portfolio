@@ -86,7 +86,13 @@ const Contact = () => {
       color: 'from-green-500 to-emerald-500',
       priority: 'primary',
       badge: 'Recomendado',
-      href: 'https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!'
+      href: (() => {
+        const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+        const ref = params.get('ref');
+        const base = 'https://wa.me/5516992233365';
+        const msg = `Opa Yan!%0AQuero um orçamento.%0AQuem indicou: ${ref || ''}%0A`;
+        return `${base}?text=${msg}`;
+      })()
     },
     {
       icon: <Mail className="w-6 h-6" />,
