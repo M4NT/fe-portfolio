@@ -8,7 +8,7 @@ const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [menuPos, setMenuPos] = useState<{ top: number; right: number } | null>(null);
+  const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(null);
 
   const languages = [
     { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
@@ -26,7 +26,15 @@ const LanguageSelector = () => {
   const computeMenuPos = () => {
     if (!buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
-    setMenuPos({ top: rect.bottom + 8, right: window.innerWidth - rect.right });
+    const menuWidth = 240; // approx
+    let left = rect.left;
+    // prevent overflow right
+    if (left + menuWidth > window.innerWidth - 8) {
+      left = Math.max(8, window.innerWidth - menuWidth - 8);
+    }
+    // prevent overflow left
+    if (left < 8) left = 8;
+    setMenuPos({ top: rect.bottom + 8, left });
   };
 
   // Open/close with immediate position computation
@@ -90,8 +98,8 @@ const LanguageSelector = () => {
       <AnimatePresence>
         {isOpen && menuPos && createPortal(
           <motion.div
-            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl origin-top-right bg-black/90 text-white shadow-xl"
-            style={{ top: menuPos.top, right: menuPos.right }}
+            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl"
+            style={{ top: menuPos.top, left: menuPos.left }}
             initial={{ opacity: 0, scale: 0.96, y: -4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -4 }}
