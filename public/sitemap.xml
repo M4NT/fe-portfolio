@@ -37,61 +37,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
   </url>
   
-  <!-- Section: Selected Works -->
-  <url>
-    <loc>https://yanmantovani.com/#works</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Section: Side Projects -->
-  <url>
-    <loc>https://yanmantovani.com/#projects</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Section: About -->
-  <url>
-    <loc>https://yanmantovani.com/#about</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Section: Services -->
-  <url>
-    <loc>https://yanmantovani.com/#services</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Section: Testimonials -->
-  <url>
-    <loc>https://yanmantovani.com/#testimonials</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Section: Contact -->
-  <url>
-    <loc>https://yanmantovani.com/#contact</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Section: FAQ -->
-  <url>
-    <loc>https://yanmantovani.com/#faq</loc>
-    <lastmod>2024-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <!-- Only canonical URLs without fragments are included. Sections with anchors are intentionally omitted. -->
 
 </urlset>
 
