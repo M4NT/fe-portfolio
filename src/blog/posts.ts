@@ -23,7 +23,7 @@ export const posts: BlogPost[] = [
     },
     date: '2024-10-20T10:00:00.000Z',
     tags: ['landing-page', 'preco', 'roi', 'conversao', 'marketing-digital'],
-    cover: '/images/blog/landing-page-pricing-2025.jpg',
+    cover: '/images/blog/quanto-custa-landing-page-2025.jpg',
     content: {
       pt: `# Quanto custa uma Landing Page em 2025? Guia completo de investimento e ROI
 
@@ -560,7 +560,7 @@ Invertir en una landing page no es un gasto, es una **inversión estratégica**.
     },
     date: '2024-10-19T14:30:00.000Z',
     tags: ['processo', 'metodologia', 'desenvolvimento', 'design', 'conversao'],
-    cover: '/images/blog/4-etapas-lancar-site.jpg',
+    cover: '/images/blog/etapas-para-lancar-seu-site.jpg',
     content: {
       pt: `# Do rascunho à realidade: as 4 etapas para lançar seu site com sucesso
 
@@ -1043,7 +1043,7 @@ Transformar una idea en un sitio profesional no tiene que ser complicado. Con un
     },
     date: '2024-10-18T09:15:00.000Z',
     tags: ['conversao', 'otimizacao', 'landing-page', 'marketing', 'ux'],
-    cover: '/images/blog/aumentar-conversoes-landing-page.jpg',
+    cover: '/images/blog/como-aumentar-conversoes-landing-page.jpg',
     content: {
       pt: `# Como aumentar conversões na sua Landing Page: 15 estratégias comprovadas
 
@@ -1733,7 +1733,7 @@ Aumentar conversiones en landing pages no es suerte - es ciencia. Con las estrat
     },
     date: '2024-10-17T16:45:00.000Z',
     tags: ['ferramentas', 'desenvolvimento', 'produtividade', 'tecnologia'],
-    cover: '/images/blog/melhores-ferramentas-dev-2025.jpg',
+    cover: '/images/blog/melhores-ferramentas-desenvolvimento-web-2025.jpg',
     content: {
       pt: `# As 20 melhores ferramentas para desenvolvimento web em 2025
 
