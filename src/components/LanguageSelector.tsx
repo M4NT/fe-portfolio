@@ -100,47 +100,33 @@ const LanguageSelector = () => {
         </motion.div>
       </motion.button>
 
-      <AnimatePresence>
-        {isOpen && createPortal(
-          <motion.div
-            className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl pointer-events-auto"
-            style={{ top: (menuPos?.top ?? 64), left: (menuPos?.left ?? 16) }}
-            initial={{ opacity: 0, scale: 0.96, y: -4 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -4 }}
-            transition={{ duration: 0.15, ease: [0.23,1,0.32,1] }}
-          >
-            <div className="max-h-[60vh] overflow-auto">
-              {languages.map((lang) => (
-                <motion.button
-                  key={lang.code}
-                  onClick={() => handleLanguageChange(lang.code)}
-                  className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors duration-200 ${
-                    language === lang.code
-                      ? 'bg-white/10 text-white'
-                      : 'text-white/75 hover:bg-white/5 hover:text-white'
-                  }`}
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.12 }}
-                >
-                  <span className="text-lg">{lang.flag}</span>
-                  <span className="text-sm">{lang.name}</span>
-                  {language === lang.code && (
-                    <motion.span
-                      className="ml-auto inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/15 border border-white/10"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                    </motion.span>
-                  )}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>, document.body)
-        }
-      </AnimatePresence>
+      {isOpen && createPortal(
+        <div
+          className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl pointer-events-auto"
+          style={{ top: (menuPos?.top ?? 64), left: (menuPos?.left ?? 16) }}
+        >
+          <div className="max-h-[60vh] overflow-auto">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => handleLanguageChange(lang.code)}
+                className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors duration-200 ${
+                  language === lang.code
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/75 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <span className="text-lg">{lang.flag}</span>
+                <span className="text-sm">{lang.name}</span>
+                {language === lang.code && (
+                  <span className="ml-auto inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/15 border border-white/10">
+                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>, document.body)}
     </div>
   );
 };
