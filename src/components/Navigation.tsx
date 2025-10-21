@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ExternalLink, Github, Linkedin, Mail, Instagram } from 'lucide-react';
 import { trackGAEvent } from '../lib/analytics';
 import { useLanguage } from './LanguageContext';
-import LanguageSelector from './LanguageSelector';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -210,14 +209,6 @@ const Navigation = () => {
                 <ExternalLink size={14} />
               </motion.button>
 
-              {/* Language Selector */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1.1 }}
-              >
-                <LanguageSelector />
-              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}

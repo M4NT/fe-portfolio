@@ -8,8 +8,6 @@ const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(null);
-
   const languages = [
     { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
     { code: 'pt' as Language, name: 'Português', flag: '🇧🇷' },
@@ -18,58 +16,39 @@ const LanguageSelector = () => {
 
   const currentLanguage = languages.find(lang => lang.code === language);
 
-  const handleLanguageChange = (newLanguage: Language) => {
+  const handleLanguageChange = (newLanguage: Language, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setLanguage(newLanguage);
     setIsOpen(false);
   };
 
-  const computeMenuPos = () => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const menuWidth = 240; // approx
-    let left = rect.left;
-    // prevent overflow right
-    if (left + menuWidth > window.innerWidth - 8) {
-      left = Math.max(8, window.innerWidth - menuWidth - 8);
-    }
-    // prevent overflow left
-    if (left < 8) left = 8;
-    setMenuPos({ top: rect.bottom + 8, left });
+  // Open/close
+  const toggleOpen = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Toggle clicked, current isOpen:', isOpen);
+    setIsOpen((v) => {
+      console.log('Setting isOpen to:', !v);
+      return !v;
+    });
   };
-
-  // Open/close with immediate position computation
-  const toggleOpen = () => {
-    if (!isOpen) {
-      computeMenuPos();
-      // Firefox/Zen: garante cálculo após pintura
-      requestAnimationFrame(() => computeMenuPos());
-      setTimeout(() => computeMenuPos(), 50);
-    }
-    setIsOpen((v) => !v);
-  };
-
-  // Update position on resize/scroll while open
-  useEffect(() => {
-    if (!isOpen) return;
-    const onUpdate = () => computeMenuPos();
-    window.addEventListener('resize', onUpdate, { passive: true });
-    window.addEventListener('scroll', onUpdate, { passive: true });
-    onUpdate();
-    return () => {
-      window.removeEventListener('resize', onUpdate);
-      window.removeEventListener('scroll', onUpdate);
-    };
-  }, [isOpen]);
 
   // Close on outside click / ESC
   useEffect(() => {
     if (!isOpen) return;
     const onClick = (e: MouseEvent) => {
-      if (buttonRef.current && !buttonRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const dropdown = document.querySelector('[data-language-dropdown]');
+      
+      if (buttonRef.current && !buttonRef.current.contains(target) && 
+          (!dropdown || !dropdown.contains(target))) {
         setIsOpen(false);
       }
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpen(false); };
+    const onKey = (e: KeyboardEvent) => { 
+      if (e.key === 'Escape') setIsOpen(false); 
+    };
     document.addEventListener('mousedown', onClick);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -79,7 +58,7 @@ const LanguageSelector = () => {
   }, [isOpen]);
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ zIndex: 9999 }}>
       <motion.button
         ref={buttonRef}
         onClick={toggleOpen}
@@ -100,33 +79,45 @@ const LanguageSelector = () => {
         </motion.div>
       </motion.button>
 
-      {isOpen && createPortal(
-        <div
-          className="fixed z-[2147483000] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl pointer-events-auto"
-          style={{ top: (menuPos?.top ?? 64), left: (menuPos?.left ?? 16) }}
-        >
-          <div className="max-h-[60vh] overflow-auto">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => handleLanguageChange(lang.code)}
-                className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors duration-200 ${
-                  language === lang.code
-                    ? 'bg-white/10 text-white'
-                    : 'text-white/75 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                <span className="text-lg">{lang.flag}</span>
-                <span className="text-sm">{lang.name}</span>
-                {language === lang.code && (
-                  <span className="ml-auto inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/15 border border-white/10">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </div>, document.body)}
+      <AnimatePresence>
+        {isOpen && createPortal(
+          <motion.div
+            data-language-dropdown
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed z-[9999] min-w-[220px] glass border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl bg-black/90 text-white shadow-xl pointer-events-auto"
+            style={{
+              top: buttonRef.current ? buttonRef.current.getBoundingClientRect().bottom + 8 : 0,
+              left: buttonRef.current ? buttonRef.current.getBoundingClientRect().left : 0,
+            }}
+          >
+            <div className="max-h-[60vh] overflow-auto">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={(e) => handleLanguageChange(lang.code, e)}
+                  className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors duration-200 ${
+                    language === lang.code
+                      ? 'bg-white/10 text-white'
+                      : 'text-white/75 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <span className="text-lg">{lang.flag}</span>
+                  <span className="text-sm">{lang.name}</span>
+                  {language === lang.code && (
+                    <span className="ml-auto inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/15 border border-white/10">
+                      <span className="w-1.5 h-1.5 bg-white rounded-full" />
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </motion.div>, 
+          document.body
+        )}
+      </AnimatePresence>
     </div>
   );
 };

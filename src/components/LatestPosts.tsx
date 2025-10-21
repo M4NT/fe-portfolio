@@ -153,13 +153,17 @@ export default function LatestPosts() {
               </motion.div>
 
               {/* View All Button */}
-              <motion.div whileHover={{ scale: 1.05 }} className="hidden lg:block">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                className="hidden lg:block"
+              >
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white/90 font-medium hover:bg-white/10 hover:border-white/20 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 border border-teal-500/30 rounded-xl text-teal-300 font-medium hover:from-teal-500/30 hover:to-cyan-500/30 hover:border-teal-500/50 hover:text-teal-200 transition-all duration-300 group"
                 >
                   <span>{language === 'pt' ? 'Ver Todos' : language === 'en' ? 'View All' : 'Ver Todos'}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </motion.div>
             </div>
@@ -340,13 +344,18 @@ export default function LatestPosts() {
             </option>
           </select>
           
-          <Link 
-            to="/blog" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span>{language === 'pt' ? 'Ver Todos os Artigos' : language === 'en' ? 'View All Posts' : 'Ver Todos los Artículos'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            <Link 
+              to="/blog" 
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300 group"
+            >
+              <span>{language === 'pt' ? 'Ver Todos os Artigos' : language === 'en' ? 'View All Posts' : 'Ver Todos los Artículos'}</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -371,6 +371,7 @@ const translations: Translations = {
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('pt');
   const [isInitialized, setIsInitialized] = useState(false);
+  const [showLanguageNotification, setShowLanguageNotification] = useState(false);
 
   // Detecta idioma automaticamente na inicialização
   useEffect(() => {
@@ -408,13 +409,68 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         'en': 'en',
         'en-US': 'en',
         'en-GB': 'en',
+        'en-CA': 'en',
+        'en-AU': 'en',
         'es': 'es',
         'es-ES': 'es',
         'es-MX': 'es',
-        'es-AR': 'es'
+        'es-AR': 'es',
+        'es-CO': 'es',
+        'es-CL': 'es',
+        'es-PE': 'es',
+        'es-VE': 'es',
+        'es-UY': 'es',
+        'es-PY': 'es',
+        'es-BO': 'es',
+        'es-EC': 'es',
+        'es-CR': 'es',
+        'es-PA': 'es',
+        'es-HN': 'es',
+        'es-GT': 'es',
+        'es-SV': 'es',
+        'es-NI': 'es',
+        'es-CU': 'es',
+        'es-DO': 'es',
+        'es-PR': 'es'
       };
 
-      return langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'pt';
+      // Detecta por geolocalização se disponível
+      const detectByLocation = (): Language | null => {
+        try {
+          // Lista de países de língua portuguesa
+          const portugueseCountries = ['BR', 'PT', 'AO', 'MZ', 'GW', 'CV', 'ST', 'TL'];
+          // Lista de países de língua espanhola
+          const spanishCountries = ['ES', 'MX', 'AR', 'CO', 'CL', 'PE', 'VE', 'UY', 'PY', 'BO', 'EC', 'CR', 'PA', 'HN', 'GT', 'SV', 'NI', 'CU', 'DO', 'PR'];
+          // Lista de países de língua inglesa
+          const englishCountries = ['US', 'GB', 'CA', 'AU', 'NZ', 'IE', 'ZA', 'NG', 'KE', 'GH', 'UG', 'TZ', 'ZW', 'BW', 'ZM', 'MW', 'LS', 'SZ', 'NA'];
+          
+          // Tenta detectar por timezone (mais confiável que geolocalização)
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          const countryCode = timezone.split('/')[1]?.split('_')[0];
+          
+          if (portugueseCountries.includes(countryCode)) return 'pt';
+          if (spanishCountries.includes(countryCode)) return 'es';
+          if (englishCountries.includes(countryCode)) return 'en';
+        } catch (e) {
+          console.log('Location detection failed:', e);
+        }
+        return null;
+      };
+
+      // Tenta detectar por localização primeiro
+      const locationLang = detectByLocation();
+      if (locationLang) {
+        console.log('🌍 Language detected by location:', locationLang);
+        console.log('📍 Timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
+        return locationLang;
+      }
+
+      // Fallback para idioma do navegador
+      const detected = langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'pt';
+      console.log('🌐 Language detected by browser:', browserLang, '->', detected);
+      console.log('🔧 Navigator language:', navigator.language);
+      console.log('🔧 User language:', (navigator as any).userLanguage);
+      return detected;
     };
 
     const detected = detectLanguage();
@@ -427,6 +483,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     const isLegalPage = legalPages.some(page => path.startsWith(page));
     
     if (!isLegalPage) {
+      // Verifica se foi detectado automaticamente (não estava salvo)
+      const savedLang = localStorage.getItem('preferred-language');
+      if (!savedLang || savedLang !== detected) {
+        setShowLanguageNotification(true);
+        // Auto-hide após 5 segundos
+        setTimeout(() => setShowLanguageNotification(false), 5000);
+      }
       localStorage.setItem('preferred-language', detected);
     }
   }, []);
@@ -474,6 +537,26 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
+      
+      {/* Notificação de idioma detectado automaticamente */}
+      {showLanguageNotification && (
+        <div className="fixed top-4 right-4 z-[10000] bg-green-500/90 backdrop-blur-sm text-white px-4 py-3 rounded-lg shadow-lg border border-green-400/20 animate-in slide-in-from-right-5 duration-300">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium">
+              {language === 'en' && 'Language set to English based on your location'}
+              {language === 'es' && 'Idioma configurado a Español basado en tu ubicación'}
+              {language === 'pt' && 'Idioma configurado para Português baseado na sua localização'}
+            </span>
+            <button 
+              onClick={() => setShowLanguageNotification(false)}
+              className="ml-2 text-white/70 hover:text-white transition-colors"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </LanguageContext.Provider>
   );
 };
