@@ -12,6 +12,7 @@ export default function BlogIndex() {
   const [sortBy, setSortBy] = useState('newest');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
   // Força scroll ao topo quando a página carrega
   useEffect(() => {
     // Scroll imediato
@@ -25,9 +26,10 @@ export default function BlogIndex() {
 
   // SEO Meta tags para Blog Index
   useEffect(() => {
-    const title = language === 'pt' ? 'Blog - Desenvolvimento Web e Design | Yan Mantovani' : 
-                  language === 'en' ? 'Blog - Web Development and Design | Yan Mantovani' : 
-                  'Blog - Desarrollo Web y Diseño | Yan Mantovani';
+    try {
+      const title = language === 'pt' ? 'Blog - Desenvolvimento Web e Design | Yan Mantovani' : 
+                    language === 'en' ? 'Blog - Web Development and Design | Yan Mantovani' : 
+                    'Blog - Desarrollo Web y Diseño | Yan Mantovani';
     
     const description = language === 'pt' ? 'Artigos sobre desenvolvimento web, design e landing pages. Dicas, tutoriais e insights para criar sites que convertem.' :
                         language === 'en' ? 'Articles about web development, design and landing pages. Tips, tutorials and insights to create converting websites.' :
@@ -94,7 +96,7 @@ export default function BlogIndex() {
         url: 'https://yanmantovani.com'
       },
       inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES',
-      blogPost: sortedPosts.slice(0, 5).map(post => ({
+      blogPost: getSortedPosts().slice(0, 5).map(post => ({
         '@type': 'BlogPosting',
         headline: post.title[language],
         description: post.excerpt[language],
@@ -118,7 +120,10 @@ export default function BlogIndex() {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(structuredData);
     document.head.appendChild(script);
-  }, [language, sortedPosts]);
+    } catch (error) {
+      console.error('Error setting up SEO meta tags:', error);
+    }
+  }, [language, sortBy]);
 
   // Scroll ao topo quando mudar o filtro
   useEffect(() => {
@@ -145,17 +150,22 @@ export default function BlogIndex() {
 
   // Função para ordenar posts
   const getSortedPosts = () => {
-    const sortedPosts = [...posts];
-    
-    switch (sortBy) {
-      case 'newest':
-        return sortedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      case 'oldest':
-        return sortedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-      case 'title':
-        return sortedPosts.sort((a, b) => a.title[language].localeCompare(b.title[language]));
-      default:
-        return sortedPosts;
+    try {
+      const sortedPosts = [...posts];
+      
+      switch (sortBy) {
+        case 'newest':
+          return sortedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        case 'oldest':
+          return sortedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        case 'title':
+          return sortedPosts.sort((a, b) => a.title[language].localeCompare(b.title[language]));
+        default:
+          return sortedPosts;
+      }
+    } catch (error) {
+      console.error('Error in getSortedPosts:', error);
+      return posts; // Fallback to original posts
     }
   };
 
