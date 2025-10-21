@@ -494,16 +494,6 @@ const SelectedWorks = () => {
                   </div>
                 </div>
 
-                {/* CTA Button */}
-                <motion.button
-                  onClick={() => openProjectModal(currentProject)}
-                  className="group/cta relative inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="text-white font-medium">View Full Details</span>
-                  <ArrowRight className="w-5 h-5 text-white/70 group-hover/cta:text-white group-hover/cta:translate-x-1 transition-all" />
-                </motion.button>
               </motion.div>
             </AnimatePresence>
           </motion.div>
