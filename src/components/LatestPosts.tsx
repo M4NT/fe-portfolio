@@ -4,7 +4,7 @@ import { posts } from '../blog/posts';
 import { useLanguage } from './LanguageContext';
 import { BookOpen, ArrowRight, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function LatestPosts() {
   const { language } = useLanguage();
@@ -28,30 +28,30 @@ export default function LatestPosts() {
   };
 
   const sortedPosts = getSortedPosts();
-  const postsPerView = 3;
+  
+  // Ajustar posts por página baseado no tamanho da tela
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const postsPerView = isMobile ? 1 : 3;
   const totalSlides = Math.ceil(sortedPosts.length / postsPerView);
   const maxIndex = Math.max(0, totalSlides - 1);
   
   const nextSlide = () => {
     setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
-    // Scroll suave ao topo da seção
-    setTimeout(() => {
-      const element = document.getElementById('latest-posts');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   };
   
   const prevSlide = () => {
     setCurrentIndex(prev => Math.max(prev - 1, 0));
-    // Scroll suave ao topo da seção
-    setTimeout(() => {
-      const element = document.getElementById('latest-posts');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   };
   
   // Função para obter os posts da página atual
@@ -138,7 +138,7 @@ export default function LatestPosts() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500/50 transition-all"
+                  className="px-3 py-1.5 bg-white/3 border border-white/5 rounded-lg text-white/50 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500/30 focus:border-teal-500/30 hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all"
                 >
                   <option value="newest">
                     {language === 'pt' ? 'Mais Recentes' : language === 'en' ? 'Newest' : 'Más Recientes'}
@@ -160,14 +160,14 @@ export default function LatestPosts() {
               >
                 <Link 
                   to="/blog" 
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 border border-teal-500/30 rounded-xl text-teal-300 font-medium hover:from-teal-500/30 hover:to-cyan-500/30 hover:border-teal-500/50 hover:text-teal-200 transition-all duration-300 group"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/3 border border-white/5 rounded-lg text-white/50 text-sm font-medium hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all duration-300 group"
                 >
                   <span>{language === 'pt' ? 'Ver Todos' : language === 'en' ? 'View All' : 'Ver Todos'}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </motion.div>
             </div>
-          </div>
+        </div>
         </motion.div>
 
         {/* Posts Carousel */}
@@ -187,23 +187,25 @@ export default function LatestPosts() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex-shrink-0 w-1/3"
+                  className={`flex-shrink-0 px-2 sm:px-3 ${
+                    isMobile ? 'w-full' : 'w-1/3'
+                  }`}
                 >
               <Link 
                 to={`/blog/${p.slug}`} 
-                className="group block h-full px-3"
+                className="group block h-full"
               >
                 <motion.div
                   className="relative overflow-hidden h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 flex flex-col group-hover:-translate-y-2"
                   style={{ borderRadius: '1rem' }}
                 >
                   {/* Cover Image */}
-                  <div className="relative h-48 w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style={{ borderRadius: '1rem 1rem 0 0' }}>
+                  <div className="relative h-40 sm:h-48 w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style={{ borderRadius: '1rem 1rem 0 0' }}>
                     <div className="w-full h-full overflow-hidden relative" style={{ borderRadius: '1rem 1rem 0 0' }}>
-                      {p.cover ? (
-                        <img 
-                          src={p.cover} 
-                          alt={p.title[language]} 
+                {p.cover ? (
+                  <img 
+                    src={p.cover} 
+                    alt={p.title[language]} 
                           className="absolute inset-0 w-full h-full object-cover object-center"
                           style={{ 
                             borderRadius: '1rem 1rem 0 0',
@@ -243,23 +245,23 @@ export default function LatestPosts() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-4 sm:p-6 flex flex-col flex-grow min-h-0">
                     {/* Date */}
-                    <div className="flex items-center gap-2 text-white/50 text-xs mb-3">
+                    <div className="flex items-center gap-2 text-white/50 text-xs mb-2 sm:mb-3">
                       <Calendar className="w-3 h-3" />
                       <span>{formatDate(p.date)}</span>
                     </div>
                     
-                    <h3 className="text-white text-xl font-semibold leading-tight group-hover:text-teal-300 transition-colors mb-6 line-clamp-2">
+                    <h3 className="text-white text-base sm:text-lg font-semibold leading-tight group-hover:text-teal-300 transition-colors mb-6 sm:mb-8 line-clamp-2">
                       {p.title[language]}
                     </h3>
                     
-                    <p className="text-white/60 text-sm leading-relaxed group-hover:text-white/80 transition-colors flex-grow mb-6 line-clamp-3">
+                    <p className="text-white/60 text-sm leading-relaxed group-hover:text-white/80 transition-colors flex-grow mb-8 sm:mb-10 line-clamp-2 sm:line-clamp-3">
                       {p.excerpt[language]}
                     </p>
                     
                     {/* Read More */}
-                    <div className="flex items-center gap-2 text-teal-400 text-sm font-medium pt-4 border-t border-white/10">
+                    <div className="flex items-center gap-2 text-teal-400 text-sm font-medium pt-3 sm:pt-4 border-t border-white/10 mt-auto">
                       <span>{language === 'pt' ? 'Ler artigo' : language === 'en' ? 'Read article' : 'Leer artículo'}</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -276,49 +278,45 @@ export default function LatestPosts() {
 
           {/* Navigation Controls */}
           {totalSlides > 1 && (
-            <div className="flex items-center justify-center gap-4 mt-8">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mt-6 sm:mt-8">
               <motion.button
                 onClick={prevSlide}
                 disabled={currentIndex === 0}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
               
               {/* Dots Indicator */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 {Array.from({ length: totalSlides }).map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`h-1.5 sm:h-2 rounded-full transition-all ${
                       currentIndex === index 
-                        ? 'bg-teal-400 w-8' 
-                        : 'bg-white/30 hover:bg-white/50'
+                        ? 'bg-gradient-to-r from-blue-400 to-purple-400 w-6 sm:w-8' 
+                        : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50'
                     }`}
                   />
                 ))}
               </div>
               
-              {/* Page Info */}
-              <div className="text-white/50 text-sm">
-                {currentIndex + 1} / {totalSlides}
-              </div>
               
               <motion.button
                 onClick={nextSlide}
                 disabled={currentIndex === maxIndex}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
             </div>
           )}
-        </div>
+              </div>
 
         {/* Mobile Controls */}
         <motion.div 
@@ -331,7 +329,7 @@ export default function LatestPosts() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500/50 transition-all"
+            className="px-3 py-1.5 bg-white/3 border border-white/5 rounded-lg text-white/50 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500/30 focus:border-teal-500/30 hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all"
           >
             <option value="newest">
               {language === 'pt' ? 'Mais Recentes' : language === 'en' ? 'Newest' : 'Más Recientes'}
@@ -350,7 +348,7 @@ export default function LatestPosts() {
           >
             <Link 
               to="/blog" 
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300 group"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/3 border border-white/5 rounded-lg text-white/50 text-sm font-medium hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all duration-300 group"
             >
               <span>{language === 'pt' ? 'Ver Todos os Artigos' : language === 'en' ? 'View All Posts' : 'Ver Todos los Artículos'}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

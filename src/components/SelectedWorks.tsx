@@ -352,16 +352,16 @@ const SelectedWorks = () => {
             </AnimatePresence>
 
             {/* Navigation Controls */}
-            <div className="flex items-center justify-between mt-6">
+            <div className="flex items-center justify-between mt-4 sm:mt-6">
               <button
                 onClick={prevProject}
-                className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                className="group/btn p-2 sm:p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
               >
-                <ArrowLeft className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover/btn:text-white transition-colors" />
               </button>
 
               {/* Progress Bar */}
-              <div className="flex-1 mx-6 h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div className="flex-1 mx-4 sm:mx-6 h-1 sm:h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   key={progressKey}
                   className={`h-full bg-gradient-to-r ${currentProject.color} rounded-full shadow-lg`}
@@ -373,14 +373,14 @@ const SelectedWorks = () => {
 
               <button
                 onClick={nextProject}
-                className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                className="group/btn p-2 sm:p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
               >
-                <ArrowRight className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover/btn:text-white transition-colors" />
               </button>
             </div>
 
             {/* Project Indicators */}
-            <div className="flex justify-center gap-3 mt-6">
+            <div className="flex justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
               {projects.map((_, index) => (
                 <button
                   key={index}
@@ -388,10 +388,10 @@ const SelectedWorks = () => {
                     setCurrentIndex(index);
                     setProgressKey(prev => prev + 1);
                   }}
-                  className={`h-2 rounded-full transition-all duration-500 ${
+                  className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
                     index === currentIndex 
-                      ? 'w-10 bg-white shadow-lg' 
-                      : 'w-2 bg-white/30 hover:bg-white/50 hover:w-3'
+                      ? 'w-8 sm:w-10 bg-white shadow-lg' 
+                      : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50 hover:w-2 sm:hover:w-3'
                   }`}
                 />
               ))}
@@ -413,46 +413,46 @@ const SelectedWorks = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
               >
                 {/* Category Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-white/70 text-sm uppercase tracking-wider font-inter">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-white/70 text-xs sm:text-sm uppercase tracking-wider font-inter">
                     {currentProject.category}
                   </span>
                 </div>
 
                 {/* Achievement Badge */}
                 {currentProject.badge && (
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-                    <span className="text-yellow-300 text-sm font-semibold tracking-wider">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-400 rounded-full animate-pulse" />
+                    <span className="text-yellow-300 text-xs sm:text-sm font-semibold tracking-wider">
                       {currentProject.badge}
                     </span>
                   </div>
                 )}
 
                 {/* Title */}
-                <h3 className="font-inter font-light text-4xl lg:text-5xl text-white leading-tight">
+                <h3 className="font-inter font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-tight">
                   {currentProject.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/70 text-lg leading-relaxed">
+                <p className="text-white/70 text-base sm:text-lg leading-relaxed">
                   {currentProject.description}
                 </p>
 
                 {/* Skills Showcased */}
                 <div>
-                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                  <h4 className="text-white/60 text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-3 font-inter">
                     Skills Showcased
                   </h4>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {currentProject.skillsShowcased.map((skill, index) => (
                       <motion.div
                         key={index}
-                        className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/80 text-sm hover:bg-white/10 hover:border-white/20 transition-all"
+                        className="px-2 py-1 sm:px-3 sm:py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/80 text-xs sm:text-sm hover:bg-white/10 hover:border-white/20 transition-all"
                         whileHover={{ scale: 1.05 }}
                       >
                         {skill}
@@ -463,14 +463,14 @@ const SelectedWorks = () => {
 
                 {/* Technologies */}
                 <div>
-                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                  <h4 className="text-white/60 text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-3 font-inter">
                     Technologies Used
                   </h4>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {currentProject.technologies.map((tech, index) => (
                       <motion.div
                         key={index}
-                        className={`px-3 py-1.5 bg-gradient-to-r ${currentProject.color} bg-opacity-10 border border-white/20 rounded-lg text-white text-sm`}
+                        className={`px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r ${currentProject.color} bg-opacity-10 border border-white/20 rounded-lg text-white text-xs sm:text-sm`}
                         whileHover={{ scale: 1.05 }}
                       >
                         {tech}
@@ -481,14 +481,14 @@ const SelectedWorks = () => {
 
                 {/* Key Features */}
                 <div>
-                  <h4 className="text-white/60 text-sm uppercase tracking-wider mb-3 font-inter">
+                  <h4 className="text-white/60 text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-3 font-inter">
                     Key Features
                   </h4>
-                  <div className="space-y-2">
+                  <div className="space-y-1.5 sm:space-y-2">
                     {currentProject.features.slice(0, 3).map((feature, index) => (
                       <div key={index} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-white/70 text-sm">{feature}</span>
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-white/70 text-xs sm:text-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -501,7 +501,7 @@ const SelectedWorks = () => {
 
         {/* Project Stats */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -515,13 +515,13 @@ const SelectedWorks = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all"
+              className="text-center p-3 sm:p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all"
               whileHover={{ y: -4, scale: 1.02 }}
             >
-              <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+              <div className={`text-2xl sm:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1 sm:mb-2`}>
                 {stat.value}
               </div>
-              <div className="text-white/60 text-sm uppercase tracking-wider font-inter">
+              <div className="text-white/60 text-xs sm:text-sm uppercase tracking-wider font-inter">
                 {stat.label}
               </div>
             </motion.div>
