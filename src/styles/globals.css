@@ -380,17 +380,43 @@ section {
 /* Fix para imagens do carrossel About - Removido CSS desnecessário */
 
 
-  /* Project cards image overflow fix */
-  .group:hover img,
+  /* Project cards image overflow fix - DISABLED */
+  /* .group:hover img,
   .group:hover .object-cover {
     transform: scale(1.05) !important;
     transform-origin: center center !important;
-  }
+  } */
 
   /* Ensure project cards contain images properly */
   .group .aspect-\[4\/3\] {
     overflow: hidden !important;
     contain: layout style paint !important;
+  }
+
+  /* Blog images overflow fix - Force containment */
+  .blog-card img {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 1rem 1rem 0 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Blog card container adjustments */
+  .blog-card {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Ensure proper spacing between blog cards */
+  .blog-card + .blog-card {
+    margin-top: 0 !important;
   }
 
   /* Disable custom cursor on mobile */
@@ -898,12 +924,12 @@ section {
   }
 
   .image-hover img {
-    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
-    will-change: transform;
+    transition: none !important;
+    will-change: auto !important;
   }
 
   .image-hover:hover img {
-    transform: scale(1.15);
+    transform: none !important;
   }
 }
 

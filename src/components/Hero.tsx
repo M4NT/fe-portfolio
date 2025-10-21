@@ -267,7 +267,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Column - Main Content */}
       <motion.div 
-            className="space-y-4 lg:space-y-8"
+            className="space-y-4 lg:space-y-8 text-center lg:text-left"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
@@ -295,7 +295,7 @@ const Hero = () => {
             </div>
             
               {/* Nome/Marca principal */}
-              <h1 className="font-inter font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
+              <h1 className="font-inter font-light text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
                 <span className="text-white">Yan</span>
                 <span className="mx-1 sm:mx-2 text-white/40">—</span>
                 <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -304,7 +304,7 @@ const Hero = () => {
               </h1>
               
               {/* Proposta de valor - SEO Optimized */}
-              <p className="text-white/70 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-2xl">
+              <p className="text-white/70 text-base sm:text-lg lg:text-xl xl:text-2xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 <span className="text-white font-semibold">Desenvolvedor Frontend Freelancer especializado em Landing Pages de alta conversão.</span>
                 <span className="text-green-400 font-medium"> Orçamento grátis em 24h</span>.
               </p>
@@ -312,7 +312,7 @@ const Hero = () => {
 
             {/* Stats - SEO Optimized */}
         <motion.div 
-              className="flex flex-wrap gap-4 sm:gap-6"
+              className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -340,7 +340,7 @@ const Hero = () => {
 
             {/* Highlights - SEO Optimized */}
             <motion.div
-              className="flex items-center gap-2 sm:gap-3"
+              className="flex items-center gap-2 sm:gap-3 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -351,7 +351,7 @@ const Hero = () => {
 
             {/* CTAs - Redesigned with site identity */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
@@ -464,57 +464,272 @@ const Hero = () => {
 
           {/* Right Column - Visual Elements */}
           <motion.div 
-            className="relative mt-6 lg:mt-0"
+            className="relative mt-8 lg:mt-0"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            {/* Floating Cards */}
-            <div className="relative max-w-xs sm:max-w-sm mx-auto lg:max-w-none">
-              {/* Main Card */}
+            {/* Interactive Performance Dashboard */}
+            <div className="relative max-w-sm sm:max-w-md mx-auto lg:max-w-none">
+              {/* Main Dashboard Card */}
               <motion.div
-                className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl overflow-hidden"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl overflow-hidden"
+                initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                whileHover={{ y: -4, scale: 1.01, rotateY: 2 }}
               >
-                {/* Animated background gradient */}
+                {/* Animated background with multiple layers */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"
+                  className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10"
                   animate={{ 
-                    opacity: [0.3, 0.6, 0.3],
-                    scale: [1, 1.05, 1]
+                    opacity: [0.3, 0.7, 0.3],
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 2, 0]
                   }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 />
                 
-                <div className="relative z-10 text-center">
+                {/* Animated grid pattern */}
+                <motion.div
+                  className="absolute inset-0 opacity-20"
+                  animate={{
+                    backgroundPosition: ['0% 0%', '100% 100%']
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                      linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '20px 20px'
+                  }}
+                />
+
+                <div className="relative z-10">
+                  {/* Header with animated icon */}
                   <motion.div 
-                    className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg"
+                    className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg relative"
                     animate={{ 
-                      rotate: [0, 5, -5, 0],
-                      scale: [1, 1.05, 1]
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1]
                     }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-                  </motion.div>
-                  <h3 className="text-white text-lg sm:text-xl font-semibold mb-2">Especialista em Conversão</h3>
-                  <p className="text-white/70 text-xs sm:text-sm mb-3 sm:mb-4">
-                    Landing pages que transformam visitantes em clientes
-                  </p>
-                  <motion.div 
-                    className="text-green-400 text-xl sm:text-2xl font-bold"
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                      color: ["#10b981", "#34d399", "#10b981"]
+                    transition={{ 
+                      rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
                     }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    +300%
+                    <motion.div
+                      animate={{ 
+                        rotate: [0, -360],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{ 
+                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                      }}
+                    >
+                      <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                    </motion.div>
+                    
+                    {/* Pulsing ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-white/30"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.8, 0, 0.8]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
                   </motion.div>
-                  <div className="text-white/60 text-xs">conversão vs média</div>
+
+                  {/* Dynamic title with typewriter effect */}
+                  <motion.h3 
+                    className="text-white text-lg sm:text-xl font-semibold mb-2 text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1 }}
+                  >
+                    <motion.span
+                      animate={{ 
+                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      style={{
+                        background: 'linear-gradient(90deg, #ffffff 0%, #60a5fa 50%, #ffffff 100%)',
+                        backgroundSize: '200% 100%',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent'
+                      }}
+                    >
+                      Desenvolvedor Frontend
+                    </motion.span>
+                  </motion.h3>
+
+                  {/* Animated description */}
+                  <motion.p 
+                    className="text-white/70 text-xs sm:text-sm mb-4 text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 1.2 }}
+                  >
+                    Soluções digitais que impressionam e performam
+                  </motion.p>
+
+                  {/* Compact Interactive Showcase */}
+                  <div className="space-y-3">
+                    {/* Interactive Tech Buttons */}
+                    <motion.div 
+                      className="flex flex-wrap gap-2 justify-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 1.6 }}
+                    >
+                      {[
+                        { label: 'React', color: 'from-cyan-400 to-blue-500', icon: '⚛️' },
+                        { label: 'TS', color: 'from-blue-400 to-indigo-500', icon: '🔷' },
+                        { label: 'Motion', color: 'from-purple-400 to-pink-500', icon: '✨' },
+                        { label: 'CSS', color: 'from-green-400 to-emerald-500', icon: '🎨' }
+                      ].map((tech, index) => (
+                        <motion.button
+                          key={tech.label}
+                          className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${tech.color} border border-white/20`}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 1.8 + index * 0.1 }}
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span className="mr-1">{tech.icon}</span>
+                          {tech.label}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+
+                    {/* Compact Live Preview */}
+                    <motion.div 
+                      className="bg-black/40 rounded-lg p-3 sm:p-4 border border-white/10"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 2 }}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-1.5 h-1.5 bg-red-400 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                        <span className="text-white/60 text-xs ml-1">component.tsx</span>
+                        <div className="ml-auto flex items-center gap-1">
+                          <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+                          <span className="text-green-400 text-xs">Live</span>
+                        </div>
+                      </div>
+
+                      {/* Mini Code */}
+                      <div className="text-xs font-mono text-green-400 space-y-1 overflow-x-auto">
+                        <div className="text-blue-400">const</div>
+                        <div className="text-white ml-2">
+                          <span className="text-blue-400">Card</span> = () =&gt; {`{`}
+                        </div>
+                        <motion.div 
+                          className="text-yellow-400 ml-4"
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          return &lt;<span className="text-pink-400">motion.div</span>&gt;
+                        </motion.div>
+                        <div className="text-gray-400 ml-6">// Magic ✨</div>
+                        <div className="text-white ml-4">
+                          &lt;/<span className="text-pink-400">motion.div</span>&gt;
+                        </div>
+                        <div className="text-white ml-2">{`}`}</div>
+                      </div>
+
+                      {/* Interactive Demo */}
+                      <motion.div 
+                        className="mt-3 p-2 bg-white/5 rounded border border-white/10"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 2.2 }}
+                      >
+                        <div className="text-white/60 text-xs mb-1">Preview:</div>
+                        <motion.div
+                          className="w-full h-10 sm:h-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded flex items-center justify-center text-white text-xs font-semibold"
+                          whileHover={{ 
+                            scale: 1.05,
+                            rotate: [0, 1, -1, 0],
+                            boxShadow: '0 5px 20px rgba(59, 130, 246, 0.3)'
+                          }}
+                          whileTap={{ scale: 0.95 }}
+                          animate={{
+                            background: [
+                              'linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%)',
+                              'linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%)',
+                              'linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)'
+                            ]
+                          }}
+                          transition={{
+                            background: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                          }}
+                        >
+                          <motion.span
+                            animate={{ 
+                              scale: [1, 1.1, 1],
+                              textShadow: [
+                                '0 0 0px rgba(255,255,255,0.5)',
+                                '0 0 8px rgba(255,255,255,0.8)',
+                                '0 0 0px rgba(255,255,255,0.5)'
+                              ]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            Hover me! ✨
+                          </motion.span>
+                        </motion.div>
+                      </motion.div>
+                    </motion.div>
+
+                    {/* Compact Stats */}
+                    <motion.div 
+                      className="grid grid-cols-2 gap-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 2.4 }}
+                    >
+                      <motion.div 
+                        className="bg-white/5 rounded-lg p-2 text-center border border-white/10"
+                        whileHover={{ 
+                          scale: 1.05, 
+                          backgroundColor: 'rgba(59, 130, 246, 0.1)'
+                        }}
+                      >
+                        <motion.div 
+                          className="text-lg mb-1"
+                          animate={{ rotate: [0, 5, -5, 0] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          🚀
+                        </motion.div>
+                        <div className="text-white/80 text-xs">Performance</div>
+                      </motion.div>
+                      <motion.div 
+                        className="bg-white/5 rounded-lg p-2 text-center border border-white/10"
+                        whileHover={{ 
+                          scale: 1.05, 
+                          backgroundColor: 'rgba(147, 51, 234, 0.1)'
+                        }}
+                      >
+                        <motion.div 
+                          className="text-lg mb-1"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          ⚡
+                        </motion.div>
+                        <div className="text-white/80 text-xs">Interativo</div>
+                      </motion.div>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
 

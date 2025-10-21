@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ExternalLink, Zap, Layers, CheckCircle2, Github } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Zap, Layers, CheckCircle2, Github, Briefcase, Sparkles } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import ProjectModal from './ProjectModal';
+import AnimatedBackground from './AnimatedBackground';
 
 const SelectedWorks = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -227,10 +228,10 @@ const SelectedWorks = () => {
     <section 
       id="works" 
       ref={containerRef}
-      className="relative py-16 md:py-24 bg-black"
+      className="relative py-16 md:py-24 bg-black overflow-hidden"
     >
-      {/* Subtle Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black" />
+      {/* Animated Background */}
+      <AnimatedBackground variant="subtle" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header */}
@@ -241,14 +242,25 @@ const SelectedWorks = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
-            {t('works.subtitle')}
-          </div>
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-full mb-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Briefcase className="w-4 h-4 text-blue-400" />
+            <span className="text-blue-300 text-sm font-medium">Trabalhos Selecionados</span>
+          </motion.div>
+          
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
-            {t('works.title')}
+            <span className="bg-gradient-to-r from-white via-blue-200 to-cyan-400 bg-clip-text text-transparent">
+              {t('works.title')}
+            </span>
           </h2>
+          
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            {t('works.description') || (t('works.title') && '')}
+            Explore meus projetos mais relevantes e descubra como aplico
+            <span className="text-cyan-400 font-semibold"> tecnologia e criatividade</span> para 
+            entregar resultados excepcionais.
           </p>
         </motion.div>
 

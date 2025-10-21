@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, Coffee, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, Star, Zap, Target, TrendingUp } from 'lucide-react';
+import { MapPin, Calendar, Coffee, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, Star, Zap, Target, TrendingUp, Code, Palette, Rocket, Heart, Sparkles, Brain, Eye } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from './LanguageContext';
 import AnimatedBackground from './AnimatedBackground';
@@ -18,39 +18,39 @@ const About = () => {
   ];
 
   const stats = [
-    { number: "50+", label: t('about.projectsCompleted'), icon: <Award size={20} />, color: 'from-yellow-400 to-orange-500' },
-    { number: "5+", label: t('about.yearsExperience'), icon: <Calendar size={20} />, color: 'from-blue-400 to-cyan-500' },
-    { number: "∞", label: t('about.cupsOfCoffee'), icon: <Coffee size={20} />, color: 'from-green-400 to-emerald-500' },
-    { number: "98%", label: 'Taxa de Sucesso', icon: <Star size={20} />, color: 'from-purple-400 to-pink-500' }
+    { number: "50+", label: 'Projetos Entregues', icon: <Rocket size={20} />, color: 'from-orange-400 to-red-500' },
+    { number: "5+", label: 'Anos de Experiência', icon: <Calendar size={20} />, color: 'from-blue-400 to-cyan-500' },
+    { number: "100%", label: 'Satisfação', icon: <Heart size={20} />, color: 'from-pink-400 to-rose-500' },
+    { number: "∞", label: 'Cafés Consumidos', icon: <Coffee size={20} />, color: 'from-green-400 to-emerald-500' }
   ];
 
   const skills = [
-    { name: "Frontend Development", level: 95, category: "Technical", color: 'from-blue-500 to-cyan-500' },
-    { name: "UI/UX Design", level: 88, category: "Design", color: 'from-purple-500 to-pink-500' },
-    { name: "3D & WebGL", level: 82, category: "Technical", color: 'from-orange-500 to-red-500' },
-    { name: "Creative Coding", level: 90, category: "Creative", color: 'from-green-500 to-teal-500' },
-    { name: "Performance Optimization", level: 85, category: "Technical", color: 'from-indigo-500 to-purple-500' },
-    { name: "Motion Design", level: 78, category: "Design", color: 'from-pink-500 to-rose-500' }
+    { name: "React & TypeScript", level: 98, category: "Frontend", color: 'from-blue-500 to-cyan-500', icon: <Code size={16} /> },
+    { name: "UI/UX Design", level: 92, category: "Design", color: 'from-purple-500 to-pink-500', icon: <Palette size={16} /> },
+    { name: "Performance", level: 95, category: "Otimização", color: 'from-orange-500 to-red-500', icon: <Zap size={16} /> },
+    { name: "Animações", level: 90, category: "Criativo", color: 'from-green-500 to-teal-500', icon: <Sparkles size={16} /> },
+    { name: "Responsividade", level: 96, category: "Mobile", color: 'from-indigo-500 to-purple-500', icon: <Eye size={16} /> },
+    { name: "Inovação", level: 88, category: "Tendências", color: 'from-pink-500 to-rose-500', icon: <Brain size={16} /> }
   ];
 
   const achievements = [
     {
-      icon: <Target className="w-5 h-5" />,
-      title: "Especialista em Conversão",
-      description: "Landing pages que convertem 300% mais que a média",
-      color: 'from-green-500 to-emerald-500'
+      icon: <Rocket className="w-5 h-5" />,
+      title: "Desenvolvimento Ágil",
+      description: "Projetos entregues em tempo recorde sem comprometer a qualidade",
+      color: 'from-orange-500 to-red-500'
     },
     {
-      icon: <Zap className="w-5 h-5" />,
-      title: "Performance Expert",
-      description: "Sites otimizados que carregam em menos de 2 segundos",
-      color: 'from-yellow-500 to-orange-500'
+      icon: <Heart className="w-5 h-5" />,
+      title: "Experiência do Usuário",
+      description: "Interfaces intuitivas que encantam e convertem visitantes",
+      color: 'from-pink-500 to-rose-500'
     },
     {
-      icon: <TrendingUp className="w-5 h-5" />,
-      title: "ROI Comprovado",
-      description: "Clientes reportam 300% de retorno nos primeiros 6 meses",
-      color: 'from-blue-500 to-cyan-500'
+      icon: <Sparkles className="w-5 h-5" />,
+      title: "Inovação Constante",
+      description: "Sempre atualizado com as últimas tecnologias e tendências",
+      color: 'from-purple-500 to-indigo-500'
     }
   ];
 
@@ -111,14 +111,27 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
-            Sobre Mim
-          </div>
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full mb-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span className="text-purple-300 text-sm font-medium">Desenvolvedor Frontend</span>
+          </motion.div>
+          
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
-            {t('about.title')}
+            <span className="bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
+              Sobre Mim
+            </span>
           </h2>
+          
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            <span className="text-white font-medium">5+ anos</span> criando soluções web para empresas e profissionais que querem <span className="text-green-400 font-medium">resultados reais</span>. Cada projeto é desenvolvido com foco em performance, SEO e conversão.
+            <span className="text-purple-400 font-semibold">5+ anos</span> transformando ideias em 
+            <span className="text-white font-semibold"> experiências digitais</span> que impressionam. 
+            Especialista em criar interfaces que não apenas funcionam, mas 
+            <span className="text-purple-400 font-semibold"> encantam</span> e 
+            <span className="text-purple-400 font-semibold"> convertem</span>.
           </p>
         </motion.div>
 
@@ -319,33 +332,46 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <h4 className="font-inter font-medium text-xl text-white mb-6">
-                {t('about.coreCompetencies')}
-              </h4>
-              <div className="space-y-4">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                  <Code className="w-4 h-4 text-white" />
+                </div>
+                <h4 className="font-inter font-medium text-xl text-white">
+                  Minhas Especialidades
+                </h4>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {skills.map((skill, index) => (
                   <motion.div
                     key={index}
-                    className="group relative"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 hover:border-white/20 transition-all duration-300"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <span className="text-white/90 group-hover:text-white transition-colors font-inter">
-                          {skill.name}
-                        </span>
-                        <span className="text-white/30 text-xs uppercase tracking-wider font-inter">
-                          {skill.category}
-                        </span>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`p-2 rounded-lg bg-gradient-to-br ${skill.color} bg-opacity-20`}>
+                        <div className="text-white/80">
+                          {skill.icon}
+                        </div>
                       </div>
-                      <span className="text-white/40 text-sm font-mono">
+                      <div className="flex-1">
+                        <div className="text-white/90 group-hover:text-white transition-colors font-inter font-medium">
+                          {skill.name}
+                        </div>
+                        <div className="text-white/40 text-xs uppercase tracking-wider font-inter">
+                          {skill.category}
+                        </div>
+                      </div>
+                      <span className="text-white/60 text-sm font-mono font-bold">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="relative h-1 bg-white/10 rounded-full overflow-hidden">
+                    
+                    <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
                         initial={{ width: 0 }}
@@ -366,28 +392,48 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               viewport={{ once: true }}
             >
-              <h4 className="font-inter font-medium text-xl text-white mb-6">
-                Diferenciais Competitivos
-              </h4>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <Star className="w-4 h-4 text-white" />
+                </div>
+                <h4 className="font-inter font-medium text-xl text-white">
+                  Por Que Me Escolher?
+                </h4>
+              </div>
+              
               <div className="space-y-4">
                 {achievements.map((achievement, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-start gap-4 p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:border-white/20 transition-all duration-300"
+                    className="group relative overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all duration-300"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className={`p-2 rounded-lg bg-gradient-to-br ${achievement.color} bg-opacity-20`}>
-                      <div className="text-white/80">
-                        {achievement.icon}
+                    <div className="flex items-start gap-4">
+                      <motion.div 
+                        className={`p-3 rounded-xl bg-gradient-to-br ${achievement.color} bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300`}
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="text-white/80 group-hover:text-white transition-colors">
+                          {achievement.icon}
+                        </div>
+                      </motion.div>
+                      <div className="flex-1">
+                        <h5 className="text-white font-semibold mb-2 group-hover:text-orange-300 transition-colors">
+                          {achievement.title}
+                        </h5>
+                        <p className="text-white/60 text-sm leading-relaxed group-hover:text-white/80 transition-colors">
+                          {achievement.description}
+                        </p>
                       </div>
                     </div>
-                    <div>
-                      <h5 className="text-white font-medium mb-1">{achievement.title}</h5>
-                      <p className="text-white/60 text-sm">{achievement.description}</p>
-                    </div>
+                    
+                    {/* Hover effect gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
                   </motion.div>
                 ))}
               </div>
@@ -400,29 +446,53 @@ const About = () => {
               transition={{ duration: 0.6, delay: 1 }}
               viewport={{ once: true }}
             >
-              <div className="border border-white/20 p-6 rounded-xl hover:border-white/40 transition-colors duration-300 group cursor-pointer relative overflow-hidden">
-                <div className="flex items-center justify-between relative z-10">
-                  <div>
-                    <h5 className="font-inter font-medium text-white mb-2 group-hover:translate-x-2 transition-transform duration-300">
-                      {t('about.letsCreate')}
-                    </h5>
-                    <p className="text-white/60 text-sm font-inter">
-                      {t('about.availableForProjects')}
-                    </p>
-                  </div>
-                  <motion.div
-                    className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center group-hover:border-white/40 transition-colors duration-300"
-                    whileHover={{ scale: 1.1, rotate: 45 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <motion.div
-                      className="w-4 h-4 border-r border-t border-white/60 transform rotate-45"
-                      whileHover={{ x: 2, y: -2 }}
+              <motion.div 
+                className="relative overflow-hidden bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 rounded-2xl p-6 group cursor-pointer"
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Background gradient animation */}
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-4">
+                    <motion.div 
+                      className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center"
+                      whileHover={{ rotate: 10, scale: 1.1 }}
                       transition={{ duration: 0.2 }}
-                    />
-                  </motion.div>
+                    >
+                      <Rocket className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <div>
+                      <h5 className="font-inter font-semibold text-white text-lg mb-1 group-hover:text-orange-300 transition-colors">
+                        Vamos Criar Algo Incrível Juntos?
+                      </h5>
+                      <p className="text-white/60 text-sm font-inter">
+                        Pronto para transformar sua ideia em realidade digital
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-orange-400 text-sm font-medium">
+                      <span>Iniciar Projeto</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                    </div>
+                    
+                    <motion.div
+                      className="w-8 h-8 border border-orange-400/50 rounded-full flex items-center justify-center group-hover:border-orange-400 group-hover:bg-orange-400/10 transition-all duration-300"
+                      whileHover={{ scale: 1.2, rotate: 45 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <motion.div
+                        className="w-3 h-3 border-r border-t border-orange-400 transform rotate-45"
+                        whileHover={{ x: 1, y: -1 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </motion.div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

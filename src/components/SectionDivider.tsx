@@ -27,19 +27,6 @@ const SectionDivider = () => {
           />
         </motion.div>
 
-        {/* Decorative dots */}
-        <div className="flex justify-center items-center gap-2 mt-8">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-1 h-1 bg-white/40 rounded-full"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-              viewport={{ once: true }}
-            />
-          ))}
-        </div>
       </div>
     </div>
   );

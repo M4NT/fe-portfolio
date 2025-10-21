@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedBackground from './AnimatedBackground';
-import { Check, Star, Zap, Palette, Code, Globe, Layout, Sparkles, Server, ChevronDown, ArrowRight } from 'lucide-react';
+import { Check, Star, Zap, Palette, Code, Globe, Layout, Sparkles, Server, ChevronDown, ArrowRight, Tag } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 const Services = () => {
@@ -427,14 +427,24 @@ const Services = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
-            Serviços & Investimentos
-          </div>
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-full mb-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Tag className="w-4 h-4 text-cyan-400" />
+            <span className="text-cyan-300 text-sm font-medium">Serviços & Investimentos</span>
+          </motion.div>
+          
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
-            Tabela de Serviços
+            <span className="bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent">
+              Tabela de Serviços
+            </span>
           </h2>
+          
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            Investimentos transparentes e competitivos. Clique em cada serviço para ver todos os detalhes incluídos.
+            Investimentos <span className="text-cyan-400 font-semibold">transparentes e competitivos</span>. 
+            Clique em cada serviço para ver <span className="text-blue-400 font-semibold">todos os detalhes incluídos</span>.
           </p>
         </motion.div>
 
@@ -446,19 +456,21 @@ const Services = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-1 gap-1">
+          <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-1.5 gap-2">
             {Object.entries(currencies).map(([key, currency]) => (
-              <button
+              <motion.button
                 key={key}
                 onClick={() => setSelectedCurrency(key as 'BRL' | 'USD' | 'EUR')}
-                className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
+                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   selectedCurrency === key
-                    ? 'bg-white text-black'
-                    : 'text-white/60 hover:text-white'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/25'
+                    : 'text-white/60 hover:text-white/90 hover:bg-white/5'
                 }`}
+                whileHover={{ scale: selectedCurrency === key ? 1 : 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {currency.symbol} {currency.name}
-              </button>
+              </motion.button>
             ))}
           </div>
         </motion.div>

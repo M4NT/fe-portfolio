@@ -13,7 +13,13 @@ export default function BlogPost() {
   
   // Força scroll ao topo quando a página carrega
   useEffect(() => {
+    // Scroll imediato
     window.scrollTo(0, 0);
+    
+    // Scroll suave adicional para garantir
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   }, [slug]);
   
   if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
@@ -22,11 +28,31 @@ export default function BlogPost() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title[language],
+    description: post.excerpt[language],
     datePublished: post.date,
     dateModified: post.date,
-    author: { '@type': 'Person', name: 'Yan Mantovani' },
+    author: { 
+      '@type': 'Person', 
+      name: 'Yan Mantovani',
+      url: 'https://yanmantovani.com',
+      jobTitle: 'Frontend Developer & Digital Artist'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Yan Mantovani',
+      url: 'https://yanmantovani.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://yanmantovani.com/logo.png'
+      }
+    },
     image: post.cover ? [`https://yanmantovani.com${post.cover}`] : undefined,
     mainEntityOfPage: `https://yanmantovani.com/blog/${post.slug}`,
+    url: `https://yanmantovani.com/blog/${post.slug}`,
+    keywords: post.tags ? post.tags.join(', ') : 'desenvolvimento web, frontend, design',
+    articleSection: 'Technology',
+    wordCount: post.content[language].split(' ').length,
+    inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES'
   } as any;
 
   const renderContent = (src: string) => {
@@ -93,10 +119,34 @@ export default function BlogPost() {
       }
       m.content = content;
     };
+    // Meta description
+    const description = post.excerpt[language] || `${post.title[language]} - Desenvolvimento web e design por Yan Mantovani`;
+    setMeta('description', description);
+    setMeta('og:description', description);
+    
+    // Open Graph tags
     setMeta('og:type', 'article');
     setMeta('og:title', post.title[language]);
     setMeta('og:url', url);
+    setMeta('og:description', description);
     if (post.cover) setMeta('og:image', `https://yanmantovani.com${post.cover}`);
+    
+    // Twitter Card tags
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', post.title[language]);
+    setMeta('twitter:description', description);
+    if (post.cover) setMeta('twitter:image', `https://yanmantovani.com${post.cover}`);
+    
+    // Article specific tags
+    setMeta('article:author', 'Yan Mantovani');
+    setMeta('article:published_time', post.date);
+    setMeta('article:modified_time', post.date);
+    
+    // Keywords based on tags
+    if (post.tags && post.tags.length > 0) {
+      const keywords = post.tags.join(', ') + ', desenvolvimento web, frontend, design, landing page';
+      setMeta('keywords', keywords);
+    }
   }, [language, post]);
 
   return (
@@ -292,7 +342,10 @@ export default function BlogPost() {
         .blog-h1 {
           font-size: 2.5rem;
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           line-height: 1.2;
@@ -303,7 +356,10 @@ export default function BlogPost() {
         .blog-h2 {
           font-size: 2rem;
           font-weight: 600;
-          color: white;
+          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin-top: 3rem;
           margin-bottom: 1.25rem;
           line-height: 1.3;
@@ -336,6 +392,7 @@ export default function BlogPost() {
           font-size: 1.25rem;
           color: rgba(255, 255, 255, 0.9);
           margin-bottom: 2rem;
+          font-weight: 400;
         }
         
         .blog-bold {
@@ -354,7 +411,10 @@ export default function BlogPost() {
         }
         
         .blog-important {
-          color: #f59e0b;
+          background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           font-weight: 600;
         }
         
@@ -366,43 +426,49 @@ export default function BlogPost() {
         
         .blog-li {
           margin-bottom: 0.75rem;
-          padding-left: 1.5rem;
+          padding-left: 2rem;
           position: relative;
           color: rgba(255, 255, 255, 0.8);
           line-height: 1.75rem;
         }
         
         .blog-li::before {
-          content: '•';
+          content: '▸';
           position: absolute;
           left: 0.5rem;
-          color: rgba(255, 255, 255, 0.6);
+          background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           font-weight: bold;
+          font-size: 1.2rem;
         }
         
         .blog-content a {
-          color: rgba(255, 255, 255, 0.9);
+          color: #14b8a6;
           text-decoration: underline;
-          text-decoration-color: rgba(255, 255, 255, 0.3);
-          text-underline-offset: 2px;
+          text-decoration-color: rgba(20, 184, 166, 0.3);
+          text-underline-offset: 3px;
           transition: all 0.3s ease;
+          font-weight: 500;
         }
         
         .blog-content a:hover {
-          color: white;
-          text-decoration-color: white;
+          color: #06b6d4;
+          text-decoration-color: #06b6d4;
         }
         
         .blog-content::selection {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(20, 184, 166, 0.3);
           color: white;
         }
         
         .blog-content blockquote {
-          border-left: 2px solid rgba(255, 255, 255, 0.2);
-          padding: 1rem 1.5rem;
-          margin: 1.5rem 0;
-          background: rgba(255, 255, 255, 0.02);
+          border-left: 3px solid #14b8a6;
+          padding: 1.5rem 2rem;
+          margin: 2rem 0;
+          background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+          border-radius: 0.5rem;
           font-style: italic;
           color: rgba(255, 255, 255, 0.9);
         }
@@ -410,29 +476,30 @@ export default function BlogPost() {
         .blog-table {
           margin: 2rem 0;
           overflow-x: auto;
+          border-radius: 1rem;
         }
         
         .blog-table table {
           width: 100%;
           border-collapse: collapse;
-          background: rgba(255, 255, 255, 0.02);
-          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 1rem;
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .blog-table th {
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
           color: white;
           font-weight: 600;
-          padding: 1rem;
+          padding: 1rem 1.5rem;
           text-align: left;
-          border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+          border-bottom: 1px solid rgba(20, 184, 166, 0.3);
         }
         
         .blog-table td {
           color: rgba(255, 255, 255, 0.8);
-          padding: 1rem;
+          padding: 1rem 1.5rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -441,7 +508,7 @@ export default function BlogPost() {
         }
         
         .blog-table tr:hover {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(20, 184, 166, 0.05);
         }
         
         @media (max-width: 768px) {
@@ -468,88 +535,186 @@ export default function BlogPost() {
           .blog-p:first-of-type {
             font-size: 1.125rem;
           }
+          
+          .blog-li {
+            padding-left: 1.5rem;
+          }
         }
       `}} />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <nav className="mb-8 text-white/50 text-sm break-words">
-          <Link to="/blog" className="hover:text-white transition-colors">Blog</Link> 
-          <span className="mx-2">/</span> 
-          <span className="text-white/70 break-words">{post.title[language]}</span>
-        </nav>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb modernizado */}
+        <motion.nav 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8 flex items-center gap-2 text-white/50 text-sm"
+        >
+          <Link to="/blog" className="hover:text-teal-400 transition-colors flex items-center gap-1">
+            <span>←</span>
+            <span>Blog</span>
+          </Link> 
+          <span>/</span> 
+          <span className="text-white/70 line-clamp-1">{post.title[language]}</span>
+        </motion.nav>
         
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 break-words">
-          {post.title[language]}
-        </h1>
-        
-        <div className="flex items-center gap-4 mb-10 text-white/60 text-sm">
-          <span>{new Date(post.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}</span>
-          <span>•</span>
-          <span>{post.tags.slice(0, 3).map((t) => `#${t}`).join(' ')}</span>
-        </div>
-        
-        {post.cover && (
-          <div className="mb-12 overflow-hidden rounded-2xl border border-white/10">
-            <img 
-              src={post.cover} 
-              alt={post.title[language]} 
-              className="w-full h-[280px] md:h-[420px] object-cover" 
-            />
+        {/* Badge de categoria */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-6 inline-flex"
+        >
+          <div className="px-4 py-2 rounded-full border border-teal-500/30 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 backdrop-blur-sm">
+            <span className="text-sm font-medium bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              {post.tags[0]?.toUpperCase()}
+            </span>
           </div>
+        </motion.div>
+        
+        {/* Título com gradiente */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 break-words"
+        >
+          <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
+            {post.title[language]}
+          </span>
+        </motion.h1>
+        
+        {/* Meta info modernizada */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap items-center gap-4 mb-10 text-white/60 text-sm"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
+            <span>{new Date(post.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}</span>
+          </div>
+          <span className="text-white/30">•</span>
+          <div className="flex flex-wrap gap-2">
+            {post.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="text-teal-400/70">#{tag}</span>
+            ))}
+          </div>
+        </motion.div>
+        
+        {/* Imagem de capa modernizada */}
+        {post.cover && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mb-16 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group"
+          >
+            <div className="relative overflow-hidden rounded-2xl">
+              <div className="w-full h-[280px] md:h-[420px] overflow-hidden rounded-2xl">
+                <img 
+                  src={post.cover} 
+                  alt={post.title[language]} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                  style={{ 
+                    borderRadius: '1rem',
+                    transform: 'none !important',
+                    transition: 'transform 0.7s ease !important'
+                  }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+            </div>
+          </motion.div>
         )}
         
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
         
         <div className="blog-content" dangerouslySetInnerHTML={renderContent(post.content[language])} />
         
-        {/* CTA Section */}
-        <div className="mt-16 mb-12 p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-          <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-            {language === 'pt' ? 'Pronto para transformar sua ideia em realidade?' : 
-             language === 'en' ? 'Ready to turn your idea into reality?' : 
-             '¿Listo para convertir tu idea en realidad?'}
-          </h3>
-          <p className="text-white/70 text-lg mb-6 max-w-2xl">
-            {language === 'pt' ? 'Vamos criar juntos uma solução digital que realmente converte e impressiona seus clientes.' : 
-             language === 'en' ? "Let's create together a digital solution that truly converts and impresses your clients." : 
-             'Creemos juntos una solución digital que realmente convierte e impresiona a tus clientes.'}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link 
-              to="/#contact" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-black rounded-lg font-semibold hover:bg-white/90 transition-all duration-300"
-            >
-              {language === 'pt' ? 'Solicitar Orçamento' : language === 'en' ? 'Request Quote' : 'Solicitar Presupuesto'}
-            </Link>
-            <Link 
-              to="/#works" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 border border-white/10"
-            >
-              {language === 'pt' ? 'Ver Portfólio' : language === 'en' ? 'View Portfolio' : 'Ver Portafolio'}
-            </Link>
+        {/* CTA Section modernizada */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 mb-12 relative group"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+          <div className="relative p-8 md:p-10 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+            {/* Decorative orb */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-teal-500/30 to-cyan-500/30 rounded-full blur-3xl"></div>
+            
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-500/20 mb-4">
+                <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></div>
+                <span className="text-xs font-medium text-teal-400">
+                  {language === 'pt' ? 'Vamos Conversar' : language === 'en' ? "Let's Talk" : 'Hablemos'}
+                </span>
+              </div>
+              
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  {language === 'pt' ? 'Pronto para transformar sua ideia em realidade?' : 
+                   language === 'en' ? 'Ready to turn your idea into reality?' : 
+                   '¿Listo para convertir tu idea en realidad?'}
+                </span>
+              </h3>
+              <p className="text-white/70 text-lg mb-8 max-w-2xl">
+                {language === 'pt' ? 'Vamos criar juntos uma solução digital que realmente converte e impressiona seus clientes.' : 
+                 language === 'en' ? "Let's create together a digital solution that truly converts and impresses your clients." : 
+                 'Creemos juntos una solución digital que realmente convierte e impresiona a tus clientes.'}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link 
+                  to="/#contact" 
+                  className="group/btn inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <span>{language === 'pt' ? 'Solicitar Orçamento' : language === 'en' ? 'Request Quote' : 'Solicitar Presupuesto'}</span>
+                  <span className="ml-2 group-hover/btn:translate-x-1 transition-transform">→</span>
+                </Link>
+                <Link 
+                  to="/#works" 
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white/5 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
+                >
+                  {language === 'pt' ? 'Ver Portfólio' : language === 'en' ? 'View Portfolio' : 'Ver Portafolio'}
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
         
-        {/* Tags and Navigation */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        {/* Tags and Navigation modernizadas */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+        >
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <span key={tag} className="px-3 py-1 bg-white/5 text-white/70 rounded-full text-sm border border-white/10">
+            {post.tags.map((tag, idx) => (
+              <motion.span 
+                key={tag}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.05 }}
+                className="px-4 py-2 bg-white/5 text-white/70 rounded-full text-sm border border-white/10 hover:border-teal-500/30 hover:bg-teal-500/10 hover:text-teal-400 transition-all duration-300 cursor-default"
+              >
                 #{tag}
-              </span>
+              </motion.span>
             ))}
           </div>
           <Link 
             to="/blog" 
-            className="text-white/70 hover:text-white transition-colors font-medium flex items-center gap-2"
+            className="group inline-flex items-center gap-2 px-4 py-2 text-white/70 hover:text-white transition-colors font-medium rounded-lg hover:bg-white/5"
           >
-            ← {language === 'pt' ? 'Voltar para o blog' : language === 'en' ? 'Back to blog' : 'Volver al blog'}
+            <span className="group-hover:-translate-x-1 transition-transform">←</span>
+            <span>{language === 'pt' ? 'Voltar para o blog' : language === 'en' ? 'Back to blog' : 'Volver al blog'}</span>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </article>
     

@@ -1,18 +1,169 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { posts } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export default function BlogIndex() {
   const { language } = useLanguage();
+  const [sortBy, setSortBy] = useState('newest');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Força scroll ao topo quando a página carrega
   useEffect(() => {
+    // Scroll imediato
     window.scrollTo(0, 0);
+    
+    // Scroll suave adicional para garantir
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   }, []);
+
+  // SEO Meta tags para Blog Index
+  useEffect(() => {
+    const title = language === 'pt' ? 'Blog - Desenvolvimento Web e Design | Yan Mantovani' : 
+                  language === 'en' ? 'Blog - Web Development and Design | Yan Mantovani' : 
+                  'Blog - Desarrollo Web y Diseño | Yan Mantovani';
+    
+    const description = language === 'pt' ? 'Artigos sobre desenvolvimento web, design e landing pages. Dicas, tutoriais e insights para criar sites que convertem.' :
+                        language === 'en' ? 'Articles about web development, design and landing pages. Tips, tutorials and insights to create converting websites.' :
+                        'Artículos sobre desarrollo web, diseño y landing pages. Consejos, tutoriales e insights para crear sitios que convierten.';
+    
+    document.title = title;
+    
+    // Meta description
+    let metaDesc = document.head.querySelector('meta[name="description"]') as HTMLMetaElement;
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = 'description';
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = description;
+    
+    // Open Graph tags
+    const setMeta = (property: string, content: string) => {
+      let m = document.head.querySelector(`meta[property='${property}']`) as HTMLMetaElement | null;
+      if (!m) {
+        m = document.createElement('meta');
+        m.setAttribute('property', property);
+        document.head.appendChild(m);
+      }
+      m.content = content;
+    };
+    
+    setMeta('og:type', 'website');
+    setMeta('og:title', title);
+    setMeta('og:description', description);
+    setMeta('og:url', 'https://yanmantovani.com/blog');
+    
+    // Twitter Card
+    setMeta('twitter:card', 'summary');
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    
+    // Keywords
+    const keywords = 'desenvolvimento web, frontend, design, landing page, blog, tutoriais, dicas, conversão, SEO, performance';
+    let metaKeywords = document.head.querySelector('meta[name="keywords"]') as HTMLMetaElement;
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta');
+      metaKeywords.name = 'keywords';
+      document.head.appendChild(metaKeywords);
+    }
+    metaKeywords.content = keywords;
+    
+    // Structured Data (JSON-LD) para Blog Index
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: title,
+      description: description,
+      url: 'https://yanmantovani.com/blog',
+      author: {
+        '@type': 'Person',
+        name: 'Yan Mantovani',
+        url: 'https://yanmantovani.com',
+        jobTitle: 'Frontend Developer & Digital Artist'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Yan Mantovani',
+        url: 'https://yanmantovani.com'
+      },
+      inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES',
+      blogPost: sortedPosts.slice(0, 5).map(post => ({
+        '@type': 'BlogPosting',
+        headline: post.title[language],
+        description: post.excerpt[language],
+        datePublished: post.date,
+        url: `https://yanmantovani.com/blog/${post.slug}`,
+        author: {
+          '@type': 'Person',
+          name: 'Yan Mantovani'
+        }
+      }))
+    };
+    
+    // Remove existing structured data
+    const existingScript = document.head.querySelector('script[type="application/ld+json"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    // Add new structured data
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+  }, [language, sortedPosts]);
+
+  // Scroll ao topo quando mudar o filtro
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [sortBy]);
+
+  // Fechar dropdown quando clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.dropdown-container')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
+  // Função para ordenar posts
+  const getSortedPosts = () => {
+    const sortedPosts = [...posts];
+    
+    switch (sortBy) {
+      case 'newest':
+        return sortedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      case 'oldest':
+        return sortedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      case 'title':
+        return sortedPosts.sort((a, b) => a.title[language].localeCompare(b.title[language]));
+      default:
+        return sortedPosts;
+    }
+  };
+
+  const sortOptions = [
+    { value: 'newest', label: { pt: 'Mais Recentes', en: 'Newest', es: 'Más Recientes' } },
+    { value: 'oldest', label: { pt: 'Mais Antigos', en: 'Oldest', es: 'Más Antiguos' } },
+    { value: 'title', label: { pt: 'Título A-Z', en: 'Title A-Z', es: 'Título A-Z' } }
+  ];
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
@@ -197,62 +348,180 @@ export default function BlogIndex() {
 
     <section id="blog" className="relative py-24 md:py-32 bg-black min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="mb-16">
-          <h1 className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-none tracking-tight mb-6">
-            {language === 'pt' ? 'Blog' : language === 'en' ? 'Blog' : 'Blog'}
-          </h1>
-          <p className="text-white/70 text-lg md:text-xl max-w-3xl">
+        {/* Header modernizado */}
+        <div className="mb-20 text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-500/20 mb-6"
+          >
+            <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></div>
+            <span className="text-sm font-medium bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              {language === 'pt' ? 'BLOG' : language === 'en' ? 'BLOG' : 'BLOG'}
+            </span>
+          </motion.div>
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-6"
+          >
+            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
+              {language === 'pt' ? 'Últimas Publicações' : language === 'en' ? 'Latest Posts' : 'Últimas Publicaciones'}
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-white/70 text-lg md:text-xl max-w-3xl mx-auto"
+          >
             {language === 'pt' ? 'Insights, dicas e estratégias sobre desenvolvimento web, design e conversão de landing pages.' : 
              language === 'en' ? 'Insights, tips and strategies about web development, design and landing page conversion.' : 
              'Ideas, consejos y estrategias sobre desarrollo web, diseño y conversión de landing pages.'}
-          </p>
+          </motion.p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8">
-          {posts.map((p, idx) => (
-            <Link 
-              key={p.slug} 
-              to={`/blog/${p.slug}`} 
-              className="group block rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:bg-white/10 transition-all duration-300"
-              style={{ animationDelay: `${idx * 100}ms` }}
+        {/* Filtro de ordenação */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12 flex justify-center"
+        >
+          <div className="relative dropdown-container">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-teal-500/30 transition-all duration-300 backdrop-blur-sm"
             >
-              {p.cover && (
-                <div className="h-56 w-full overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                  <img 
-                    src={p.cover} 
-                    alt={p.title[language]} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                  />
-                </div>
-              )}
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-white/60 text-sm">
-                    {new Date(p.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
-                      year: 'numeric', 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
-                  </span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-white/50 text-sm">{p.tags[0]}</span>
-                </div>
+              <span className="text-white font-medium">
+                {language === 'pt' ? 'Ordenar por:' : language === 'en' ? 'Sort by:' : 'Ordenar por:'}
+              </span>
+              <span className="text-teal-400 font-medium">
+                {sortOptions.find(option => option.value === sortBy)?.label[language]}
+              </span>
+              <ChevronDownIcon 
+                className={`w-4 h-4 text-white/60 transition-transform duration-200 ${
+                  isDropdownOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </button>
+            
+            {/* Dropdown */}
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full left-0 mt-2 w-64 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden z-50"
+              >
+                {sortOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      setSortBy(option.value);
+                      setIsDropdownOpen(false);
+                    }}
+                    className={`w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-200 ${
+                      sortBy === option.value 
+                        ? 'bg-teal-500/20 text-teal-400' 
+                        : 'text-white/80 hover:text-white'
+                    }`}
+                  >
+                    {option.label[language]}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+        
+        {/* Grid de posts modernizado */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {getSortedPosts().map((p, idx) => (
+            <motion.div
+              key={p.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              <Link 
+                to={`/blog/${p.slug}`} 
+                className="group blog-card block h-full rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-teal-500/30 hover:bg-white/10 transition-all duration-300 flex flex-col"
+              >
+                {/* Imagem de capa */}
+                {p.cover && (
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <div className="w-full h-full overflow-hidden rounded-t-2xl">
+                      <img 
+                        src={p.cover} 
+                        alt={p.title[language]} 
+                        className="w-full h-full object-cover" 
+                        style={{ 
+                          borderRadius: '1rem 1rem 0 0',
+                          transform: 'none !important',
+                          transition: 'none !important',
+                          animation: 'none !important',
+                          willChange: 'auto !important',
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          display: 'block'
+                        }}
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 rounded-t-2xl"></div>
+                    {/* Badge de categoria */}
+                    <div className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20">
+                      <span className="text-xs font-medium text-white">
+                        {p.tags[0]?.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 
-                <h2 className="text-white text-2xl md:text-3xl font-semibold mb-3 leading-tight group-hover:text-white/80 transition-colors">
-                  {p.title[language]}
-                </h2>
-                
-                <p className="text-white/70 mb-4 line-clamp-3 leading-relaxed">
-                  {p.excerpt[language]}
-                </p>
-                
-                <div className="flex items-center gap-2 text-white/70 font-medium group-hover:text-white transition-colors">
-                  <span>{language === 'pt' ? 'Ler artigo' : language === 'en' ? 'Read article' : 'Leer artículo'}</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                {/* Conteúdo */}
+                <div className="p-6 flex flex-col flex-grow">
+                  {/* Meta info */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
+                      <span>
+                        {new Date(p.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Título */}
+                  <h2 className="text-white text-xl md:text-2xl font-bold mb-3 leading-tight group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                    {p.title[language]}
+                  </h2>
+                  
+                  {/* Excerpt */}
+                  <p className="text-white/70 mb-8 line-clamp-2 leading-relaxed text-sm flex-grow">
+                    {p.excerpt[language]}
+                  </p>
+                  
+                  {/* CTA - Fixado no final */}
+                  <div className="mt-auto">
+                    <div className="flex items-center gap-2 text-teal-400 font-medium group-hover:gap-3 transition-all duration-300 text-sm">
+                      <span>{language === 'pt' ? 'Ler artigo' : language === 'en' ? 'Read article' : 'Leer artículo'}</span>
+                      <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                    
+                    {/* Decorative gradient line */}
+                    <div className="mt-3 h-1 w-full bg-gradient-to-r from-teal-500/0 via-teal-500/50 to-teal-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

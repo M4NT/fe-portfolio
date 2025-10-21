@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CreditCard, Smartphone, Calendar, TrendingUp, Shield, Clock, FileText, Check, ArrowRight, Zap } from 'lucide-react';
+import { CreditCard, Smartphone, Calendar, TrendingUp, Shield, Clock, FileText, Check, ArrowRight, Zap, Sparkles, Wallet } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import AnimatedBackground from './AnimatedBackground';
 
 const PaymentTerms = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,10 +106,10 @@ const PaymentTerms = () => {
     <section 
       id="payment" 
       ref={containerRef}
-      className="relative py-24 md:py-32 bg-black"
+      className="relative py-16 md:py-24 bg-black overflow-hidden"
     >
-      {/* Subtle Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black" />
+      {/* Animated Background */}
+      <AnimatedBackground variant="subtle" />
 
       <motion.div 
         className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10"
@@ -121,14 +122,24 @@ const PaymentTerms = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-white/40 text-sm uppercase tracking-wider mb-4 font-inter">
-            Formas de Pagamento
-          </div>
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-full mb-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Wallet className="w-4 h-4 text-indigo-400" />
+            <span className="text-indigo-300 text-sm font-medium">Formas de Pagamento</span>
+          </motion.div>
+          
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
-            Flexibilidade Total
+            <span className="bg-gradient-to-r from-white via-indigo-200 to-purple-400 bg-clip-text text-transparent">
+              Flexibilidade Total
+            </span>
           </h2>
+          
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            Escolha a forma de pagamento que melhor se adapta ao seu orçamento. Todas as opções são seguras e transparentes.
+            Escolha a forma de pagamento que <span className="text-indigo-400 font-semibold">melhor se adapta</span> ao seu orçamento. 
+            Todas as opções são <span className="text-purple-400 font-semibold">seguras e transparentes</span>.
           </p>
         </motion.div>
 
@@ -142,9 +153,12 @@ const PaymentTerms = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              whileHover={{ y: -4 }}
             >
               {/* Payment Card */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300">
+              <div className="relative overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-white/20 transition-all duration-300">
+                {/* Hover Gradient Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${payment.accent} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`} />
                 {/* Header - Clickable */}
                 <button
                   onClick={() => togglePayment(payment.id)}
@@ -264,28 +278,37 @@ const PaymentTerms = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-center mb-8">
-            <h3 className="text-white text-2xl font-light mb-2">Segurança Garantida</h3>
-            <p className="text-white/60">Todas as transações são protegidas e transparentes</p>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center">
+              <Shield className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-white text-2xl font-semibold">Segurança Garantida</h3>
+              <p className="text-white/60 text-sm">Todas as transações são protegidas e transparentes</p>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {securityFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:border-white/20 transition-all duration-300"
+                className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:border-indigo-400/30 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4, scale: 1.02 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <motion.div 
+                  className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                  whileHover={{ rotate: 5 }}
+                >
                   <div className="text-white">
                     {feature.icon}
                   </div>
-                </div>
-                <h4 className="text-white font-medium mb-2">{feature.title}</h4>
-                <p className="text-white/60 text-sm">{feature.description}</p>
+                </motion.div>
+                <h4 className="text-white font-semibold mb-2 group-hover:text-indigo-300 transition-colors">{feature.title}</h4>
+                <p className="text-white/60 text-sm group-hover:text-white/80 transition-colors">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -293,35 +316,43 @@ const PaymentTerms = () => {
 
         {/* Bottom CTA */}
         <motion.div 
-          className="text-center border-t border-white/10 pt-12"
+          className="relative overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-indigo-500/10 p-8 lg:p-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm mb-4">
+          {/* Background Glow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5" />
+          
+          <div className="relative z-10 text-center max-w-2xl mx-auto">
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/20 border border-indigo-500/30 rounded-full text-indigo-300 text-sm mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
               <Shield className="w-4 h-4" />
               <span>Todas as transações são seguras e protegidas</span>
-            </div>
-          </div>
+            </motion.div>
 
-          <h3 className="text-white text-2xl font-light mb-3">
-            Pronto para começar?
-          </h3>
-          <p className="text-white/60 mb-6 max-w-2xl mx-auto">
-            Entre em contato para discutirmos a melhor forma de pagamento para o seu projeto.
-          </p>
-          
-          <a
-            href="#contact"
-            className="group/cta relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg font-medium overflow-hidden transition-all hover:border-gray-600 hover:shadow-lg hover:shadow-gray-500/20"
-          >
-            <span className="relative bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent font-semibold text-lg group-hover/cta:from-white group-hover/cta:via-white group-hover/cta:to-gray-300 transition-all duration-300">
-              Discutir Condições de Pagamento
-            </span>
-            <ArrowRight className="w-5 h-5 text-white/80 group-hover/cta:text-white group-hover/cta:translate-x-1 transition-all duration-300" />
-          </a>
+            <h3 className="text-white font-bold text-3xl mb-4">
+              Pronto para Começar?
+            </h3>
+            
+            <p className="text-white/70 text-lg mb-8">
+              Entre em contato para discutirmos a <span className="text-indigo-400 font-semibold">melhor forma de pagamento</span> para o seu projeto.
+            </p>
+            
+            <motion.a
+              href="#contact"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl text-white font-bold text-lg transition-all shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/40"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Sparkles className="w-5 h-5" />
+              <span>Discutir Condições de Pagamento</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+          </div>
         </motion.div>
       </motion.div>
     </section>

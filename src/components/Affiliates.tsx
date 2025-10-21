@@ -1,26 +1,48 @@
 import { motion } from 'framer-motion';
-import { Flame, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { Flame, CheckCircle2, Sparkles, ArrowRight, Gift, Users, TrendingUp } from 'lucide-react';
 import { trackGAEvent } from '../lib/analytics';
 import { useLanguage } from './LanguageContext';
+import AffiliatesBackground from './AffiliatesBackground';
+
+const benefits = {
+  pt: [
+    { icon: '💰', label: 'Você economiza', value: 'R$ 300 de desconto' },
+    { icon: '🎁', label: 'Quem indicou ganha', value: 'R$ 300 em créditos' },
+    { icon: '🤝', label: 'Projetos válidos', value: 'Landing Page ou Site' },
+    { icon: '✅', label: 'Aplicação', value: 'No fechamento do contrato' }
+  ],
+  en: [
+    { icon: '💰', label: 'You save', value: '$60 discount' },
+    { icon: '🎁', label: 'Referrer gets', value: '$60 in credits' },
+    { icon: '🤝', label: 'Valid projects', value: 'Landing Page or Website' },
+    { icon: '✅', label: 'Applied', value: 'On contract closing' }
+  ],
+  es: [
+    { icon: '💰', label: 'Ahorras', value: '$60 de descuento' },
+    { icon: '🎁', label: 'Quien indica gana', value: '$60 en créditos' },
+    { icon: '🤝', label: 'Proyectos válidos', value: 'Landing Page o Sitio' },
+    { icon: '✅', label: 'Aplicación', value: 'Al cerrar el contrato' }
+  ]
+};
 
 const rules = {
   pt: [
-    'R$ 300 de desconto para o novo cliente (Site Institucional ou Landing Page)',
-    'Quem indicou recebe R$ 300 de crédito no próximo projeto',
-    'Válido no fechamento (contrato + entrada) • 1 por projeto • Não cumulativo',
-    'Sem abordagens ativas: o indicado precisa vir até mim e informar quem indicou'
+    'Mencione quem indicou no primeiro contato',
+    'Válido para Landing Pages e Sites Institucionais',
+    '1 indicação por projeto (não cumulativo)',
+    'Benefício aplicado no fechamento com entrada'
   ],
   en: [
-    '$60 off for the new client (Institutional Site or Landing Page)',
-    'Referrer gets $60 credit for the next project',
-    'Applied on closing (contract + deposit) • 1 per project • Not cumulative',
-    'No outreach: the referred client must contact and mention the referrer'
+    'Mention referrer in first contact',
+    'Valid for Landing Pages and Institutional Sites',
+    '1 referral per project (non-cumulative)',
+    'Benefit applied on closing with deposit'
   ],
   es: [
-    '$60 de descuento para el nuevo cliente (Sitio institucional o Landing Page)',
-    'Quien indica recibe $60 de crédito para el próximo proyecto',
-    'Válido al cerrar (contrato + entrada) • 1 por proyecto • No acumulable',
-    'Sin abordaje activo: el referido debe contactarnos e informar quién lo indicó'
+    'Menciona quién indicó en el primer contacto',
+    'Válido para Landing Pages y Sitios Institucionales',
+    '1 referido por proyecto (no acumulable)',
+    'Beneficio aplicado al cerrar con entrada'
   ]
 };
 
@@ -36,8 +58,12 @@ export default function Affiliates() {
   };
 
   return (
-    <section id="affiliates" className="relative py-24 md:py-32 bg-black">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="affiliates" className="relative py-24 md:py-32 bg-black overflow-hidden">
+      {/* Animated Background with Emojis */}
+      <AffiliatesBackground />
+      
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Section Header - Mantendo estética original */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,9 +71,13 @@ export default function Affiliates() {
           transition={{ duration: 0.6 }}
           className="mb-10 flex items-center gap-3"
         >
-          <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500/80">
+          <motion.div 
+            className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500/80"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ duration: 0.2 }}
+          >
             <Flame className="w-5 h-5 text-white" />
-          </div>
+          </motion.div>
           <h2 className="text-white text-3xl md:text-5xl font-light tracking-tight">
             {language === 'pt' && (<>
               Indique e economize <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">R$ 300</span>
@@ -66,81 +96,161 @@ export default function Affiliates() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="text-white/70 text-lg md:text-xl max-w-3xl mb-10"
+          className="text-white/80 text-lg md:text-xl max-w-3xl mb-16"
         >
-          {language === 'pt' && 'Programa simples e vantajoso: quem fecha um projeto e informa quem indicou paga menos, e quem indicou ganha crédito para o próximo.'}
-          {language === 'en' && 'Simple and fair: close a project, mention who referred you and pay less; the referrer gets credit for the next project.'}
-          {language === 'es' && 'Simple y ventajoso: cierras un proyecto, mencionas quién te indicó y pagas menos; quien indica recibe crédito para el próximo proyecto.'}
+          {language === 'pt' && (
+            <>
+              Ganhe <span className="text-orange-400 font-bold">R$ 300</span> de desconto no seu projeto 
+              <span className="text-white font-semibold"> ao mencionar quem indicou</span>. 
+              Quem indica também recebe <span className="text-pink-400 font-bold">R$ 300 em créditos</span>. 
+              <span className="block mt-2 text-white/60 text-base">
+                É vantagem para todos! 🎉
+              </span>
+            </>
+          )}
+          {language === 'en' && (
+            <>
+              Get <span className="text-orange-400 font-bold">$60</span> off your project 
+              <span className="text-white font-semibold"> by mentioning who referred you</span>. 
+              Referrers also get <span className="text-pink-400 font-bold">$60 in credits</span>. 
+              <span className="block mt-2 text-white/60 text-base">
+                Win-win for everyone! 🎉
+              </span>
+            </>
+          )}
+          {language === 'es' && (
+            <>
+              Obtén <span className="text-orange-400 font-bold">$60</span> de descuento en tu proyecto 
+              <span className="text-white font-semibold"> mencionando quién te indicó</span>. 
+              Quien indica también recibe <span className="text-pink-400 font-bold">$60 en créditos</span>. 
+              <span className="block mt-2 text-white/60 text-base">
+                ¡Ventaja para todos! 🎉
+              </span>
+            </>
+          )}
         </motion.p>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {[0,1,2].map((i) => (
+        {/* Benefits Grid - Visual mais impactante */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+          {benefits[language].map((benefit, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * i }}
-              className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -6, scale: 1.05 }}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6 backdrop-blur-sm hover:border-orange-400/30 transition-all duration-300 text-center"
             >
-              <div className="flex items-start gap-3">
-                <div className="mt-1 text-orange-400"><Sparkles className="w-5 h-5" /></div>
-                <div>
-                  <h3 className="text-white text-lg font-semibold mb-1">
-                    {i === 0 && (language === 'pt' ? 'Como funciona' : language === 'en' ? 'How it works' : 'Cómo funciona')}
-                    {i === 1 && (language === 'pt' ? 'Quem ganha o quê' : language === 'en' ? 'Who gets what' : 'Quién gana qué')}
-                    {i === 2 && (language === 'pt' ? 'Regras rápidas' : language === 'en' ? 'Quick rules' : 'Reglas rápidas')}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {i === 0 && (language === 'pt' ? 'Ao fechar seu projeto, informe quem te indicou. Se for Site Institucional ou Landing Page, você recebe R$ 300 de desconto.' : language === 'en' ? 'When closing your project, mention who referred you. For Institutional Site or Landing Page, you get $60 off.' : 'Al cerrar tu proyecto, menciona quién te indicó. Para Sitio institucional o Landing Page, obtienes $60 de descuento.')}
-                    {i === 1 && (language === 'pt' ? 'Você paga menos; quem indicou recebe R$ 300 de crédito no próximo projeto. Vantagem para os dois lados.' : language === 'en' ? 'You pay less; the referrer gets $60 credit for the next project. Win‑win.' : 'Pagas menos; quien indica recibe $60 de crédito para el próximo proyecto. Win‑win.')}
-                    {i === 2 && (language === 'pt' ? 'Benefício aplicado no fechamento (contrato + entrada), 1 por projeto, não cumulativo, sem prospecção ativa do indicado.' : language === 'en' ? 'Benefit applied on closing (contract + deposit), 1 per project, not cumulative, no outreach to the referred client.' : 'Beneficio aplicado al cerrar (contrato + entrada), 1 por proyecto, no acumulable, sin abordaje activo al referido.')}
-                  </p>
+              <div className="relative z-10">
+                <motion.div 
+                  className="text-4xl mb-3"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  {benefit.icon}
+                </motion.div>
+                <div className="text-white/50 text-xs uppercase tracking-wider mb-1 font-medium">
+                  {benefit.label}
+                </div>
+                <div className="text-white font-bold text-lg">
+                  {benefit.value}
                 </div>
               </div>
+              
+              {/* Hover Glow */}
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
             </motion.div>
           ))}
         </div>
 
-        <motion.ul
-          initial={{ opacity: 0, y: 10 }}
+        {/* How it Works */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid md:grid-cols-2 gap-3 mb-10"
+          className="mb-12"
         >
-          {rules[language].map((item, idx) => (
-            <li key={idx} className="flex items-start gap-2 text-white/80">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 mt-0.5" />
-              <span className="text-sm md:text-base leading-relaxed">{item}</span>
-            </li>
-          ))}
-        </motion.ul>
+          <h3 className="text-white font-semibold text-2xl mb-6 flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-pink-500 rounded-xl flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            {language === 'pt' && 'Como Funciona'}
+            {language === 'en' && 'How It Works'}
+            {language === 'es' && 'Cómo Funciona'}
+          </h3>
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            {rules[language].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
+              >
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <span className="text-white/80 text-sm leading-relaxed">{item}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
+        {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="flex flex-wrap items-center gap-4"
+          transition={{ duration: 0.6 }}
+          className="relative overflow-hidden rounded-3xl border border-orange-500/30 bg-gradient-to-br from-orange-500/10 via-pink-500/5 to-orange-500/10 p-8 lg:p-12"
         >
-          <button
-            onClick={handleWhatsApp}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold transition-all shadow-[0_0_40px_-15px_rgba(255,100,0,0.6)] hover:shadow-[0_0_50px_-12px_rgba(255,100,0,0.8)]"
-          >
-            <span className="relative">
-              {language === 'pt' && 'Falar no WhatsApp'}
-              {language === 'en' && 'Chat on WhatsApp'}
-              {language === 'es' && 'Hablar por WhatsApp'}
-              {/* foguinho + dinheiro animados no hover */}
-              <span className="pointer-events-none absolute -right-8 -top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="inline-block animate-bounce">🔥</span>
-                <span className="inline-block animate-pulse ml-1">💸</span>
+          {/* Background Glow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-pink-500/5" />
+          
+          <div className="relative z-10 text-center max-w-2xl mx-auto">
+            <motion.div 
+              className="text-6xl mb-4"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              🎉
+            </motion.div>
+            
+            <h4 className="text-white font-bold text-3xl mb-4">
+              {language === 'pt' && 'Pronto para Economizar?'}
+              {language === 'en' && 'Ready to Save?'}
+              {language === 'es' && '¿Listo para Ahorrar?'}
+            </h4>
+            
+            <p className="text-white/70 text-lg mb-8">
+              {language === 'pt' && 'Entre em contato agora e mencione quem indicou para garantir seu desconto de R$ 300!'}
+              {language === 'en' && 'Contact now and mention your referrer to secure your $60 discount!'}
+              {language === 'es' && '¡Contacta ahora y menciona quién te indicó para asegurar tu descuento de $60!'}
+            </p>
+            
+            <motion.button
+              onClick={handleWhatsApp}
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold text-lg transition-all shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/40"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Flame className="w-5 h-5" />
+              <span>
+                {language === 'pt' && 'Falar no WhatsApp'}
+                {language === 'en' && 'Chat on WhatsApp'}
+                {language === 'es' && 'Hablar por WhatsApp'}
               </span>
-            </span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <span className="text-white/50 text-sm">Informe quem indicou no primeiro contato</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+            
+            <p className="text-white/50 text-sm mt-6">
+              {language === 'pt' && '💡 Lembre-se: Mencione quem indicou no primeiro contato'}
+              {language === 'en' && '💡 Remember: Mention your referrer in the first contact'}
+              {language === 'es' && '💡 Recuerda: Menciona quién te indicó en el primer contacto'}
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
