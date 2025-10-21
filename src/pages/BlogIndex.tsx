@@ -5,7 +5,7 @@ import { posts } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { ChevronDown } from 'lucide-react';
 
 export default function BlogIndex() {
   const { language } = useLanguage();
@@ -402,7 +402,7 @@ export default function BlogIndex() {
               <span className="text-teal-400 font-medium">
                 {sortOptions.find(option => option.value === sortBy)?.label[language]}
               </span>
-              <ChevronDownIcon 
+              <ChevronDown 
                 className={`w-4 h-4 text-white/60 transition-transform duration-200 ${
                   isDropdownOpen ? 'rotate-180' : ''
                 }`} 
