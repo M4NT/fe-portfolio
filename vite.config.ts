@@ -20,13 +20,17 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 3,
+        passes: 4,
         unsafe: true,
         unsafe_comps: true,
         unsafe_math: true,
         dead_code: true,
         unused: true,
-        side_effects: false
+        side_effects: false,
+        collapse_vars: true,
+        reduce_vars: true,
+        hoist_funs: true,
+        hoist_vars: true
       },
       mangle: {
         toplevel: true,
