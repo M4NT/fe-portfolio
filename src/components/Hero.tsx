@@ -35,7 +35,7 @@ const Hero = () => {
     <section 
       id="home" 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
+      className="hero-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -298,7 +298,7 @@ const Hero = () => {
             </div>
             
               {/* Nome/Marca principal */}
-              <h1 className="font-inter font-light text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
+              <h1 className="hero-title font-inter font-light text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
                 <span className="text-white">Yan</span>
                 <span className="mx-1 sm:mx-2 text-white/40">—</span>
                 <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">

@@ -50,6 +50,42 @@ html {
 img {
   content-visibility: auto;
   contain-intrinsic-size: 300px 200px;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* Prevenção de reflows forçados */
+* {
+  box-sizing: border-box;
+}
+
+/* Otimização de layout para evitar reflows */
+.hero-section,
+.about-section,
+.projects-section,
+.services-section {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Otimização de animações para GPU */
+.animate-composite,
+.gpu-accelerated,
+[data-framer-motion] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Otimização de fontes para evitar FOIT */
+body {
+  font-display: swap;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Lazy loading otimizado */
