@@ -259,15 +259,27 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <Link to="/privacy-policy" className="hover:text-white/60 transition-colors">
+          <Link 
+            to="/privacy-policy" 
+            className="hover:text-white/60 transition-colors"
+            aria-label="Ler Política de Privacidade completa"
+          >
             Política de Privacidade
           </Link>
           <span>•</span>
-          <Link to="/terms-of-use" className="hover:text-white/60 transition-colors">
+          <Link 
+            to="/terms-of-use" 
+            className="hover:text-white/60 transition-colors"
+            aria-label="Ler Termos de Uso completos"
+          >
             Termos de Uso
           </Link>
           <span>•</span>
-          <Link to="/cookie-policy" className="hover:text-white/60 transition-colors">
+          <Link 
+            to="/cookie-policy" 
+            className="hover:text-white/60 transition-colors"
+            aria-label="Ler Política de Cookies completa"
+          >
             Política de Cookies
           </Link>
         </motion.div>

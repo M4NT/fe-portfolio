@@ -11,10 +11,10 @@ const About = () => {
   const { t } = useLanguage();
 
   const profileImages = [
-    "/images/about/photo-1.png",
-    "/images/about/photo-2.png", 
-    "/images/about/photo-3.png",
-    "/images/about/photo-4.png"
+    "/images/about/photo-1.webp",
+    "/images/about/photo-2.webp", 
+    "/images/about/photo-3.webp",
+    "/images/about/photo-4.webp"
   ];
 
   const stats = [

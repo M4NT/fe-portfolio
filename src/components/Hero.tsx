@@ -10,7 +10,8 @@ const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    // Reduzir frequência de atualização para melhor performance
+    const timer = setInterval(() => setCurrentTime(new Date()), 30000); // 30s em vez de 1s
     return () => clearInterval(timer);
   }, []);
 
@@ -40,7 +41,7 @@ const Hero = () => {
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient orbs - More vibrant */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl animate-composite"
           animate={{ 
             scale: [1, 1.3, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -48,9 +49,10 @@ const Hero = () => {
             y: [0, -10, 0]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: 'transform, opacity' }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl animate-composite"
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.7, 0.4],
@@ -58,6 +60,7 @@ const Hero = () => {
             y: [0, 15, 0]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: 'transform, opacity' }}
         />
         
         {/* Additional accent orbs */}
@@ -544,7 +547,7 @@ const Hero = () => {
                   </motion.div>
 
                   {/* Dynamic title with typewriter effect */}
-                  <motion.h3 
+                  <motion.h2 
                     className="text-white text-lg sm:text-xl font-semibold mb-2 text-center"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -565,7 +568,7 @@ const Hero = () => {
                     >
                       Desenvolvedor Frontend
                     </motion.span>
-                  </motion.h3>
+                  </motion.h2>
 
                   {/* Animated description */}
                   <motion.p 

@@ -24,23 +24,33 @@ export default defineConfig({
     // },
     rollupOptions: {
       output: {
-        // Code splitting otimizado
-        manualChunks: {
-          // Vendor chunks
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-router': ['react-router-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-icons': ['lucide-react'],
-          // App chunks
-          'app-components': [
-            './src/components/Hero.tsx',
-            './src/components/Navigation.tsx',
-            './src/components/Footer.tsx'
-          ],
-          'app-pages': [
-            './src/pages/BlogIndex.tsx',
-            './src/pages/BlogPost.tsx'
-          ]
+        // Code splitting otimizado - apenas chunks essenciais
+        manualChunks: (id) => {
+          // Vendor chunks críticos apenas
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            // Agrupar outros vendors menores
+            return 'vendor-misc';
+          }
+          
+          // App chunks por funcionalidade
+          if (id.includes('/components/')) {
+            return 'app-components';
+          }
+          if (id.includes('/pages/')) {
+            return 'app-pages';
+          }
+          if (id.includes('/blog/')) {
+            return 'app-blog';
+          }
         },
         // Otimizar nomes de arquivos
         chunkFileNames: 'assets/[name]-[hash].js',

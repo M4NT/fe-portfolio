@@ -23,7 +23,7 @@ export const posts: BlogPost[] = [
     },
     date: '2025-01-22T10:00:00.000Z',
     tags: ['marketing-digital', 'conversao', 'estrategia', 'web-design', 'resultados'],
-    cover: '/images/blog/seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas.jpg',
+    cover: '/images/blog/seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas.webp',
     content: {
       pt: `# Seu Site é uma Vitrine Bonita ou uma Máquina de Vendas? Os 3 Segredos dos Sites que Convertem
 
@@ -380,7 +380,7 @@ Ahora que conoces los 3 secretos, es hora de actuar:
     },
     date: '2025-01-22T10:00:00.000Z',
     tags: ['performance', 'seo', 'experiencia-usuario', 'negocios-digitais', 'conversao'],
-    cover: '/images/blog/por-que-seu-site-lento-esta-roubando-seus-clientes.jpg',
+    cover: '/images/blog/por-que-seu-site-lento-esta-roubando-seus-clientes.webp',
     content: {
       pt: `# Por que seu site lento está roubando seus clientes? Os 3 culpados que você não vê
 
@@ -647,7 +647,7 @@ Dejar tu sitio web lento es como tener una tienda increíble en una calle donde 
     },
     date: '2025-01-20T10:00:00.000Z',
     tags: ['landing-page', 'preco', 'roi', 'conversao', 'marketing-digital'],
-    cover: '/images/blog/quanto-custa-landing-page-2025.jpg',
+    cover: '/images/blog/quanto-custa-landing-page-2025.webp',
     content: {
       pt: `# Quanto Custa uma Landing Page em 2025? O Guia Definitivo de Investimento e ROI
 
@@ -1234,7 +1234,7 @@ Invertir en una landing page no es un gasto, es una **inversión estratégica**.
     },
     date: '2025-01-19T14:30:00.000Z',
     tags: ['processo', 'metodologia', 'desenvolvimento', 'design', 'conversao'],
-    cover: '/images/blog/etapas-para-lancar-seu-site.jpg',
+    cover: '/images/blog/etapas-para-lancar-seu-site.webp',
     content: {
       pt: `# Do Rascunho à Realidade: O Guia Definitivo de 4 Etapas para Lançar um Site de Sucesso
 
@@ -1723,7 +1723,7 @@ Transformar una idea en un sitio profesional no tiene que ser complicado. Con un
     },
     date: '2025-01-18T09:15:00.000Z',
     tags: ['conversao', 'otimizacao', 'landing-page', 'marketing', 'ux'],
-    cover: '/images/blog/como-aumentar-conversoes-landing-page.jpg',
+    cover: '/images/blog/como-aumentar-conversoes-landing-page.webp',
     content: {
       pt: `# Como Aumentar Conversões na Sua Landing Page: 15 Estratégias Comprovadas que Dobram Resultados
 
@@ -2415,7 +2415,7 @@ Aumentar conversiones en landing pages no es suerte - es ciencia. Con las estrat
     },
     date: '2025-01-17T16:45:00.000Z',
     tags: ['ferramentas', 'desenvolvimento', 'produtividade', 'tecnologia'],
-    cover: '/images/blog/melhores-ferramentas-desenvolvimento-web-2025.jpg',
+    cover: '/images/blog/melhores-ferramentas-desenvolvimento-web-2025.webp',
     content: {
       pt: `# As 20 Melhores Ferramentas para Desenvolvimento Web em 2025: O Stack Completo para Desenvolvedores Modernos
 
@@ -3113,7 +3113,7 @@ Las herramientas correctas pueden hacer la diferencia entre un proyecto que func
     },
     date: '2025-01-21T10:00:00.000Z',
     tags: ['landing-page', 'ferramentas', 'conversao', 'marketing-digital', 'gratuito'],
-    cover: '/images/blog/o-que-e-landing-page-melhores-ferramentas-gratuitas.jpg',
+    cover: '/images/blog/o-que-e-landing-page-melhores-ferramentas-gratuitas.webp',
     content: {
       pt: `# O que é uma Landing Page? (E as Melhores Ferramentas Gratuitas para Criar a Sua)
 

@@ -124,8 +124,9 @@ const CookieConsent: React.FC = () => {
                       
                       {/* Privacy Link */}
                       <a
-                        href="#privacy"
+                        href="/privacy-policy"
                         className="text-blue-400 hover:text-blue-300 text-sm underline transition-colors"
+                        aria-label="Ler Política de Privacidade completa"
                       >
                         Política de Privacidade
                       </a>

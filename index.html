@@ -131,21 +131,45 @@
       });
       
       // Carregar GA4 de forma assíncrona após carregamento da página
-      window.addEventListener('load', function() {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1';
-        script.onload = function() {
-          gtag('js', new Date());
-          gtag('config', 'G-5X4W3JPES1', {
-            allow_google_signals: false,
-            anonymize_ip: true,
-            ads_data_redaction: true,
-            send_page_view: false // Controlar manualmente
+      // Usar requestIdleCallback para não bloquear a main thread
+      function loadGA4() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1';
+            script.onload = function() {
+              gtag('js', new Date());
+              gtag('config', 'G-5X4W3JPES1', {
+                allow_google_signals: false,
+                anonymize_ip: true,
+                ads_data_redaction: true,
+                send_page_view: false // Controlar manualmente
+              });
+            };
+            document.head.appendChild(script);
           });
-        };
-        document.head.appendChild(script);
-      });
+        } else {
+          // Fallback para navegadores sem requestIdleCallback
+          setTimeout(() => {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1';
+            script.onload = function() {
+              gtag('js', new Date());
+              gtag('config', 'G-5X4W3JPES1', {
+                allow_google_signals: false,
+                anonymize_ip: true,
+                ads_data_redaction: true,
+                send_page_view: false
+              });
+            };
+            document.head.appendChild(script);
+          }, 1000);
+        }
+      }
+      
+      window.addEventListener('load', loadGA4);
     </script>
     
     <!-- Schema.org JSON-LD para SEO e AIs -->

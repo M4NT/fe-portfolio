@@ -66,6 +66,36 @@ img {
   perspective: 1000px;
 }
 
+/* Otimizações para animações compostas */
+.animate-composite {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Animações que devem usar GPU */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Evitar animações não compostas */
+.no-layout-animation {
+  will-change: transform, opacity;
+}
+
+/* Otimizar framer-motion */
+[data-framer-motion] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Reduzir scrollbar-color warnings */
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
 /* Remove qualquer background escuro do container da imagem */
 .selected-works-image-container {
   background: transparent !important;
