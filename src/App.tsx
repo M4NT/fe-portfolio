@@ -4,7 +4,7 @@ import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Preloader from './components/Preloader';
 import Navigation from './components/Navigation';
-import Hero from './components/Hero';
+import HeroOptimized from './components/HeroOptimized';
 import About from './components/About';
 import Services from './components/Services';
 import PaymentTerms from './components/PaymentTerms';
@@ -66,7 +66,7 @@ function AppContent() {
           {/* Main Portfolio Route */}
           <Route path="/" element={
             <>
-              <Hero />
+              <HeroOptimized />
               <SectionDivider />
               <SelectedWorks />
               <SectionDivider />
@@ -90,7 +90,7 @@ function AppContent() {
           {/* Language-prefixed routes for EN/ES */}
           <Route path=":lang(en|es)" element={
             <>
-              <Hero />
+              <HeroOptimized />
               <SectionDivider />
               <SelectedWorks />
               <SectionDivider />

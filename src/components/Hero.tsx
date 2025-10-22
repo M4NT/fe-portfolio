@@ -10,9 +10,9 @@ const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    // Reduzir frequência de atualização para melhor performance
-    const timer = setInterval(() => setCurrentTime(new Date()), 30000); // 30s em vez de 1s
-    return () => clearInterval(timer);
+    // Remover timer completamente para evitar reflows
+    // const timer = setInterval(() => setCurrentTime(new Date()), 30000);
+    // return () => clearInterval(timer);
   }, []);
 
   const formatTime = (date: Date) => {
@@ -37,31 +37,11 @@ const Hero = () => {
       ref={containerRef}
       className="hero-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
-      {/* Enhanced Animated Background */}
+      {/* Simplified Background - sem animações para melhor performance */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Main gradient orbs - More vibrant */}
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl animate-composite"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, 20, 0],
-            y: [0, -10, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ willChange: 'transform, opacity' }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl animate-composite"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4],
-            x: [0, -15, 0],
-            y: [0, 15, 0]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          style={{ willChange: 'transform, opacity' }}
-        />
+        {/* Static gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 to-orange-500/20 blur-3xl" />
         
         {/* Additional accent orbs */}
         <motion.div 
@@ -389,7 +369,7 @@ const Hero = () => {
                 <span className="relative text-white font-semibold z-10">
                   <span className="hidden sm:inline">Solicitar Orçamento Grátis</span>
                   <span className="sm:hidden">Orçamento Grátis</span>
-                </span>
+              </span>
                 <motion.div
                   className="relative z-10"
                   animate={{ x: [0, 2, 0] }}
@@ -397,7 +377,7 @@ const Hero = () => {
                 >
                   <ArrowRight className="w-4 h-4 text-white" />
                 </motion.div>
-              </motion.a>
+            </motion.a>
 
               {/* Secondary CTA - Orange gradient with animation */}
               <motion.a
@@ -433,7 +413,7 @@ const Hero = () => {
                 <span className="relative text-white font-semibold z-10">
                   <span className="hidden sm:inline">Falar com Especialista</span>
                   <span className="sm:hidden">WhatsApp</span>
-                </span>
+              </span>
                 <motion.div
                   className="relative z-10"
                   animate={{ 
@@ -444,7 +424,7 @@ const Hero = () => {
                 >
                   <MessageCircle className="w-4 h-4 text-white" />
                 </motion.div>
-              </motion.a>
+            </motion.a>
             </motion.div>
 
             {/* Location & Time - Hidden on mobile to reduce clutter */}
@@ -531,8 +511,8 @@ const Hero = () => {
                         rotate: { duration: 8, repeat: Infinity, ease: "linear" },
                         scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                       }}
-                    >
-                      <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                  >
+                    <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                     </motion.div>
                     
                     {/* Pulsing ring */}
@@ -656,7 +636,7 @@ const Hero = () => {
                         transition={{ duration: 0.5, delay: 2.2 }}
                       >
                         <div className="text-white/60 text-xs mb-1">Preview:</div>
-                        <motion.div
+                  <motion.div 
                           className="w-full h-10 sm:h-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded flex items-center justify-center text-white text-xs font-semibold"
                           whileHover={{ 
                             scale: 1.05,
@@ -676,16 +656,16 @@ const Hero = () => {
                           }}
                         >
                           <motion.span
-                            animate={{ 
-                              scale: [1, 1.1, 1],
+                    animate={{ 
+                      scale: [1, 1.1, 1],
                               textShadow: [
                                 '0 0 0px rgba(255,255,255,0.5)',
                                 '0 0 8px rgba(255,255,255,0.8)',
                                 '0 0 0px rgba(255,255,255,0.5)'
                               ]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          >
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
                             Hover me! ✨
                           </motion.span>
                         </motion.div>
@@ -731,7 +711,7 @@ const Hero = () => {
                         </motion.div>
                         <div className="text-white/80 text-xs">Interativo</div>
                       </motion.div>
-                    </motion.div>
+                  </motion.div>
                   </div>
                 </div>
               </motion.div>

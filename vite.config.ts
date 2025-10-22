@@ -13,15 +13,25 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
-    // Otimizações de performance
-    minify: 'esbuild', // Usar esbuild que é mais rápido
-    // terserOptions: {
-    //   compress: {
-    //     drop_console: true,
-    //     drop_debugger: true,
-    //     pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
-    //   }
-    // },
+    // Otimizações de performance agressivas
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
+        passes: 2,
+        unsafe: true,
+        unsafe_comps: true,
+        unsafe_math: true
+      },
+      mangle: {
+        toplevel: true,
+        properties: {
+          regex: /^_/
+        }
+      }
+    },
     rollupOptions: {
       output: {
         // Code splitting otimizado - apenas chunks essenciais
