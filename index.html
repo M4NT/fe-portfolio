@@ -26,7 +26,7 @@
     <!-- Primary Meta Tags - Otimizado para Freelance + SEO -->
     <title>Yan Mantovani - Desenvolvedor Frontend Freelancer | React, TypeScript | Landing Pages de Alta Conversão</title>
     <meta name="title" content="Yan Mantovani - Desenvolvedor Frontend Freelancer | React, TypeScript | Landing Pages de Alta Conversão" />
-    <meta name="description" content="Desenvolvedor Frontend Freelancer especializado em React, TypeScript e Landing Pages de alta conversão. Orçamento grátis em 24h. ROI de 300%. Atendo todo Brasil desde Monte Alto SP. Sites profissionais que realmente vendem." />
+    <meta name="description" content="🚀 Desenvolvedor Frontend Freelancer especializado em React, TypeScript e Landing Pages de alta conversão. ✅ Orçamento grátis em 24h. 💰 ROI de 300%. 🌎 Atendo todo Brasil desde Monte Alto SP. 📈 Sites profissionais que realmente vendem e geram resultados." />
     <meta name="keywords" content="desenvolvedor frontend freelancer, freelancer react, desenvolvedor freelance são paulo, landing page alta conversão, criar site profissional, desenvolvedor web freelance, orçamento site, contratar desenvolvedor frontend, freelancer typescript, desenvolvedor react monte alto, site que vende, landing page preço, desenvolvedor disponível, criar landing page, freelance desenvolvimento web" />
     <meta name="author" content="Yan Mantovani" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -48,8 +48,8 @@
     <!-- Open Graph / Facebook / LinkedIn / WhatsApp - Otimizado -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yanmantovani.com/" />
-    <meta property="og:title" content="Yan Mantovani - Desenvolvedor Frontend Freelancer | Landing Pages de Alta Conversão" />
-    <meta property="og:description" content="Desenvolvedor Frontend Freelancer com ROI de 300%. Orçamento grátis em 24h. Especialista em React, TypeScript e Landing Pages que vendem. Atendo todo Brasil." />
+    <meta property="og:title" content="🚀 Yan Mantovani - Desenvolvedor Frontend Freelancer | ROI 300% | Orçamento Grátis" />
+    <meta property="og:description" content="✅ Desenvolvedor Frontend Freelancer com ROI de 300%. 💰 Orçamento grátis em 24h. 🎯 Especialista em React, TypeScript e Landing Pages que vendem. 🌎 Atendo todo Brasil desde Monte Alto SP." />
     <meta property="og:image" content="https://yanmantovani.com/og-image.svg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -63,8 +63,8 @@
     <!-- Twitter Card - Otimizado -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://yanmantovani.com/" />
-    <meta name="twitter:title" content="Yan Mantovani - Desenvolvedor Frontend Freelancer | ROI de 300%" />
-    <meta name="twitter:description" content="Landing Pages de Alta Conversão. Orçamento grátis em 24h. Especialista React & TypeScript. Atendo todo Brasil." />
+    <meta name="twitter:title" content="🚀 Yan Mantovani - Desenvolvedor Frontend Freelancer | ROI 300% | Orçamento Grátis" />
+    <meta name="twitter:description" content="✅ Landing Pages de Alta Conversão. 💰 Orçamento grátis em 24h. 🎯 Especialista React & TypeScript. 🌎 Atendo todo Brasil desde Monte Alto SP." />
     <meta name="twitter:image" content="https://yanmantovani.com/og-image.svg" />
     <meta name="twitter:image:alt" content="Yan Mantovani - Desenvolvedor Frontend Freelancer" />
     <meta name="twitter:creator" content="@yanm" />
@@ -79,13 +79,18 @@
     <link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
     <link rel="alternate" hreflang="x-default" href="https://yanmantovani.com/" />
     
-    <!-- Preconnect para fontes Google - melhora LCP -->
+    <!-- Preconnect para origens críticas - melhora LCP -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     
     <!-- Preload fontes críticas para melhor LCP -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1" />
     
     <!-- Load fontes com display=swap para evitar FOIT -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
@@ -111,22 +116,35 @@
     <!-- ATENÇÃO: Adicione aqui a tag de verificação do Google Search Console -->
     <!-- Exemplo: <meta name="google-site-verification" content="seu-código-aqui" /> -->
     
-    <!-- Google Analytics 4 + Consent Mode (desativa recursos de ads) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1"></script>
+    <!-- Google Analytics 4 + Consent Mode (otimizado para performance) -->
     <script>
+      // Inicializar GA4 de forma não-bloqueante
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}    
+      function gtag(){dataLayer.push(arguments);}
+      
       // Consent Mode padrão: sem ads
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
-        ad_personalization: 'denied'
+        ad_personalization: 'denied',
+        analytics_storage: 'granted'
       });
-      gtag('js', new Date());
-      gtag('config', 'G-5X4W3JPES1', {
-        allow_google_signals: false,
-        anonymize_ip: true,
-        ads_data_redaction: true
+      
+      // Carregar GA4 de forma assíncrona após carregamento da página
+      window.addEventListener('load', function() {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1';
+        script.onload = function() {
+          gtag('js', new Date());
+          gtag('config', 'G-5X4W3JPES1', {
+            allow_google_signals: false,
+            anonymize_ip: true,
+            ads_data_redaction: true,
+            send_page_view: false // Controlar manualmente
+          });
+        };
+        document.head.appendChild(script);
       });
     </script>
     
@@ -393,14 +411,17 @@
     }
     </script>
     
-    <!-- CSS crítico inline para eliminar CLS -->
+    <!-- CSS crítico inline para eliminar CLS e render-blocking -->
     <style>
-      /* Previne CLS durante carregamento */
+      /* Reset e base críticos */
       html, body {
         overflow-x: hidden;
         margin: 0;
         padding: 0;
         background: #000000;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: #ffffff;
       }
       
       /* Sempre iniciar no topo */
@@ -411,6 +432,72 @@
       #root {
         min-height: 100vh;
         background: #000000;
+      }
+      
+      /* Hero section crítico - LCP element */
+      .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-title {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        line-height: 1.1;
+        text-align: center;
+        margin: 0;
+        background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .hero-subtitle {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        color: #a0a0a0;
+        text-align: center;
+        margin: 1rem 0 2rem;
+        max-width: 600px;
+      }
+      
+      /* Navigation crítico */
+      .nav-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+      }
+      
+      /* Buttons críticos */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: transform 0.2s ease;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .btn-primary:hover {
+        transform: translateY(-2px);
       }
       
       /* Skeleton para prevenir CLS */
@@ -460,6 +547,16 @@
         border: 2px solid #fff !important;
         z-index: 999999 !important;
         text-decoration: none !important;
+      }
+      
+      /* Preload critical fonts */
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
     </style>
   </head>

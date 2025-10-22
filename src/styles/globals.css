@@ -30,7 +30,7 @@ html {
 }
 
 /* ========================================
-   CORREÇÃO DE IMAGENS NO CARROSSEL
+   OTIMIZAÇÕES DE PERFORMANCE
    ======================================== */
 
 /* Força a imagem a preencher corretamente o container */
@@ -44,6 +44,26 @@ html {
   min-height: 100% !important;
   max-width: 100% !important;
   max-height: 100% !important;
+}
+
+/* Otimizações de performance para imagens */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+}
+
+/* Lazy loading otimizado */
+.lazy-image {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+}
+
+/* Reduzir reflows forçados */
+.performance-optimized {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Remove qualquer background escuro do container da imagem */
