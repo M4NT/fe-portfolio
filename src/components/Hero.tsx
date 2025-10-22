@@ -10,9 +10,9 @@ const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    // Remover timer completamente para evitar reflows
-    // const timer = setInterval(() => setCurrentTime(new Date()), 30000);
-    // return () => clearInterval(timer);
+    // Timer otimizado - apenas uma vez para evitar reflows
+    const timer = setTimeout(() => setCurrentTime(new Date()), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const formatTime = (date: Date) => {
@@ -37,11 +37,36 @@ const Hero = () => {
       ref={containerRef}
       className="hero-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
-      {/* Simplified Background - sem animações para melhor performance */}
+      {/* Enhanced Animated Background - Otimizado */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Static gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 to-orange-500/20 blur-3xl" />
+        {/* Main gradient orbs - Otimizado com will-change */}
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ 
+            duration: 12, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          style={{ willChange: 'transform, opacity' }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ 
+            duration: 15, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 3
+          }}
+          style={{ willChange: 'transform, opacity' }}
+        />
         
         {/* Additional accent orbs */}
         <motion.div 

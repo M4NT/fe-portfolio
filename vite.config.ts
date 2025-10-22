@@ -20,23 +20,29 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 2,
+        passes: 3,
         unsafe: true,
         unsafe_comps: true,
-        unsafe_math: true
+        unsafe_math: true,
+        dead_code: true,
+        unused: true,
+        side_effects: false
       },
       mangle: {
         toplevel: true,
         properties: {
           regex: /^_/
         }
+      },
+      format: {
+        comments: false
       }
     },
     rollupOptions: {
       output: {
         // Code splitting otimizado - apenas chunks essenciais
         manualChunks: (id) => {
-          // Vendor chunks críticos apenas
+          // Vendor chunks otimizados para reduzir tamanho
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom')) {
               return 'vendor-react';
@@ -47,11 +53,26 @@ export default defineConfig({
             if (id.includes('lucide-react')) {
               return 'vendor-icons';
             }
-            // Agrupar outros vendors menores
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            // Agrupar vendors menores
             return 'vendor-misc';
           }
           
-          // App chunks por funcionalidade
+          // App chunks por funcionalidade - mais granular
+          if (id.includes('/components/Hero')) {
+            return 'app-hero';
+          }
+          if (id.includes('/components/About')) {
+            return 'app-about';
+          }
+          if (id.includes('/components/Projects') || id.includes('/components/SelectedWorks')) {
+            return 'app-projects';
+          }
+          if (id.includes('/components/Services')) {
+            return 'app-services';
+          }
           if (id.includes('/components/')) {
             return 'app-components';
           }
