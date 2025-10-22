@@ -10,6 +10,363 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas',
+    title: {
+      pt: 'Seu Site é uma Vitrine Bonita ou uma Máquina de Vendas? Os 3 Segredos dos Sites que Convertem',
+      en: 'Is Your Website a Beautiful Showcase or a Sales Machine? The 3 Secrets of Converting Websites',
+      es: '¿Tu Sitio Web es una Vitrina Bonita o una Máquina de Ventas? Los 3 Secretos de los Sitios que Convierten',
+    },
+    excerpt: {
+      pt: 'Descubra os 3 segredos que transformam sites bonitos em máquinas de vendas. Aprenda como sair da "síndrome da vitrine" e criar um site que gera resultados reais para seu negócio.',
+      en: 'Discover the 3 secrets that transform beautiful websites into sales machines. Learn how to break out of the "showcase syndrome" and create a website that generates real results for your business.',
+      es: 'Descubre los 3 secretos que transforman sitios web bonitos en máquinas de ventas. Aprende cómo salir del "síndrome de la vitrina" y crear un sitio web que genere resultados reales para tu negocio.',
+    },
+    date: '2025-01-22T10:00:00.000Z',
+    tags: ['marketing-digital', 'conversao', 'estrategia', 'web-design', 'resultados'],
+    cover: '/images/blog/seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas.jpg',
+    content: {
+      pt: `# Seu Site é uma Vitrine Bonita ou uma Máquina de Vendas? Os 3 Segredos dos Sites que Convertem
+
+22 de janeiro de 2025 • #marketingdigital #conversão #estrategia #webdesign #resultados
+
+Você fez tudo certo. Investiu em um design moderno, escolheu fotos incríveis e escreveu sobre sua empresa com orgulho. Seu site está no ar, bonito e profissional. Mas há um problema... o silêncio. Os dias passam e o formulário de contato continua vazio. O telefone não toca.
+
+Essa é a dura realidade da maioria dos sites na internet. Eles são como vitrines de loja lindas e bem decoradas, mas com a porta trancada. Atraem olhares, mas não geram negócios.
+
+A grande virada de chave acontece quando você entende que um site de sucesso não é uma "vitrine digital". Ele é um vendedor estratégico que trabalha para você 24 horas por dia.
+
+Mas como transformar uma vitrine passiva em uma máquina ativa de vendas? Existem 3 segredos de estratégia, muitas vezes ignorados, que separam os sites que apenas existem dos sites que geram resultados.
+
+## Segredo #1: Clareza Radical — A Regra dos 5 Segundos
+
+O erro mais comum é tentar ser "criativo" ou "inteligente" demais. Quando um visitante chega ao seu site, ele tem uma única pergunta subconsciente: "O que tem aqui para mim?".
+
+Você tem 5 segundos para responder a essa pergunta de forma cristalina. Se não conseguir, ele aperta o botão de voltar e vai para o seu concorrente.
+
+### O Site-Vitrine vs O Site-Vendedor
+
+**O Site-Vitrine diz:** "Bem-vindo à Inovatech Solutions, onde a sinergia encontra a inovação desde 2015." (Confuso e focado na empresa).
+
+**O Site-Vendedor diz:** "Criamos sites rápidos que dobram seus leads em 90 dias." (Claro, focado no benefício para o cliente).
+
+### Como aplicar isso:
+
+Sua página inicial precisa, acima de tudo, dizer:
+- **O que você faz**
+- **Para quem você faz** 
+- **Qual o resultado que a pessoa terá**
+
+Esqueça o jargão corporativo. Fale a língua do seu cliente e da dor que ele quer resolver.
+
+## Segredo #2: O Caminho Único — Menos Opções, Mais Ação
+
+Sites-vitrine sofrem da "síndrome do excesso de opções". Eles oferecem 15 links no menu, ícones para 5 redes sociais, pop-ups de newsletter, links para o blog... O resultado? Paralisia por análise. O visitante fica sobrecarregado e não toma ação nenhuma.
+
+Um site vendedor é como um guia turístico habilidoso. Ele pega o visitante pela mão e o leva por um único caminho claro em direção ao objetivo mais importante.
+
+### O Site-Vitrine vs O Site-Vendedor
+
+**O Site-Vitrine pergunta:** "O que você gostaria de fazer? Ler nosso blog? Seguir-nos no Instagram? Conhecer nossa história? Ver nossos 20 serviços?"
+
+**O Site-Vendedor afirma:** "O próximo passo lógico para resolver seu problema é este. Clique aqui."
+
+### Como aplicar isso:
+
+1. **Defina uma única ação principal** para cada página
+2. **Torne o botão para essa ação** o elemento mais óbvio e convidativo
+3. **Remova todas as distrações** que não contribuem para esse objetivo
+
+É "Agendar uma Reunião"? "Baixar um Catálogo"? "Fazer um Teste Gratuito"? Escolha uma e foque nela.
+
+## Segredo #3: A Prova Irrefutável — Mostre, Não Apenas Fale
+
+Confiança é a moeda da internet. Ninguém vai comprar de você ou preencher um formulário se não confiar na sua marca.
+
+O site-vitrine faz afirmações vagas sobre si mesmo: "Somos os melhores", "Qualidade e confiança", "Líderes de mercado". Essas palavras não significam nada sem provas.
+
+O site vendedor constrói um caso irrefutável de confiança mostrando evidências.
+
+### O Site-Vitrine vs O Site-Vendedor
+
+**O Site-Vitrine diz:** "Temos clientes satisfeitos."
+
+**O Site-Vendedor mostra:** 
+- Depoimentos em vídeo de clientes reais
+- Logos de empresas conhecidas que atendeu
+- Estudos de caso com gráficos de resultados
+- Prêmios e certificações conquistadas
+
+### Como aplicar isso:
+
+Transforme suas afirmações em evidências:
+- **Colete depoimentos** reais de clientes
+- **Crie estudos de caso** mostrando "antes e depois"
+- **Exiba selos de segurança** e certificados
+- **Mostre resultados concretos** com números
+
+Deixe que os resultados do seu trabalho falem por você.
+
+## Sua Presença Online Merece Mais do que Apenas Elogios
+
+Um site que recebe elogios pelo design é bom. Um site que paga as contas, atrai clientes qualificados e faz seu negócio crescer é transformador.
+
+A diferença não está na tecnologia ou no preço. Está na estratégia por trás de cada pixel e de cada palavra.
+
+### Pergunta para Reflexão
+
+Seu site atual está trabalhando para você ou apenas ocupando um endereço na web? 
+
+Se você sente que sua "vitrine" está com a porta trancada para novos negócios, talvez seja a hora de transformá-la no seu melhor vendedor.
+
+## Próximos Passos: Transforme Sua Vitrine em Vendedor
+
+Agora que você conhece os 3 segredos, é hora de agir:
+
+### 1. Avalie Seu Site Atual
+- Teste a regra dos 5 segundos
+- Identifique a ação principal de cada página
+- Liste as provas de confiança que você tem
+
+### 2. Implemente as Mudanças
+- Reescreva sua mensagem principal
+- Simplifique a navegação
+- Adicione depoimentos e provas sociais
+
+### 3. Meça os Resultados
+- Acompanhe conversões antes e depois
+- Teste diferentes versões
+- Otimize continuamente
+
+**Lembre-se:** Um site que converte não é luxo, é necessidade. Seu negócio depende disso.`,
+      en: `# Is Your Website a Beautiful Showcase or a Sales Machine? The 3 Secrets of Converting Websites
+
+January 22, 2025 • #digitalmarketing #conversion #strategy #webdesign #results
+
+You did everything right. You invested in a modern design, chose amazing photos, and wrote about your company with pride. Your website is live, beautiful and professional. But there's a problem... silence. Days pass and the contact form remains empty. The phone doesn't ring.
+
+This is the harsh reality of most websites on the internet. They are like beautiful, well-decorated store windows, but with a locked door. They attract looks, but don't generate business.
+
+The big turning point happens when you understand that a successful website is not a "digital showcase". It's a strategic salesperson who works for you 24 hours a day.
+
+But how do you transform a passive showcase into an active sales machine? There are 3 strategy secrets, often ignored, that separate websites that just exist from websites that generate results.
+
+## Secret #1: Radical Clarity — The 5-Second Rule
+
+The most common mistake is trying to be too "creative" or "smart". When a visitor arrives at your website, they have one subconscious question: "What's in it for me?".
+
+You have 5 seconds to answer that question crystal clear. If you can't, they hit the back button and go to your competitor.
+
+### The Showcase Site vs The Sales Site
+
+**The Showcase Site says:** "Welcome to Inovatech Solutions, where synergy meets innovation since 2015." (Confusing and company-focused).
+
+**The Sales Site says:** "We create fast websites that double your leads in 90 days." (Clear, focused on customer benefit).
+
+### How to apply this:
+
+Your homepage needs, above all, to say:
+- **What you do**
+- **Who you do it for**
+- **What result the person will have**
+
+Forget corporate jargon. Speak your customer's language and the pain they want to solve.
+
+## Secret #2: The Single Path — Fewer Options, More Action
+
+Showcase sites suffer from "excess options syndrome". They offer 15 menu links, icons for 5 social networks, newsletter pop-ups, blog links... The result? Analysis paralysis. The visitor gets overwhelmed and takes no action.
+
+A sales site is like a skilled tour guide. It takes the visitor by the hand and leads them down a single clear path toward the most important goal.
+
+### The Showcase Site vs The Sales Site
+
+**The Showcase Site asks:** "What would you like to do? Read our blog? Follow us on Instagram? Learn our story? See our 20 services?"
+
+**The Sales Site states:** "The next logical step to solve your problem is this. Click here."
+
+### How to apply this:
+
+1. **Define a single main action** for each page
+2. **Make the button for that action** the most obvious and inviting element
+3. **Remove all distractions** that don't contribute to that goal
+
+Is it "Schedule a Meeting"? "Download a Catalog"? "Take a Free Test"? Choose one and focus on it.
+
+## Secret #3: Irrefutable Proof — Show, Don't Just Tell
+
+Trust is the currency of the internet. No one will buy from you or fill out a form if they don't trust your brand.
+
+The showcase site makes vague claims about itself: "We're the best", "Quality and trust", "Market leaders". These words mean nothing without proof.
+
+The sales site builds an irrefutable case of trust by showing evidence.
+
+### The Showcase Site vs The Sales Site
+
+**The Showcase Site says:** "We have satisfied customers."
+
+**The Sales Site shows:**
+- Video testimonials from real customers
+- Logos of well-known companies they've served
+- Case studies with results graphs
+- Awards and certifications won
+
+### How to apply this:
+
+Transform your claims into evidence:
+- **Collect real testimonials** from customers
+- **Create case studies** showing "before and after"
+- **Display security seals** and certificates
+- **Show concrete results** with numbers
+
+Let the results of your work speak for you.
+
+## Your Online Presence Deserves More Than Just Praise
+
+A website that receives praise for its design is good. A website that pays the bills, attracts qualified customers, and makes your business grow is transformative.
+
+The difference isn't in technology or price. It's in the strategy behind every pixel and every word.
+
+### Reflection Question
+
+Is your current website working for you or just occupying an address on the web?
+
+If you feel your "showcase" has a locked door for new business, maybe it's time to transform it into your best salesperson.
+
+## Next Steps: Transform Your Showcase into Salesperson
+
+Now that you know the 3 secrets, it's time to act:
+
+### 1. Evaluate Your Current Website
+- Test the 5-second rule
+- Identify the main action of each page
+- List the trust proofs you have
+
+### 2. Implement the Changes
+- Rewrite your main message
+- Simplify navigation
+- Add testimonials and social proof
+
+### 3. Measure Results
+- Track conversions before and after
+- Test different versions
+- Continuously optimize
+
+**Remember:** A converting website isn't a luxury, it's a necessity. Your business depends on it.`,
+      es: `# ¿Tu Sitio Web es una Vitrina Bonita o una Máquina de Ventas? Los 3 Secretos de los Sitios que Convierten
+
+22 de enero de 2025 • #marketingdigital #conversion #estrategia #webdesign #resultados
+
+Hiciste todo bien. Invertiste en un diseño moderno, elegiste fotos increíbles y escribiste sobre tu empresa con orgullo. Tu sitio web está en línea, bonito y profesional. Pero hay un problema... el silencio. Pasan los días y el formulario de contacto sigue vacío. El teléfono no suena.
+
+Esta es la dura realidad de la mayoría de los sitios web en internet. Son como vitrinas de tienda hermosas y bien decoradas, pero con la puerta cerrada. Atraen miradas, pero no generan negocios.
+
+El gran punto de inflexión ocurre cuando entiendes que un sitio web exitoso no es una "vitrina digital". Es un vendedor estratégico que trabaja para ti 24 horas al día.
+
+Pero, ¿cómo transformar una vitrina pasiva en una máquina activa de ventas? Existen 3 secretos de estrategia, a menudo ignorados, que separan los sitios que solo existen de los sitios que generan resultados.
+
+## Secreto #1: Claridad Radical — La Regla de los 5 Segundos
+
+El error más común es tratar de ser demasiado "creativo" o "inteligente". Cuando un visitante llega a tu sitio web, tiene una única pregunta subconsciente: "¿Qué hay aquí para mí?".
+
+Tienes 5 segundos para responder esa pregunta de forma cristalina. Si no puedes, presiona el botón de atrás y va a tu competidor.
+
+### El Sitio-Vitrina vs El Sitio-Vendedor
+
+**El Sitio-Vitrina dice:** "Bienvenido a Inovatech Solutions, donde la sinergia encuentra la innovación desde 2015." (Confuso y enfocado en la empresa).
+
+**El Sitio-Vendedor dice:** "Creamos sitios web rápidos que duplican tus leads en 90 días." (Claro, enfocado en el beneficio para el cliente).
+
+### Cómo aplicar esto:
+
+Tu página de inicio necesita, sobre todo, decir:
+- **Qué haces**
+- **Para quién lo haces**
+- **Qué resultado tendrá la persona**
+
+Olvida la jerga corporativa. Habla el idioma de tu cliente y el dolor que quiere resolver.
+
+## Secreto #2: El Camino Único — Menos Opciones, Más Acción
+
+Los sitios-vitrina sufren del "síndrome del exceso de opciones". Ofrecen 15 enlaces en el menú, iconos para 5 redes sociales, pop-ups de newsletter, enlaces al blog... ¿El resultado? Parálisis por análisis. El visitante se siente abrumado y no toma ninguna acción.
+
+Un sitio vendedor es como un guía turístico hábil. Toma al visitante de la mano y lo lleva por un único camino claro hacia el objetivo más importante.
+
+### El Sitio-Vitrina vs El Sitio-Vendedor
+
+**El Sitio-Vitrina pregunta:** "¿Qué te gustaría hacer? ¿Leer nuestro blog? ¿Seguirnos en Instagram? ¿Conocer nuestra historia? ¿Ver nuestros 20 servicios?"
+
+**El Sitio-Vendedor afirma:** "El próximo paso lógico para resolver tu problema es este. Haz clic aquí."
+
+### Cómo aplicar esto:
+
+1. **Define una única acción principal** para cada página
+2. **Haz que el botón para esa acción** sea el elemento más obvio e invitador
+3. **Elimina todas las distracciones** que no contribuyen a ese objetivo
+
+¿Es "Agendar una Reunión"? "Descargar un Catálogo"? "Hacer una Prueba Gratuita"? Elige una y enfócate en ella.
+
+## Secreto #3: La Prueba Irrefutable — Muestra, No Solo Digas
+
+La confianza es la moneda de internet. Nadie te comprará o llenará un formulario si no confía en tu marca.
+
+El sitio-vitrina hace afirmaciones vagas sobre sí mismo: "Somos los mejores", "Calidad y confianza", "Líderes del mercado". Estas palabras no significan nada sin pruebas.
+
+El sitio vendedor construye un caso irrefutable de confianza mostrando evidencia.
+
+### El Sitio-Vitrina vs El Sitio-Vendedor
+
+**El Sitio-Vitrina dice:** "Tenemos clientes satisfechos."
+
+**El Sitio-Vendedor muestra:**
+- Testimonios en video de clientes reales
+- Logos de empresas conocidas que ha atendido
+- Estudios de caso con gráficos de resultados
+- Premios y certificaciones ganadas
+
+### Cómo aplicar esto:
+
+Transforma tus afirmaciones en evidencia:
+- **Recolecta testimonios reales** de clientes
+- **Crea estudios de caso** mostrando "antes y después"
+- **Muestra sellos de seguridad** y certificados
+- **Exhibe resultados concretos** con números
+
+Deja que los resultados de tu trabajo hablen por ti.
+
+## Tu Presencia Online Merece Más que Solo Elogios
+
+Un sitio web que recibe elogios por su diseño es bueno. Un sitio web que paga las cuentas, atrae clientes calificados y hace crecer tu negocio es transformador.
+
+La diferencia no está en la tecnología o el precio. Está en la estrategia detrás de cada píxel y cada palabra.
+
+### Pregunta para Reflexión
+
+¿Tu sitio web actual está trabajando para ti o solo ocupando una dirección en la web?
+
+Si sientes que tu "vitrina" tiene la puerta cerrada para nuevos negocios, tal vez sea hora de transformarla en tu mejor vendedor.
+
+## Próximos Pasos: Transforma tu Vitrina en Vendedor
+
+Ahora que conoces los 3 secretos, es hora de actuar:
+
+### 1. Evalúa tu Sitio Web Actual
+- Prueba la regla de los 5 segundos
+- Identifica la acción principal de cada página
+- Lista las pruebas de confianza que tienes
+
+### 2. Implementa los Cambios
+- Reescribe tu mensaje principal
+- Simplifica la navegación
+- Añade testimonios y pruebas sociales
+
+### 3. Mide los Resultados
+- Rastrea conversiones antes y después
+- Prueba diferentes versiones
+- Optimiza continuamente
+
+**Recuerda:** Un sitio web que convierte no es un lujo, es una necesidad. Tu negocio depende de ello.`
+    }
+  },
+  {
     slug: 'por-que-seu-site-lento-esta-roubando-seus-clientes',
     title: {
       pt: 'Por que seu site lento está roubando seus clientes? Os 3 culpados que você não vê',

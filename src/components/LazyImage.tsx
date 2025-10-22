@@ -74,6 +74,11 @@ export default function LazyImage({
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 1.05 }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{
+            borderRadius: className.includes('rounded-t-2xl') ? '1rem 1rem 0 0' : 
+                        className.includes('rounded-2xl') ? '1rem' : 
+                        className.includes('rounded-full') ? '50%' : '0'
+          }}
         />
       )}
 

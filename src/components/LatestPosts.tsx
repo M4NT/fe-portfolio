@@ -209,37 +209,24 @@ export default function LatestPosts() {
                 className="group block h-full"
               >
                 <motion.div
-                  className="relative overflow-hidden h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 flex flex-col group-hover:-translate-y-2"
+                  className="blog-card relative overflow-hidden h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 flex flex-col group-hover:-translate-y-2"
                   style={{ borderRadius: '1rem' }}
                 >
                   {/* Cover Image */}
-                  <div className="relative h-40 sm:h-48 w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style={{ borderRadius: '1rem 1rem 0 0' }}>
-                    <div className="w-full h-full overflow-hidden relative" style={{ borderRadius: '1rem 1rem 0 0' }}>
+                  <div className="relative h-40 sm:h-48 w-full flex-shrink-0 overflow-hidden rounded-t-2xl">
                 {p.cover ? (
                   <LazyImage
                     src={p.cover} 
                     alt={p.title[language]} 
-                          className="absolute inset-0 w-full h-full object-cover object-center"
+                          className="w-full h-full object-cover object-center"
                         />
                       ) : (
                         <div 
-                          className="absolute inset-0 w-full h-full bg-gradient-to-br from-teal-600/30 to-cyan-600/30"
-                          style={{ 
-                            borderRadius: '1rem 1rem 0 0',
-                            borderTopLeftRadius: '1rem',
-                            borderTopRightRadius: '1rem'
-                          }}
+                          className="w-full h-full bg-gradient-to-br from-teal-600/30 to-cyan-600/30"
                         />
                       )}
-                    </div>
                     <div 
-                      className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent rounded-t-2xl"
-                      style={{ 
-                        borderRadius: '1rem 1rem 0 0',
-                        borderTopLeftRadius: '1rem',
-                        borderTopRightRadius: '1rem',
-                        clipPath: 'inset(0 0 0 0 round 1rem 1rem 0 0)'
-                      }}
+                      className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
                     />
                     
                     {/* Category Badge */}

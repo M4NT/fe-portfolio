@@ -5,6 +5,10 @@ const path = require('path');
 // Simulate blog posts data (in production, this would be imported from posts.ts)
 const blogPosts = [
   {
+    slug: 'seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas',
+    date: '2025-01-22T10:00:00.000Z'
+  },
+  {
     slug: 'por-que-seu-site-lento-esta-roubando-seus-clientes',
     date: '2025-01-22T10:00:00.000Z'
   },

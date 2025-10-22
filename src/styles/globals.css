@@ -406,6 +406,14 @@ section {
     display: block !important;
     border-radius: 1rem 1rem 0 0 !important;
     overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  /* Force rounded corners on blog card image containers */
+  .blog-card .relative {
+    border-radius: 1rem 1rem 0 0 !important;
+    overflow: hidden !important;
   }
 
   /* Blog card container adjustments */
