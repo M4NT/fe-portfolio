@@ -127,9 +127,9 @@ body {
   transform: translateZ(0);
 }
 
-/* Reduzir scrollbar-color warnings */
+/* Reduzir scrollbar-color warnings - removido para compatibilidade */
 * {
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-width: thin;
 }
 
 /* Remove qualquer background escuro do container da imagem */
@@ -1310,7 +1310,7 @@ a, button, [role="button"] {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(139, 92, 246, 0.3) rgba(255, 255, 255, 0.03);
+  scrollbar-width: thin;
 }
 
 /* Preloader Animations */

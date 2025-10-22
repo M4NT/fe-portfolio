@@ -150,9 +150,9 @@
       }
     </style>
     
-    <!-- CSS crítico inline para LCP -->
+    <!-- CSS crítico inline para LCP - otimizado -->
     <style>
-      *{box-sizing:border-box;margin:0;padding:0}html{font-size:16px;line-height:1.5}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#000;color:#fff;margin:0;padding:0;overflow-x:hidden;font-display:swap;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;color:#fff;position:relative;overflow:hidden}.hero-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(2.5rem,5vw,4rem);line-height:1.1;margin:0;color:#fff;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.hero-subtitle{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.6;color:rgba(255,255,255,0.7);margin:0;max-width:42rem}img{max-width:100%;height:auto;display:block}.hero-section,.about-section,.projects-section,.services-section{contain:layout style paint;will-change:transform}.animate-composite,.gpu-accelerated,[data-framer-motion]{will-change:transform,opacity;transform:translateZ(0);backface-visibility:hidden;perspective:1000px}.performance-optimized{will-change:auto;transform:translateZ(0);backface-visibility:hidden;perspective:1000px}
+      *{box-sizing:border-box;margin:0;padding:0}html{font-size:16px;line-height:1.5}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#000;color:#fff;margin:0;padding:0;overflow-x:hidden;font-display:swap;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;color:#fff;position:relative;overflow:hidden;contain:layout style paint;will-change:transform}.hero-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(2.5rem,5vw,4rem);line-height:1.1;margin:0;color:#fff;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;contain:layout style paint}.hero-subtitle{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.6;color:rgba(255,255,255,0.7);margin:0;max-width:42rem;contain:layout style paint}img{max-width:100%;height:auto;display:block;contain:layout style paint}.hero-section,.about-section,.projects-section,.services-section{contain:layout style paint;will-change:transform}.animate-composite,.gpu-accelerated,[data-framer-motion]{will-change:transform,opacity;transform:translateZ(0);backface-visibility:hidden;perspective:1000px;contain:layout style paint}.performance-optimized{will-change:auto;transform:translateZ(0);backface-visibility:hidden;perspective:1000px;contain:layout style paint}
     </style>
     
     <!-- CSS crítico inline para hero section -->
@@ -242,6 +242,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+    
+    <!-- Fallback para navegadores sem JS -->
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" />
+    </noscript>
     
     <!-- Fallback para navegadores sem JS -->
     <noscript>
