@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -11,8 +11,6 @@ import PaymentTerms from './components/PaymentTerms';
 import Affiliates from './components/Affiliates';
 import Process from './components/Process';
 import LatestPosts from './components/LatestPosts';
-import BlogIndex from './pages/BlogIndex';
-import BlogPost from './pages/BlogPost';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -23,10 +21,12 @@ import BackToTop from './components/BackToTop';
 import CookieConsent from './components/CookieConsent';
 import InstallPWA from './components/InstallPWA';
 
-// Import pages
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfUse from './pages/TermsOfUse';
-import CookiePolicy from './pages/CookiePolicy';
+// Lazy load pages para reduzir JS não usado
+const BlogIndex = lazy(() => import('./pages/BlogIndex'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 
 // Import Analytics
 import { trackPageView } from './lib/analytics-ga4';
@@ -110,12 +110,32 @@ function AppContent() {
           } />
           
           {/* Legal Pages */}
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use" element={<TermsOfUse />} />
-          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/privacy-policy" element={
+            <Suspense fallback={<div>Carregando...</div>}>
+              <PrivacyPolicy />
+            </Suspense>
+          } />
+          <Route path="/terms-of-use" element={
+            <Suspense fallback={<div>Carregando...</div>}>
+              <TermsOfUse />
+            </Suspense>
+          } />
+          <Route path="/cookie-policy" element={
+            <Suspense fallback={<div>Carregando...</div>}>
+              <CookiePolicy />
+            </Suspense>
+          } />
           {/* Blog */}
-          <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog" element={
+            <Suspense fallback={<div>Carregando...</div>}>
+              <BlogIndex />
+            </Suspense>
+          } />
+          <Route path="/blog/:slug" element={
+            <Suspense fallback={<div>Carregando...</div>}>
+              <BlogPost />
+            </Suspense>
+          } />
         </Routes>
         
         {!isLoading && <BackToTop />}

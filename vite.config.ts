@@ -20,7 +20,7 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 4,
+        passes: 5,
         unsafe: true,
         unsafe_comps: true,
         unsafe_math: true,
@@ -30,7 +30,16 @@ export default defineConfig({
         collapse_vars: true,
         reduce_vars: true,
         hoist_funs: true,
-        hoist_vars: true
+        hoist_vars: true,
+        inline: 2,
+        if_return: true,
+        sequences: true,
+        conditionals: true,
+        comparisons: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        typeofs: true
       },
       mangle: {
         toplevel: true,
@@ -46,7 +55,7 @@ export default defineConfig({
       output: {
         // Code splitting otimizado - apenas chunks essenciais
         manualChunks: (id) => {
-          // Vendor chunks otimizados para reduzir tamanho
+          // Vendor chunks ultra otimizados para reduzir tamanho
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom')) {
               return 'vendor-react';
