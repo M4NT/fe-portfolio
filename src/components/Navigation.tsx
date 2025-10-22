@@ -164,6 +164,7 @@ const Navigation = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
                       whileHover={{ y: -1 }}
+                      aria-label={`Ir para seção ${item.label}`}
                     >
                       <span className="relative">
                         {item.label}

@@ -151,6 +151,7 @@ const Footer = () => {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className="flex items-center gap-3 text-white/60 hover:text-white transition-all duration-300 group w-full text-left"
+                  aria-label={`Ir para seção ${item.label}`}
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300" />
                   <span className="font-light text-sm group-hover:translate-x-1 transition-transform duration-300">

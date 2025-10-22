@@ -180,6 +180,7 @@ const About = () => {
                 <button
                   onClick={prevImage}
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-colors duration-200 opacity-0 group-hover:opacity-100"
+                  aria-label="Imagem anterior"
                 >
                   <ChevronLeft size={16} />
                 </button>
@@ -187,6 +188,7 @@ const About = () => {
                 <button
                   onClick={nextImage}
                   className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/80 hover:bg-white/20 transition-colors duration-200 opacity-0 group-hover:opacity-100"
+                  aria-label="Próxima imagem"
                 >
                   <ChevronRight size={16} />
                 </button>
@@ -210,6 +212,7 @@ const About = () => {
                 <button
                   onClick={prevImage}
                   className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                  aria-label="Imagem anterior"
                 >
                   <ChevronLeft className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
                 </button>
@@ -228,6 +231,7 @@ const About = () => {
                 <button
                   onClick={nextImage}
                   className="group/btn p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                  aria-label="Próxima imagem"
                 >
                   <ChevronRight className="w-5 h-5 text-white/70 group-hover/btn:text-white transition-colors" />
                 </button>
@@ -244,6 +248,8 @@ const About = () => {
                         ? 'bg-white w-6' 
                         : 'bg-white/30 hover:bg-white/50'
                     }`}
+                    aria-label={`Ir para imagem ${index + 1}`}
+                    aria-pressed={index === currentImageIndex}
                   />
                 ))}
               </div>
