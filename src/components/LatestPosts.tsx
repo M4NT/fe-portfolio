@@ -4,6 +4,9 @@ import { posts } from '../blog/posts';
 import { useLanguage } from './LanguageContext';
 import { BookOpen, ArrowRight, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
+import LazyImage from './LazyImage';
+import { useSwipe } from '../hooks/useSwipe';
+import { trackPortfolioEvents } from '../lib/analytics-ga4';
 import { useState, useEffect } from 'react';
 
 export default function LatestPosts() {
@@ -48,11 +51,21 @@ export default function LatestPosts() {
   
   const nextSlide = () => {
     setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
+    trackPortfolioEvents.clickBlogCTA('carousel_next');
   };
   
   const prevSlide = () => {
     setCurrentIndex(prev => Math.max(prev - 1, 0));
+    trackPortfolioEvents.clickBlogCTA('carousel_prev');
   };
+  
+  // Swipe handlers para mobile
+  const swipeRef = useSwipe({
+    onSwipeLeft: nextSlide,
+    onSwipeRight: prevSlide
+  }, {
+    minSwipeDistance: 50
+  });
   
   // Função para obter os posts da página atual
   const getCurrentPagePosts = () => {
@@ -173,7 +186,7 @@ export default function LatestPosts() {
         {/* Posts Carousel */}
         <div className="relative">
           {/* Carousel Container */}
-          <div className="overflow-hidden max-w-7xl mx-auto">
+          <div className="overflow-hidden max-w-7xl mx-auto" ref={swipeRef}>
             <motion.div
               className="flex"
               initial={{ opacity: 0 }}
@@ -203,18 +216,10 @@ export default function LatestPosts() {
                   <div className="relative h-40 sm:h-48 w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style={{ borderRadius: '1rem 1rem 0 0' }}>
                     <div className="w-full h-full overflow-hidden relative" style={{ borderRadius: '1rem 1rem 0 0' }}>
                 {p.cover ? (
-                  <img 
+                  <LazyImage
                     src={p.cover} 
                     alt={p.title[language]} 
                           className="absolute inset-0 w-full h-full object-cover object-center"
-                          style={{ 
-                            borderRadius: '1rem 1rem 0 0',
-                            borderTopLeftRadius: '1rem',
-                            borderTopRightRadius: '1rem',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            clipPath: 'inset(0 0 0 0 round 1rem 1rem 0 0)'
-                          }}
                         />
                       ) : (
                         <div 

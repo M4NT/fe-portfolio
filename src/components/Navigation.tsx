@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ExternalLink, Github, Linkedin, Mail, Instagram } from 'lucide-react';
 import { trackGAEvent } from '../lib/analytics';
+import { trackPortfolioEvents } from '../lib/analytics-ga4';
 import { useLanguage } from './LanguageContext';
 
 const Navigation = () => {
@@ -76,6 +77,9 @@ const Navigation = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
+    // Track navigation
+    trackPortfolioEvents.scrollToSection(sectionId);
+    
     // Se for "home", navegar para a home
     if (sectionId === 'home') {
       window.location.href = '/';

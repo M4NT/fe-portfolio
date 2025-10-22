@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Preloader from './components/Preloader';
@@ -21,14 +21,24 @@ import SectionDivider from './components/SectionDivider';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import CookieConsent from './components/CookieConsent';
+import InstallPWA from './components/InstallPWA';
 
 // Import pages
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import CookiePolicy from './pages/CookiePolicy';
 
+// Import Analytics
+import { trackPageView } from './lib/analytics-ga4';
+
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  // Track page views
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
 
   useEffect(() => {
     // Force scroll to top and clear URL hash on load/reload
@@ -108,6 +118,7 @@ function AppContent() {
         
         {!isLoading && <BackToTop />}
         {!isLoading && <CookieConsent />}
+        {!isLoading && <InstallPWA />}
       </div>
     </>
   );

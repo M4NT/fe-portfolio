@@ -1,0 +1,83 @@
+{
+  "name": "Yan Mantovani - Web Developer Portfolio",
+  "short_name": "Yan Mantovani",
+  "description": "Desenvolvedor Web Full Stack especializado em React, Node.js e soluções personalizadas para transformar suas ideias em realidade digital.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "portfolio"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Projetos",
+      "short_name": "Projetos",
+      "description": "Veja meus projetos e trabalhos realizados",
+      "url": "/#projects",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Leia artigos sobre desenvolvimento web",
+      "url": "/blog",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contato",
+      "short_name": "Contato",
+      "description": "Entre em contato comigo",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
+
