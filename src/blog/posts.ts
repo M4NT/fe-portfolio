@@ -10,6 +10,273 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'por-que-seu-site-lento-esta-roubando-seus-clientes',
+    title: {
+      pt: 'Por que seu site lento está roubando seus clientes? Os 3 culpados que você não vê',
+      en: 'Why is your slow website stealing your customers? The 3 culprits you don\'t see',
+      es: '¿Por qué tu sitio web lento está robando tus clientes? Los 3 culpables que no ves',
+    },
+    excerpt: {
+      pt: 'Descubra os 3 principais culpados pela lentidão do seu site e como transformá-lo em uma máquina de resultados. Dados reais sobre perda de conversões e soluções práticas.',
+      en: 'Discover the 3 main culprits for your website\'s slowness and how to turn it into a results machine. Real data on conversion loss and practical solutions.',
+      es: 'Descubre los 3 principales culpables de la lentitud de tu sitio web y cómo convertirlo en una máquina de resultados. Datos reales sobre pérdida de conversiones y soluciones prácticas.',
+    },
+    date: '2025-01-22T10:00:00.000Z',
+    tags: ['performance', 'seo', 'experiencia-usuario', 'negocios-digitais', 'conversao'],
+    cover: '/images/blog/por-que-seu-site-lento-esta-roubando-seus-clientes.jpg',
+    content: {
+      pt: `# Por que seu site lento está roubando seus clientes? Os 3 culpados que você não vê
+
+22 de janeiro de 2025 • #performance #SEO #experienciadousuario #negociosdigitais
+
+Você clica em um link. Um, dois, três segundos. A página ainda está em branco. Quatro, cinco segundos. Você desiste e aperta o botão de voltar.
+
+Essa cena é familiar? Agora, imagine que o site lento é o seu, e a pessoa que desistiu era um cliente pronto para comprar. Todos os dias, sites perdem dinheiro, leads e credibilidade não por causa de um design ruim ou de uma oferta fraca, mas por um vilão silencioso e invisível: a lentidão.
+
+Seu site pode ser lindo, mas se ele for lento, ele está quebrado. É um funcionário que chega atrasado e espanta os clientes da porta.
+
+Neste artigo, vamos desmascarar os 3 principais culpados pela lentidão do seu site e mostrar como transformá-lo em uma máquina de resultados.
+
+## Antes dos culpados: Por que cada segundo conta (e custa caro)?
+
+Entender a urgência é o primeiro passo. Um site lento não é apenas "irritante", ele é um sabotador de negócios.
+
+### A Primeira Impressão é a que Fica (e a que Carrega)
+
+47% dos usuários esperam que uma página carregue em no máximo 2 segundos. Se demorar mais, a percepção sobre sua marca já começa negativa.
+
+### O Google Odeia Lentidão
+
+A velocidade da página é um fator crucial de ranqueamento no Google. Um site lento é penalizado e perde posições para concorrentes mais rápidos. O Google quer oferecer a melhor experiência, e lentidão não faz parte dela.
+
+### Conversões em Queda Livre
+
+Estudos gigantes como os da Amazon e Walmart mostram que a cada 1 segundo de atraso no carregamento, a taxa de conversão pode cair em até 7%. 
+
+**Faça as contas:** Se seu site fatura R$ 10.000 por mês, 2 segundos de lentidão podem estar custando mais de R$ 1.400 mensais.
+
+Agora que a urgência está clara, vamos caçar os criminosos.
+
+## Os 3 Culpados Ocultos pela Lentidão do Seu Site
+
+Explicar performance pode ser técnico, mas vamos usar analogias simples. Pense no seu site como um carro de corrida. Para ele ser rápido, três coisas precisam estar em sintonia.
+
+### Culpado #1: Imagens Pesadas — O "Excesso de Bagagem"
+
+Imagens são essenciais, mas também são, de longe, a principal causa de lentidão na web.
+
+**O Problema (Linguagem Fácil):** Imagine tentar correr uma maratona carregando uma mala de viagem cheia de pedras. É exatamente isso que imagens não otimizadas fazem com seu site. Elas são arquivos gigantes que o navegador do seu visitante precisa "baixar" antes de mostrar a página. Uma única foto de alta resolução de um celular pode ter 5 MB, quando o ideal para a web seria menos de 200 KB.
+
+**A Solução Técnica (Simplificada):** Não se trata de usar imagens de baixa qualidade, mas de usar o formato certo (como WebP, um formato moderno que oferece alta qualidade com tamanho reduzido) e a compressão inteligente. Ferramentas e técnicas corretas podem reduzir o peso de uma imagem em até 80% sem perda de qualidade perceptível.
+
+### Culpado #2: Código Inchado — O "Motor Desregulado"
+
+O código é o motor do seu site. Um código limpo e otimizado entrega potência máxima. Um código "inchado" gasta energia à toa.
+
+**O Problema (Linguagem Fácil):** Muitos sites, especialmente os feitos em plataformas com excesso de plugins e temas genéricos, carregam um código desnecessário. É como se, para ligar o farol do carro, o motor precisasse antes verificar as janelas, o rádio e o ar-condicionado. Essa "conversa" desnecessária entre os arquivos (CSS, JavaScript) atrasa tudo.
+
+**A Solução Técnica (Simplificada):** O processo de "minificação" e "otimização de renderização". Basicamente, é uma "limpeza" no motor: removemos os espaços, comentários e códigos que não estão sendo usados naquela página específica, e organizamos a ordem de carregamento para que o conteúdo mais importante apareça primeiro.
+
+### Culpado #3: Hospedagem de Baixa Qualidade — O "Combustível Adulterado"
+
+A hospedagem é onde seu site "mora". É a base de tudo. Economizar aqui é o maior erro que você pode cometer.
+
+**O Problema (Linguagem Fácil):** Contratar a hospedagem mais barata é como abastecer seu carro de corrida com o pior combustível possível. O servidor (o computador onde o site fica) não tem potência suficiente para responder rapidamente quando muitos usuários chegam ao mesmo tempo. Ele "engasga", e seu site fica lento ou até sai do ar.
+
+**A Solução Técnica (Simplificada):** A escolha de um servidor adequado para sua demanda. Isso envolve analisar o tempo de resposta do servidor (TTFB - Time to First Byte) e garantir que ele tenha recursos (CPU, memória RAM) suficientes para entregar seus arquivos com velocidade, não importa de onde o visitante esteja acessando.
+
+## Diagnóstico Rápido: Seu Site Está Doente?
+
+Curioso para saber a "nota" de saúde do seu site? O próprio Google oferece uma ferramenta gratuita: o PageSpeed Insights.
+
+1. Acesse o site do PageSpeed Insights
+2. Cole o endereço (URL) do seu site
+3. Clique em analisar
+
+Você verá uma nota de 0 a 100 e um monte de termos técnicos em vermelho. Não se assuste! Isso é apenas o diagnóstico. Agora, você precisa do especialista para aplicar o tratamento.
+
+## Seu Site Não Precisa Ser a Tartaruga na Corrida Digital
+
+Um site lento não é uma sentença. É um problema com solução. Corrigir esses três culpados não é apenas um ajuste técnico; é um investimento estratégico que se paga com melhor ranqueamento no Google, clientes mais felizes e, o mais importante, mais vendas.
+
+Deixar seu site lento é como ter uma loja incrível em uma rua onde os clientes demoram 10 minutos para conseguir abrir a porta. Eles simplesmente vão para o concorrente ao lado.
+
+## Próximos Passos: Transforme Seu Site em uma Máquina de Resultados
+
+Agora que você conhece os culpados, é hora de agir. Aqui estão as ações imediatas que você pode tomar:
+
+### 1. Teste a Velocidade do Seu Site
+- Use o PageSpeed Insights do Google
+- Teste também com GTmetrix e WebPageTest
+- Anote os problemas identificados
+
+### 2. Otimize as Imagens
+- Converta para formato WebP
+- Redimensione para o tamanho necessário
+- Use ferramentas como TinyPNG ou ImageOptim
+
+### 3. Avalie Sua Hospedagem
+- Teste o TTFB (Time to First Byte)
+- Considere migrar para um servidor mais rápido
+- Implemente CDN se necessário
+
+### 4. Busque Ajuda Profissional
+Se você não tem tempo ou conhecimento técnico para otimizar seu site, considere contratar um especialista. O investimento se paga rapidamente com o aumento nas conversões.
+
+**Lembre-se:** Um site rápido não é luxo, é necessidade. Seu negócio depende disso.`,
+      en: `# Why is your slow website stealing your customers? The 3 culprits you don't see
+
+January 22, 2025 • #performance #SEO #userexperience #digitalbusiness
+
+You click a link. One, two, three seconds. The page is still blank. Four, five seconds. You give up and hit the back button.
+
+Does this sound familiar? Now imagine that slow website is yours, and the person who gave up was a customer ready to buy. Every day, websites lose money, leads, and credibility not because of bad design or weak offers, but because of a silent and invisible villain: slowness.
+
+Your website can be beautiful, but if it's slow, it's broken. It's like an employee who arrives late and scares customers away from the door.
+
+In this article, we'll unmask the 3 main culprits for your website's slowness and show how to turn it into a results machine.
+
+## Before the culprits: Why every second counts (and costs dearly)?
+
+Understanding the urgency is the first step. A slow website isn't just "annoying," it's a business saboteur.
+
+### First Impressions Last (and Load)
+
+47% of users expect a page to load in at most 2 seconds. If it takes longer, their perception of your brand already starts negative.
+
+### Google Hates Slowness
+
+Page speed is a crucial ranking factor on Google. A slow website is penalized and loses positions to faster competitors. Google wants to offer the best experience, and slowness isn't part of it.
+
+### Conversions in Free Fall
+
+Giant studies like those from Amazon and Walmart show that for every 1 second of loading delay, conversion rates can drop by up to 7%.
+
+**Do the math:** If your website generates $10,000 per month, 2 seconds of slowness could be costing you more than $1,400 monthly.
+
+Now that the urgency is clear, let's hunt the criminals.
+
+## The 3 Hidden Culprits for Your Website's Slowness
+
+Explaining performance can be technical, but let's use simple analogies. Think of your website as a race car. For it to be fast, three things need to be in sync.
+
+### Culprit #1: Heavy Images — The "Excess Baggage"
+
+Images are essential, but they're also, by far, the main cause of slowness on the web.
+
+**The Problem (Easy Language):** Imagine trying to run a marathon carrying a suitcase full of rocks. That's exactly what unoptimized images do to your website. They're giant files that your visitor's browser needs to "download" before showing the page. A single high-resolution photo from a cell phone can be 5 MB, when the ideal for the web would be less than 200 KB.
+
+**The Technical Solution (Simplified):** It's not about using low-quality images, but using the right format (like WebP, a modern format that offers high quality with reduced size) and intelligent compression. Correct tools and techniques can reduce an image's weight by up to 80% without perceptible quality loss.
+
+### Culprit #2: Bloated Code — The "Malfunctioning Engine"
+
+Code is your website's engine. Clean, optimized code delivers maximum power. "Bloated" code wastes energy unnecessarily.
+
+**The Problem (Easy Language):** Many websites, especially those made on platforms with excess plugins and generic themes, load unnecessary code. It's as if, to turn on the car's headlight, the engine needed to first check the windows, radio, and air conditioning. This unnecessary "conversation" between files (CSS, JavaScript) delays everything.
+
+**The Technical Solution (Simplified):** The process of "minification" and "render optimization." Basically, it's an engine "cleanup": we remove spaces, comments, and code that isn't being used on that specific page, and organize the loading order so that the most important content appears first.
+
+### Culprit #3: Low-Quality Hosting — The "Adulterated Fuel"
+
+Hosting is where your website "lives." It's the foundation of everything. Saving money here is the biggest mistake you can make.
+
+**The Problem (Easy Language):** Hiring the cheapest hosting is like fueling your race car with the worst possible fuel. The server (the computer where the website is) doesn't have enough power to respond quickly when many users arrive at the same time. It "chokes," and your website becomes slow or even goes down.
+
+**The Technical Solution (Simplified):** Choosing a server adequate for your demand. This involves analyzing the server's response time (TTFB - Time to First Byte) and ensuring it has sufficient resources (CPU, RAM) to deliver your files with speed, no matter where the visitor is accessing from.
+
+## Quick Diagnosis: Is Your Website Sick?
+
+Curious to know your website's "health score"? Google itself offers a free tool: PageSpeed Insights.
+
+1. Visit the PageSpeed Insights website
+2. Paste your website's address (URL)
+3. Click analyze
+
+You'll see a score from 0 to 100 and a bunch of technical terms in red. Don't panic! This is just the diagnosis. Now you need the specialist to apply the treatment.
+
+## Your Website Doesn't Need to Be the Turtle in the Digital Race
+
+A slow website isn't a sentence. It's a problem with a solution. Fixing these three culprits isn't just a technical adjustment; it's a strategic investment that pays off with better Google ranking, happier customers, and most importantly, more sales.
+
+Leaving your website slow is like having an amazing store on a street where customers take 10 minutes to open the door. They simply go to the competitor next door.`,
+      es: `# ¿Por qué tu sitio web lento está robando tus clientes? Los 3 culpables que no ves
+
+22 de enero de 2025 • #performance #SEO #experienciadeusuario #negociosdigitales
+
+Haces clic en un enlace. Uno, dos, tres segundos. La página sigue en blanco. Cuatro, cinco segundos. Te rindes y presionas el botón de atrás.
+
+¿Te resulta familiar esta escena? Ahora imagina que el sitio web lento es el tuyo, y la persona que se rindió era un cliente listo para comprar. Todos los días, los sitios web pierden dinero, leads y credibilidad no por un mal diseño o una oferta débil, sino por un villano silencioso e invisible: la lentitud.
+
+Tu sitio web puede ser hermoso, pero si es lento, está roto. Es como un empleado que llega tarde y espanta a los clientes de la puerta.
+
+En este artículo, vamos a desenmascarar los 3 principales culpables de la lentitud de tu sitio web y mostrar cómo convertirlo en una máquina de resultados.
+
+## Antes de los culpables: ¿Por qué cada segundo cuenta (y cuesta caro)?
+
+Entender la urgencia es el primer paso. Un sitio web lento no es solo "molesto", es un saboteador de negocios.
+
+### La Primera Impresión es la que Cuenta (y la que Carga)
+
+47% de los usuarios esperan que una página cargue en máximo 2 segundos. Si tarda más, la percepción sobre tu marca ya comienza negativa.
+
+### Google Odia la Lentitud
+
+La velocidad de la página es un factor crucial de ranking en Google. Un sitio web lento es penalizado y pierde posiciones ante competidores más rápidos. Google quiere ofrecer la mejor experiencia, y la lentitud no forma parte de ella.
+
+### Conversiones en Caída Libre
+
+Estudios gigantes como los de Amazon y Walmart muestran que por cada 1 segundo de retraso en la carga, la tasa de conversión puede caer hasta 7%.
+
+**Haz las cuentas:** Si tu sitio web factura $10,000 por mes, 2 segundos de lentitud pueden estar costándote más de $1,400 mensuales.
+
+Ahora que la urgencia está clara, vamos a cazar a los criminales.
+
+## Los 3 Culpables Ocultos de la Lentitud de tu Sitio Web
+
+Explicar el rendimiento puede ser técnico, pero vamos a usar analogías simples. Piensa en tu sitio web como un auto de carreras. Para que sea rápido, tres cosas necesitan estar en sintonía.
+
+### Culpable #1: Imágenes Pesadas — El "Exceso de Equipaje"
+
+Las imágenes son esenciales, pero también son, de lejos, la principal causa de lentitud en la web.
+
+**El Problema (Lenguaje Fácil):** Imagina intentar correr un maratón cargando una maleta de viaje llena de piedras. Eso es exactamente lo que hacen las imágenes no optimizadas a tu sitio web. Son archivos gigantes que el navegador de tu visitante necesita "descargar" antes de mostrar la página. Una sola foto de alta resolución de un celular puede tener 5 MB, cuando lo ideal para la web sería menos de 200 KB.
+
+**La Solución Técnica (Simplificada):** No se trata de usar imágenes de baja calidad, sino de usar el formato correcto (como WebP, un formato moderno que ofrece alta calidad con tamaño reducido) y la compresión inteligente. Herramientas y técnicas correctas pueden reducir el peso de una imagen hasta 80% sin pérdida de calidad perceptible.
+
+### Culpable #2: Código Inflado — El "Motor Desregulado"
+
+El código es el motor de tu sitio web. Un código limpio y optimizado entrega potencia máxima. Un código "inflado" gasta energía innecesariamente.
+
+**El Problema (Lenguaje Fácil):** Muchos sitios web, especialmente los hechos en plataformas con exceso de plugins y temas genéricos, cargan código innecesario. Es como si, para encender el faro del auto, el motor necesitara antes verificar las ventanas, la radio y el aire acondicionado. Esta "conversación" innecesaria entre archivos (CSS, JavaScript) retrasa todo.
+
+**La Solución Técnica (Simplificada):** El proceso de "minificación" y "optimización de renderizado". Básicamente, es una "limpieza" del motor: removemos espacios, comentarios y códigos que no se están usando en esa página específica, y organizamos el orden de carga para que el contenido más importante aparezca primero.
+
+### Culpable #3: Hospedaje de Baja Calidad — El "Combustible Adulterado"
+
+El hospedaje es donde tu sitio web "vive". Es la base de todo. Ahorrar aquí es el mayor error que puedes cometer.
+
+**El Problema (Lenguaje Fácil):** Contratar el hospedaje más barato es como abastecer tu auto de carreras con el peor combustible posible. El servidor (la computadora donde está el sitio) no tiene suficiente potencia para responder rápidamente cuando muchos usuarios llegan al mismo tiempo. Se "ahoga", y tu sitio web se vuelve lento o incluso se cae.
+
+**La Solución Técnica (Simplificada):** La elección de un servidor adecuado para tu demanda. Esto involucra analizar el tiempo de respuesta del servidor (TTFB - Time to First Byte) y garantizar que tenga recursos suficientes (CPU, memoria RAM) para entregar tus archivos con velocidad, no importa desde dónde esté accediendo el visitante.
+
+## Diagnóstico Rápido: ¿Tu Sitio Web Está Enfermo?
+
+¿Curioso por saber la "nota" de salud de tu sitio web? El propio Google ofrece una herramienta gratuita: PageSpeed Insights.
+
+1. Accede al sitio de PageSpeed Insights
+2. Pega la dirección (URL) de tu sitio web
+3. Haz clic en analizar
+
+Verás una nota de 0 a 100 y un montón de términos técnicos en rojo. ¡No te asustes! Esto es solo el diagnóstico. Ahora necesitas al especialista para aplicar el tratamiento.
+
+## Tu Sitio Web No Necesita Ser la Tortuga en la Carrera Digital
+
+Un sitio web lento no es una sentencia. Es un problema con solución. Corregir estos tres culpables no es solo un ajuste técnico; es una inversión estratégica que se paga con mejor ranking en Google, clientes más felices y, lo más importante, más ventas.
+
+Dejar tu sitio web lento es como tener una tienda increíble en una calle donde los clientes tardan 10 minutos en conseguir abrir la puerta. Simplemente van al competidor de al lado.`
+    }
+  },
+  {
     slug: 'quanto-custa-landing-page-2025',
     title: {
       pt: 'Quanto custa uma Landing Page em 2025? Guia completo de investimento e ROI',

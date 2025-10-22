@@ -5,24 +5,28 @@ const path = require('path');
 // Simulate blog posts data (in production, this would be imported from posts.ts)
 const blogPosts = [
   {
-    slug: 'melhores-ferramentas-desenvolvimento-web-2025',
-    date: '2025-01-15T10:00:00.000Z'
-  },
-  {
-    slug: 'como-aumentar-conversoes-landing-page',
-    date: '2025-01-18T10:00:00.000Z'
-  },
-  {
-    slug: 'quanto-custa-landing-page-2025',
-    date: '2025-01-20T10:00:00.000Z'
+    slug: 'por-que-seu-site-lento-esta-roubando-seus-clientes',
+    date: '2025-01-22T10:00:00.000Z'
   },
   {
     slug: 'o-que-e-landing-page-melhores-ferramentas-gratuitas',
     date: '2025-01-21T10:00:00.000Z'
   },
   {
+    slug: 'quanto-custa-landing-page-2025',
+    date: '2025-01-20T10:00:00.000Z'
+  },
+  {
+    slug: 'como-aumentar-conversoes-landing-page',
+    date: '2025-01-18T10:00:00.000Z'
+  },
+  {
     slug: 'etapas-para-lancar-seu-site',
     date: '2025-01-17T10:00:00.000Z'
+  },
+  {
+    slug: 'melhores-ferramentas-desenvolvimento-web-2025',
+    date: '2025-01-15T10:00:00.000Z'
   }
 ];
 
