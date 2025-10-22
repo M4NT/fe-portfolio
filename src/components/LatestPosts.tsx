@@ -148,10 +148,15 @@ export default function LatestPosts() {
                 transition={{ delay: 0.3 }}
                 className="hidden lg:block"
               >
+                <label htmlFor="sort-select" className="sr-only">
+                  {language === 'pt' ? 'Ordenar posts por' : language === 'en' ? 'Sort posts by' : 'Ordenar posts por'}
+                </label>
                 <select
+                  id="sort-select"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-3 py-1.5 bg-white/3 border border-white/5 rounded-lg text-white/50 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500/30 focus:border-teal-500/30 hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all"
+                  aria-label={language === 'pt' ? 'Ordenar posts por' : language === 'en' ? 'Sort posts by' : 'Ordenar posts por'}
                 >
                   <option value="newest">
                     {language === 'pt' ? 'Mais Recentes' : language === 'en' ? 'Newest' : 'Más Recientes'}
@@ -277,6 +282,7 @@ export default function LatestPosts() {
                 className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Post anterior"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
@@ -292,6 +298,8 @@ export default function LatestPosts() {
                         ? 'bg-gradient-to-r from-blue-400 to-purple-400 w-6 sm:w-8' 
                         : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50'
                     }`}
+                    aria-label={`Ir para slide ${index + 1}`}
+                    aria-pressed={currentIndex === index}
                   />
                 ))}
               </div>
@@ -303,6 +311,7 @@ export default function LatestPosts() {
                 className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Próximo post"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
@@ -318,10 +327,15 @@ export default function LatestPosts() {
           viewport={{ once: true }}
         >
           {/* Mobile Sort Filter */}
+          <label htmlFor="mobile-sort-select" className="sr-only">
+            {language === 'pt' ? 'Ordenar posts por' : language === 'en' ? 'Sort posts by' : 'Ordenar posts por'}
+          </label>
           <select
+            id="mobile-sort-select"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             className="px-3 py-1.5 bg-white/3 border border-white/5 rounded-lg text-white/50 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500/30 focus:border-teal-500/30 hover:bg-white/5 hover:border-white/10 hover:text-white/70 transition-all"
+            aria-label={language === 'pt' ? 'Ordenar posts por' : language === 'en' ? 'Sort posts by' : 'Ordenar posts por'}
           >
             <option value="newest">
               {language === 'pt' ? 'Mais Recentes' : language === 'en' ? 'Newest' : 'Más Recientes'}

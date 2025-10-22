@@ -67,7 +67,8 @@ function AppContent() {
           <Route path="/" element={
             <>
               <Hero />
-              <SectionDivider />
+              <main id="main-content">
+                <SectionDivider />
               <SelectedWorks />
               <SectionDivider />
               <About />
@@ -85,6 +86,7 @@ function AppContent() {
               <SectionDivider />
               <FAQ />
               <Footer />
+              </main>
             </>
           } />
           {/* Language-prefixed routes for EN/ES */}

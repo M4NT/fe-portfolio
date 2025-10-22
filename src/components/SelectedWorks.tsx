@@ -332,6 +332,7 @@ const SelectedWorks = () => {
                     className="p-2 bg-black/40 backdrop-blur-sm border border-white/30 rounded-lg hover:bg-black/60 hover:border-white/50 hover:scale-105 transition-all duration-300 ease-out"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={`Ver projeto ${currentProject.title} ao vivo`}
                   >
                     <ExternalLink className="w-4 h-4 text-white" />
                   </motion.a>
@@ -343,6 +344,7 @@ const SelectedWorks = () => {
                       className="p-2 bg-black/40 backdrop-blur-sm border border-white/30 rounded-lg hover:bg-black/60 hover:border-white/50 hover:scale-105 transition-all duration-300 ease-out"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      aria-label={`Ver código do projeto ${currentProject.title} no GitHub`}
                     >
                       <Github className="w-4 h-4 text-white" />
                     </motion.a>
@@ -356,6 +358,7 @@ const SelectedWorks = () => {
               <button
                 onClick={prevProject}
                 className="group/btn p-2 sm:p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                aria-label="Projeto anterior"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover/btn:text-white transition-colors" />
               </button>
@@ -374,6 +377,7 @@ const SelectedWorks = () => {
               <button
                 onClick={nextProject}
                 className="group/btn p-2 sm:p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+                aria-label="Próximo projeto"
               >
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover/btn:text-white transition-colors" />
               </button>
@@ -393,6 +397,8 @@ const SelectedWorks = () => {
                       ? 'w-8 sm:w-10 bg-white shadow-lg' 
                       : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50 hover:w-2 sm:hover:w-3'
                   }`}
+                  aria-label={`Ir para projeto ${index + 1}`}
+                  aria-pressed={index === currentIndex}
                 />
               ))}
             </div>
