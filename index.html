@@ -274,13 +274,22 @@
     <meta name="format-detection" content="telephone=no" />
     
     <!-- ATENÇÃO: Adicione aqui a tag de verificação do Google Search Console -->
-    <!-- Exemplo: <meta name="google-site-verification" content="seu-código-aqui" /> -->
+    <!-- Google Search Console - Substitua pelo código fornecido -->
+    <!-- <meta name="google-site-verification" content="SEU_CODIGO_AQUI" /> -->
+    
+    <!-- INSTRUÇÕES:
+    1. Acesse: https://search.google.com/search-console
+    2. Adicione propriedade: yanmantovani.com
+    3. Escolha método: "Tag HTML" ou "Arquivo HTML"
+    4. Se Tag HTML: descomente a linha abaixo e cole o código
+    5. Se Arquivo HTML: substitua o conteúdo de public/google-site-verification.html
+    -->
     
     <!-- Google Analytics 4 + Consent Mode (otimizado para performance) -->
     <script>
       // Inicializar GA4 de forma não-bloqueante
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);}    
       
       // Consent Mode padrão: sem ads
       gtag('consent', 'default', {
@@ -339,10 +348,10 @@
         script.async = true;
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5X4W3JPES1';
         script.onload = function() {
-          gtag('js', new Date());
-          gtag('config', 'G-5X4W3JPES1', {
-            allow_google_signals: false,
-            anonymize_ip: true,
+      gtag('js', new Date());
+      gtag('config', 'G-5X4W3JPES1', {
+        allow_google_signals: false,
+        anonymize_ip: true,
             ads_data_redaction: true,
             send_page_view: false
           });

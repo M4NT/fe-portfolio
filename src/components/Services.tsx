@@ -13,7 +13,7 @@ const Services = () => {
   const currencies = {
     BRL: { symbol: 'R$', name: 'Real' },
     USD: { symbol: '$', name: 'Dólar' },
-    EUR: { symbol: '£', name: 'Euro' }
+    EUR: { symbol: '€', name: 'Euro' }
   };
 
   const getServiceData = (currency: 'BRL' | 'USD' | 'EUR') => {
@@ -274,7 +274,7 @@ const Services = () => {
         {
           id: 1,
           title: 'Brand Identity System',
-          price: 'from £1,250',
+          price: 'from €108',
           category: 'Branding',
           icon: <Palette className="w-5 h-5" />,
           accent: 'from-pink-500 to-purple-500',
@@ -291,7 +291,7 @@ const Services = () => {
         {
           id: 2,
           title: 'Social Media Design (20 Posts)',
-          price: 'from £650',
+          price: '€117',
           category: 'Design',
           icon: <Star className="w-5 h-5" />,
           accent: 'from-blue-500 to-cyan-500',
@@ -306,7 +306,7 @@ const Services = () => {
         {
           id: 3,
           title: 'Social Media Strategy & Design (30 Posts)',
-          price: 'from £950',
+          price: '€158',
           category: 'Design Pro',
           icon: <Sparkles className="w-5 h-5" />,
           accent: 'from-purple-500 to-pink-500',
@@ -322,7 +322,7 @@ const Services = () => {
         {
           id: 4,
           title: 'Brand + Social Media Launch Kit',
-          price: 'from £2,500',
+          price: '€200',
           category: 'Bundle',
           icon: <Zap className="w-5 h-5" />,
           accent: 'from-green-500 to-teal-500',
@@ -337,7 +337,7 @@ const Services = () => {
         {
           id: 5,
           title: 'Conversion-Focused Landing Page',
-          price: 'from £1,200',
+          price: 'from €300',
           category: 'Development',
           icon: <Globe className="w-5 h-5" />,
           accent: 'from-orange-500 to-red-500',
@@ -352,7 +352,7 @@ const Services = () => {
         {
           id: 6,
           title: 'Corporate Website',
-          price: 'from £3,000',
+          price: 'from €583',
           category: 'Development',
           icon: <Code className="w-5 h-5" />,
           accent: 'from-indigo-500 to-purple-500',
@@ -367,14 +367,14 @@ const Services = () => {
         {
           id: 7,
           title: 'Website UI Layout (2 Pages)',
-          price: 'from £950',
+          price: '€167 (2p)',
           category: 'Design',
           icon: <Layout className="w-5 h-5" />,
           accent: 'from-teal-500 to-green-500',
           accentSolid: 'bg-teal-500',
           features: [
-            'Two page layouts included',
-            '£345 per extra page',
+            'Up to 2 pages',
+            '€100 per extra page',
             'Visual for your dev to implement easily'
           ],
           highlight: 'Design ready for development'
@@ -382,7 +382,7 @@ const Services = () => {
         {
           id: 8,
           title: 'Website Hosting',
-          price: 'from £10',
+          price: 'from €7',
           category: 'Hosting',
           icon: <Server className="w-5 h-5" />,
           accent: 'from-emerald-500 to-cyan-500',
@@ -520,7 +520,7 @@ const Services = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <div className="text-orange-400 font-bold text-2xl">
-                        {selectedCurrency === 'BRL' ? 'R$ 1.799,99' : selectedCurrency === 'USD' ? '$1,500' : '£1,200'}
+                        {selectedCurrency === 'BRL' ? 'R$ 1.799,99' : selectedCurrency === 'USD' ? '$1,500' : '€300'}
                       </div>
                       <div className="text-white/50 text-xs">a partir de</div>
                     </div>
@@ -589,7 +589,7 @@ const Services = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <div className="text-green-400 font-bold text-2xl">
-                        {selectedCurrency === 'BRL' ? 'R$ 1.199,99' : selectedCurrency === 'USD' ? '$1,900' : '£2,500'}
+                        {selectedCurrency === 'BRL' ? 'R$ 1.199,99' : selectedCurrency === 'USD' ? '$1,900' : '€200'}
                       </div>
                       <div className="text-white/50 text-xs">combo completo</div>
                     </div>
