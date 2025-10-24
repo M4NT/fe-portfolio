@@ -10,10 +10,14 @@ export default function BlogPost() {
   const { slug } = useParams();
   const { language } = useLanguage();
   
+  console.log('BlogPost - slug:', slug);
+  console.log('BlogPost - language:', language);
+  
   // Try-catch para capturar erros em produção
   let post;
   try {
     post = getPost(slug || '');
+    console.log('BlogPost - post encontrado:', !!post);
   } catch (error) {
     console.error('Erro ao carregar post:', error);
     return <div className="text-white p-8">Erro ao carregar post.</div>;
