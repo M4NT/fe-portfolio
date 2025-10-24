@@ -7,16 +7,26 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function BlogPost() {
+  console.log('BlogPost - Componente iniciado');
+  
   const { slug } = useParams();
+  console.log('BlogPost - slug do useParams:', slug);
+  
   const { language } = useLanguage();
+  console.log('BlogPost - language do context:', language);
   
-  console.log('BlogPost - slug:', slug);
-  console.log('BlogPost - language:', language);
+  // TESTE DIRETO - SEM FUNÇÃO
+  console.log('BlogPost - Testando getPost diretamente...');
+  let post;
+  try {
+    post = getPost(slug || '');
+    console.log('BlogPost - getPost executado, resultado:', !!post);
+  } catch (error) {
+    console.error('BlogPost - ERRO no getPost:', error);
+    return <div className="text-white p-8">ERRO no getPost: {String(error)}</div>;
+  }
   
-  // TESTE SIMPLES - SEM TRY-CATCH
-  const post = getPost(slug || '');
-  console.log('BlogPost - post encontrado:', !!post);
-  console.log('BlogPost - post data:', post ? { title: post.title[language], slug: post.slug } : 'null');
+  console.log('BlogPost - post final:', post);
   
   // Verificação básica do slug
   if (!slug) {

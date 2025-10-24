@@ -3561,13 +3561,26 @@ Las landing pages no son solo una herramienta de marketing - son una estrategia 
 ];
 
 export const getPost = (slug: string) => {
-  console.log('getPost - buscando slug:', slug);
-  console.log('getPost - total de posts:', posts.length);
-  const post = posts.find((p) => p.slug === slug);
-  console.log('getPost - post encontrado:', !!post);
+  console.log('getPost - INICIANDO com slug:', slug);
+  console.log('getPost - tipo do slug:', typeof slug);
+  console.log('getPost - total de posts disponíveis:', posts.length);
+  
+  // Listar todos os slugs disponíveis
+  const availableSlugs = posts.map(p => p.slug);
+  console.log('getPost - slugs disponíveis:', availableSlugs);
+  
+  const post = posts.find((p) => {
+    console.log('getPost - comparando:', p.slug, '===', slug, '?', p.slug === slug);
+    return p.slug === slug;
+  });
+  
+  console.log('getPost - resultado da busca:', !!post);
   if (post) {
-    console.log('getPost - post data:', { title: post.title.pt, slug: post.slug });
+    console.log('getPost - post encontrado:', { title: post.title.pt, slug: post.slug });
+  } else {
+    console.log('getPost - NENHUM POST ENCONTRADO para slug:', slug);
   }
+  
   return post;
 };
 
