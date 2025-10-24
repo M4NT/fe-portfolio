@@ -28,17 +28,17 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 
-// Import Analytics
-import { trackPageView } from './lib/analytics-ga4';
+// Import Analytics - DESABILITADO TEMPORARIAMENTE
+// import { trackPageView } from './lib/analytics-ga4';
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
-  // Track page views
-  useEffect(() => {
-    trackPageView(location.pathname + location.search);
-  }, [location]);
+  // Track page views - DESABILITADO TEMPORARIAMENTE
+  // useEffect(() => {
+  //   trackPageView(location.pathname + location.search);
+  // }, [location]);
 
   useEffect(() => {
     // Force scroll to top and clear URL hash on load/reload
