@@ -22,13 +22,8 @@
     
     <!-- Preload fontes críticas - REMOVIDO URLs hardcoded -->
     
-    <!-- Cache busting agressivo para forçar atualizações -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <meta name="cache-control" content="no-cache" />
-    <meta name="expires" content="0" />
-    <meta name="pragma" content="no-cache" />
+    <!-- Cache busting simples -->
+    <meta http-equiv="Cache-Control" content="no-cache" />
     
     <!-- Força cores consistentes em todos os dispositivos -->
     <meta name="color-scheme" content="dark" />
@@ -136,9 +131,33 @@
       }
     </style>
     
-    <!-- CSS crítico inline para LCP - ultra otimizado -->
+    <!-- CSS crítico simplificado -->
     <style>
-      *{box-sizing:border-box;margin:0;padding:0}html{font-size:16px;line-height:1.5}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#000;color:#fff;margin:0;padding:0;overflow-x:hidden;font-display:swap;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;color:#fff;position:relative;overflow:hidden;contain:layout style paint;will-change:transform}.hero-title{font-family:'Orbitron','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:clamp(2.5rem,5vw,4rem);line-height:1.1;margin:0;color:#fff;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;contain:layout style paint}.hero-subtitle{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.6;color:rgba(255,255,255,0.7);margin:0;max-width:42rem;contain:layout style paint}img{max-width:100%;height:auto;display:block;contain:layout style paint}.hero-section,.about-section,.projects-section,.services-section{contain:layout style paint;will-change:transform}.animate-composite,.gpu-accelerated,[data-framer-motion]{will-change:transform,opacity;transform:translateZ(0);backface-visibility:hidden;perspective:1000px;contain:layout style paint}.performance-optimized{will-change:auto;transform:translateZ(0);backface-visibility:hidden;perspective:1000px;contain:layout style paint}.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:500;transition:all 0.2s;text-decoration:none;border:none;cursor:pointer}.btn-primary{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-primary:hover{background:linear-gradient(135deg,#2563eb,#7c3aed);transform:translateY(-1px)}.btn-secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}.btn-secondary:hover{background:rgba(255,255,255,0.2);transform:translateY(-1px)}.text-white\/70{color:rgba(255,255,255,0.7)}.text-base{font-size:1rem;line-height:1.5}.sm\:text-lg{font-size:1.125rem;line-height:1.75}.lg\:text-xl{font-size:1.25rem;line-height:1.75}.xl\:text-2xl{font-size:1.5rem;line-height:2}.leading-relaxed{line-height:1.625}
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { 
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #000; 
+        color: #fff; 
+        margin: 0; 
+        padding: 0; 
+        overflow-x: hidden; 
+      }
+      .hero-section { 
+        min-height: 100vh; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        background: #000; 
+        color: #fff; 
+      }
+      .hero-title { 
+        font-family: 'Orbitron', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 700; 
+        font-size: clamp(2.5rem, 5vw, 4rem); 
+        line-height: 1.1; 
+        margin: 0; 
+        color: #fff; 
+      }
     </style>
     
     <!-- CSS crítico inline para hero section -->
@@ -767,22 +786,13 @@
       }
     </script>
     
-    <!-- Script de limpeza de cache -->
+    <!-- Script simples de limpeza -->
     <script>
-      // Limpar cache e Service Workers
+      // Limpar Service Workers apenas
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(function(registrations) {
           for (let registration of registrations) {
             registration.unregister();
-          }
-        });
-      }
-      
-      // Limpar cache do navegador
-      if ('caches' in window) {
-        caches.keys().then(function(names) {
-          for (let name of names) {
-            caches.delete(name);
           }
         });
       }
