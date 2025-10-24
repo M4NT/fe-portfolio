@@ -9,9 +9,9 @@ measureWebVitals();
 monitorSlowResources();
 logPerformanceSummary();
 
-// Initialize Google Analytics 4
-import { initGA4 } from './lib/analytics-ga4';
-initGA4();
+// Initialize Google Analytics 4 - DESABILITADO
+// import { initGA4 } from './lib/analytics-ga4';
+// initGA4();
 
 // Initialize Sentry (Error Tracking)
 // Descomente quando configurar seu DSN do Sentry
