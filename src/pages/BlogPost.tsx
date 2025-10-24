@@ -9,7 +9,15 @@ import Footer from '../components/Footer';
 export default function BlogPost() {
   const { slug } = useParams();
   const { language } = useLanguage();
-  const post = getPost(slug || '');
+  
+  // Try-catch para capturar erros em produção
+  let post;
+  try {
+    post = getPost(slug || '');
+  } catch (error) {
+    console.error('Erro ao carregar post:', error);
+    return <div className="text-white p-8">Erro ao carregar post.</div>;
+  }
   
   // Força scroll ao topo quando a página carrega
   useEffect(() => {
