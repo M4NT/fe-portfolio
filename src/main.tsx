@@ -3,18 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './styles/globals.css'
 
-// Global error handler para capturar erros JavaScript
-window.addEventListener('error', (event) => {
-  console.error('🚨 Global JavaScript Error:', event.error);
-  console.error('🚨 Error Message:', event.message);
-  console.error('🚨 Error Source:', event.filename, 'Line:', event.lineno, 'Column:', event.colno);
-});
-
-// Global unhandled promise rejection handler
-window.addEventListener('unhandledrejection', (event) => {
-  console.error('🚨 Unhandled Promise Rejection:', event.reason);
-});
-
 // Initialize Performance Monitoring
 import { measureWebVitals, monitorSlowResources, logPerformanceSummary } from './lib/performance';
 measureWebVitals();
