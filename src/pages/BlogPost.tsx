@@ -110,44 +110,107 @@ export default function BlogPost() {
   }, [post, ld]);
 
   const renderContent = (src: string) => {
-    // Transform markdown to HTML with better structure
-    let html = src
-      .replace(/^###\s+(.*)$/gm, '<h3 class="blog-h3">$1</h3>')
-      .replace(/^##\s+(.*)$/gm, '<h2 class="blog-h2">$1</h2>')
-      .replace(/^#\s+(.*)$/gm, '<h1 class="blog-h1">$1</h1>')
-      .replace(/\*\*\*(.+?)\*\*\*/g, '<strong class="blog-important">$1</strong>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong class="blog-bold">$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em class="blog-italic">$1</em>')
-      .replace(/^\-\s+(.*)$/gm, '<li class="blog-li">$1</li>')
-      .replace(/\n\n/g, '</p><p class="blog-p">')
-      .replace(/^(.+)$/gm, (match) => {
-        if (!match.startsWith('<')) return `<p class="blog-p">${match}</p>`;
-        return match;
-      });
+    // Split content into lines for processing
+    const lines = src.split('\n');
+    const elements: JSX.Element[] = [];
+    let currentList: string[] = [];
+    let key = 0;
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={key++} className="blog-ul">
+            {currentList.map((item, index) => (
+              <li key={index} className="blog-li">{item}</li>
+            ))}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      
+      if (trimmed.startsWith('### ')) {
+        flushList();
+        elements.push(<h3 key={key++} className="blog-h3">{trimmed.slice(4)}</h3>);
+      } else if (trimmed.startsWith('## ')) {
+        flushList();
+        elements.push(<h2 key={key++} className="blog-h2">{trimmed.slice(3)}</h2>);
+      } else if (trimmed.startsWith('# ')) {
+        flushList();
+        elements.push(<h1 key={key++} className="blog-h1">{trimmed.slice(2)}</h1>);
+      } else if (trimmed.startsWith('- ')) {
+        currentList.push(trimmed.slice(2));
+      } else if (trimmed === '') {
+        flushList();
+        if (elements.length > 0 && elements[elements.length - 1].type !== 'br') {
+          elements.push(<br key={key++} />);
+        }
+      } else if (trimmed) {
+        flushList();
+        // Process inline formatting
+        const processedLine = processInlineFormatting(trimmed);
+        elements.push(<p key={key++} className="blog-p">{processedLine}</p>);
+      }
+    }
     
-    // SANITIZAÇÃO: Remover qualquer script tag que possa causar React Error #61
-    html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    html = html.replace(/<script\b[^>]*>/gi, '');
-    html = html.replace(/<\/script>/gi, '');
-    
-    // Wrap consecutive <li> in <ul>
-    html = html.replace(/(<li class="blog-li">.*?<\/li>\s*)+/gs, (match) => {
-      return `<ul class="blog-ul">${match}</ul>`;
-    });
-    
-    // Process HTML tables
-    html = html.replace(/<div class="blog-table">([\s\S]*?)<\/div>/g, (_match, tableContent) => {
-      return `<div class="blog-table">${tableContent}</div>`;
-    });
-    
-    // Add highlight classes to important phrases
-    html = html.replace(/(ROI médio de 300%)/g, '<span class="blog-highlight">$1</span>');
-    html = html.replace(/(investimento estratégico)/g, '<span class="blog-highlight">$1</span>');
-    html = html.replace(/(conversões até 3 vezes maiores)/g, '<span class="blog-highlight">$1</span>');
-    html = html.replace(/(reduz em 40%)/g, '<span class="blog-highlight">$1</span>');
-    html = html.replace(/(aumenta em 25%)/g, '<span class="blog-highlight">$1</span>');
-    
-    return <div className="blog-content" dangerouslySetInnerHTML={{ __html: html }} />;
+    flushList();
+    return <div className="blog-content">{elements}</div>;
+  };
+
+  const processInlineFormatting = (text: string) => {
+    // Process bold, italic, and other inline formatting
+    const parts: (string | JSX.Element)[] = [];
+    let remaining = text;
+    let partKey = 0;
+
+    while (remaining.length > 0) {
+      // Check for ***bold***
+      const boldMatch = remaining.match(/^\*\*\*(.+?)\*\*\*/);
+      if (boldMatch) {
+        parts.push(<strong key={partKey++} className="blog-important">{boldMatch[1]}</strong>);
+        remaining = remaining.slice(boldMatch[0].length);
+        continue;
+      }
+
+      // Check for **bold**
+      const boldMatch2 = remaining.match(/^\*\*(.+?)\*\*/);
+      if (boldMatch2) {
+        parts.push(<strong key={partKey++} className="blog-bold">{boldMatch2[1]}</strong>);
+        remaining = remaining.slice(boldMatch2[0].length);
+        continue;
+      }
+
+      // Check for *italic*
+      const italicMatch = remaining.match(/^\*(.+?)\*/);
+      if (italicMatch) {
+        parts.push(<em key={partKey++} className="blog-italic">{italicMatch[1]}</em>);
+        remaining = remaining.slice(italicMatch[0].length);
+        continue;
+      }
+
+      // Check for highlights
+      const highlightMatch = remaining.match(/^(ROI médio de 300%|investimento estratégico|conversões até 3 vezes maiores|reduz em 40%|aumenta em 25%)/);
+      if (highlightMatch) {
+        parts.push(<span key={partKey++} className="blog-highlight">{highlightMatch[1]}</span>);
+        remaining = remaining.slice(highlightMatch[1].length);
+        continue;
+      }
+
+      // Regular text
+      const nextSpecial = remaining.search(/[\*\#]/);
+      if (nextSpecial === -1) {
+        parts.push(remaining);
+        break;
+      } else {
+        parts.push(remaining.slice(0, nextSpecial));
+        remaining = remaining.slice(nextSpecial);
+      }
+    }
+
+    return parts;
   };
 
   // Dynamic head tags (title, canonical, OG) for SPA
