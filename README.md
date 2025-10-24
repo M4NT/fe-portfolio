@@ -7,3 +7,5 @@ Portfolio de desenvolvedor frontend com React e TypeScript.
 - ✅ Build funcionando localmente  
 - ✅ Aguardando deploy no Vercel
 - 🕐 Última atualização: 24/10/2025 12:00
+
+k
