@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './styles/globals.css'
 
-// Initialize Performance Monitoring
-import { measureWebVitals, monitorSlowResources, logPerformanceSummary } from './lib/performance';
-measureWebVitals();
-monitorSlowResources();
-logPerformanceSummary();
+// Initialize Performance Monitoring - DESABILITADO
+// import { measureWebVitals, monitorSlowResources, logPerformanceSummary } from './lib/performance';
+// measureWebVitals();
+// monitorSlowResources();
+// logPerformanceSummary();
 
 // Initialize Google Analytics 4 - DESABILITADO
 // import { initGA4 } from './lib/analytics-ga4';
