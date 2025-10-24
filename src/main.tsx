@@ -18,10 +18,10 @@ initGA4();
 // import { initSentry } from './lib/sentry';
 // initSentry();
 
-// Register Service Worker (PWA)
-import { registerServiceWorker, checkOnlineStatus } from './lib/pwa';
-registerServiceWorker();
-checkOnlineStatus();
+// Register Service Worker (PWA) - DESABILITADO
+// import { registerServiceWorker, checkOnlineStatus } from './lib/pwa';
+// registerServiceWorker();
+// checkOnlineStatus();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
