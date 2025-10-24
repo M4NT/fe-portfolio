@@ -125,6 +125,11 @@ export default function BlogPost() {
         return match;
       });
     
+    // SANITIZAÇÃO: Remover qualquer script tag que possa causar React Error #61
+    html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    html = html.replace(/<script\b[^>]*>/gi, '');
+    html = html.replace(/<\/script>/gi, '');
+    
     // Wrap consecutive <li> in <ul>
     html = html.replace(/(<li class="blog-li">.*?<\/li>\s*)+/gs, (match) => {
       return `<ul class="blog-ul">${match}</ul>`;
