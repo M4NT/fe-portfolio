@@ -105,24 +105,7 @@
     
     <!-- CSS crítico inline para evitar render-blocking -->
     <style>
-      /* Font face declarations para evitar FOIT */
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 300 700;
-        font-display: swap;
-        src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-      
-      @font-face {
-        font-family: 'Orbitron';
-        font-style: normal;
-        font-weight: 400 700;
-        font-display: swap;
-        src: url('https://fonts.gstatic.com/s/orbitron/v25/yMJMMIlzdpvBhQDB2aE.woff2') format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
+      /* Font face declarations removidas - usando Google Fonts CSS */
       
       /* Estilos críticos para LCP */
       body {
@@ -248,18 +231,14 @@
       }
     </style>
     
-    <!-- Load fontes com display=swap para evitar FOIT -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <!-- Google Fonts - Carregamento simples -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" />
     
     <!-- CSS não crítico carregado de forma assíncrona -->
     
     <!-- Fallback para navegadores sem JS -->
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" />
     </noscript>
     
     <!-- Preconnect para Unsplash - melhora LCP de imagens -->

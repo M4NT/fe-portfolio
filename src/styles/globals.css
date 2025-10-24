@@ -438,9 +438,9 @@ section {
     @apply font-inter;
   }
   
-  /* Código e monospace - Geist Mono */
+  /* Código e monospace - Inter Mono */
   .font-mono {
-    @apply font-geist-mono;
+    @apply font-inter;
   }
   
   /* Títulos de seção - Inter com tracking específico */
@@ -524,9 +524,7 @@ section {
     font-family: 'Orbitron', sans-serif;
   }
 
-  .font-geist-mono {
-    font-family: 'Geist Mono', monospace;
-  }
+  /* Geist Mono removido - usando Inter */
 
   .font-inter {
     font-family: 'Inter', sans-serif;

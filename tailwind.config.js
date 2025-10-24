@@ -9,7 +9,6 @@ module.exports = {
     extend: {
       fontFamily: {
         'orbitron': ['Orbitron', 'monospace'],
-        'geist-mono': ['Geist Mono', 'monospace'],
         'inter': ['Inter', 'sans-serif'],
       },
       colors: {
