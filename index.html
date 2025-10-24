@@ -22,10 +22,13 @@
     
     <!-- Preload fontes críticas - REMOVIDO URLs hardcoded -->
     
-    <!-- Cache busting para forçar atualizações -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <!-- Cache busting agressivo para forçar atualizações -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta name="cache-control" content="no-cache" />
+    <meta name="expires" content="0" />
+    <meta name="pragma" content="no-cache" />
     
     <!-- Força cores consistentes em todos os dispositivos -->
     <meta name="color-scheme" content="dark" />
@@ -761,6 +764,27 @@
           history.replaceState(null, '', window.location.pathname);
         }
         window.scrollTo(0, 0);
+      }
+    </script>
+    
+    <!-- Script de limpeza de cache -->
+    <script>
+      // Limpar cache e Service Workers
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+      
+      // Limpar cache do navegador
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
       }
     </script>
     
