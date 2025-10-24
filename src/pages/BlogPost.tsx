@@ -18,6 +18,7 @@ export default function BlogPost() {
   try {
     post = getPost(slug || '');
     console.log('BlogPost - post encontrado:', !!post);
+    console.log('BlogPost - post data:', post ? { title: post.title[language], slug: post.slug } : 'null');
   } catch (error) {
     console.error('Erro ao carregar post:', error);
     return <div className="text-white p-8">Erro ao carregar post.</div>;
@@ -34,7 +35,23 @@ export default function BlogPost() {
     }, 100);
   }, [slug]);
   
-  if (!post) return <div className="text-white p-8">Post não encontrado.</div>;
+  if (!post) {
+    console.log('BlogPost - Post não encontrado para slug:', slug);
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Post não encontrado</h1>
+          <p className="text-gray-400 mb-6">O post "{slug}" não foi encontrado.</p>
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+          >
+            ← Voltar ao Blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   const ld = {
     '@context': 'https://schema.org',
