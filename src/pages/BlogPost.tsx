@@ -45,20 +45,6 @@ export default function BlogPost() {
     }, 100);
   }, [slug]);
 
-  // Adicionar JSON-LD script
-  useEffect(() => {
-    if (post) {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.textContent = JSON.stringify(ld);
-      document.head.appendChild(script);
-      
-      return () => {
-        document.head.removeChild(script);
-      };
-    }
-  }, [post, ld]);
-  
   if (!post) {
     console.log('BlogPost - Post não encontrado para slug:', slug);
     return (
@@ -108,6 +94,20 @@ export default function BlogPost() {
     wordCount: post.content[language].split(' ').length,
     inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES'
   } as any;
+
+  // Adicionar JSON-LD script
+  useEffect(() => {
+    if (post) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(ld);
+      document.head.appendChild(script);
+      
+      return () => {
+        document.head.removeChild(script);
+      };
+    }
+  }, [post, ld]);
 
   const renderContent = (src: string) => {
     // Transform markdown to HTML with better structure
