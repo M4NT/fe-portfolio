@@ -147,7 +147,7 @@ export default function BlogPost() {
     html = html.replace(/(reduz em 40%)/g, '<span class="blog-highlight">$1</span>');
     html = html.replace(/(aumenta em 25%)/g, '<span class="blog-highlight">$1</span>');
     
-    return { __html: html };
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
   };
 
   // Dynamic head tags (title, canonical, OG) for SPA
@@ -692,7 +692,9 @@ export default function BlogPost() {
         )}
         
         
-        <div className="blog-content" dangerouslySetInnerHTML={renderContent(post.content[language])} />
+        <div className="blog-content">
+          {renderContent(post.content[language])}
+        </div>
         
         {/* CTA Section modernizada */}
         <motion.div 
