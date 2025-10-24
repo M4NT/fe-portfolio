@@ -13,10 +13,16 @@ export default function BlogPost() {
   console.log('BlogPost - slug:', slug);
   console.log('BlogPost - language:', language);
   
+  // Verificação básica do slug
+  if (!slug) {
+    console.log('BlogPost - slug é undefined');
+    return <div className="text-white p-8">Slug não encontrado.</div>;
+  }
+  
   // Try-catch para capturar erros em produção
   let post;
   try {
-    post = getPost(slug || '');
+    post = getPost(slug);
     console.log('BlogPost - post encontrado:', !!post);
     console.log('BlogPost - post data:', post ? { title: post.title[language], slug: post.slug } : 'null');
   } catch (error) {

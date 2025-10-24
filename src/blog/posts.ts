@@ -3560,5 +3560,14 @@ Las landing pages no son solo una herramienta de marketing - son una estrategia 
   },
 ];
 
-export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
+export const getPost = (slug: string) => {
+  console.log('getPost - buscando slug:', slug);
+  console.log('getPost - total de posts:', posts.length);
+  const post = posts.find((p) => p.slug === slug);
+  console.log('getPost - post encontrado:', !!post);
+  if (post) {
+    console.log('getPost - post data:', { title: post.title.pt, slug: post.slug });
+  }
+  return post;
+};
 
