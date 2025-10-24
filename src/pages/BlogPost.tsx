@@ -13,21 +13,15 @@ export default function BlogPost() {
   console.log('BlogPost - slug:', slug);
   console.log('BlogPost - language:', language);
   
+  // TESTE SIMPLES - SEM TRY-CATCH
+  const post = getPost(slug || '');
+  console.log('BlogPost - post encontrado:', !!post);
+  console.log('BlogPost - post data:', post ? { title: post.title[language], slug: post.slug } : 'null');
+  
   // Verificação básica do slug
   if (!slug) {
     console.log('BlogPost - slug é undefined');
     return <div className="text-white p-8">Slug não encontrado.</div>;
-  }
-  
-  // Try-catch para capturar erros em produção
-  let post;
-  try {
-    post = getPost(slug);
-    console.log('BlogPost - post encontrado:', !!post);
-    console.log('BlogPost - post data:', post ? { title: post.title[language], slug: post.slug } : 'null');
-  } catch (error) {
-    console.error('Erro ao carregar post:', error);
-    return <div className="text-white p-8">Erro ao carregar post.</div>;
   }
   
   // Força scroll ao topo quando a página carrega
@@ -48,6 +42,7 @@ export default function BlogPost() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Post não encontrado</h1>
           <p className="text-gray-400 mb-6">O post "{slug}" não foi encontrado.</p>
+          <p className="text-gray-500 mb-4">Debug: {JSON.stringify({ slug, language, postFound: !!post })}</p>
           <Link 
             to="/blog" 
             className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
