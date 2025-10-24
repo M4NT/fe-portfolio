@@ -23,13 +23,19 @@ import InstallPWA from './components/InstallPWA';
 
 // Lazy load pages para reduzir JS não usado
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
+const BlogPost = lazy(() => import('./pages/BlogPost').catch(() => ({ default: () => <div className="text-white p-8">Erro ao carregar BlogPost</div> })));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 
 // Import Analytics - DESABILITADO TEMPORARIAMENTE
 // import { trackPageView } from './lib/analytics-ga4';
+
+// Wrapper para debug do BlogPost
+function BlogPostWrapper() {
+  console.log('BlogPostWrapper - Componente carregado');
+  return <BlogPost />;
+}
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -140,7 +146,7 @@ function AppContent() {
                 </div>
               </div>
             }>
-              <BlogPost />
+              <BlogPostWrapper />
             </Suspense>
           } />
         </Routes>
