@@ -44,6 +44,20 @@ export default function BlogPost() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
   }, [slug]);
+
+  // Adicionar JSON-LD script
+  useEffect(() => {
+    if (post) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(ld);
+      document.head.appendChild(script);
+      
+      return () => {
+        document.head.removeChild(script);
+      };
+    }
+  }, [post, ld]);
   
   if (!post) {
     console.log('BlogPost - Post não encontrado para slug:', slug);
@@ -672,7 +686,6 @@ export default function BlogPost() {
           </motion.div>
         )}
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
         
         <div className="blog-content" dangerouslySetInnerHTML={renderContent(post.content[language])} />
         
