@@ -1,6 +1,9 @@
 // Simple sitemap generator for build process
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Simulate blog posts data (in production, this would be imported from posts.ts)
 const blogPosts = [
@@ -122,8 +125,8 @@ ${urls.map(url => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-// Write sitemap to dist folder
-const distPath = path.join(__dirname, 'dist', 'sitemap.xml');
+// Write sitemap to dist/client folder (where the build outputs)
+const distPath = path.join(__dirname, 'dist', 'client', 'sitemap.xml');
 fs.writeFileSync(distPath, sitemap);
 
 console.log('✅ Sitemap gerado com sucesso:', distPath);
