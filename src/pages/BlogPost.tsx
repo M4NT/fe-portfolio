@@ -119,6 +119,239 @@ export default function BlogPost() {
     };
   }, [structuredData]);
 
+  // Adicionar estilos do blog no head
+  useEffect(() => {
+    const blogStyles = `
+      .blog-content {
+        font-size: 1.125rem;
+        line-height: 1.875rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 400;
+      }
+      
+      .blog-h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .blog-h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 3rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .blog-h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .blog-p {
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.875rem;
+      }
+      
+      .blog-p:empty {
+        display: none;
+      }
+      
+      .blog-p:first-of-type {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        font-weight: 400;
+      }
+      
+      .blog-bold {
+        font-weight: 600;
+        color: white;
+      }
+      
+      .blog-italic {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      .blog-highlight {
+        color: #60a5fa;
+        font-weight: 600;
+      }
+      
+      .blog-important {
+        background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600;
+      }
+      
+      .blog-ul {
+        margin: 1.5rem 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      
+      .blog-li {
+        margin-bottom: 0.75rem;
+        padding-left: 2rem;
+        position: relative;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.75rem;
+      }
+      
+      .blog-li::before {
+        content: '▸';
+        position: absolute;
+        left: 0.5rem;
+        background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      
+      .blog-content a {
+        color: #14b8a6;
+        text-decoration: underline;
+        text-decoration-color: rgba(20, 184, 166, 0.3);
+        text-underline-offset: 3px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      
+      .blog-content a:hover {
+        color: #06b6d4;
+        text-decoration-color: #06b6d4;
+      }
+      
+      .blog-content::selection {
+        background: rgba(20, 184, 166, 0.3);
+        color: white;
+      }
+      
+      .blog-content blockquote {
+        border-left: 3px solid #14b8a6;
+        padding: 1.5rem 2rem;
+        margin: 2rem 0;
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+        border-radius: 0.5rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      
+      .blog-table {
+        margin: 2rem 0;
+        overflow-x: auto;
+        border-radius: 1rem;
+      }
+      
+      .blog-table table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 1rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .blog-table th {
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+        color: white;
+        font-weight: 600;
+        padding: 1rem 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(20, 184, 166, 0.3);
+      }
+      
+      .blog-table td {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      .blog-table tr:last-child td {
+        border-bottom: none;
+      }
+      
+      .blog-table tr:hover {
+        background: rgba(20, 184, 166, 0.05);
+      }
+      
+      @media (max-width: 768px) {
+        .blog-content {
+          font-size: 1rem;
+          line-height: 1.75rem;
+        }
+        
+        .blog-h1 {
+          font-size: 2rem;
+          margin-top: 2rem;
+        }
+        
+        .blog-h2 {
+          font-size: 1.75rem;
+          margin-top: 2rem;
+        }
+        
+        .blog-h3 {
+          font-size: 1.25rem;
+          margin-top: 1.5rem;
+        }
+        
+        .blog-p:first-of-type {
+          font-size: 1.125rem;
+        }
+        
+        .blog-li {
+          padding-left: 1.5rem;
+        }
+      }
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.id = 'blog-post-styles';
+    styleElement.textContent = blogStyles;
+    
+    // Remove estilo antigo se existir
+    const oldStyle = document.getElementById('blog-post-styles');
+    if (oldStyle && oldStyle.parentNode) {
+      oldStyle.parentNode.removeChild(oldStyle);
+    }
+    
+    document.head.appendChild(styleElement);
+    
+    return () => {
+      const styleToRemove = document.getElementById('blog-post-styles');
+      if (styleToRemove && styleToRemove.parentNode) {
+        styleToRemove.parentNode.removeChild(styleToRemove);
+      }
+    };
+  }, []);
+
   // Dynamic head tags (title, canonical, OG) for SPA
   useEffect(() => {
     if (!postSlug || !post) return;
@@ -560,217 +793,6 @@ export default function BlogPost() {
       <Navigation />
 
       <article className="relative py-16 md:py-24 bg-black">
-      <style dangerouslySetInnerHTML={{ __html: `
-        .blog-content {
-          font-size: 1.125rem;
-          line-height: 1.875rem;
-          color: rgba(255, 255, 255, 0.8);
-          font-weight: 400;
-        }
-        
-        .blog-h1 {
-          font-size: 2.5rem;
-          font-weight: 600;
-          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          margin-top: 3rem;
-          margin-bottom: 1.5rem;
-          line-height: 1.2;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-        
-        .blog-h2 {
-          font-size: 2rem;
-          font-weight: 600;
-          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          margin-top: 3rem;
-          margin-bottom: 1.25rem;
-          line-height: 1.3;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-        
-        .blog-h3 {
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: white;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          line-height: 1.4;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-        
-        .blog-p {
-          margin-bottom: 1.5rem;
-          color: rgba(255, 255, 255, 0.8);
-          line-height: 1.875rem;
-        }
-        
-        .blog-p:empty {
-          display: none;
-        }
-        
-        .blog-p:first-of-type {
-          font-size: 1.25rem;
-          color: rgba(255, 255, 255, 0.9);
-          margin-bottom: 2rem;
-          font-weight: 400;
-        }
-        
-        .blog-bold {
-          font-weight: 600;
-          color: white;
-        }
-        
-        .blog-italic {
-          font-style: italic;
-          color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .blog-highlight {
-          color: #60a5fa;
-          font-weight: 600;
-        }
-        
-        .blog-important {
-          background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-weight: 600;
-        }
-        
-        .blog-ul {
-          margin: 1.5rem 0;
-          padding-left: 0;
-          list-style: none;
-        }
-        
-        .blog-li {
-          margin-bottom: 0.75rem;
-          padding-left: 2rem;
-          position: relative;
-          color: rgba(255, 255, 255, 0.8);
-          line-height: 1.75rem;
-        }
-        
-        .blog-li::before {
-          content: '▸';
-          position: absolute;
-          left: 0.5rem;
-          background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-weight: bold;
-          font-size: 1.2rem;
-        }
-        
-        .blog-content a {
-          color: #14b8a6;
-          text-decoration: underline;
-          text-decoration-color: rgba(20, 184, 166, 0.3);
-          text-underline-offset: 3px;
-          transition: all 0.3s ease;
-          font-weight: 500;
-        }
-        
-        .blog-content a:hover {
-          color: #06b6d4;
-          text-decoration-color: #06b6d4;
-        }
-        
-        .blog-content::selection {
-          background: rgba(20, 184, 166, 0.3);
-          color: white;
-        }
-        
-        .blog-content blockquote {
-          border-left: 3px solid #14b8a6;
-          padding: 1.5rem 2rem;
-          margin: 2rem 0;
-          background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
-          border-radius: 0.5rem;
-          font-style: italic;
-          color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .blog-table {
-          margin: 2rem 0;
-          overflow-x: auto;
-          border-radius: 1rem;
-        }
-        
-        .blog-table table {
-          width: 100%;
-          border-collapse: collapse;
-          background: rgba(255, 255, 255, 0.03);
-          border-radius: 1rem;
-          overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .blog-table th {
-          background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
-          color: white;
-          font-weight: 600;
-          padding: 1rem 1.5rem;
-          text-align: left;
-          border-bottom: 1px solid rgba(20, 184, 166, 0.3);
-        }
-        
-        .blog-table td {
-          color: rgba(255, 255, 255, 0.8);
-          padding: 1rem 1.5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .blog-table tr:last-child td {
-          border-bottom: none;
-        }
-        
-        .blog-table tr:hover {
-          background: rgba(20, 184, 166, 0.05);
-        }
-        
-        @media (max-width: 768px) {
-          .blog-content {
-            font-size: 1rem;
-            line-height: 1.75rem;
-          }
-          
-          .blog-h1 {
-            font-size: 2rem;
-            margin-top: 2rem;
-          }
-          
-          .blog-h2 {
-            font-size: 1.75rem;
-            margin-top: 2rem;
-          }
-          
-          .blog-h3 {
-            font-size: 1.25rem;
-            margin-top: 1.5rem;
-          }
-          
-          .blog-p:first-of-type {
-            font-size: 1.125rem;
-          }
-          
-          .blog-li {
-            padding-left: 1.5rem;
-          }
-        }
-      `}} />
-      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb modernizado */}
         <motion.nav 
