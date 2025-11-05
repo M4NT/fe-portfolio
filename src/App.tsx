@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Preloader from './components/Preloader';
@@ -156,11 +156,9 @@ function AppContent() {
 function App() {
   return (
     <ErrorBoundary>
-      <Router>
-        <LanguageProvider>
-          <AppContent />
-        </LanguageProvider>
-      </Router>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }
