@@ -39,12 +39,12 @@ const Footer = () => {
   ];
 
   const navigationLinks = [
-    { id: 'works', label: 'Trabalhos' },
-    { id: 'projects', label: 'Projetos Pessoais' },
-    { id: 'about', label: 'Sobre' },
-    { id: 'services', label: 'Serviços' },
-    { id: 'testimonials', label: 'Depoimentos' },
-    { id: 'contact', label: 'Contato' }
+    { id: 'works', label: 'Trabalhos', href: '/#works' },
+    { id: 'about', label: 'Sobre', href: '/#about' },
+    { id: 'services', label: 'Serviços', href: '/#services' },
+    { id: 'affiliates', label: 'Quem Indica', href: '/#affiliates' },
+    { id: 'contact', label: 'Contato', href: '/#contact' },
+    { id: 'blog', label: 'Blog', href: '/blog' }
   ];
 
 
@@ -145,19 +145,39 @@ const Footer = () => {
             <h3 className="font-label text-white/40 text-xs font-medium">
               Navegação
             </h3>
-            <nav className="space-y-3">
+            <nav className="space-y-3" itemScope itemType="https://schema.org/SiteNavigationElement">
               {navigationLinks.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-3 text-white/60 hover:text-white transition-all duration-300 group w-full text-left"
-                  aria-label={`Ir para seção ${item.label}`}
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300" />
-                  <span className="font-light text-sm group-hover:translate-x-1 transition-transform duration-300">
-                    {item.label}
-                  </span>
-                </button>
+                item.href === '/blog' ? (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    className="flex items-center gap-3 text-white/60 hover:text-white transition-all duration-300 group w-full text-left"
+                    aria-label={`Ir para ${item.label}`}
+                    itemProp="url"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300" />
+                    <span className="font-light text-sm group-hover:translate-x-1 transition-transform duration-300" itemProp="name">
+                      {item.label}
+                    </span>
+                  </Link>
+                ) : (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.id);
+                    }}
+                    className="flex items-center gap-3 text-white/60 hover:text-white transition-all duration-300 group w-full text-left"
+                    aria-label={`Ir para seção ${item.label}`}
+                    itemProp="url"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300" />
+                    <span className="font-light text-sm group-hover:translate-x-1 transition-transform duration-300" itemProp="name">
+                      {item.label}
+                    </span>
+                  </a>
+                )
               ))}
             </nav>
           </motion.div>

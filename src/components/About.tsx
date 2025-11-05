@@ -117,21 +117,26 @@ const About = () => {
             transition={{ duration: 0.2 }}
           >
             <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">Desenvolvedor Frontend</span>
+            <span className="text-purple-300 text-sm font-medium">Especialista em Resultados Digitais</span>
           </motion.div>
           
           <h2 className="font-inter font-light text-5xl lg:text-7xl leading-none tracking-tight text-white mb-6">
             <span className="bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
-              Sobre Mim
+              Transformando Negócios
             </span>
           </h2>
           
           <p className="text-white/70 text-lg lg:text-xl max-w-3xl leading-relaxed">
-            <span className="text-purple-400 font-semibold">5+ anos</span> transformando ideias em 
-            <span className="text-white font-semibold"> experiências digitais</span> que impressionam. 
-            Especialista em criar interfaces que não apenas funcionam, mas 
-            <span className="text-purple-400 font-semibold"> encantam</span> e 
-            <span className="text-purple-400 font-semibold"> convertem</span>.
+            <span className="text-purple-400 font-semibold">Transformei 50+ negócios</span>, gerando mais de 
+            <span className="text-white font-semibold"> R$ 2 milhões em receita</span> para meus clientes.
+            <br /><br />
+            Especialista em resolver o problema que mais dói em pequenos e médios negócios: 
+            <span className="text-purple-400 font-semibold"> "Como fazer minha presença online realmente vender?"</span>
+            <br /><br />
+            <span className="text-white/90">Não vendo sites bonitos. Vendo <span className="text-green-400 font-semibold">alívio</span>.</span><br />
+            Alívio de finalmente ter leads chegando todos os dias.<br />
+            Alívio de não precisar se preocupar com atualizações técnicas.<br />
+            Alívio de ver números crescendo no painel.
           </p>
         </motion.div>
 

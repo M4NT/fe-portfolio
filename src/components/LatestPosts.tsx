@@ -7,30 +7,28 @@ import AnimatedBackground from './AnimatedBackground';
 import LazyImage from './LazyImage';
 import { useSwipe } from '../hooks/useSwipe';
 import { trackPortfolioEvents } from '../lib/analytics-ga4';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export default function LatestPosts() {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sortBy, setSortBy] = useState('newest');
   
-  // Função para ordenar posts
-  const getSortedPosts = () => {
-    const sortedPosts = [...posts];
+  // Função para ordenar posts - memoizada
+  const sortedPosts = useMemo(() => {
+    const sorted = [...posts];
     
     switch (sortBy) {
       case 'newest':
-        return sortedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       case 'oldest':
-        return sortedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        return sorted.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
       case 'title':
-        return sortedPosts.sort((a, b) => a.title[language].localeCompare(b.title[language]));
+        return sorted.sort((a, b) => a.title[language].localeCompare(b.title[language]));
       default:
-        return sortedPosts;
+        return sorted;
     }
-  };
-
-  const sortedPosts = getSortedPosts();
+  }, [sortBy, language]);
   
   // Ajustar posts por página baseado no tamanho da tela
   const [isMobile, setIsMobile] = useState(false);
@@ -49,15 +47,52 @@ export default function LatestPosts() {
   const totalSlides = Math.ceil(sortedPosts.length / postsPerView);
   const maxIndex = Math.max(0, totalSlides - 1);
   
+  // Resetar o índice quando os posts mudarem ou se ficar fora do range válido
+  useEffect(() => {
+    if (currentIndex > maxIndex && maxIndex >= 0) {
+      setCurrentIndex(0);
+    }
+  }, [sortedPosts.length, totalSlides, maxIndex]);
+  
   const nextSlide = () => {
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
+    setCurrentIndex(prev => {
+      if (prev >= maxIndex) {
+        return 0; // Volta para o primeiro
+      }
+      return prev + 1;
+    });
     trackPortfolioEvents.clickBlogCTA('carousel_next');
   };
   
   const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
+    setCurrentIndex(prev => {
+      if (prev <= 0) {
+        return maxIndex; // Vai para o último
+      }
+      return prev - 1;
+    });
     trackPortfolioEvents.clickBlogCTA('carousel_prev');
   };
+
+  // Calcular quais dots mostrar (máximo 5) - memoizado para evitar recálculos desnecessários
+  const visibleDots = useMemo(() => {
+    const maxVisible = 5;
+    if (totalSlides <= maxVisible) {
+      return Array.from({ length: totalSlides }, (_, i) => i);
+    }
+    
+    // Calcular o range de dots visíveis, mantendo o atual no centro quando possível
+    let start = Math.max(0, currentIndex - Math.floor(maxVisible / 2));
+    let end = start + maxVisible - 1;
+    
+    // Se o end ultrapassar o total, ajustar o start
+    if (end >= totalSlides) {
+      end = totalSlides - 1;
+      start = Math.max(0, end - maxVisible + 1);
+    }
+    
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }, [currentIndex, totalSlides]);
   
   // Swipe handlers para mobile
   const swipeRef = useSwipe({
@@ -278,8 +313,7 @@ export default function LatestPosts() {
             <div className="flex items-center justify-center gap-2 sm:gap-4 mt-6 sm:mt-8">
               <motion.button
                 onClick={prevSlide}
-                disabled={currentIndex === 0}
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all flex-shrink-0"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Post anterior"
@@ -287,28 +321,36 @@ export default function LatestPosts() {
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
               
-              {/* Dots Indicator */}
+              {/* Dots Indicator - máximo 5 dots visíveis */}
               <div className="flex items-center gap-1.5 sm:gap-2">
-                {Array.from({ length: totalSlides }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-1.5 sm:h-2 rounded-full transition-all ${
-                      currentIndex === index 
-                        ? 'bg-gradient-to-r from-blue-400 to-purple-400 w-6 sm:w-8' 
-                        : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50'
-                    }`}
-                    aria-label={`Ir para slide ${index + 1}`}
-                    aria-pressed={currentIndex === index}
-                  />
-                ))}
+                {visibleDots.map((dotIndex) => {
+                  const isActive = currentIndex === dotIndex;
+                  return (
+                    <button
+                      key={`dot-${dotIndex}`}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (dotIndex >= 0 && dotIndex <= maxIndex) {
+                          setCurrentIndex(dotIndex);
+                        }
+                      }}
+                      className={`h-1.5 sm:h-2 rounded-full transition-all flex-shrink-0 cursor-pointer ${
+                        isActive
+                          ? 'bg-gradient-to-r from-blue-400 to-purple-400 w-6 sm:w-8' 
+                          : 'w-1.5 sm:w-2 bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Ir para slide ${dotIndex + 1}`}
+                      aria-pressed={isActive}
+                    />
+                  );
+                })}
               </div>
-              
               
               <motion.button
                 onClick={nextSlide}
-                disabled={currentIndex === maxIndex}
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all flex-shrink-0"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Próximo post"

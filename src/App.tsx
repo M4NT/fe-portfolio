@@ -31,12 +31,6 @@ const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 // Import Analytics - DESABILITADO TEMPORARIAMENTE
 // import { trackPageView } from './lib/analytics-ga4';
 
-// Wrapper para debug do BlogPost
-function BlogPostWrapper() {
-  console.log('BlogPostWrapper - Componente carregado');
-  return <BlogPost />;
-}
-
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -146,7 +140,7 @@ function AppContent() {
                 </div>
               </div>
             }>
-              <BlogPostWrapper />
+              <BlogPost />
             </Suspense>
           } />
         </Routes>

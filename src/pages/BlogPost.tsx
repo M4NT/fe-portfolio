@@ -1,58 +1,211 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { getPost } from '../blog/posts';
+import { getPost, type BlogPost } from '../blog/posts';
 import { useLanguage } from '../components/LanguageContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function BlogPost() {
-  console.log('BlogPost - Componente iniciado');
-  
-  const { slug } = useParams();
-  console.log('BlogPost - slug do useParams:', slug);
-  
+  const { slug } = useParams<{ slug: string }>();
   const { language } = useLanguage();
-  console.log('BlogPost - language do context:', language);
-  
-  // TESTE DIRETO - SEM FUNÇÃO
-  console.log('BlogPost - Testando getPost diretamente...');
-  let post;
-  try {
-    post = getPost(slug || '');
-    console.log('BlogPost - getPost executado, resultado:', !!post);
-  } catch (error) {
-    console.error('BlogPost - ERRO no getPost:', error);
-    return <div className="text-white p-8">ERRO no getPost: {String(error)}</div>;
-  }
-  
-  console.log('BlogPost - post final:', post);
-  
-  // Verificação básica do slug
-  if (!slug) {
-    console.log('BlogPost - slug é undefined');
-    return <div className="text-white p-8">Slug não encontrado.</div>;
-  }
-  
-  // Força scroll ao topo quando a página carrega
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Carrega o post quando o slug mudar
   useEffect(() => {
-    // Scroll imediato
-    window.scrollTo(0, 0);
+    if (!slug) {
+      setError('Slug não encontrado');
+      setIsLoading(false);
+      setPost(null);
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setPost(null);
+
+    // Carregar post de forma síncrona
+    const loadedPost = getPost(slug);
+    console.log('Buscando post com slug:', slug);
+    console.log('Post encontrado?', !!loadedPost);
     
-    // Scroll suave adicional para garantir
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    if (loadedPost) {
+      setPost(loadedPost);
+      setError(null);
+      setIsLoading(false);
+    } else {
+      setError(`Post "${slug}" não encontrado`);
+      setPost(null);
+      setIsLoading(false);
+    }
   }, [slug]);
 
-  if (!post) {
-    console.log('BlogPost - Post não encontrado para slug:', slug);
+  // Força scroll ao topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  // Valores do post - calcular com segurança
+  const postSlug = post?.slug || '';
+  const postTitle = post?.title?.[language] || post?.title?.pt || '';
+  const postExcerpt = post?.excerpt?.[language] || post?.excerpt?.pt || '';
+  const postCover = post?.cover || '';
+  const postDate = post?.date || '';
+  const postTagsStr = post?.tags && Array.isArray(post.tags) && post.tags.length > 0 ? post.tags.join(',') : '';
+
+  // Memoize structured data
+  const structuredData = useMemo(() => {
+    if (!post) return null;
+    
+    const content = post.content?.[language] || post.content?.pt || '';
+    const wordCount = content ? content.split(/\s+/).filter(w => w.trim().length > 0).length : 0;
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: postTitle,
+      description: postExcerpt,
+      datePublished: postDate,
+      dateModified: postDate,
+      author: { 
+        '@type': 'Person', 
+        name: 'Yan Mantovani',
+        url: 'https://yanmantovani.com',
+        jobTitle: 'Frontend Developer & Digital Artist'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Yan Mantovani',
+        url: 'https://yanmantovani.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://yanmantovani.com/logo.png'
+        }
+      },
+      image: postCover ? [`https://yanmantovani.com${postCover}`] : undefined,
+      mainEntityOfPage: `https://yanmantovani.com/blog/${postSlug}`,
+      url: `https://yanmantovani.com/blog/${postSlug}`,
+      keywords: postTagsStr || 'desenvolvimento web, frontend, design',
+      articleSection: 'Technology',
+      wordCount: wordCount,
+      inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES'
+    };
+  }, [post, language, postTitle, postExcerpt, postCover, postDate, postSlug, postTagsStr]);
+
+  // Adicionar JSON-LD script
+  useEffect(() => {
+    if (!structuredData) return;
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'blog-post-schema';
+    script.textContent = JSON.stringify(structuredData);
+    
+    // Remove script antigo se existir
+    const oldScript = document.getElementById('blog-post-schema');
+    if (oldScript && oldScript.parentNode) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+    
+    document.head.appendChild(script);
+    
+    return () => {
+      const scriptToRemove = document.getElementById('blog-post-schema');
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        scriptToRemove.parentNode.removeChild(scriptToRemove);
+      }
+    };
+  }, [structuredData]);
+
+  // Dynamic head tags (title, canonical, OG) for SPA
+  useEffect(() => {
+    if (!postSlug || !post) return;
+
+    const url = `https://yanmantovani.com/blog/${postSlug}`;
+    document.title = `${postTitle} | Yan Mantovani`;
+    
+    const ensure = (selector: string, create: () => HTMLElement) => {
+      let el = document.head.querySelector(selector) as HTMLElement | null;
+      if (!el) {
+        el = create();
+        document.head.appendChild(el);
+      }
+      return el as HTMLElement;
+    };
+    
+    const canon = ensure('link[rel="canonical"]', () => {
+      const l = document.createElement('link');
+      l.setAttribute('rel', 'canonical');
+      return l;
+    }) as HTMLLinkElement;
+    canon.href = url;
+
+    const setMeta = (property: string, content: string) => {
+      let m = document.head.querySelector(`meta[property='${property}']`) as HTMLMetaElement | null;
+      if (!m) {
+        m = document.createElement('meta');
+        m.setAttribute('property', property);
+        document.head.appendChild(m);
+      }
+      m.content = content;
+    };
+    
+    // Meta description
+    const description = postExcerpt || `${postTitle} - Desenvolvimento web e design por Yan Mantovani`;
+    setMeta('description', description);
+    setMeta('og:description', description);
+    
+    // Open Graph tags
+    setMeta('og:type', 'article');
+    setMeta('og:title', postTitle);
+    setMeta('og:url', url);
+    setMeta('og:description', description);
+    if (postCover) setMeta('og:image', `https://yanmantovani.com${postCover}`);
+    
+    // Twitter Card tags
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', postTitle);
+    setMeta('twitter:description', description);
+    if (postCover) setMeta('twitter:image', `https://yanmantovani.com${postCover}`);
+    
+    // Article specific tags
+    setMeta('article:author', 'Yan Mantovani');
+    setMeta('article:published_time', postDate);
+    setMeta('article:modified_time', postDate);
+    
+    // Keywords based on tags
+    if (postTagsStr && typeof postTagsStr === 'string' && postTagsStr.length > 0) {
+      try {
+        const keywords = postTagsStr.split(',').join(', ') + ', desenvolvimento web, frontend, design, landing page';
+        setMeta('keywords', keywords);
+      } catch (e) {
+        console.error('Erro ao processar keywords:', e);
+      }
+    }
+  }, [postSlug, language, postTitle, postExcerpt, postCover, postDate, postTagsStr, post]);
+
+  // AGORA SIM, podemos fazer os returns condicionais DEPOIS de todos os hooks
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Carregando post...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !post) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Post não encontrado</h1>
-          <p className="text-gray-400 mb-6">O post "{slug}" não foi encontrado.</p>
-          <p className="text-gray-500 mb-4">Debug: {JSON.stringify({ slug, language, postFound: !!post })}</p>
+          <p className="text-gray-400 mb-6">{error || `O post "${slug}" não foi encontrado.`}</p>
           <Link 
             to="/blog" 
             className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
@@ -64,54 +217,21 @@ export default function BlogPost() {
     );
   }
 
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title[language],
-    description: post.excerpt[language],
-    datePublished: post.date,
-    dateModified: post.date,
-    author: { 
-      '@type': 'Person', 
-      name: 'Yan Mantovani',
-      url: 'https://yanmantovani.com',
-      jobTitle: 'Frontend Developer & Digital Artist'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Yan Mantovani',
-      url: 'https://yanmantovani.com',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://yanmantovani.com/logo.png'
-      }
-    },
-    image: post.cover ? [`https://yanmantovani.com${post.cover}`] : undefined,
-    mainEntityOfPage: `https://yanmantovani.com/blog/${post.slug}`,
-    url: `https://yanmantovani.com/blog/${post.slug}`,
-    keywords: post.tags ? post.tags.join(', ') : 'desenvolvimento web, frontend, design',
-    articleSection: 'Technology',
-    wordCount: post.content[language].split(' ').length,
-    inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES'
-  } as any;
-
-  // Adicionar JSON-LD script
-  useEffect(() => {
-    if (post) {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.textContent = JSON.stringify(ld);
-      document.head.appendChild(script);
-      
-      return () => {
-        document.head.removeChild(script);
-      };
-    }
-  }, [post, ld]);
-
   const renderContent = (src: string) => {
-    // Split content into lines for processing
-    const lines = src.split('\n');
+    if (!src || typeof src !== 'string') {
+      return <div className="blog-content"><p>Conteúdo não disponível.</p></div>;
+    }
+    
+    // Limitar tamanho do conteúdo para evitar problemas de memória
+    const maxLength = 1000000; // 1MB
+    const safeSrc = src.length > maxLength ? src.substring(0, maxLength) : src;
+    
+    const lines = safeSrc.split('\n');
+    
+    // Limitar número de linhas para evitar problemas de renderização
+    const maxLines = 10000;
+    const safeLines = lines.length > maxLines ? lines.slice(0, maxLines) : lines;
+    
     const elements: JSX.Element[] = [];
     let currentList: string[] = [];
     let key = 0;
@@ -129,7 +249,7 @@ export default function BlogPost() {
       }
     };
 
-    for (const line of lines) {
+    for (const line of safeLines) {
       const trimmed = line.trim();
       
       if (trimmed.startsWith('### ')) {
@@ -162,11 +282,22 @@ export default function BlogPost() {
 
   const processInlineFormatting = (text: string) => {
     // Process bold, italic, and other inline formatting
+    if (!text || typeof text !== 'string' || text.length === 0) {
+      return text;
+    }
+    
+    // Limitar tamanho do texto para evitar problemas
+    const maxTextLength = 10000;
+    const safeText = text.length > maxTextLength ? text.substring(0, maxTextLength) : text;
+    
     const parts: (string | JSX.Element)[] = [];
-    let remaining = text;
+    let remaining = safeText;
     let partKey = 0;
+    let iterations = 0;
+    const maxIterations = 1000; // Prevenir loops infinitos
 
-    while (remaining.length > 0) {
+    while (remaining.length > 0 && iterations < maxIterations) {
+      iterations++;
       // Check for ***bold***
       const boldMatch = remaining.match(/^\*\*\*(.+?)\*\*\*/);
       if (boldMatch) {
@@ -204,72 +335,25 @@ export default function BlogPost() {
       if (nextSpecial === -1) {
         parts.push(remaining);
         break;
+      } else if (nextSpecial === 0) {
+        // Se o próximo caractere especial está na posição 0 mas não foi capturado,
+        // adiciona o caractere e avança para evitar loop infinito
+        parts.push(remaining[0] || '');
+        remaining = remaining.slice(1);
       } else {
         parts.push(remaining.slice(0, nextSpecial));
         remaining = remaining.slice(nextSpecial);
       }
+      
+      // Verificação de segurança: se remaining não foi reduzido, forçar avanço
+      if (remaining.length >= safeText.length && iterations > 1) {
+        parts.push(remaining);
+        break;
+      }
     }
 
-    return parts;
+    return parts.length > 0 ? parts : [safeText];
   };
-
-  // Dynamic head tags (title, canonical, OG) for SPA
-  useEffect(() => {
-    const url = `https://yanmantovani.com/blog/${post.slug}`;
-    document.title = `${post.title[language]} | Yan Mantovani`;
-    const ensure = (selector: string, create: () => HTMLElement) => {
-      let el = document.head.querySelector(selector) as HTMLElement | null;
-      if (!el) {
-        el = create();
-        document.head.appendChild(el);
-      }
-      return el as HTMLElement;
-    };
-    const canon = ensure('link[rel="canonical"]', () => {
-      const l = document.createElement('link');
-      l.setAttribute('rel', 'canonical');
-      return l;
-    }) as HTMLLinkElement;
-    canon.href = url;
-
-    const setMeta = (property: string, content: string) => {
-      let m = document.head.querySelector(`meta[property='${property}']`) as HTMLMetaElement | null;
-      if (!m) {
-        m = document.createElement('meta');
-        m.setAttribute('property', property);
-        document.head.appendChild(m);
-      }
-      m.content = content;
-    };
-    // Meta description
-    const description = post.excerpt[language] || `${post.title[language]} - Desenvolvimento web e design por Yan Mantovani`;
-    setMeta('description', description);
-    setMeta('og:description', description);
-    
-    // Open Graph tags
-    setMeta('og:type', 'article');
-    setMeta('og:title', post.title[language]);
-    setMeta('og:url', url);
-    setMeta('og:description', description);
-    if (post.cover) setMeta('og:image', `https://yanmantovani.com${post.cover}`);
-    
-    // Twitter Card tags
-    setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:title', post.title[language]);
-    setMeta('twitter:description', description);
-    if (post.cover) setMeta('twitter:image', `https://yanmantovani.com${post.cover}`);
-    
-    // Article specific tags
-    setMeta('article:author', 'Yan Mantovani');
-    setMeta('article:published_time', post.date);
-    setMeta('article:modified_time', post.date);
-    
-    // Keywords based on tags
-    if (post.tags && post.tags.length > 0) {
-      const keywords = post.tags.join(', ') + ', desenvolvimento web, frontend, design, landing page';
-      setMeta('keywords', keywords);
-    }
-  }, [language, post]);
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
@@ -401,9 +485,10 @@ export default function BlogPost() {
         />
 
         {/* Floating particles - EXACT COPY FROM HERO */}
-        {[...Array(8)].map((_, i) => {
+        {!isLoading && post && Array.from({ length: 8 }).map((_, i) => {
           const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          const colorIndex = Math.floor(Math.random() * colors.length);
+          const randomColor = colors[colorIndex] || colors[0];
           
           // Posições mais controladas (não totalmente aleatórias)
           const positions = [
@@ -417,8 +502,30 @@ export default function BlogPost() {
             { left: '60%', top: '85%' }
           ];
           
-          const position = positions[i % positions.length];
-          const duration = 12 + Math.random() * 6; // 12-18 segundos
+          const position = positions[i % positions.length] || positions[0];
+          
+          // Garantir valores válidos para duration
+          const randomDuration = Math.random();
+          const duration = isNaN(randomDuration) || !isFinite(randomDuration) ? 15 : 12 + (randomDuration * 6);
+          
+          // Garantir valores válidos para animação x
+          const getRandomX = (max: number) => {
+            const val = Math.random() * max - (max / 2);
+            return isNaN(val) || !isFinite(val) ? 0 : val;
+          };
+          
+          const xValues = [
+            0,
+            getRandomX(20),
+            getRandomX(30),
+            getRandomX(40),
+            getRandomX(50),
+            getRandomX(60)
+          ];
+          
+          // Garantir delay válido
+          const randomDelay = Math.random();
+          const delay = isNaN(randomDelay) || !isFinite(randomDelay) ? 0 : randomDelay * 8;
           
           // Aplicar blur em 40% das bolinhas (índices pares)
           const shouldBlur = i % 2 === 0;
@@ -437,12 +544,12 @@ export default function BlogPost() {
                 opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
                 scale: [0, 1, 1, 1, 1, 0],
                 y: [0, -10, -20, -30, -40, -50],
-                x: [0, Math.random() * 20 - 10, Math.random() * 30 - 15, Math.random() * 40 - 20, Math.random() * 50 - 25, Math.random() * 60 - 30]
+                x: xValues
               }}
               transition={{
                 duration: duration,
                 repeat: Infinity,
-                delay: Math.random() * 8,
+                delay: delay,
                 ease: "easeInOut"
               }}
             />
@@ -676,7 +783,7 @@ export default function BlogPost() {
             <span>Blog</span>
           </Link> 
           <span>/</span> 
-          <span className="text-white/70 line-clamp-1">{post.title[language]}</span>
+          <span className="text-white/70 line-clamp-1">{post.title?.[language] || post.title?.pt || 'Artigo'}</span>
         </motion.nav>
         
         {/* Badge de categoria */}
@@ -688,7 +795,7 @@ export default function BlogPost() {
         >
           <div className="px-4 py-2 rounded-full border border-teal-500/30 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 backdrop-blur-sm">
             <span className="text-sm font-medium bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
-              {post.tags[0]?.toUpperCase()}
+              {post.tags && Array.isArray(post.tags) && post.tags.length > 0 ? post.tags[0].toUpperCase() : 'ARTIGO'}
             </span>
           </div>
         </motion.div>
@@ -701,7 +808,7 @@ export default function BlogPost() {
           className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 break-words"
         >
           <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-            {post.title[language]}
+            {post.title?.[language] || post.title?.pt || ''}
           </span>
         </motion.h1>
         
@@ -722,9 +829,9 @@ export default function BlogPost() {
           </div>
           <span className="text-white/30">•</span>
           <div className="flex flex-wrap gap-2">
-            {post.tags.slice(0, 3).map((tag) => (
+            {post.tags && Array.isArray(post.tags) ? post.tags.slice(0, 3).map((tag) => (
               <span key={tag} className="text-teal-400/70">#{tag}</span>
-            ))}
+            )) : null}
           </div>
         </motion.div>
         
@@ -740,7 +847,7 @@ export default function BlogPost() {
               <div className="w-full h-[280px] md:h-[420px] overflow-hidden rounded-2xl">
                 <img 
                   src={post.cover} 
-                  alt={post.title[language]} 
+                  alt={post.title?.[language] || post.title?.pt || 'Artigo'} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                   style={{ 
                     borderRadius: '1rem',
@@ -755,7 +862,15 @@ export default function BlogPost() {
         )}
         
         
-        {renderContent(post.content[language])}
+        {post && post.content && post.content[language] && typeof post.content[language] === 'string' && post.content[language].length > 0 ? renderContent(post.content[language]) : (
+          <div className="blog-content">
+            <p className="text-white/60 italic">
+              {language === 'pt' ? 'Conteúdo não disponível neste idioma.' : 
+               language === 'en' ? 'Content not available in this language.' : 
+               'Contenido no disponible en este idioma.'}
+            </p>
+          </div>
+        )}
         
         {/* CTA Section modernizada */}
         <motion.div 
@@ -816,7 +931,7 @@ export default function BlogPost() {
           className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
         >
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag, idx) => (
+            {post.tags && Array.isArray(post.tags) ? post.tags.map((tag, idx) => (
               <motion.span 
                 key={tag}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -826,7 +941,7 @@ export default function BlogPost() {
               >
                 #{tag}
               </motion.span>
-            ))}
+            )) : null}
           </div>
           <Link 
             to="/blog" 

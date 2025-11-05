@@ -1,204 +1,143 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, MessageCircle, Clock, MapPin, ArrowRight, Star, Zap, Target, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageCircle, ArrowRight, TrendingUp, CheckCircle2, AlertCircle, DollarSign, Users, Timer, Zap, TrendingDown, Frown } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import { trackCTAClick } from '../lib/analytics';
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [storyStep, setStoryStep] = useState(0); // 0: triste, 1: transformação, 2: sucesso
+  const [isPaused, setIsPaused] = useState(false);
 
-  useEffect(() => {
-    // Timer otimizado - apenas uma vez para evitar reflows
-    const timer = setTimeout(() => setCurrentTime(new Date()), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const whatsappNumber = '5516992233365';
+  const whatsappMessage = encodeURIComponent('Olá! Quero transformar meu site em uma máquina de vendas. Podemos conversar agora?');
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const handleWhatsApp = (buttonType: string) => {
+    trackCTAClick(`whatsapp-${buttonType}`, 'hero', `https://wa.me/${whatsappNumber}`);
+    window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
   };
 
-  const stats = [
-    { icon: <TrendingUp className="w-4 h-4" />, label: 'ROI Médio', value: '300%', color: 'from-green-400 to-emerald-500' },
-    { icon: <Star className="w-4 h-4" />, label: 'Projetos Entregues', value: '50+', color: 'from-yellow-400 to-orange-500' }
-  ];
+  const goToStep = (step: number) => {
+    setStoryStep(step);
+    setIsPaused(true);
+    // Resume automático após 6 segundos
+    setTimeout(() => setIsPaused(false), 6000);
+  };
 
-  const highlights = [
-    'Landing Pages que convertem 300% mais que a média do mercado'
-  ];
+  // Ciclo automático da história
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setStoryStep((prev) => (prev + 1) % 3);
+    }, 5000); // Muda a cada 5 segundos
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section 
       id="home" 
       ref={containerRef}
-      className="hero-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden w-full"
     >
-      {/* Enhanced Animated Background - Otimizado */}
+      {/* Animated Background - Enhanced */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Main gradient orbs - Otimizado com will-change */}
+        {/* Main gradient orbs */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-blue-500/20 sm:from-blue-500/25 to-purple-500/20 sm:to-purple-500/25 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-red-500/30 via-orange-500/25 to-red-600/30 blur-[100px]"
           animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ 
-            duration: 12, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          style={{ willChange: 'transform, opacity' }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-pink-500/20 sm:from-pink-500/25 to-orange-500/20 sm:to-orange-500/25 blur-3xl"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ 
-            duration: 15, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 3
-          }}
-          style={{ willChange: 'transform, opacity' }}
-        />
-        
-        {/* Additional accent orbs */}
-        <motion.div 
-          className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-gradient-to-r from-green-500/20 to-teal-500/20 blur-2xl"
-          animate={{ 
-            scale: [1, 1.4, 1],
+            scale: [1, 1.3, 1],
             opacity: [0.3, 0.6, 0.3],
-            rotate: [0, 180, 360]
+            x: [0, 50, 0],
+            y: [0, 30, 0]
           }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
-
-        {/* Additional colorful orbs */}
         <motion.div 
-          className="absolute top-1/6 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-green-500/30 via-emerald-500/25 to-green-600/30 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.5, 0.2],
-            x: [0, 30, 0],
-            y: [0, 20, 0]
-          }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        <motion.div 
-          className="absolute bottom-1/6 left-1/3 w-72 h-72 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl"
-          animate={{ 
-            scale: [1.1, 1, 1.1],
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, -25, 0],
+            x: [0, -40, 0],
             y: [0, -20, 0]
           }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-600/20 blur-[120px] -translate-x-1/2 -translate-y-1/2"
+          animate={{ 
+            scale: [1, 1.4, 1],
+            opacity: [0.1, 0.4, 0.1],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Floating particles - Fixed positions with smooth movement and blur */}
-        {[...Array(8)].map((_, i) => {
-          const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
-          
-          // Posições mais controladas (não totalmente aleatórias)
-          const positions = [
-            { left: '10%', top: '20%' },
-            { left: '85%', top: '70%' },
-            { left: '20%', top: '60%' },
-            { left: '75%', top: '30%' },
-            { left: '50%', top: '15%' },
-            { left: '30%', top: '80%' },
-            { left: '90%', top: '40%' },
-            { left: '60%', top: '85%' }
-          ];
-          
-          const position = positions[i % positions.length];
-          const duration = 12 + Math.random() * 6; // 12-18 segundos
-          
-          // Aplicar blur em 40% das bolinhas (índices pares)
-          const shouldBlur = i % 2 === 0;
-          const blurClass = shouldBlur ? 'blur-sm' : '';
-          const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
-          
-          return (
-          <motion.div
-              key={i}
-              className={`absolute ${sizeClass} ${randomColor} rounded-full ${blurClass}`}
-            style={{
-                left: position.left,
-                top: position.top,
-            }}
-            animate={{
-                opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
-                scale: [0, 1, 1, 1, 1, 0],
-                y: [0, -10, -20, -30, -40, -50],
-                x: [0, Math.random() * 20 - 10, Math.random() * 30 - 15, Math.random() * 40 - 20, Math.random() * 50 - 25, Math.random() * 60 - 30]
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: Math.random() * 8,
-                ease: "easeInOut",
-                times: [0, 0.1, 0.3, 0.6, 0.8, 1] // Aparece rápido, fica visível 70% do tempo, desaparece suave
-              }}
-            />
-          );
-        })}
+                 {/* Animated particles */}
+         {[...Array(15)].map((_, i) => {
+           const size = 8 + Math.random() * 12;
+           const leftPos = Math.random() * 100;
+           const topPos = Math.random() * 100;
+           const colors = [
+             'rgba(248, 113, 113, 0.4)',
+             'rgba(34, 197, 94, 0.4)',
+             'rgba(96, 165, 250, 0.4)',
+             'rgba(196, 181, 253, 0.4)'
+           ];
+           const randomColor = colors[i % colors.length];
+           
+           return (
+             <motion.div
+               key={i}
+               className="absolute rounded-full blur-sm"
+               style={{
+                 width: `${size}px`,
+                 height: `${size}px`,
+                 left: `${leftPos}%`,
+                 top: `${topPos}%`,
+                 backgroundColor: randomColor,
+               }}
+               animate={{
+                 opacity: [0, 0.8, 0],
+                 scale: [0, 1, 0],
+                 y: [0, -100 - Math.random() * 200],
+                 x: [0, (Math.random() - 0.5) * 100]
+               }}
+               transition={{
+                 duration: 10 + Math.random() * 10,
+                 repeat: Infinity,
+                 delay: Math.random() * 5,
+                 ease: "easeOut"
+               }}
+             />
+           );
+         })}
 
-        {/* Animated geometric shapes - More colorful */}
+        {/* Animated grid pattern */}
         <motion.div
-          className="absolute top-1/3 left-1/6 w-32 h-32 border-2 border-blue-400/20 rotate-45"
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `
+              linear-gradient(30deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(150deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }}
           animate={{
-            rotate: [45, 405, 45],
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.5, 0.2]
-            }}
-            transition={{
-            duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        
-        <motion.div
-          className="absolute bottom-1/3 right-1/6 w-24 h-24 border-2 border-purple-400/20 rounded-full"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.6, 0.2],
-            x: [0, 20, 0],
-            y: [0, -15, 0]
+            backgroundPosition: ['0% 0%', '100% 100%']
           }}
           transition={{
-            duration: 12,
+            duration: 20,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "linear"
           }}
         />
 
+        {/* Animated lines */}
         <motion.div
-          className="absolute top-1/2 left-1/2 w-16 h-16 border-2 border-pink-400/20 rotate-45"
-          animate={{
-            rotate: [0, 360, 0],
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.4, 0.1]
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-
-        {/* Animated lines - More colorful */}
-        <motion.div
-          className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+          className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-400/30 to-transparent"
           animate={{ 
             x: [-100, 100],
             opacity: [0, 1, 0]
@@ -209,9 +148,8 @@ const Hero = () => {
             ease: "easeInOut"
           }}
         />
-        
         <motion.div
-          className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-purple-400/20 to-transparent"
+          className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-green-400/30 to-transparent"
           animate={{ 
             y: [-100, 100],
             opacity: [0, 1, 0]
@@ -223,594 +161,525 @@ const Hero = () => {
             delay: 2
           }}
         />
-
-        <motion.div 
-          className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-400/15 to-transparent"
-          animate={{
-            x: [100, -100],
-            opacity: [0, 0.8, 0]
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4
-          }}
-        />
-        
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `
-                linear-gradient(30deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(150deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: '60px 60px'
-            }}
-          />
-        </div>
-
-        {/* Animated gradient overlay - More vibrant */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10"
-          animate={{
-            opacity: [0.4, 0.7, 0.4],
-            background: [
-              'linear-gradient(45deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 50%, rgba(236,72,153,0.1) 100%)',
-              'linear-gradient(225deg, rgba(236,72,153,0.1) 0%, rgba(59,130,246,0.1) 50%, rgba(147,51,234,0.1) 100%)',
-              'linear-gradient(45deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 50%, rgba(236,72,153,0.1) 100%)'
-            ]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Left Column - Main Content */}
-      <motion.div 
-            className="space-y-4 lg:space-y-8 text-center lg:text-left"
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 w-full py-8 sm:py-12 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center w-full">
+          
+          {/* Left Column - Headline & CTA */}
+          <motion.div 
+            className="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left w-full"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Badge - Hidden on mobile to reduce clutter */}
+            {/* Badge de Urgência - Mobile menor */}
             <motion.div
-              className="hidden sm:inline-flex items-center gap-2 px-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/80 text-sm"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-500/20 border border-red-500/50 rounded-full text-red-400 text-[10px] sm:text-xs md:text-sm font-medium mb-2 sm:mb-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span>Disponível para novos projetos</span>
+              <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="leading-tight">Você está perdendo clientes AGORA</span>
             </motion.div>
 
-            {/* Main Title */}
-            <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            {/* Headline Principal - Mobile muito menor */}
+            <motion.h1 
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.1] sm:leading-[1.2] max-w-3xl"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* Subtítulo profissional - Hidden on mobile */}
-              <div className="hidden sm:block text-white/60 text-sm lg:text-base uppercase tracking-wider mb-4 font-inter">
-                Desenvolvedor Frontend Freelancer
-            </div>
-            
-              {/* Nome/Marca principal */}
-              <h1 className="hero-title font-inter font-light text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none tracking-tight mb-4 sm:mb-6">
-                <span className="text-white">Yan</span>
-                <span className="mx-1 sm:mx-2 text-white/40">—</span>
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  .m
-                </span>
-              </h1>
-              
-              {/* Proposta de valor - SEO Optimized */}
-              <p className="text-white/70 text-base sm:text-lg lg:text-xl xl:text-2xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                <span className="text-white font-semibold">Desenvolvedor Frontend Freelancer especializado em Landing Pages de alta conversão.</span>
-                <span className="text-green-400 font-medium"> Orçamento grátis em 24h</span>.
-              </p>
-        </motion.div>
-
-            {/* Stats - SEO Optimized */}
-        <motion.div 
-              className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-2"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                >
-                  <div className={`p-2 rounded-lg bg-gradient-to-br ${stat.color} bg-opacity-20`}>
-                    <div className="text-white/80">
-                      {stat.icon}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-white text-base sm:text-lg font-semibold">{stat.value}</div>
-                    <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Highlights - SEO Optimized */}
-            <motion.div
-              className="flex items-center gap-2 sm:gap-3 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-              <span className="text-white/80 text-sm sm:text-base">{highlights[0]}</span>
-            </motion.div>
-
-            {/* CTAs - Redesigned with site identity */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
-              {/* Primary CTA - Gradient with animation */}
-              <motion.a
-                href="#contact"
-                onClick={() => trackCTAClick('contact', 'hero', '#contact')}
-                className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold overflow-hidden transition-all duration-300 text-sm sm:text-base"
-                style={{
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
-                  boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
-                }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -2,
-                  boxShadow: '0 8px 25px rgba(59, 130, 246, 0.4)'
-                }}
-                whileTap={{ scale: 0.98 }}
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
-                    'linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%)',
-                    'linear-gradient(135deg, #ec4899 0%, #3b82f6 50%, #8b5cf6 100%)',
-                    'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)'
+              <span className="text-white">Seu site não está </span>
+              <span className="bg-gradient-to-r from-red-400 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                vendendo?
+              </span>
+              <br className="hidden sm:block" />
+              <span className="text-white block sm:inline">Você está perdendo </span>
+              <motion.span
+                className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent block sm:inline"
+                animate={{ 
+                  filter: [
+                    'drop-shadow(0 0 10px rgba(239, 68, 68, 0.5))',
+                    'drop-shadow(0 0 20px rgba(239, 68, 68, 0.8))',
+                    'drop-shadow(0 0 10px rgba(239, 68, 68, 0.5))'
                   ]
                 }}
-                transition={{
-                  background: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                <span className="relative text-white font-semibold z-10">
-                  <span className="hidden sm:inline">Solicitar Orçamento Grátis</span>
-                  <span className="sm:hidden">Orçamento Grátis</span>
-              </span>
-                <motion.div
-                  className="relative z-10"
-                  animate={{ x: [0, 2, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <ArrowRight className="w-4 h-4 text-white" />
-                </motion.div>
-            </motion.a>
+                R$ 50.000+ por mês
+              </motion.span>
+            </motion.h1>
 
-              {/* Secondary CTA - Orange gradient with animation */}
-              <motion.a
-                href="https://wa.me/5516992233365?text=Opa%20Yan!%0AVim%20atrav%C3%A9s%20do%20site%20do%20seu%20portf%C3%B3lio.%0ATenho%20interesse%20em%20um%20projeto%20e%20gostaria%20de%20conversar%20sobre%20como%20podemos%20trabalhar%20juntos!"
-                onClick={() => trackCTAClick('whatsapp', 'hero', 'https://wa.me/5516992233365')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold overflow-hidden transition-all duration-300 text-sm sm:text-base border"
-                style={{
-                  background: 'linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%)',
-                  borderColor: 'rgba(249, 115, 22, 0.3)',
-                  boxShadow: '0 4px 15px rgba(249, 115, 22, 0.2)'
-                }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -2,
-                  boxShadow: '0 8px 25px rgba(249, 115, 22, 0.3)',
-                  borderColor: 'rgba(249, 115, 22, 0.5)'
-                }}
-                whileTap={{ scale: 0.98 }}
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%)',
-                    'linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #f97316 100%)',
-                    'linear-gradient(135deg, #dc2626 0%, #f97316 50%, #ea580c 100%)',
-                    'linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%)'
-                  ]
-                }}
-                transition={{
-                  background: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                }}
-              >
-                <span className="relative text-white font-semibold z-10">
-                  <span className="hidden sm:inline">Falar com Especialista</span>
-                  <span className="sm:hidden">WhatsApp</span>
-              </span>
-                <motion.div
-                  className="relative z-10"
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    rotate: [0, 3, 0]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <MessageCircle className="w-4 h-4 text-white" />
-                </motion.div>
-            </motion.a>
-            </motion.div>
-
-            {/* Location & Time - Hidden on mobile to reduce clutter */}
-            <motion.div
-              className="hidden sm:flex items-center gap-6 text-white/60 text-sm"
+            {/* Subheadline - Mobile menor */}
+            <motion.p 
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto lg:mx-0 mt-3 sm:mt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Monte Alto, SP</span>
+              <span className="font-semibold text-green-400">Landing pages que convertem 300% mais</span> que a média do mercado.
+              {' '}Sites que <span className="font-semibold text-blue-400">vendem enquanto você dorme</span>.
+              {' '}<span className="text-white/60">Sem complicação. Apenas resultados.</span>
+            </motion.p>
+
+            {/* Prova Social - Mobile mais compacto */}
+            <motion.div
+              className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 items-center justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-white/5 rounded-lg border border-green-500/30">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-green-400 flex-shrink-0" />
+                <div>
+                  <div className="text-white font-bold text-sm sm:text-base md:text-lg">50+</div>
+                  <div className="text-white/60 text-[10px] sm:text-xs">Clientes satisfeitos</div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>{formatTime(currentTime)}</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-white/5 rounded-lg border border-blue-500/30">
+                <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-400 flex-shrink-0" />
+                <div>
+                  <div className="text-white font-bold text-sm sm:text-base md:text-lg">300%</div>
+                  <div className="text-white/60 text-[10px] sm:text-xs">ROI médio</div>
+                </div>
               </div>
+              <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-white/5 rounded-lg border border-purple-500/30">
+                <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-purple-400 flex-shrink-0" />
+                <div>
+                  <div className="text-white font-bold text-sm sm:text-base md:text-lg">24h</div>
+                  <div className="text-white/60 text-[10px] sm:text-xs">Orçamento grátis</div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CTAs - WhatsApp Diretos - Mobile menor */}
+            <motion.div
+              className="flex flex-col gap-3 sm:gap-4 justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              {/* CTA Principal */}
+              <motion.button
+                onClick={() => handleWhatsApp('primary')}
+                className="group relative px-5 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-sm sm:text-base md:text-lg rounded-lg shadow-lg shadow-green-500/50 hover:shadow-xl hover:shadow-green-500/70 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+                <span className="whitespace-nowrap">Quero Vender Mais AGORA</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+
+              {/* CTA Secundário */}
+              <motion.button
+                onClick={() => handleWhatsApp('secondary')}
+                className="px-5 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-sm sm:text-base md:text-lg rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="whitespace-nowrap">Falar com Especialista</span>
+              </motion.button>
+            </motion.div>
+
+            {/* Garantia/Urgência - Mobile menor */}
+            <motion.div
+              className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:gap-3 text-[10px] sm:text-xs md:text-sm text-white/60 justify-center lg:justify-start"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+            >
+              <div className="flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                <span>Orçamento em <span className="text-green-400 font-semibold">24 horas</span></span>
+              </div>
+              <span className="hidden sm:inline">•</span>
+              <span>Sem compromisso</span>
+              <span className="hidden sm:inline">•</span>
+              <span className="text-red-400 font-semibold">Últimas 3 vagas de Janeiro</span>
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Visual Elements */}
+          {/* Right Column - Storytelling Animado - Hidden on mobile */}
           <motion.div 
-            className="relative mt-8 lg:mt-0"
+            className="hidden lg:block relative w-full flex justify-center lg:justify-end"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {/* Interactive Performance Dashboard */}
-            <div className="relative max-w-sm sm:max-w-md mx-auto lg:max-w-none">
-              {/* Main Dashboard Card */}
+            <div className="relative w-full max-w-md">
+              {/* Card Principal com Storytelling */}
               <motion.div
-                className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl overflow-hidden"
-                initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+                className="bg-gradient-to-br from-gray-900/95 via-purple-900/20 to-black/95 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden min-h-[550px]"
+                initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
                 animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-                whileHover={{ y: -4, scale: 1.01, rotateY: 2 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                whileHover={{ y: -4 }}
               >
-                {/* Animated background with multiple layers */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10"
-                  animate={{ 
-                    opacity: [0.3, 0.7, 0.3],
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 2, 0]
-                  }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                />
-                
-                {/* Animated grid pattern */}
-                <motion.div
-                  className="absolute inset-0 opacity-20"
-                  animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%']
-                  }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                      linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '20px 20px'
-                  }}
-                />
+                {/* Indicadores de Progresso */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+                  {[0, 1, 2].map((step) => (
+                    <button
+                      key={step}
+                      onClick={() => goToStep(step)}
+                      className="relative group"
+                      aria-label={`Ir para etapa ${step + 1}`}
+                    >
+                      <div className={`h-1.5 rounded-full transition-all duration-300 ${
+                        storyStep === step 
+                          ? 'w-8 bg-green-400' 
+                          : 'w-1.5 bg-white/30 hover:bg-white/50'
+                      }`} />
+                      {storyStep === step && (
+                        <motion.div
+                          className="absolute -top-1 left-0 h-1.5 bg-green-400 rounded-full"
+                          layoutId="activeIndicator"
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
 
-                <div className="relative z-10">
-                  {/* Header with animated icon */}
-                  <motion.div 
-                    className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg relative"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.1, 1]
-                    }}
-                    transition={{ 
-                      rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                  >
-                    <motion.div
-                      animate={{ 
-                        rotate: [0, -360],
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{ 
-                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                      }}
-                  >
-                    <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-                    </motion.div>
-                    
-                    {/* Pulsing ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-white/30"
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.8, 0, 0.8]
-                      }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                  </motion.div>
-
-                  {/* Dynamic title with typewriter effect */}
-                  <motion.h2 
-                    className="text-white text-lg sm:text-xl font-semibold mb-2 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1 }}
-                  >
+                {/* Labels das Etapas */}
+                <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20 flex gap-6 text-xs text-white/50">
+                  {['Antes', 'Durante', 'Depois'].map((label, index) => (
                     <motion.span
-                      animate={{ 
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                      }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      style={{
-                        background: 'linear-gradient(90deg, #ffffff 0%, #60a5fa 50%, #ffffff 100%)',
-                        backgroundSize: '200% 100%',
-                        backgroundClip: 'text',
-                        WebkitBackgroundClip: 'text',
-                        color: 'transparent'
-                      }}
+                      key={index}
+                      className={`transition-colors duration-300 ${
+                        storyStep === index ? 'text-green-400 font-semibold' : ''
+                      }`}
                     >
-                      Desenvolvedor Frontend
+                      {label}
                     </motion.span>
-                  </motion.h2>
+                  ))}
+                </div>
 
-                  {/* Animated description */}
-                  <motion.p 
-                    className="text-white/70 text-xs sm:text-sm mb-4 text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                  >
-                    Soluções digitais que impressionam e performam
-                  </motion.p>
-
-                  {/* Compact Interactive Showcase */}
-                  <div className="space-y-3">
-                    {/* Interactive Tech Buttons */}
-                    <motion.div 
-                      className="flex flex-wrap gap-2 justify-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 1.6 }}
+                <AnimatePresence mode="wait">
+                  {/* PASSO 1: Antes - Situação Atual */}
+                  {storyStep === 0 && (
+                    <motion.div
+                      key="before"
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 30 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      className="relative z-10 h-full flex flex-col pt-16 pb-24"
                     >
-                      {[
-                        { label: 'React', color: 'from-cyan-400 to-blue-500', icon: '⚛️' },
-                        { label: 'TS', color: 'from-blue-400 to-indigo-500', icon: '🔷' },
-                        { label: 'Motion', color: 'from-purple-400 to-pink-500', icon: '✨' },
-                        { label: 'CSS', color: 'from-green-400 to-emerald-500', icon: '🎨' }
-                      ].map((tech, index) => (
-                        <motion.button
-                          key={tech.label}
-                          className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${tech.color} border border-white/20`}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3, delay: 1.8 + index * 0.1 }}
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <span className="mr-1">{tech.icon}</span>
-                          {tech.label}
-                        </motion.button>
-                      ))}
-                    </motion.div>
+                      {/* Background sutil */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-red-500/8 via-orange-500/8 to-red-600/8"
+                        animate={{ opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
 
-                    {/* Compact Live Preview */}
-                    <motion.div 
-                      className="bg-black/40 rounded-lg p-3 sm:p-4 border border-white/10"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 2 }}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-1.5 h-1.5 bg-red-400 rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
-                        <span className="text-white/60 text-xs ml-1">component.tsx</span>
-                        <div className="ml-auto flex items-center gap-1">
-                          <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-green-400 text-xs">Live</span>
-                        </div>
-                      </div>
-
-                      {/* Mini Code */}
-                      <div className="text-xs font-mono text-green-400 space-y-1 overflow-x-auto">
-                        <div className="text-blue-400">const</div>
-                        <div className="text-white ml-2">
-                          <span className="text-blue-400">Card</span> = () =&gt; {`{`}
-                        </div>
-                        <motion.div 
-                          className="text-yellow-400 ml-4"
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          return &lt;<span className="text-pink-400">motion.div</span>&gt;
-                        </motion.div>
-                        <div className="text-gray-400 ml-6">// Magic ✨</div>
-                        <div className="text-white ml-4">
-                          &lt;/<span className="text-pink-400">motion.div</span>&gt;
-                        </div>
-                        <div className="text-white ml-2">{`}`}</div>
-                      </div>
-
-                      {/* Interactive Demo */}
-                      <motion.div 
-                        className="mt-3 p-2 bg-white/5 rounded border border-white/10"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 2.2 }}
-                      >
-                        <div className="text-white/60 text-xs mb-1">Preview:</div>
-                  <motion.div 
-                          className="w-full h-10 sm:h-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded flex items-center justify-center text-white text-xs font-semibold"
-                          whileHover={{ 
-                            scale: 1.05,
-                            rotate: [0, 1, -1, 0],
-                            boxShadow: '0 5px 20px rgba(59, 130, 246, 0.3)'
-                          }}
-                          whileTap={{ scale: 0.95 }}
-                          animate={{
-                            background: [
-                              'linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%)',
-                              'linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%)',
-                              'linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)'
-                            ]
-                          }}
-                          transition={{
-                            background: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                          }}
+                      <div className="relative z-10 flex-1 flex flex-col">
+                        {/* Ícone visual */}
+                        <motion.div
+                          className="text-5xl mb-6 text-center"
+                          initial={{ scale: 0, rotate: -15 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
                         >
                           <motion.span
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                              textShadow: [
-                                '0 0 0px rgba(255,255,255,0.5)',
-                                '0 0 8px rgba(255,255,255,0.8)',
-                                '0 0 0px rgba(255,255,255,0.5)'
-                              ]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                            Hover me! ✨
+                            animate={{ rotate: [0, -5, 5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                          >
+                            😔
                           </motion.span>
                         </motion.div>
-                      </motion.div>
+
+                        <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 text-center">
+                          A situação atual
+                        </h2>
+                        <p className="text-white/60 mb-8 text-center text-sm">
+                          Sem estratégia digital eficiente
+                        </p>
+
+                        {/* Métricas ruins - mais compactas */}
+                        <div className="space-y-2.5 flex-1">
+                          {[
+                            { icon: TrendingDown, value: 'R$ 2k', label: 'Receita/mês', color: 'red', delay: 0.3 },
+                            { icon: Frown, value: '3', label: 'Leads/mês', color: 'orange', delay: 0.4 },
+                            { icon: AlertCircle, value: '0.8%', label: 'Taxa de conversão', color: 'yellow', delay: 0.5 }
+                          ].map((metric, index) => (
+                            <motion.div
+                              key={index}
+                              className="flex items-center justify-between p-3.5 bg-white/5 rounded-lg border backdrop-blur-sm"
+                              style={{ borderColor: `rgba(239, 68, 68, 0.2)` }}
+                              initial={{ x: -40, opacity: 0 }}
+                              animate={{ x: 0, opacity: 1 }}
+                              transition={{ delay: metric.delay, type: "spring" }}
+                              whileHover={{ scale: 1.02, x: 4, borderColor: `rgba(239, 68, 68, 0.4)` }}
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className={`p-2 bg-red-500/15 rounded-lg`}>
+                                  <metric.icon className="w-5 h-5 text-red-400" />
+                                </div>
+                                <div>
+                                  <div className="text-white font-bold text-lg">{metric.value}</div>
+                                  <div className="text-white/50 text-xs">{metric.label}</div>
+                                </div>
+                              </div>
+                              <motion.span
+                                className="text-2xl"
+                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                              >
+                                📉
+                              </motion.span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
                     </motion.div>
+                  )}
 
-                    {/* Compact Stats */}
-                    <motion.div 
-                      className="grid grid-cols-2 gap-2"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 2.4 }}
+                  {/* PASSO 2: Durante - Transformação */}
+                  {storyStep === 1 && (
+                    <motion.div
+                      key="during"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      className="relative z-10 h-full flex flex-col items-center justify-center pt-16 pb-24"
                     >
-                      <motion.div 
-                        className="bg-white/5 rounded-lg p-2 text-center border border-white/10"
-                        whileHover={{ 
-                          scale: 1.05, 
-                          backgroundColor: 'rgba(59, 130, 246, 0.1)'
-                        }}
-                      >
-                        <motion.div 
-                          className="text-lg mb-1"
-                          animate={{ rotate: [0, 5, -5, 0] }}
-                          transition={{ duration: 2, repeat: Infinity }}
+                      {/* Background de transformação */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-purple-500/8 via-blue-500/8 to-cyan-500/8"
+                        animate={{ opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+
+                      <div className="relative z-10 text-center w-full">
+                        {/* Ícones de processo */}
+                        <div className="flex justify-center gap-3 mb-8">
+                          {['🎯', '✨', '🚀'].map((emoji, index) => (
+                            <motion.div
+                              key={index}
+                              className="text-4xl"
+                              initial={{ scale: 0, rotate: -180 }}
+                              animate={{ scale: 1, rotate: 0 }}
+                              transition={{ 
+                                delay: 0.3 + index * 0.2, 
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 15
+                              }}
+                            >
+                              <motion.span
+                                animate={{ 
+                                  y: [0, -8, 0],
+                                  rotate: [0, 5, -5, 0]
+                                }}
+                                transition={{ 
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  delay: index * 0.3
+                                }}
+                              >
+                                {emoji}
+                              </motion.span>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        <motion.h2
+                          className="text-xl sm:text-2xl font-bold text-white mb-2"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.9 }}
                         >
-                          🚀
-                        </motion.div>
-                        <div className="text-white/80 text-xs">Performance</div>
-                      </motion.div>
-                      <motion.div 
-                        className="bg-white/5 rounded-lg p-2 text-center border border-white/10"
-                        whileHover={{ 
-                          scale: 1.05, 
-                          backgroundColor: 'rgba(147, 51, 234, 0.1)'
-                        }}
-                      >
-                        <motion.div 
-                          className="text-lg mb-1"
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
+                          <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                            O processo de transformação
+                          </span>
+                        </motion.h2>
+                        <motion.p
+                          className="text-white/60 mb-8 text-sm"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1 }}
                         >
-                          ⚡
+                          Criando sua máquina de vendas
+                        </motion.p>
+
+                        {/* Lista de features animadas */}
+                        <div className="space-y-3 mb-6">
+                          {[
+                            'Landing page otimizada para conversão',
+                            'Copys persuasivas e diretas',
+                            'Design moderno e responsivo'
+                          ].map((feature, index) => (
+                            <motion.div
+                              key={index}
+                              className="flex items-center gap-3 p-3 bg-white/5 rounded-lg backdrop-blur-sm border border-purple-500/20"
+                              initial={{ x: -30, opacity: 0 }}
+                              animate={{ x: 0, opacity: 1 }}
+                              transition={{ delay: 1.2 + index * 0.15 }}
+                              whileHover={{ scale: 1.02, x: 4, borderColor: 'rgba(147, 51, 234, 0.4)' }}
+                            >
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 1.3 + index * 0.15, type: "spring" }}
+                              >
+                                <CheckCircle2 className="w-5 h-5 text-purple-400" />
+                              </motion.div>
+                              <span className="text-white/80 text-sm flex-1 text-left">{feature}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        {/* Barra de progresso animada */}
+                        <motion.div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500"
+                            initial={{ width: 0 }}
+                            animate={{ width: "100%" }}
+                            transition={{ duration: 3, ease: "easeOut", delay: 1.5 }}
+                          />
                         </motion.div>
-                        <div className="text-white/80 text-xs">Interativo</div>
-                      </motion.div>
-                  </motion.div>
-                  </div>
-                </div>
-              </motion.div>
+                      </div>
+                    </motion.div>
+                  )}
 
-              {/* Floating Elements - Simplified for mobile */}
-              <motion.div
-                className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                whileHover={{ scale: 1.1, rotate: 10 }}
-              >
-                <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-              </motion.div>
+                  {/* PASSO 3: Depois - Resultados */}
+                  {storyStep === 2 && (
+                    <motion.div
+                      key="after"
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -30 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      className="relative z-10 h-full flex flex-col pt-16 pb-24"
+                    >
+                      {/* Background de sucesso */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-green-500/8 via-emerald-500/8 to-green-600/8"
+                        animate={{ opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
 
-              {/* Floating Elements - Visible on all screens */}
-              <motion.div
-                className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                whileHover={{ scale: 1.1, rotate: -10 }}
-              >
-                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-        </motion.div>
+                      <div className="relative z-10 flex-1 flex flex-col">
+                        {/* Emoji de celebração */}
+                        <motion.div
+                          className="text-5xl mb-6 text-center relative"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1, rotate: [0, 5, -5, 0] }}
+                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                        >
+                          🎉
+                          {/* Emojis flutuantes */}
+                          {['💰', '🚀', '⭐'].map((emoji, i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute text-2xl"
+                              style={{
+                                left: `${30 + i * 20}%`,
+                                top: '50%',
+                              }}
+                              initial={{ scale: 0, y: 0, opacity: 0 }}
+                              animate={{
+                                scale: [0, 1, 0.8],
+                                y: [-20, -40, -20],
+                                opacity: [0, 1, 0.7],
+                                rotate: [0, 180, 360]
+                              }}
+                              transition={{
+                                delay: 0.5 + i * 0.2,
+                                duration: 3,
+                                repeat: Infinity,
+                                repeatDelay: 1.5,
+                                ease: "easeInOut"
+                              }}
+                            >
+                              {emoji}
+                            </motion.div>
+                          ))}
+                        </motion.div>
 
-              <motion.div
-                className="absolute top-1/2 -left-4 sm:-left-8 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-                whileHover={{ scale: 1.1, rotate: 15 }}
-              >
-                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                        <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 text-center">
+                          Os resultados alcançados
+                        </h2>
+                        <p className="text-white/60 mb-8 text-center text-sm">
+                          Transformação completa em ação
+                        </p>
+
+                        {/* Métricas de sucesso - melhoradas */}
+                        <div className="space-y-2.5 flex-1">
+                          {[
+                            { icon: DollarSign, value: '+R$ 42k', label: 'Receita extra/mês', emoji: '💰', delay: 0.3 },
+                            { icon: Users, value: '+127', label: 'Leads/mês', emoji: '🚀', delay: 0.4 },
+                            { icon: TrendingUp, value: '300%', label: 'Aumento de conversão', emoji: '⭐', delay: 0.5 }
+                          ].map((metric, index) => (
+                            <motion.div
+                              key={index}
+                              className="flex items-center justify-between p-3.5 bg-white/5 rounded-lg border backdrop-blur-sm"
+                              style={{ borderColor: `rgba(34, 197, 94, 0.3)` }}
+                              initial={{ x: 40, opacity: 0 }}
+                              animate={{ x: 0, opacity: 1 }}
+                              transition={{ delay: metric.delay, type: "spring" }}
+                              whileHover={{ scale: 1.02, x: -4, borderColor: 'rgba(34, 197, 94, 0.5)' }}
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="p-2 bg-green-500/15 rounded-lg">
+                                  <metric.icon className="w-5 h-5 text-green-400" />
+                                </div>
+                                <div>
+                                  <div className="text-white font-bold text-lg">{metric.value}</div>
+                                  <div className="text-white/50 text-xs">{metric.label}</div>
+                                </div>
+                              </div>
+                              <motion.span
+                                className="text-2xl"
+                                animate={{ 
+                                  rotate: [0, 10, -10, 0],
+                                  scale: [1, 1.1, 1]
+                                }}
+                                transition={{ 
+                                  duration: 2, 
+                                  repeat: Infinity, 
+                                  delay: index * 0.3 
+                                }}
+                              >
+                                {metric.emoji}
+                              </motion.span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* CTA fixo na parte inferior */}
+                <motion.div
+                  className="absolute bottom-0 left-0 right-0 p-6 pt-4 bg-gradient-to-t from-gray-900/95 via-gray-900/80 to-transparent z-20"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2 }}
+                >
+                  <motion.button
+                    onClick={() => handleWhatsApp('card')}
+                    className="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-base rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-green-500/30"
+                    whileHover={{ scale: 1.02, y: -2, boxShadow: '0 10px 30px rgba(34, 197, 94, 0.4)' }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Quero essa transformação</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.button>
+                </motion.div>
               </motion.div>
             </div>
+          </motion.div>
 
-            {/* Background Pattern */}
-            <div className="absolute inset-0 -z-10">
-              <div className="absolute top-0 left-0 w-full h-full opacity-5">
-                <div 
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: `
-                      radial-gradient(circle at 25% 25%, rgba(59,130,246,0.3) 0%, transparent 50%),
-                      radial-gradient(circle at 75% 75%, rgba(147,51,234,0.3) 0%, transparent 50%)
-                    `,
-                    backgroundSize: '100% 100%'
-                  }}
-                />
-              </div>
-            </div>
-      </motion.div>
         </div>
-
-        {/* Bottom Indicator */}
-        <motion.div 
-          className="absolute -bottom-12 sm:-bottom-16 left-1/2 -translate-x-1/2 z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-        >
-          <motion.div
-            className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center bg-black/20 backdrop-blur-sm"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className="w-1 h-2 sm:h-3 bg-white/60 rounded-full mt-1 sm:mt-2"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            </motion.div>
-        </motion.div>
       </div>
     </section>
   );

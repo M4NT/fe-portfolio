@@ -3558,29 +3558,748 @@ Las landing pages no son solo una herramienta de marketing - son una estrategia 
 `,
     },
   },
+  {
+    slug: 'como-escolher-landing-page-site-institucional-ecommerce-2025',
+    title: {
+      pt: 'Como Escolher entre Landing Page, Site Institucional e E-commerce em 2025',
+      en: 'How to Choose Between Landing Page, Corporate Website and E-commerce in 2025',
+      es: 'Cómo Elegir entre Landing Page, Sitio Institucional y E-commerce en 2025',
+    },
+    excerpt: {
+      pt: 'Descubra qual tipo de site é ideal para o seu negócio. Guia completo comparando Landing Pages, Sites Institucionais e E-commerce, com casos de uso, custos e quando usar cada um.',
+      en: 'Discover which type of website is ideal for your business. Complete guide comparing Landing Pages, Corporate Websites and E-commerce, with use cases, costs and when to use each one.',
+      es: 'Descubre qué tipo de sitio web es ideal para tu negocio. Guía completa comparando Landing Pages, Sitios Institucionales y E-commerce, con casos de uso, costos y cuándo usar cada uno.',
+    },
+    date: '2025-01-20T10:00:00.000Z',
+    tags: ['landing-page', 'site-institucional', 'ecommerce', 'desenvolvimento-web', 'negocio-digital'],
+    cover: '/images/blog/como-escolher-landing-page-site-institucional-ecommerce-2025.webp',
+    content: {
+      pt: `# Como Escolher entre Landing Page, Site Institucional e E-commerce em 2025
+
+20 de janeiro de 2025 • #landing-page #site-institucional #ecommerce #desenvolvimento-web #negocio-digital
+
+Você decidiu que precisa de um site. Excelente decisão! Mas agora vem a dúvida: qual tipo de site é o ideal para o seu negócio? Landing Page? Site Institucional? E-commerce?
+
+A escolha errada pode custar caro — tanto em dinheiro quanto em oportunidades perdidas. Por isso, criamos este guia completo para ajudar você a tomar a decisão certa.
+
+## O Problema: Decisão Sem Informação
+
+Muitos empreendedores escolhem o tipo de site baseado apenas em:
+- "Vi que a concorrência tem um e-commerce"
+- "Quero algo simples, então vou de landing page"
+- "Preciso de um site completo, então vou fazer site institucional"
+
+Mas a verdade é que cada tipo de site serve para um propósito específico. Escolher o errado significa:
+- ❌ Gastar mais do que deveria
+- ❌ Não atingir seus objetivos
+- ❌ Perder vendas e oportunidades
+- ❌ Ter que refazer tudo depois
+
+## Os 3 Tipos de Sites (E Quando Usar Cada Um)
+
+### 1. Landing Page: A Especialista em Conversão
+
+**O que é:**
+Uma página única, focada em uma única ação: converter visitantes em leads ou vendas.
+
+**Características:**
+- ✅ Uma única página (sem navegação complexa)
+- ✅ Foco total em uma oferta específica
+- ✅ Design otimizado para conversão
+- ✅ Call-to-action (CTA) claro e destacado
+- ✅ Carregamento rápido e otimizado
+
+**Quando usar:**
+- 🎯 Campanha de marketing específica (lançamento, produto novo)
+- 🎯 Captura de leads (ebook, webinar, curso)
+- 🎯 Venda de um produto/serviço único
+- 🎯 Teste de mercado para validar ideia
+- 🎯 Evento ou promoção temporária
+
+**Investimento:**
+- A partir de R$ 1.500 (simples)
+- R$ 2.500 - R$ 4.000 (com recursos avançados)
+- Prazo: 3-5 dias úteis
+
+**Exemplo prático:**
+Você lançou um curso online sobre "Como Criar Landing Pages que Convertem". Em vez de criar um site completo, você cria uma landing page focada apenas em apresentar o curso e capturar vendas.
+
+**Vantagens:**
+- ✅ Alta taxa de conversão (foco único)
+- ✅ Custo menor
+- ✅ Desenvolvimento rápido
+- ✅ Fácil de testar e otimizar
+
+**Desvantagens:**
+- ❌ Limitada a uma oferta
+- ❌ Não serve para mostrar múltiplos produtos
+- ❌ Não tem navegação completa
+
+---
+
+### 2. Site Institucional: A Vitrine Completa
+
+**O que é:**
+Um site completo com múltiplas páginas, apresentando sua empresa, serviços, equipe e portfólio de forma profissional.
+
+**Características:**
+- ✅ Múltiplas páginas (Home, Sobre, Serviços, Contato, Blog, etc.)
+- ✅ Navegação completa e intuitiva
+- ✅ Apresentação completa da empresa
+- ✅ Portfólio de trabalhos/projetos
+- ✅ Blog integrado (opcional)
+
+**Quando usar:**
+- 🏢 Empresa que precisa de presença online profissional
+- 🏢 Serviços que precisam de credibilidade e autoridade
+- 🏢 Agências, consultorias, profissionais liberais
+- 🏢 Marca que quer construir autoridade no mercado
+- 🏢 Negócio que precisa mostrar portfólio e cases
+
+**Investimento:**
+- A partir de R$ 3.500 (básico)
+- R$ 5.000 - R$ 8.000 (com recursos avançados e CMS)
+- Prazo: 7-15 dias úteis
+
+**Exemplo prático:**
+Você é uma agência de marketing digital. Você precisa de um site que mostre:
+- Quem você é (Sobre)
+- O que você faz (Serviços)
+- Como você faz (Processo)
+- Resultados que você já gerou (Portfólio/Cases)
+- Como entrar em contato (Contato)
+
+**Vantagens:**
+- ✅ Presença profissional completa
+- ✅ Múltiplas páginas para SEO
+- ✅ Credibilidade e autoridade
+- ✅ Espaço para contar sua história
+
+**Desvantagens:**
+- ❌ Investimento maior
+- ❌ Desenvolvimento mais longo
+- ❌ Pode ter menor conversão (muitas opções)
+
+---
+
+### 3. E-commerce: A Loja Virtual Completa
+
+**O que é:**
+Uma loja online completa, onde você pode vender múltiplos produtos, gerenciar estoque, processar pagamentos e entregar produtos.
+
+**Características:**
+- ✅ Catálogo de produtos completo
+- ✅ Carrinho de compras
+- ✅ Sistema de checkout e pagamento
+- ✅ Painel administrativo para gestão
+- ✅ Gestão de estoque e pedidos
+- ✅ Área do cliente
+
+**Quando usar:**
+- 🛒 Venda de produtos físicos ou digitais
+- 🛒 Múltiplos produtos para vender
+- 🛒 Precisa de gestão de estoque
+- 🛒 Quer escalar vendas online
+- 🛒 Tem infraestrutura de entrega
+
+**Investimento:**
+- A partir de R$ 8.000 (loja básica)
+- R$ 12.000 - R$ 25.000+ (com recursos avançados)
+- Prazo: 15-30 dias úteis
+
+**Exemplo prático:**
+Você tem uma marca de roupas e quer vender online. Você precisa de:
+- Catálogo com todas as peças
+- Filtros por tamanho, cor, preço
+- Carrinho de compras
+- Integração com pagamento (cartão, PIX, boleto)
+- Gestão de estoque
+- Área do cliente para acompanhar pedidos
+
+**Vantagens:**
+- ✅ Vendas 24/7
+- ✅ Escalabilidade
+- ✅ Múltiplos produtos
+- ✅ Gestão completa integrada
+
+**Desvantagens:**
+- ❌ Investimento maior
+- ❌ Desenvolvimento mais complexo
+- ❌ Precisa de infraestrutura (logística, estoque)
+
+---
+
+## Tabela Comparativa Rápida
+
+| Característica | Landing Page | Site Institucional | E-commerce |
+|----------------|--------------|-------------------|------------|
+| **Páginas** | 1 | 5-10+ | Múltiplas (dinâmicas) |
+| **Foco** | Conversão única | Apresentação completa | Vendas |
+| **Investimento** | R$ 1.500+ | R$ 3.500+ | R$ 8.000+ |
+| **Prazo** | 3-5 dias | 7-15 dias | 15-30 dias |
+| **Conversão** | Alta (foco único) | Média | Depende da otimização |
+| **SEO** | Limitado | Excelente | Excelente |
+| **Manutenção** | Baixa | Média | Alta |
+
+---
+
+## Perguntas para Decidir
+
+Responda estas perguntas para descobrir qual é o ideal:
+
+### 1. Qual é o seu objetivo principal?
+- [ ] Gerar leads para um produto/serviço específico → **Landing Page**
+- [ ] Apresentar minha empresa e serviços → **Site Institucional**
+- [ ] Vender produtos online → **E-commerce**
+
+### 2. Quantos produtos/serviços você tem?
+- [ ] 1 produto/serviço específico → **Landing Page**
+- [ ] 2-5 serviços → **Site Institucional**
+- [ ] Múltiplos produtos → **E-commerce**
+
+### 3. Você precisa de checkout e pagamento online?
+- [ ] Não, só capturar contato → **Landing Page ou Site Institucional**
+- [ ] Sim, preciso vender online → **E-commerce**
+
+### 4. Qual é o seu orçamento?
+- [ ] Até R$ 3.000 → **Landing Page**
+- [ ] R$ 3.000 - R$ 7.000 → **Site Institucional**
+- [ ] R$ 8.000+ → **E-commerce**
+
+### 5. Qual é o seu prazo?
+- [ ] Urgente (menos de 1 semana) → **Landing Page**
+- [ ] 1-2 semanas → **Site Institucional**
+- [ ] 3-4 semanas → **E-commerce**
+
+---
+
+## Estratégia Híbrida: Você Pode Combinar!
+
+**Importante:** Você não precisa escolher apenas um tipo. Muitos negócios usam uma combinação:
+
+### Exemplo 1: Site Institucional + Landing Pages
+- Site institucional como base (presença profissional)
+- Landing pages para campanhas específicas (lançamentos, produtos novos)
+
+### Exemplo 2: E-commerce + Landing Pages
+- E-commerce como loja principal
+- Landing pages para campanhas de marketing (produtos em destaque, promoções)
+
+### Exemplo 3: Site Institucional + E-commerce
+- Site institucional para apresentar a empresa
+- E-commerce integrado para vender produtos
+
+---
+
+## O Que Fazer Agora?
+
+1. **Defina seu objetivo principal** (leads, vendas, presença)
+2. **Analise seu orçamento e prazo**
+3. **Escolha o tipo baseado nas perguntas acima**
+4. **Considere começar simples e evoluir** (Landing Page → Site Institucional → E-commerce)
+
+---
+
+## Conclusão
+
+Não existe "o melhor tipo de site". Existe o tipo certo para o seu momento e objetivo.
+
+- **Landing Page** = Foco em conversão rápida
+- **Site Institucional** = Presença profissional completa
+- **E-commerce** = Loja virtual completa
+
+A escolha certa depende do seu objetivo, orçamento e necessidades. E lembre-se: você sempre pode começar com um e evoluir para outro conforme seu negócio cresce.
+
+**Precisa de ajuda para decidir?** Entre em contato e vamos analisar juntos qual é a melhor solução para o seu negócio. Orçamento grátis em 24h! 🚀
+
+`,
+      en: `# How to Choose Between Landing Page, Corporate Website and E-commerce in 2025
+
+January 20, 2025 • #landing-page #corporate-website #ecommerce #web-development #digital-business
+
+You've decided you need a website. Great decision! But now comes the question: which type of website is ideal for your business? Landing Page? Corporate Website? E-commerce?
+
+The wrong choice can be costly - both in money and missed opportunities. That's why we created this complete guide to help you make the right decision.
+
+## The Problem: Decision Without Information
+
+Many entrepreneurs choose the type of website based only on:
+- "I saw that the competition has an e-commerce"
+- "I want something simple, so I'll go with a landing page"
+- "I need a complete site, so I'll make a corporate website"
+
+But the truth is that each type of website serves a specific purpose. Choosing the wrong one means:
+- ❌ Spending more than you should
+- ❌ Not achieving your goals
+- ❌ Losing sales and opportunities
+- ❌ Having to redo everything later
+
+## The 3 Types of Websites (And When to Use Each One)
+
+### 1. Landing Page: The Conversion Specialist
+
+**What it is:**
+A single page, focused on a single action: converting visitors into leads or sales.
+
+**Characteristics:**
+- ✅ Single page (no complex navigation)
+- ✅ Total focus on a specific offer
+- ✅ Conversion-optimized design
+- ✅ Clear and highlighted call-to-action (CTA)
+- ✅ Fast and optimized loading
+
+**When to use:**
+- 🎯 Specific marketing campaign (launch, new product)
+- 🎯 Lead capture (ebook, webinar, course)
+- 🎯 Sale of a single product/service
+- 🎯 Market testing to validate idea
+- 🎯 Event or temporary promotion
+
+**Investment:**
+- From $300 (simple)
+- $500 - $800 (with advanced features)
+- Timeline: 3-5 business days
+
+**Example:**
+You launched an online course on "How to Create Landing Pages that Convert". Instead of creating a complete website, you create a landing page focused only on presenting the course and capturing sales.
+
+**Advantages:**
+- ✅ High conversion rate (single focus)
+- ✅ Lower cost
+- ✅ Fast development
+- ✅ Easy to test and optimize
+
+**Disadvantages:**
+- ❌ Limited to one offer
+- ❌ Doesn't serve to show multiple products
+- ❌ No complete navigation
+
+---
+
+### 2. Corporate Website: The Complete Showcase
+
+**What it is:**
+A complete website with multiple pages, presenting your company, services, team and portfolio in a professional way.
+
+**Characteristics:**
+- ✅ Multiple pages (Home, About, Services, Contact, Blog, etc.)
+- ✅ Complete and intuitive navigation
+- ✅ Complete company presentation
+- ✅ Portfolio of works/projects
+- ✅ Integrated blog (optional)
+
+**When to use:**
+- 🏢 Company that needs professional online presence
+- 🏢 Services that need credibility and authority
+- 🏢 Agencies, consultancies, freelancers
+- 🏢 Brand that wants to build market authority
+- 🏢 Business that needs to show portfolio and cases
+
+**Investment:**
+- From $700 (basic)
+- $1,000 - $1,600 (with advanced features and CMS)
+- Timeline: 7-15 business days
+
+**Example:**
+You are a digital marketing agency. You need a website that shows:
+- Who you are (About)
+- What you do (Services)
+- How you do it (Process)
+- Results you've already generated (Portfolio/Cases)
+- How to contact (Contact)
+
+**Advantages:**
+- ✅ Complete professional presence
+- ✅ Multiple pages for SEO
+- ✅ Credibility and authority
+- ✅ Space to tell your story
+
+**Disadvantages:**
+- ❌ Higher investment
+- ❌ Longer development
+- ❌ May have lower conversion (many options)
+
+---
+
+### 3. E-commerce: The Complete Virtual Store
+
+**What it is:**
+A complete online store where you can sell multiple products, manage inventory, process payments and deliver products.
+
+**Characteristics:**
+- ✅ Complete product catalog
+- ✅ Shopping cart
+- ✅ Checkout and payment system
+- ✅ Administrative panel for management
+- ✅ Inventory and order management
+- ✅ Customer area
+
+**When to use:**
+- 🛒 Sale of physical or digital products
+- 🛒 Multiple products to sell
+- 🛒 Need inventory management
+- 🛒 Want to scale online sales
+- 🛒 Have delivery infrastructure
+
+**Investment:**
+- From $1,600 (basic store)
+- $2,400 - $5,000+ (with advanced features)
+- Timeline: 15-30 business days
+
+**Example:**
+You have a clothing brand and want to sell online. You need:
+- Catalog with all pieces
+- Filters by size, color, price
+- Shopping cart
+- Payment integration (card, bank transfer, boleto)
+- Inventory management
+- Customer area to track orders
+
+**Advantages:**
+- ✅ 24/7 sales
+- ✅ Scalability
+- ✅ Multiple products
+- ✅ Complete integrated management
+
+**Disadvantages:**
+- ❌ Higher investment
+- ❌ More complex development
+- ❌ Need infrastructure (logistics, inventory)
+
+---
+
+## Quick Comparison Table
+
+| Characteristic | Landing Page | Corporate Website | E-commerce |
+|----------------|--------------|-------------------|------------|
+| **Pages** | 1 | 5-10+ | Multiple (dynamic) |
+| **Focus** | Single conversion | Complete presentation | Sales |
+| **Investment** | $300+ | $700+ | $1,600+ |
+| **Timeline** | 3-5 days | 7-15 days | 15-30 days |
+| **Conversion** | High (single focus) | Medium | Depends on optimization |
+| **SEO** | Limited | Excellent | Excellent |
+| **Maintenance** | Low | Medium | High |
+
+---
+
+## Questions to Decide
+
+Answer these questions to find out which is ideal:
+
+### 1. What is your main goal?
+- [ ] Generate leads for a specific product/service → **Landing Page**
+- [ ] Present my company and services → **Corporate Website**
+- [ ] Sell products online → **E-commerce**
+
+### 2. How many products/services do you have?
+- [ ] 1 specific product/service → **Landing Page**
+- [ ] 2-5 services → **Corporate Website**
+- [ ] Multiple products → **E-commerce**
+
+### 3. Do you need online checkout and payment?
+- [ ] No, just capture contact → **Landing Page or Corporate Website**
+- [ ] Yes, I need to sell online → **E-commerce**
+
+### 4. What is your budget?
+- [ ] Up to $600 → **Landing Page**
+- [ ] $600 - $1,400 → **Corporate Website**
+- [ ] $1,600+ → **E-commerce**
+
+### 5. What is your deadline?
+- [ ] Urgent (less than 1 week) → **Landing Page**
+- [ ] 1-2 weeks → **Corporate Website**
+- [ ] 3-4 weeks → **E-commerce**
+
+---
+
+## Hybrid Strategy: You Can Combine!
+
+**Important:** You don't need to choose just one type. Many businesses use a combination:
+
+### Example 1: Corporate Website + Landing Pages
+- Corporate website as base (professional presence)
+- Landing pages for specific campaigns (launches, new products)
+
+### Example 2: E-commerce + Landing Pages
+- E-commerce as main store
+- Landing pages for marketing campaigns (featured products, promotions)
+
+### Example 3: Corporate Website + E-commerce
+- Corporate website to present the company
+- Integrated e-commerce to sell products
+
+---
+
+## What to Do Now?
+
+1. **Define your main goal** (leads, sales, presence)
+2. **Analyze your budget and deadline**
+3. **Choose the type based on the questions above**
+4. **Consider starting simple and evolving** (Landing Page → Corporate Website → E-commerce)
+
+---
+
+## Conclusion
+
+There is no "best type of website". There is the right type for your moment and goal.
+
+- **Landing Page** = Focus on quick conversion
+- **Corporate Website** = Complete professional presence
+- **E-commerce** = Complete virtual store
+
+The right choice depends on your goal, budget and needs. And remember: you can always start with one and evolve to another as your business grows.
+
+**Need help deciding?** Get in touch and let's analyze together what's the best solution for your business. Free quote in 24h! 🚀
+
+`,
+      es: `# Cómo Elegir entre Landing Page, Sitio Institucional y E-commerce en 2025
+
+20 de enero de 2025 • #landing-page #sitio-institucional #ecommerce #desarrollo-web #negocio-digital
+
+Has decidido que necesitas un sitio web. ¡Excelente decisión! Pero ahora viene la duda: ¿qué tipo de sitio web es ideal para tu negocio? ¿Landing Page? ¿Sitio Institucional? ¿E-commerce?
+
+La elección equivocada puede costar caro, tanto en dinero como en oportunidades perdidas. Por eso, creamos esta guía completa para ayudarte a tomar la decisión correcta.
+
+## El Problema: Decisión Sin Información
+
+Muchos emprendedores eligen el tipo de sitio basándose solo en:
+- "Vi que la competencia tiene un e-commerce"
+- "Quiero algo simple, entonces voy con landing page"
+- "Necesito un sitio completo, entonces voy a hacer sitio institucional"
+
+Pero la verdad es que cada tipo de sitio sirve para un propósito específico. Elegir el equivocado significa:
+- ❌ Gastar más de lo que deberías
+- ❌ No alcanzar tus objetivos
+- ❌ Perder ventas y oportunidades
+- ❌ Tener que rehacer todo después
+
+## Los 3 Tipos de Sitios (Y Cuándo Usar Cada Uno)
+
+### 1. Landing Page: La Especialista en Conversión
+
+**Qué es:**
+Una página única, enfocada en una única acción: convertir visitantes en leads o ventas.
+
+**Características:**
+- ✅ Una única página (sin navegación compleja)
+- ✅ Enfoque total en una oferta específica
+- ✅ Diseño optimizado para conversión
+- ✅ Call-to-action (CTA) claro y destacado
+- ✅ Carga rápida y optimizada
+
+**Cuándo usar:**
+- 🎯 Campaña de marketing específica (lanzamiento, producto nuevo)
+- 🎯 Captura de leads (ebook, webinar, curso)
+- 🎯 Venta de un producto/servicio único
+- 🎯 Prueba de mercado para validar idea
+- 🎯 Evento o promoción temporal
+
+**Inversión:**
+- Desde $300 (simple)
+- $500 - $800 (con recursos avanzados)
+- Plazo: 3-5 días hábiles
+
+**Ejemplo práctico:**
+Lanzaste un curso online sobre "Cómo Crear Landing Pages que Convierten". En lugar de crear un sitio completo, creas una landing page enfocada solo en presentar el curso y capturar ventas.
+
+**Ventajas:**
+- ✅ Alta tasa de conversión (enfoque único)
+- ✅ Costo menor
+- ✅ Desarrollo rápido
+- ✅ Fácil de probar y optimizar
+
+**Desventajas:**
+- ❌ Limitada a una oferta
+- ❌ No sirve para mostrar múltiples productos
+- ❌ No tiene navegación completa
+
+---
+
+### 2. Sitio Institucional: La Vitrina Completa
+
+**Qué es:**
+Un sitio completo con múltiples páginas, presentando tu empresa, servicios, equipo y portafolio de forma profesional.
+
+**Características:**
+- ✅ Múltiples páginas (Home, Sobre, Servicios, Contacto, Blog, etc.)
+- ✅ Navegación completa e intuitiva
+- ✅ Presentación completa de la empresa
+- ✅ Portafolio de trabajos/proyectos
+- ✅ Blog integrado (opcional)
+
+**Cuándo usar:**
+- 🏢 Empresa que necesita presencia online profesional
+- 🏢 Servicios que necesitan credibilidad y autoridad
+- 🏢 Agencias, consultorías, profesionales liberales
+- 🏢 Marca que quiere construir autoridad en el mercado
+- 🏢 Negocio que necesita mostrar portafolio y casos
+
+**Inversión:**
+- Desde $700 (básico)
+- $1,000 - $1,600 (con recursos avanzados y CMS)
+- Plazo: 7-15 días hábiles
+
+**Ejemplo práctico:**
+Eres una agencia de marketing digital. Necesitas un sitio que muestre:
+- Quién eres (Sobre)
+- Qué haces (Servicios)
+- Cómo lo haces (Proceso)
+- Resultados que ya has generado (Portafolio/Casos)
+- Cómo contactar (Contacto)
+
+**Ventajas:**
+- ✅ Presencia profesional completa
+- ✅ Múltiples páginas para SEO
+- ✅ Credibilidad y autoridad
+- ✅ Espacio para contar tu historia
+
+**Desventajas:**
+- ❌ Mayor inversión
+- ❌ Desarrollo más largo
+- ❌ Puede tener menor conversión (muchas opciones)
+
+---
+
+### 3. E-commerce: La Tienda Virtual Completa
+
+**Qué es:**
+Una tienda online completa, donde puedes vender múltiples productos, gestionar inventario, procesar pagos y entregar productos.
+
+**Características:**
+- ✅ Catálogo de productos completo
+- ✅ Carrito de compras
+- ✅ Sistema de checkout y pago
+- ✅ Panel administrativo para gestión
+- ✅ Gestión de inventario y pedidos
+- ✅ Área del cliente
+
+**Cuándo usar:**
+- 🛒 Venta de productos físicos o digitales
+- 🛒 Múltiplos productos para vender
+- 🛒 Necesitas gestión de inventario
+- 🛒 Quieres escalar ventas online
+- 🛒 Tienes infraestructura de entrega
+
+**Inversión:**
+- Desde $1,600 (tienda básica)
+- $2,400 - $5,000+ (con recursos avanzados)
+- Plazo: 15-30 días hábiles
+
+**Ejemplo práctico:**
+Tienes una marca de ropa y quieres vender online. Necesitas:
+- Catálogo con todas las piezas
+- Filtros por talla, color, precio
+- Carrito de compras
+- Integración con pago (tarjeta, transferencia, boleto)
+- Gestión de inventario
+- Área del cliente para seguir pedidos
+
+**Ventajas:**
+- ✅ Ventas 24/7
+- ✅ Escalabilidad
+- ✅ Múltiplos productos
+- ✅ Gestión completa integrada
+
+**Desventajas:**
+- ❌ Mayor inversión
+- ❌ Desarrollo más complejo
+- ❌ Necesitas infraestructura (logística, inventario)
+
+---
+
+## Tabla Comparativa Rápida
+
+| Característica | Landing Page | Sitio Institucional | E-commerce |
+|----------------|--------------|-------------------|------------|
+| **Páginas** | 1 | 5-10+ | Múltiples (dinámicas) |
+| **Enfoque** | Conversión única | Presentación completa | Ventas |
+| **Inversión** | $300+ | $700+ | $1,600+ |
+| **Plazo** | 3-5 días | 7-15 días | 15-30 días |
+| **Conversión** | Alta (enfoque único) | Media | Depende de la optimización |
+| **SEO** | Limitado | Excelente | Excelente |
+| **Mantenimiento** | Baja | Media | Alta |
+
+---
+
+## Preguntas para Decidir
+
+Responde estas preguntas para descubrir cuál es ideal:
+
+### 1. ¿Cuál es tu objetivo principal?
+- [ ] Generar leads para un producto/servicio específico → **Landing Page**
+- [ ] Presentar mi empresa y servicios → **Sitio Institucional**
+- [ ] Vender productos online → **E-commerce**
+
+### 2. ¿Cuántos productos/servicios tienes?
+- [ ] 1 producto/servicio específico → **Landing Page**
+- [ ] 2-5 servicios → **Sitio Institucional**
+- [ ] Múltiplos productos → **E-commerce**
+
+### 3. ¿Necesitas checkout y pago online?
+- [ ] No, solo capturar contacto → **Landing Page o Sitio Institucional**
+- [ ] Sí, necesito vender online → **E-commerce**
+
+### 4. ¿Cuál es tu presupuesto?
+- [ ] Hasta $600 → **Landing Page**
+- [ ] $600 - $1,400 → **Sitio Institucional**
+- [ ] $1,600+ → **E-commerce**
+
+### 5. ¿Cuál es tu plazo?
+- [ ] Urgente (menos de 1 semana) → **Landing Page**
+- [ ] 1-2 semanas → **Sitio Institucional**
+- [ ] 3-4 semanas → **E-commerce**
+
+---
+
+## Estrategia Híbrida: ¡Puedes Combinar!
+
+**Importante:** No necesitas elegir solo un tipo. Muchos negocios usan una combinación:
+
+### Ejemplo 1: Sitio Institucional + Landing Pages
+- Sitio institucional como base (presencia profesional)
+- Landing pages para campañas específicas (lanzamientos, productos nuevos)
+
+### Ejemplo 2: E-commerce + Landing Pages
+- E-commerce como tienda principal
+- Landing pages para campañas de marketing (productos destacados, promociones)
+
+### Ejemplo 3: Sitio Institucional + E-commerce
+- Sitio institucional para presentar la empresa
+- E-commerce integrado para vender productos
+
+---
+
+## Qué Hacer Ahora?
+
+1. **Define tu objetivo principal** (leads, ventas, presencia)
+2. **Analiza tu presupuesto y plazo**
+3. **Elige el tipo basado en las preguntas anteriores**
+4. **Considera comenzar simple y evolucionar** (Landing Page → Sitio Institucional → E-commerce)
+
+---
+
+## Conclusión
+
+No existe "el mejor tipo de sitio". Existe el tipo correcto para tu momento y objetivo.
+
+- **Landing Page** = Enfoque en conversión rápida
+- **Sitio Institucional** = Presencia profesional completa
+- **E-commerce** = Tienda virtual completa
+
+La elección correcta depende de tu objetivo, presupuesto y necesidades. Y recuerda: siempre puedes comenzar con uno y evolucionar a otro conforme tu negocio crece.
+
+**¿Necesitas ayuda para decidir?** Ponte en contacto y analicemos juntos cuál es la mejor solución para tu negocio. ¡Presupuesto gratis en 24h! 🚀
+
+`,
+    },
+  },
 ];
 
-export const getPost = (slug: string) => {
-  console.log('getPost - INICIANDO com slug:', slug);
-  console.log('getPost - tipo do slug:', typeof slug);
-  console.log('getPost - total de posts disponíveis:', posts.length);
-  
-  // Listar todos os slugs disponíveis
-  const availableSlugs = posts.map(p => p.slug);
-  console.log('getPost - slugs disponíveis:', availableSlugs);
-  
-  const post = posts.find((p) => {
-    console.log('getPost - comparando:', p.slug, '===', slug, '?', p.slug === slug);
-    return p.slug === slug;
-  });
-  
-  console.log('getPost - resultado da busca:', !!post);
-  if (post) {
-    console.log('getPost - post encontrado:', { title: post.title.pt, slug: post.slug });
-  } else {
-    console.log('getPost - NENHUM POST ENCONTRADO para slug:', slug);
+export const getPost = (slug: string): BlogPost | undefined => {
+  if (!slug || typeof slug !== 'string') {
+    return undefined;
   }
   
-  return post;
+  return posts.find((p) => p.slug === slug);
 };
 
