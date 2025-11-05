@@ -15,12 +15,19 @@ export default defineConfig({
         dir: 'dist/server',
         format: 'es',
       },
+      // Não externalizar react-router-dom para SSR
+      external: ['fs', 'path', 'url', 'stream', 'util', 'crypto', 'http', 'https', 'net', 'os', 'buffer', 'events'],
     },
+    ssrEmitAssets: true,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+    dedupe: ['react', 'react-dom', 'react-router-dom'],
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 })
 
