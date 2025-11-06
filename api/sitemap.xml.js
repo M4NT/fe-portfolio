@@ -7,8 +7,11 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Sitemap XML gerado dinamicamente (fallback se arquivo não existir)
-function generateSitemap() {
-  const baseUrl = 'https://yanmantovani.com';
+function generateSitemap(req) {
+  // Detectar se a requisição veio com www ou não-www
+  const host = req?.headers?.host || 'yanmantovani.com';
+  const protocol = req?.headers?.['x-forwarded-proto'] || 'https';
+  const baseUrl = `${protocol}://${host}`;
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
   
   const blogPosts = [
@@ -90,13 +93,23 @@ export default async function handler(req, res) {
     
     // Se não encontrou arquivo válido, gerar dinamicamente
     if (!sitemap || sitemap.trim().length === 0) {
-      sitemap = generateSitemap();
+      sitemap = generateSitemap(req);
     }
     
     // Validar formato básico do XML
     if (!sitemap.includes('<?xml') || !sitemap.includes('<urlset')) {
       console.warn('Sitemap inválido detectado, regenerando...');
-      sitemap = generateSitemap();
+      sitemap = generateSitemap(req);
+    }
+    
+    // Ajustar URLs no sitemap para corresponder ao domínio da requisição
+    const host = req.headers?.host || 'yanmantovani.com';
+    const protocol = req.headers?.['x-forwarded-proto'] || 'https';
+    const requestBaseUrl = `${protocol}://${host}`;
+    
+    // Se o sitemap foi lido de arquivo, ajustar URLs para corresponder ao domínio da requisição
+    if (sitemap && requestBaseUrl !== 'https://yanmantovani.com') {
+      sitemap = sitemap.replace(/https:\/\/yanmantovani\.com/g, requestBaseUrl);
     }
     
     // Configurar headers corretos para XML (CRÍTICO: deve ser application/xml, não text/plain)
@@ -119,7 +132,7 @@ export default async function handler(req, res) {
     console.error('[SITEMAP] Erro ao servir sitemap:', error);
     // Em caso de erro, sempre tentar gerar dinamicamente
     try {
-      const fallbackSitemap = generateSitemap();
+      const fallbackSitemap = generateSitemap(req);
       // CRÍTICO: Garantir Content-Type correto no fallback também
       res.status(200)
         .setHeader('Content-Type', 'application/xml; charset=utf-8')
