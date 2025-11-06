@@ -192,5 +192,5 @@ git push
 
 ---
 
-**Última atualização**: Janeiro 2025
+**Última atualização**: Novembro 2025
 
