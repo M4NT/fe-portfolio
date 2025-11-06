@@ -1,19 +1,6 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.yanmantovani.com"
-        }
-      ],
-      "destination": "https://yanmantovani.com/:splat",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/assets/(.*)",
@@ -22,6 +9,10 @@
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap.xml.js"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
     },
     {
       "source": "/((?!assets/|images/|favicon|robots|sitemap|api|_next).*)",
