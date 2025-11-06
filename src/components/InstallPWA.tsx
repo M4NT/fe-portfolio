@@ -7,6 +7,11 @@ export default function InstallPWA() {
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -40,11 +45,18 @@ export default function InstallPWA() {
   const handleDismiss = () => {
     setShowPrompt(false);
     // Não mostrar novamente nesta sessão
-    sessionStorage.setItem('pwa-install-dismissed', 'true');
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem('pwa-install-dismissed', 'true');
+    }
   };
 
   // Não mostrar se já foi dispensado nesta sessão
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+      return;
+    }
+
     if (sessionStorage.getItem('pwa-install-dismissed')) {
       setShowPrompt(false);
     }

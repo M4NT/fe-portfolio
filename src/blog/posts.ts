@@ -3572,7 +3572,7 @@ Las landing pages no son solo una herramienta de marketing - son una estrategia 
     },
     date: '2025-01-20T10:00:00.000Z',
     tags: ['landing-page', 'site-institucional', 'ecommerce', 'desenvolvimento-web', 'negocio-digital'],
-    cover: '/images/blog/como-escolher-landing-page-site-institucional-ecommerce-2025.webp',
+    // cover: '/images/blog/como-escolher-landing-page-site-institucional-ecommerce-2025.webp', // Imagem não disponível ainda
     content: {
       pt: `# Como Escolher entre Landing Page, Site Institucional e E-commerce em 2025
 
