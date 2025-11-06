@@ -104,17 +104,31 @@ export default function BlogIndex() {
         url: 'https://yanmantovani.com'
       },
       inLanguage: language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES',
-      blogPost: getSortedPosts().slice(0, 5).map(post => ({
-        '@type': 'BlogPosting',
-        headline: post.title[language],
-        description: post.excerpt[language],
-        datePublished: post.date,
-        url: `https://yanmantovani.com/blog/${post.slug}`,
-        author: {
-          '@type': 'Person',
-          name: 'Yan Mantovani'
+      blogPost: (() => {
+        try {
+          const sorted = [...posts];
+          sorted.sort((a, b) => {
+            try {
+              return new Date(b.date).getTime() - new Date(a.date).getTime();
+            } catch (e) {
+              return 0;
+            }
+          });
+          return sorted.slice(0, 5).map(post => ({
+            '@type': 'BlogPosting',
+            headline: post.title[language] || post.title.pt || '',
+            description: post.excerpt[language] || post.excerpt.pt || '',
+            datePublished: post.date,
+            url: `https://yanmantovani.com/blog/${post.slug}`,
+            author: {
+              '@type': 'Person',
+              name: 'Yan Mantovani'
+            }
+          }));
+        } catch (error) {
+          return [];
         }
-      }))
+      })()
     };
     
     // Remove existing structured data
@@ -131,7 +145,10 @@ export default function BlogIndex() {
       document.head.appendChild(script);
     }
     } catch (error) {
-      console.error('Error setting up SEO meta tags:', error);
+      // Log apenas no cliente
+      if (typeof console !== 'undefined' && console.error) {
+        console.error('Error setting up SEO meta tags:', error);
+      }
     }
   }, [language, sortBy]);
 
@@ -158,23 +175,46 @@ export default function BlogIndex() {
     };
   }, [isDropdownOpen]);
 
-  // Função para ordenar posts
+  // Função para ordenar posts - memoizada e segura para SSR
   const getSortedPosts = () => {
     try {
       const sortedPosts = [...posts];
       
       switch (sortBy) {
         case 'newest':
-          return sortedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+          return sortedPosts.sort((a, b) => {
+            try {
+              return new Date(b.date).getTime() - new Date(a.date).getTime();
+            } catch (e) {
+              return 0;
+            }
+          });
         case 'oldest':
-          return sortedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          return sortedPosts.sort((a, b) => {
+            try {
+              return new Date(a.date).getTime() - new Date(b.date).getTime();
+            } catch (e) {
+              return 0;
+            }
+          });
         case 'title':
-          return sortedPosts.sort((a, b) => a.title[language].localeCompare(b.title[language]));
+          return sortedPosts.sort((a, b) => {
+            try {
+              const titleA = a.title[language] || a.title.pt || '';
+              const titleB = b.title[language] || b.title.pt || '';
+              return titleA.localeCompare(titleB);
+            } catch (e) {
+              return 0;
+            }
+          });
         default:
           return sortedPosts;
       }
     } catch (error) {
-      console.error('Error in getSortedPosts:', error);
+      // Log apenas no cliente
+      if (typeof console !== 'undefined' && console.error) {
+        console.error('Error in getSortedPosts:', error);
+      }
       return posts; // Fallback to original posts
     }
   };
@@ -510,11 +550,25 @@ export default function BlogIndex() {
                     <div className="flex items-center gap-2 text-white/60 text-sm">
                       <div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
                       <span>
-                        {new Date(p.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
-                          year: 'numeric', 
-                          month: 'short', 
-                          day: 'numeric' 
-                        })}
+                        {(() => {
+                          try {
+                            const date = new Date(p.date);
+                            if (typeof Intl !== 'undefined' && Intl.DateTimeFormat) {
+                              return date.toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES', { 
+                                year: 'numeric', 
+                                month: 'short', 
+                                day: 'numeric' 
+                              });
+                            }
+                            // Fallback para formato simples
+                            const day = date.getDate().toString().padStart(2, '0');
+                            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                            const year = date.getFullYear();
+                            return `${day}/${month}/${year}`;
+                          } catch (error) {
+                            return p.date.split('T')[0]; // Fallback para data ISO
+                          }
+                        })()}
                       </span>
                     </div>
                   </div>
