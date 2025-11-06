@@ -99,7 +99,8 @@ export default async function handler(req, res) {
       sitemap = generateSitemap();
     }
     
-    // Configurar headers corretos para XML
+    // Configurar headers corretos para XML (CRÍTICO: deve ser application/xml, não text/plain)
+    // IMPORTANTE: Configurar headers ANTES de enviar resposta
     res.setHeader('Content-Type', 'application/xml; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -112,16 +113,19 @@ export default async function handler(req, res) {
       console.log('[SITEMAP] Requisição do Googlebot detectada');
     }
     
-    res.status(200).send(sitemap);
+    // Enviar resposta com status 200 e garantir que Content-Type não seja sobrescrito
+    res.status(200).setHeader('Content-Type', 'application/xml; charset=utf-8').send(sitemap);
   } catch (error) {
     console.error('[SITEMAP] Erro ao servir sitemap:', error);
     // Em caso de erro, sempre tentar gerar dinamicamente
     try {
       const fallbackSitemap = generateSitemap();
-      res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-      res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-      res.setHeader('X-Content-Type-Options', 'nosniff');
-      res.status(200).send(fallbackSitemap);
+      // CRÍTICO: Garantir Content-Type correto no fallback também
+      res.status(200)
+        .setHeader('Content-Type', 'application/xml; charset=utf-8')
+        .setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600')
+        .setHeader('X-Content-Type-Options', 'nosniff')
+        .send(fallbackSitemap);
     } catch (fallbackError) {
       console.error('[SITEMAP] Erro ao gerar sitemap de fallback:', fallbackError);
       res.status(500).setHeader('Content-Type', 'text/plain').send('Erro ao carregar sitemap');
