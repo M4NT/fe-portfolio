@@ -42,9 +42,11 @@ export default function BlogPost() {
     }
   }, [slug]);
 
-  // Força scroll ao topo quando a página carrega
+  // Força scroll ao topo quando a página carrega (apenas no cliente)
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   }, [slug]);
 
   // Valores do post - calcular com segurança
@@ -94,9 +96,9 @@ export default function BlogPost() {
     };
   }, [post, language, postTitle, postExcerpt, postCover, postDate, postSlug, postTagsStr]);
 
-  // Adicionar JSON-LD script
+  // Adicionar JSON-LD script (apenas no cliente)
   useEffect(() => {
-    if (!structuredData) return;
+    if (!structuredData || typeof document === 'undefined') return;
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -109,7 +111,9 @@ export default function BlogPost() {
       oldScript.parentNode.removeChild(oldScript);
     }
     
-    document.head.appendChild(script);
+    if (document.head) {
+      document.head.appendChild(script);
+    }
     
     return () => {
       const scriptToRemove = document.getElementById('blog-post-schema');
@@ -119,8 +123,10 @@ export default function BlogPost() {
     };
   }, [structuredData]);
 
-  // Adicionar estilos do blog no head
+  // Adicionar estilos do blog no head (apenas no cliente)
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+    
     const blogStyles = `
       .blog-content {
         font-size: 1.125rem;
@@ -342,7 +348,9 @@ export default function BlogPost() {
       oldStyle.parentNode.removeChild(oldStyle);
     }
     
-    document.head.appendChild(styleElement);
+    if (document.head) {
+      document.head.appendChild(styleElement);
+    }
     
     return () => {
       const styleToRemove = document.getElementById('blog-post-styles');
@@ -352,12 +360,16 @@ export default function BlogPost() {
     };
   }, []);
 
-  // Dynamic head tags (title, canonical, OG) for SPA
+  // Dynamic head tags (title, canonical, OG) for SPA (apenas no cliente)
   useEffect(() => {
-    if (!postSlug || !post) return;
+    if (!postSlug || !post || typeof document === 'undefined') return;
 
     const url = `https://yanmantovani.com/blog/${postSlug}`;
-    document.title = `${postTitle} | Yan Mantovani`;
+    if (document.title !== undefined) {
+      document.title = `${postTitle} | Yan Mantovani`;
+    }
+    
+    if (!document.head) return;
     
     const ensure = (selector: string, create: () => HTMLElement) => {
       let el = document.head.querySelector(selector) as HTMLElement | null;

@@ -42,27 +42,27 @@ const blogPosts = [
 ];
 
 const baseUrl = 'https://yanmantovani.com';
-const currentDate = new Date().toISOString();
+const currentDate = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD para sitemap
 
 const urls = [
-  // Main pages
+  // Main pages - Prioridade máxima
   {
     loc: baseUrl,
     lastmod: currentDate,
-    changefreq: 'weekly',
+    changefreq: 'daily', // Aumentado para daily (mais frequente)
     priority: 1.0
   },
   {
-    loc: `${baseUrl}/#about`,
+    loc: `${baseUrl}/blog`,
     lastmod: currentDate,
-    changefreq: 'monthly',
-    priority: 0.8
+    changefreq: 'daily',
+    priority: 0.9
   },
   {
     loc: `${baseUrl}/#services`,
     lastmod: currentDate,
-    changefreq: 'monthly',
-    priority: 0.8
+    changefreq: 'weekly', // Aumentado para weekly
+    priority: 0.9 // Aumentado de 0.8 para 0.9
   },
   {
     loc: `${baseUrl}/#projects`,
@@ -71,24 +71,23 @@ const urls = [
     priority: 0.9
   },
   {
+    loc: `${baseUrl}/#about`,
+    lastmod: currentDate,
+    changefreq: 'monthly',
+    priority: 0.8
+  },
+  {
     loc: `${baseUrl}/#contact`,
     lastmod: currentDate,
     changefreq: 'monthly',
-    priority: 0.7
+    priority: 0.8 // Aumentado de 0.7 para 0.8
   },
-  // Blog index
-  {
-    loc: `${baseUrl}/blog`,
-    lastmod: currentDate,
-    changefreq: 'daily',
-    priority: 0.9
-  },
-  // Blog posts
+  // Blog posts - Prioridade alta para conteúdo
   ...blogPosts.map(post => ({
     loc: `${baseUrl}/blog/${post.slug}`,
-    lastmod: post.date,
-    changefreq: 'monthly',
-    priority: 0.7
+    lastmod: post.date ? post.date.split('T')[0] : currentDate, // Formato YYYY-MM-DD
+    changefreq: 'weekly', // Aumentado para weekly (conteúdo é importante)
+    priority: 0.8 // Aumentado de 0.7 para 0.8
   })),
   // Legal pages
   {
@@ -125,10 +124,131 @@ ${urls.map(url => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-// Write sitemap to dist/client folder (where the build outputs)
-const distPath = path.join(__dirname, 'dist', 'client', 'sitemap.xml');
-fs.writeFileSync(distPath, sitemap);
+// Gerar também robots.txt melhorado
+const robotsTxt = `# robots.txt for yanmantovani.com
+# Optimized for Search Engines and AI Crawlers
+# Desenvolvedor Frontend Freelancer | Landing Pages de Alta Conversão
 
-console.log('✅ Sitemap gerado com sucesso:', distPath);
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yanmantovani.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 0
+
+# Search Engine Bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Social Media Crawlers
+User-agent: facebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# AI Crawlers (ChatGPT, Claude, Gemini, etc.)
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 0
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Archive Bots
+User-agent: ia_archiver
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+# Disallow admin or private paths (if any in the future)
+# Disallow: /admin/
+# Disallow: /private/
+`;
+
+// Write sitemap to múltiplos locais para garantir acesso
+const distClientPath = path.join(__dirname, 'dist', 'client', 'sitemap.xml');
+const distPath = path.join(__dirname, 'dist', 'sitemap.xml');
+const publicPath = path.join(__dirname, 'public', 'sitemap.xml');
+
+// Criar diretórios se não existirem
+const distClientDir = path.dirname(distClientPath);
+const distDir = path.dirname(distPath);
+const publicDir = path.dirname(publicPath);
+
+[distClientDir, distDir, publicDir].forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
+
+// Escrever sitemap em todos os locais
+fs.writeFileSync(distClientPath, sitemap);
+fs.writeFileSync(distPath, sitemap);
+fs.writeFileSync(publicPath, sitemap);
+
+// Write robots.txt também
+const robotsClientPath = path.join(__dirname, 'dist', 'client', 'robots.txt');
+const robotsPublicPath = path.join(__dirname, 'public', 'robots.txt');
+
+fs.writeFileSync(robotsClientPath, robotsTxt);
+fs.writeFileSync(robotsPublicPath, robotsTxt);
+
+console.log('✅ Sitemap gerado com sucesso em:');
+console.log('   -', distClientPath);
+console.log('   -', distPath);
+console.log('   -', publicPath);
+console.log('✅ Robots.txt atualizado em:');
+console.log('   -', robotsClientPath);
+console.log('   -', robotsPublicPath);
 console.log(`📊 Total de URLs: ${urls.length}`);
+console.log(`📅 Última atualização: ${currentDate}`);
 
