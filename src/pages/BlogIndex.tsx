@@ -354,10 +354,12 @@ export default function BlogIndex() {
           }}
         />
 
-        {/* Floating particles - EXACT COPY FROM HERO */}
+        {/* Floating particles - Determinístico para SSR */}
         {[...Array(8)].map((_, i) => {
           const colors = ['bg-green-400/40', 'bg-emerald-400/40', 'bg-teal-400/40', 'bg-cyan-400/40'];
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          // Usar índice para escolher cor de forma determinística (não aleatória)
+          const colorIndex = i % colors.length;
+          const selectedColor = colors[colorIndex];
           
           // Posições mais controladas (não totalmente aleatórias)
           const positions = [
@@ -372,17 +374,32 @@ export default function BlogIndex() {
           ];
           
           const position = positions[i % positions.length];
-          const duration = 12 + Math.random() * 6; // 12-18 segundos
+          // Duração determinística baseada no índice (12-18 segundos)
+          const duration = 12 + (i % 6) + 1; // 13-18 segundos
           
           // Aplicar blur em 40% das bolinhas (índices pares)
           const shouldBlur = i % 2 === 0;
           const blurClass = shouldBlur ? 'blur-sm' : '';
           const sizeClass = shouldBlur ? 'w-4 h-4' : 'w-3 h-3';
           
+          // Valores determinísticos para animação (baseados no índice)
+          const xOffsets = [
+            [0, 5, 10, 15, 20, 25],
+            [0, -5, -10, -15, -20, -25],
+            [0, 8, 12, 18, 22, 28],
+            [0, -8, -12, -18, -22, -28],
+            [0, 3, 7, 11, 15, 19],
+            [0, -3, -7, -11, -15, -19],
+            [0, 6, 9, 14, 17, 23],
+            [0, -6, -9, -14, -17, -23]
+          ];
+          const xValues = xOffsets[i % xOffsets.length];
+          const delay = (i % 8) * 1; // Delay determinístico baseado no índice
+          
           return (
             <motion.div
               key={i}
-              className={`absolute ${sizeClass} ${randomColor} rounded-full ${blurClass}`}
+              className={`absolute ${sizeClass} ${selectedColor} rounded-full ${blurClass}`}
               style={{
                 left: position.left,
                 top: position.top,
@@ -391,12 +408,12 @@ export default function BlogIndex() {
                 opacity: [0, 0.8, 0.8, 0.8, 0.8, 0],
                 scale: [0, 1, 1, 1, 1, 0],
                 y: [0, -10, -20, -30, -40, -50],
-                x: [0, Math.random() * 20 - 10, Math.random() * 30 - 15, Math.random() * 40 - 20, Math.random() * 50 - 25, Math.random() * 60 - 30]
+                x: xValues
               }}
               transition={{
                 duration: duration,
                 repeat: Infinity,
-                delay: Math.random() * 8,
+                delay: delay,
                 ease: "easeInOut"
               }}
             />
@@ -500,7 +517,11 @@ export default function BlogIndex() {
         
         {/* Grid de posts modernizado */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {getSortedPosts().map((p, idx) => (
+          {(() => {
+            try {
+              return getSortedPosts()
+                .filter(p => p && p.slug && p.title && p.excerpt) // Filtrar posts inválidos
+                .map((p, idx) => (
             <motion.div
               key={p.slug}
               initial={{ opacity: 0, y: 20 }}
@@ -517,7 +538,7 @@ export default function BlogIndex() {
                     <div className="w-full h-full overflow-hidden rounded-t-2xl">
                       <img 
                         src={p.cover} 
-                        alt={p.title[language]} 
+                        alt={p.title?.[language] || p.title?.pt || ''} 
                         className="w-full h-full object-cover" 
                         style={{ 
                           borderRadius: '1rem 1rem 0 0',
@@ -535,11 +556,13 @@ export default function BlogIndex() {
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 rounded-t-2xl"></div>
                     {/* Badge de categoria */}
-                    <div className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20">
-                      <span className="text-xs font-medium text-white">
-                        {p.tags[0]?.toUpperCase()}
-                      </span>
-                    </div>
+                    {p.tags && Array.isArray(p.tags) && p.tags.length > 0 && (
+                      <div className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/20">
+                        <span className="text-xs font-medium text-white">
+                          {p.tags[0]?.toUpperCase() || ''}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 )}
                 
@@ -566,7 +589,7 @@ export default function BlogIndex() {
                             const year = date.getFullYear();
                             return `${day}/${month}/${year}`;
                           } catch (error) {
-                            return p.date.split('T')[0]; // Fallback para data ISO
+                            return p.date ? p.date.split('T')[0] : ''; // Fallback para data ISO
                           }
                         })()}
                       </span>
@@ -575,12 +598,12 @@ export default function BlogIndex() {
                   
                   {/* Título */}
                   <h2 className="text-white text-xl md:text-2xl font-bold mb-3 leading-tight group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                    {p.title[language]}
+                    {p.title?.[language] || p.title?.pt || ''}
                   </h2>
                   
                   {/* Excerpt */}
                   <p className="text-white/70 mb-8 line-clamp-2 leading-relaxed text-sm flex-grow">
-                    {p.excerpt[language]}
+                    {p.excerpt?.[language] || p.excerpt?.pt || ''}
                   </p>
                   
                   {/* CTA - Fixado no final */}
@@ -596,7 +619,15 @@ export default function BlogIndex() {
                 </div>
               </Link>
             </motion.div>
-          ))}
+                ));
+            } catch (error) {
+              // Log apenas no cliente
+              if (typeof console !== 'undefined' && console.error) {
+                console.error('Error rendering posts:', error);
+              }
+              return [];
+            }
+          })()}
         </div>
       </div>
     </section>
