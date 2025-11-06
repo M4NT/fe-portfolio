@@ -13,8 +13,10 @@ export default function BlogIndex() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
-  // Força scroll ao topo quando a página carrega
+  // Força scroll ao topo quando a página carrega (apenas no cliente)
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     // Scroll imediato
     window.scrollTo(0, 0);
     
@@ -24,8 +26,10 @@ export default function BlogIndex() {
     }, 100);
   }, []);
 
-  // SEO Meta tags para Blog Index
+  // SEO Meta tags para Blog Index (apenas no cliente)
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+    
     try {
       const title = language === 'pt' ? 'Blog - Desenvolvimento Web e Design | Yan Mantovani' : 
                     language === 'en' ? 'Blog - Web Development and Design | Yan Mantovani' : 
@@ -35,7 +39,11 @@ export default function BlogIndex() {
                         language === 'en' ? 'Articles about web development, design and landing pages. Tips, tutorials and insights to create converting websites.' :
                         'Artículos sobre desarrollo web, diseño y landing pages. Consejos, tutoriales e insights para crear sitios que convierten.';
     
-    document.title = title;
+    if (document.title !== undefined) {
+      document.title = title;
+    }
+    
+    if (!document.head) return;
     
     // Meta description
     let metaDesc = document.head.querySelector('meta[name="description"]') as HTMLMetaElement;
@@ -110,16 +118,18 @@ export default function BlogIndex() {
     };
     
     // Remove existing structured data
-    const existingScript = document.head.querySelector('script[type="application/ld+json"]');
-    if (existingScript) {
-      existingScript.remove();
+    if (document.head) {
+      const existingScript = document.head.querySelector('script[type="application/ld+json"]');
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript);
+      }
+      
+      // Add new structured data
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(structuredData);
+      document.head.appendChild(script);
     }
-    
-    // Add new structured data
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
     } catch (error) {
       console.error('Error setting up SEO meta tags:', error);
     }

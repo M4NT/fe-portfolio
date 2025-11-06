@@ -21,9 +21,10 @@ import BackToTop from './components/BackToTop';
 import CookieConsent from './components/CookieConsent';
 import InstallPWA from './components/InstallPWA';
 
-// Lazy load pages para reduzir JS não usado
-const BlogIndex = lazy(() => import('./pages/BlogIndex'));
-const BlogPost = lazy(() => import('./pages/BlogPost').catch(() => ({ default: () => <div className="text-white p-8">Erro ao carregar BlogPost</div> })));
+// Import direto para SSR funcionar corretamente
+// Lazy loading não funciona bem com renderToString (SSR)
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
@@ -131,24 +132,9 @@ function AppContent() {
               <CookiePolicy />
             </Suspense>
           } />
-          {/* Blog */}
-          <Route path="/blog" element={
-            <Suspense fallback={<div>Carregando...</div>}>
-              <BlogIndex />
-            </Suspense>
-          } />
-          <Route path="/blog/:slug" element={
-            <Suspense fallback={
-              <div className="min-h-screen bg-black text-white flex items-center justify-center">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-                  <p>Carregando post...</p>
-                </div>
-              </div>
-            }>
-              <BlogPost />
-            </Suspense>
-          } />
+          {/* Blog - Import direto para SSR funcionar */}
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
         
         {!isLoading && <BackToTop />}
