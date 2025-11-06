@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './components/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -25,9 +25,9 @@ import InstallPWA from './components/InstallPWA';
 // Lazy loading não funciona bem com renderToString (SSR)
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
-const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
-const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
+import CookiePolicy from './pages/CookiePolicy';
 
 // Import Analytics - DESABILITADO TEMPORARIAMENTE
 // import { trackPageView } from './lib/analytics-ga4';
@@ -116,22 +116,10 @@ function AppContent() {
             </>
           } />
           
-          {/* Legal Pages */}
-          <Route path="/privacy-policy" element={
-            <Suspense fallback={<div>Carregando...</div>}>
-              <PrivacyPolicy />
-            </Suspense>
-          } />
-          <Route path="/terms-of-use" element={
-            <Suspense fallback={<div>Carregando...</div>}>
-              <TermsOfUse />
-            </Suspense>
-          } />
-          <Route path="/cookie-policy" element={
-            <Suspense fallback={<div>Carregando...</div>}>
-              <CookiePolicy />
-            </Suspense>
-          } />
+          {/* Legal Pages - Import direto para SSR funcionar */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
           {/* Blog - Import direto para SSR funcionar */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

@@ -83,18 +83,22 @@ export function render(url: string) {
       
       // Se a renderização demorou muito, pode haver problema
       if (Date.now() - startTime > timeout) {
-        console.warn(`Renderização lenta para ${normalizedUrl}: ${Date.now() - startTime}ms`);
+        console.warn(`[SSR] Renderização lenta para ${normalizedUrl}: ${Date.now() - startTime}ms`);
+      } else {
+        console.log(`[SSR] Renderizado com sucesso: ${normalizedUrl} (${Date.now() - startTime}ms)`);
       }
     } catch (renderError: any) {
       error = renderError;
-      console.error(`Erro ao renderizar ${normalizedUrl}:`, renderError);
+      console.error(`[SSR] Erro ao renderizar ${normalizedUrl}:`, renderError);
+      console.error(`[SSR] Stack trace:`, renderError?.stack);
+      console.error(`[SSR] Message:`, renderError?.message);
       
       // Retornar HTML básico com fallback
       html = `
         <div class="min-h-screen bg-black text-white flex items-center justify-center">
           <div class="text-center p-8">
-            <h1 class="text-2xl font-bold mb-4">Carregando...</h1>
-            <p class="text-gray-400">Por favor, aguarde enquanto carregamos o conteúdo.</p>
+            <h1 class="text-2xl font-bold mb-4">Yan Mantovani - Desenvolvedor Frontend Freelancer</h1>
+            <p class="text-gray-400">Carregando conteúdo...</p>
           </div>
         </div>
       `;
@@ -102,7 +106,7 @@ export function render(url: string) {
     
     // Se o HTML está vazio ou muito pequeno, pode haver problema
     if (!html || html.trim().length < 100) {
-      console.warn(`HTML muito pequeno para ${normalizedUrl}: ${html.length} caracteres`);
+      console.warn(`[SSR] HTML muito pequeno para ${normalizedUrl}: ${html.length} caracteres`);
       html = `
         <div class="min-h-screen bg-black text-white flex items-center justify-center">
           <div class="text-center p-8">
@@ -115,7 +119,10 @@ export function render(url: string) {
     
     return html;
   } catch (e: any) {
-    console.error(`Erro crítico ao renderizar ${url}:`, e);
+    console.error(`[SSR] Erro crítico ao renderizar ${url}:`, e);
+    console.error(`[SSR] Stack trace:`, e?.stack);
+    console.error(`[SSR] Message:`, e?.message);
+    
     // Retornar HTML mínimo para não quebrar completamente
     return `
       <div class="min-h-screen bg-black text-white flex items-center justify-center">

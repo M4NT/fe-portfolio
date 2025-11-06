@@ -42,11 +42,15 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   private handleReload = () => {
-    window.location.reload();
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
   };
 
   private handleGoHome = () => {
-    window.location.href = '/';
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    }
   };
 
   public render() {
@@ -80,7 +84,7 @@ class ErrorBoundary extends Component<Props, State> {
               </p>
 
               {/* Detalhes do erro (apenas em desenvolvimento) */}
-              {process.env.NODE_ENV === 'development' && this.state.error && (
+              {typeof process !== 'undefined' && process.env?.NODE_ENV === 'development' && this.state.error && (
                 <details className="mb-8 p-4 bg-black/50 rounded-lg border border-white/10">
                   <summary className="text-white/80 cursor-pointer hover:text-white transition-colors mb-2">
                     Detalhes técnicos (dev only)
