@@ -113,18 +113,33 @@ const urls = [
   }
 ];
 
+// Gerar sitemap XML válido e bem formatado (formato simplificado para compatibilidade máxima com Google)
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-${urls.map(url => `  <url>
-    <loc>${url.loc}</loc>
-    ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>` : ''}
-    ${url.changefreq ? `<changefreq>${url.changefreq}</changefreq>` : ''}
-    ${url.priority ? `<priority>${url.priority}</priority>` : ''}
-  </url>`).join('\n')}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(url => {
+  // Garantir que a URL está corretamente formatada
+  const loc = url.loc.trim();
+  // Garantir formato de data correto (YYYY-MM-DD) - remover timestamp se houver
+  let lastmod = '';
+  if (url.lastmod) {
+    const dateStr = url.lastmod.trim();
+    // Se for formato ISO (com T e Z), extrair apenas a data
+    if (dateStr.includes('T')) {
+      lastmod = dateStr.split('T')[0];
+    } else {
+      lastmod = dateStr;
+    }
+  }
+  const changefreq = url.changefreq || '';
+  const priority = url.priority !== undefined ? url.priority.toString() : '';
+  
+  return `  <url>
+    <loc>${loc}</loc>${lastmod ? `
+    <lastmod>${lastmod}</lastmod>` : ''}${changefreq ? `
+    <changefreq>${changefreq}</changefreq>` : ''}${priority ? `
+    <priority>${priority}</priority>` : ''}
+  </url>`;
+}).join('\n')}
 </urlset>`;
 
 // Gerar também robots.txt melhorado
