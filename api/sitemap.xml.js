@@ -8,10 +8,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Sitemap XML gerado dinamicamente (fallback se arquivo não existir)
 function generateSitemap(req) {
-  // Detectar se a requisição veio com www ou não-www
-  const host = req?.headers?.host || 'yanmantovani.com';
+  // SEMPRE usar a versão sem www como canônica (oficial)
+  // Remover www se presente no host
+  let host = req?.headers?.host || 'yanmantovani.com';
+  if (host.startsWith('www.')) {
+    host = host.replace('www.', '');
+  }
   const protocol = req?.headers?.['x-forwarded-proto'] || 'https';
-  const baseUrl = `${protocol}://${host}`;
+  const baseUrl = `${protocol}://${host}`; // Sempre sem www
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
   const blogPosts = [
@@ -103,14 +107,23 @@ export default async function handler(req, res) {
       sitemap = generateSitemap(req);
     }
 
-    // Ajustar URLs no sitemap para corresponder ao domínio da requisição
-    const host = req.headers?.host || 'yanmantovani.com';
+    // SEMPRE usar a versão sem www como canônica (oficial)
+    // Remover www se presente no host e garantir que todas as URLs sejam sem www
+    let host = req.headers?.host || 'yanmantovani.com';
+    if (host.startsWith('www.')) {
+      host = host.replace('www.', '');
+    }
     const protocol = req.headers?.['x-forwarded-proto'] || 'https';
-    const requestBaseUrl = `${protocol}://${host}`;
-
-    // Se o sitemap foi lido de arquivo, ajustar URLs para corresponder ao domínio da requisição
-    if (sitemap && requestBaseUrl !== 'https://yanmantovani.com') {
-      sitemap = sitemap.replace(/https:\/\/yanmantovani\.com/g, requestBaseUrl);
+    const canonicalBaseUrl = `${protocol}://${host}`; // Sempre sem www
+    
+    // Garantir que todas as URLs no sitemap sejam sem www (versão canônica)
+    if (sitemap) {
+      // Substituir qualquer ocorrência de www.yanmantovani.com por yanmantovani.com
+      sitemap = sitemap.replace(/https:\/\/www\.yanmantovani\.com/g, 'https://yanmantovani.com');
+      // Se houver outras variações, normalizar para a versão sem www
+      if (canonicalBaseUrl !== 'https://yanmantovani.com') {
+        sitemap = sitemap.replace(new RegExp(canonicalBaseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), 'https://yanmantovani.com');
+      }
     }
 
     // Configurar headers corretos para XML (CRÍTICO: deve ser application/xml, não text/plain)
