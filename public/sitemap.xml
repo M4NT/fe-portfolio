@@ -1,133 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Homepage - Portuguese (Default) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yanmantovani.com/</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2025-01-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://yanmantovani.com/" />
   </url>
-  
-  <!-- Homepage - English -->
-  <url>
-    <loc>https://yanmantovani.com/en</loc>
-    <lastmod>2025-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
-  </url>
-  
-  <!-- Homepage - Spanish -->
-  <url>
-    <loc>https://yanmantovani.com/es</loc>
-    <lastmod>2025-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://yanmantovani.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://yanmantovani.com/en" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://yanmantovani.com/es" />
-  </url>
-  
-  <!-- Serviços -->
-  <url>
-    <loc>https://yanmantovani.com/#services</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Trabalhos Selecionados -->
-  <url>
-    <loc>https://yanmantovani.com/#works</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Sobre -->
-  <url>
-    <loc>https://yanmantovani.com/#about</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Contato -->
-  <url>
-    <loc>https://yanmantovani.com/#contact</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Quem Indica -->
-  <url>
-    <loc>https://yanmantovani.com/#affiliates</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Blog -->
   <url>
     <loc>https://yanmantovani.com/blog</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yanmantovani.com/blog/a-revolucao-silenciosa-por-que-o-futuro-do-wordpress-e-escrito-em-react</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yanmantovani.com/blog/seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas</loc>
+    <lastmod>2025-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yanmantovani.com/blog/por-que-seu-site-lento-esta-roubando-seus-clientes</loc>
+    <lastmod>2025-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yanmantovani.com/blog/o-que-e-landing-page-melhores-ferramentas-gratuitas</loc>
+    <lastmod>2025-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yanmantovani.com/blog/quanto-custa-landing-page-2025</loc>
     <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yanmantovani.com/blog/etapas-para-lancar-seu-site</loc>
-    <lastmod>2025-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yanmantovani.com/blog/como-aumentar-conversoes-landing-page</loc>
     <lastmod>2025-01-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yanmantovani.com/blog/etapas-para-lancar-seu-site</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yanmantovani.com/blog/melhores-ferramentas-desenvolvimento-web-2025</loc>
-    <lastmod>2025-01-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-  
-  <!-- Páginas Legais -->
   <url>
     <loc>https://yanmantovani.com/privacy-policy</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-01-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://yanmantovani.com/terms-of-use</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-01-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://yanmantovani.com/cookie-policy</loc>
-    <lastmod>2025-01-20</lastmod>
+    <lastmod>2025-01-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
 </urlset>
-

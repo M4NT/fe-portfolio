@@ -88,7 +88,10 @@ const urls = [
     lastmod: post.date ? post.date.split('T')[0] : currentDate, // Formato YYYY-MM-DD
     changefreq: 'weekly', // Aumentado para weekly (conteúdo é importante)
     priority: 0.8 // Aumentado de 0.7 para 0.8
-  })),
+  })).sort((a, b) => {
+    // Ordenar por data (mais recente primeiro)
+    return new Date(b.lastmod).getTime() - new Date(a.lastmod).getTime();
+  }),
   // Legal pages
   {
     loc: `${baseUrl}/privacy-policy`,
