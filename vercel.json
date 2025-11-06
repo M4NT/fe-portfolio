@@ -40,8 +40,7 @@
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         }
-      ],
-      "force": true
+      ]
     },
     {
       "source": "/robots.txt",
