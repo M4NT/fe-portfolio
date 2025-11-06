@@ -13,7 +13,7 @@ function generateSitemap(req) {
   const protocol = req?.headers?.['x-forwarded-proto'] || 'https';
   const baseUrl = `${protocol}://${host}`;
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-  
+
   const blogPosts = [
     { slug: 'a-revolucao-silenciosa-por-que-o-futuro-do-wordpress-e-escrito-em-react', date: '2025-01-23' },
     { slug: 'seu-site-e-uma-vitrine-bonita-ou-uma-maquina-de-vendas', date: '2025-01-22' },
@@ -28,10 +28,11 @@ function generateSitemap(req) {
   const urls = [
     { loc: baseUrl, lastmod: currentDate, changefreq: 'daily', priority: '1.0' },
     { loc: `${baseUrl}/blog`, lastmod: currentDate, changefreq: 'daily', priority: '0.9' },
-    { loc: `${baseUrl}/#services`, lastmod: currentDate, changefreq: 'weekly', priority: '0.9' },
-    { loc: `${baseUrl}/#projects`, lastmod: currentDate, changefreq: 'weekly', priority: '0.9' },
-    { loc: `${baseUrl}/#about`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
-    { loc: `${baseUrl}/#contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+    // REMOVIDAS as URLs com #
+    // { loc: `${baseUrl}/#services`, lastmod: currentDate, changefreq: 'weekly', priority: '0.9' },
+    // { loc: `${baseUrl}/#projects`, lastmod: currentDate, changefreq: 'weekly', priority: '0.9' },
+    // { loc: `${baseUrl}/#about`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+    // { loc: `${baseUrl}/#contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
     ...blogPosts.map(post => ({
       loc: `${baseUrl}/blog/${post.slug}`,
       lastmod: post.date,
@@ -59,23 +60,23 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
+
   // Responder a requisições OPTIONS (preflight)
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
-  
+
   try {
     let sitemap = null;
-    
+
     // Tentar ler arquivo estático de múltiplos locais
     const possiblePaths = [
       path.resolve(__dirname, '../dist/client/sitemap.xml'),
       path.resolve(__dirname, '../public/sitemap.xml'),
       path.resolve(__dirname, '../dist/sitemap.xml')
     ];
-    
+
     for (const sitemapPath of possiblePaths) {
       if (fs.existsSync(sitemapPath)) {
         try {
@@ -90,42 +91,42 @@ export default async function handler(req, res) {
         }
       }
     }
-    
+
     // Se não encontrou arquivo válido, gerar dinamicamente
     if (!sitemap || sitemap.trim().length === 0) {
       sitemap = generateSitemap(req);
     }
-    
+
     // Validar formato básico do XML
     if (!sitemap.includes('<?xml') || !sitemap.includes('<urlset')) {
       console.warn('Sitemap inválido detectado, regenerando...');
       sitemap = generateSitemap(req);
     }
-    
+
     // Ajustar URLs no sitemap para corresponder ao domínio da requisição
     const host = req.headers?.host || 'yanmantovani.com';
     const protocol = req.headers?.['x-forwarded-proto'] || 'https';
     const requestBaseUrl = `${protocol}://${host}`;
-    
+
     // Se o sitemap foi lido de arquivo, ajustar URLs para corresponder ao domínio da requisição
     if (sitemap && requestBaseUrl !== 'https://yanmantovani.com') {
       sitemap = sitemap.replace(/https:\/\/yanmantovani\.com/g, requestBaseUrl);
     }
-    
+
     // Configurar headers corretos para XML (CRÍTICO: deve ser application/xml, não text/plain)
     // IMPORTANTE: Configurar headers ANTES de enviar resposta
     res.setHeader('Content-Type', 'application/xml; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Content-Length', Buffer.byteLength(sitemap, 'utf-8').toString());
-    
+
     // Log para debug
     const userAgent = req.headers['user-agent'] || 'unknown';
     const isGooglebot = userAgent.includes('Googlebot') || userAgent.includes('Google');
     if (isGooglebot) {
       console.log('[SITEMAP] Requisição do Googlebot detectada');
     }
-    
+
     // Enviar resposta com status 200 e garantir que Content-Type não seja sobrescrito
     res.status(200).setHeader('Content-Type', 'application/xml; charset=utf-8').send(sitemap);
   } catch (error) {
