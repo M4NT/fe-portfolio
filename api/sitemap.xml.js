@@ -52,53 +52,50 @@ ${urls.map(url => `  <url>
 }
 
 export default async function handler(req, res) {
+  // Permitir CORS para Googlebot
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // Responder a requisições OPTIONS (preflight)
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  
   try {
-    // Tentar ler o sitemap de dist/client primeiro (produção)
-    let sitemapPath = path.resolve(__dirname, '../dist/client/sitemap.xml');
     let sitemap = null;
     
-    // Tentar ler arquivo estático
-    if (fs.existsSync(sitemapPath)) {
-      try {
-        sitemap = fs.readFileSync(sitemapPath, 'utf-8');
-      } catch (e) {
-        console.warn('Erro ao ler sitemap de dist/client:', e.message);
-      }
-    }
+    // Tentar ler arquivo estático de múltiplos locais
+    const possiblePaths = [
+      path.resolve(__dirname, '../dist/client/sitemap.xml'),
+      path.resolve(__dirname, '../public/sitemap.xml'),
+      path.resolve(__dirname, '../dist/sitemap.xml')
+    ];
     
-    // Se não encontrou, tentar public (fallback)
-    if (!sitemap) {
-      sitemapPath = path.resolve(__dirname, '../public/sitemap.xml');
+    for (const sitemapPath of possiblePaths) {
       if (fs.existsSync(sitemapPath)) {
         try {
           sitemap = fs.readFileSync(sitemapPath, 'utf-8');
+          // Validar que não está vazio
+          if (sitemap && sitemap.trim().length > 0) {
+            break;
+          }
         } catch (e) {
-          console.warn('Erro ao ler sitemap de public:', e.message);
+          // Continuar tentando outros caminhos
+          continue;
         }
       }
     }
     
-    // Se ainda não encontrou, tentar dist (outro fallback)
-    if (!sitemap) {
-      sitemapPath = path.resolve(__dirname, '../dist/sitemap.xml');
-      if (fs.existsSync(sitemapPath)) {
-        try {
-          sitemap = fs.readFileSync(sitemapPath, 'utf-8');
-        } catch (e) {
-          console.warn('Erro ao ler sitemap de dist:', e.message);
-        }
-      }
-    }
-    
-    // Se ainda não encontrou, gerar dinamicamente
-    if (!sitemap) {
-      console.log('Gerando sitemap dinamicamente (arquivo não encontrado)');
+    // Se não encontrou arquivo válido, gerar dinamicamente
+    if (!sitemap || sitemap.trim().length === 0) {
       sitemap = generateSitemap();
     }
     
-    // Validar que o sitemap não está vazio
-    if (!sitemap || sitemap.trim().length === 0) {
-      console.error('Sitemap vazio, gerando dinamicamente');
+    // Validar formato básico do XML
+    if (!sitemap.includes('<?xml') || !sitemap.includes('<urlset')) {
+      console.warn('Sitemap inválido detectado, regenerando...');
       sitemap = generateSitemap();
     }
     
@@ -106,25 +103,28 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type', 'application/xml; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
     res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Content-Length', Buffer.byteLength(sitemap, 'utf-8').toString());
     
-    // Log para debug (apenas em desenvolvimento)
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Sitemap servido com sucesso, tamanho:', sitemap.length, 'bytes');
+    // Log para debug
+    const userAgent = req.headers['user-agent'] || 'unknown';
+    const isGooglebot = userAgent.includes('Googlebot') || userAgent.includes('Google');
+    if (isGooglebot) {
+      console.log('[SITEMAP] Requisição do Googlebot detectada');
     }
     
     res.status(200).send(sitemap);
   } catch (error) {
-    console.error('Erro ao servir sitemap:', error);
-    // Em caso de erro, tentar gerar dinamicamente
+    console.error('[SITEMAP] Erro ao servir sitemap:', error);
+    // Em caso de erro, sempre tentar gerar dinamicamente
     try {
       const fallbackSitemap = generateSitemap();
       res.setHeader('Content-Type', 'application/xml; charset=utf-8');
       res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+      res.setHeader('X-Content-Type-Options', 'nosniff');
       res.status(200).send(fallbackSitemap);
     } catch (fallbackError) {
-      console.error('Erro ao gerar sitemap de fallback:', fallbackError);
-      res.status(500).send('Erro ao carregar sitemap');
+      console.error('[SITEMAP] Erro ao gerar sitemap de fallback:', fallbackError);
+      res.status(500).setHeader('Content-Type', 'text/plain').send('Erro ao carregar sitemap');
     }
   }
 }
-

@@ -7,6 +7,7 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://yanmantovani.com/sitemap.xml
+Sitemap: https://www.yanmantovani.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 0
