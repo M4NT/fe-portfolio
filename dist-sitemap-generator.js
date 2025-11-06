@@ -41,7 +41,7 @@ const blogPosts = [
   }
 ];
 
-// SEMPRE usar a versão sem www como canônica (oficial)
+// SEMPRE usar a versão sem www como canônica (oficial)a
 const baseUrl = 'https://yanmantovani.com';
 const currentDate = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD para sitemap
 
