@@ -7,6 +7,10 @@
       "destination": "/assets/$1"
     },
     {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml.js"
+    },
+    {
       "source": "/((?!assets/|images/|favicon|robots|sitemap|api|_next).*)",
       "destination": "/api/index.js"
     }
