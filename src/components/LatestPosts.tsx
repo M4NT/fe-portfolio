@@ -34,6 +34,12 @@ export default function LatestPosts() {
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined') {
+      setIsMobile(false); // Default para desktop no SSR
+      return;
+    }
+    
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
     };

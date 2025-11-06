@@ -28,8 +28,11 @@ export default function BlogPost() {
 
     // Carregar post de forma síncrona
     const loadedPost = getPost(slug);
-    console.log('Buscando post com slug:', slug);
-    console.log('Post encontrado?', !!loadedPost);
+    // Log apenas no cliente para debug
+    if (typeof console !== 'undefined' && console.log) {
+      console.log('Buscando post com slug:', slug);
+      console.log('Post encontrado?', !!loadedPost);
+    }
     
     if (loadedPost) {
       setPost(loadedPost);

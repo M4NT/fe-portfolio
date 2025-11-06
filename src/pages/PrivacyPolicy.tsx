@@ -35,7 +35,7 @@ const PrivacyPolicy = () => {
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">Política de Privacidade</h1>
               <p className="text-white/60">Conforme Lei Geral de Proteção de Dados (LGPD) - Lei nº 13.709/2018</p>
-              <p className="text-white/50 text-sm">Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
+              <p className="text-white/50 text-sm">Última atualização: {typeof Intl !== 'undefined' && Intl.DateTimeFormat ? new Date().toLocaleDateString('pt-BR') : '06/11/2025'}</p>
             </div>
           </div>
         </div>

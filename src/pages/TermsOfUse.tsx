@@ -35,7 +35,7 @@ const TermsOfUse = () => {
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">Termos de Uso</h1>
               <p className="text-white/60">Contrato de Prestação de Serviços de Desenvolvimento Web</p>
-              <p className="text-white/50 text-sm">Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
+              <p className="text-white/50 text-sm">Última atualização: {typeof Intl !== 'undefined' && Intl.DateTimeFormat ? new Date().toLocaleDateString('pt-BR') : '06/11/2025'}</p>
             </div>
           </div>
         </div>

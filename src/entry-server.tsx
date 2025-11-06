@@ -44,11 +44,35 @@ if (typeof window === 'undefined') {
     removeItem: () => {},
     clear: () => {},
   } as any;
+  // Mock completo do Intl para SSR
   global.Intl = {
-    DateTimeFormat: () => ({
-      resolvedOptions: () => ({ timeZone: 'America/Sao_Paulo' }),
-    }),
+    DateTimeFormat: (locale?: string, options?: any) => {
+      const format = (date: Date) => {
+        // Formato simples para SSR: DD/MM/YYYY
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
+      return {
+        format,
+        resolvedOptions: () => ({ 
+          timeZone: 'America/Sao_Paulo',
+          locale: locale || 'pt-BR'
+        }),
+      };
+    },
   } as any;
+  
+  // Adicionar toLocaleDateString ao Date.prototype se não existir
+  if (typeof Date.prototype.toLocaleDateString === 'undefined') {
+    Date.prototype.toLocaleDateString = function(locale?: string) {
+      const day = this.getDate().toString().padStart(2, '0');
+      const month = (this.getMonth() + 1).toString().padStart(2, '0');
+      const year = this.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
+  }
 }
 
 export function render(url: string) {
