@@ -58,30 +58,32 @@ const urls = [
     changefreq: 'daily',
     priority: 0.9
   },
-  {
-    loc: `${baseUrl}/#services`,
-    lastmod: currentDate,
-    changefreq: 'weekly', // Aumentado para weekly
-    priority: 0.9 // Aumentado de 0.8 para 0.9
-  },
-  {
-    loc: `${baseUrl}/#projects`,
-    lastmod: currentDate,
-    changefreq: 'weekly',
-    priority: 0.9
-  },
-  {
-    loc: `${baseUrl}/#about`,
-    lastmod: currentDate,
-    changefreq: 'monthly',
-    priority: 0.8
-  },
-  {
-    loc: `${baseUrl}/#contact`,
-    lastmod: currentDate,
-    changefreq: 'monthly',
-    priority: 0.8 // Aumentado de 0.7 para 0.8
-  },
+  // REMOVIDAS URLs com # (hash) - Google não indexa bem URLs com hash
+  // Seções da homepage são indexadas através da URL principal
+  // {
+  //   loc: `${baseUrl}/#services`,
+  //   lastmod: currentDate,
+  //   changefreq: 'weekly',
+  //   priority: 0.9
+  // },
+  // {
+  //   loc: `${baseUrl}/#projects`,
+  //   lastmod: currentDate,
+  //   changefreq: 'weekly',
+  //   priority: 0.9
+  // },
+  // {
+  //   loc: `${baseUrl}/#about`,
+  //   lastmod: currentDate,
+  //   changefreq: 'monthly',
+  //   priority: 0.8
+  // },
+  // {
+  //   loc: `${baseUrl}/#contact`,
+  //   lastmod: currentDate,
+  //   changefreq: 'monthly',
+  //   priority: 0.8
+  // },
   // Blog posts - Prioridade alta para conteúdo
   ...blogPosts.map(post => ({
     loc: `${baseUrl}/blog/${post.slug}`,
