@@ -41,6 +41,12 @@ function AppContent() {
   // }, [location]);
 
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined') {
+      setIsLoading(false);
+      return;
+    }
+
     // Force scroll to top and clear URL hash on load/reload
     window.scrollTo(0, 0);
     if (window.location.hash) {

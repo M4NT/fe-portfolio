@@ -5,24 +5,64 @@ import App from './App';
 
 // Mock para APIs do navegador que não existem no servidor
 if (typeof window === 'undefined') {
-  global.window = {} as any;
+  global.window = {
+    scrollTo: () => {},
+    location: { pathname: '', hash: '', search: '', href: '' },
+    history: { replaceState: () => {}, pushState: () => {} },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    innerWidth: 1920,
+    innerHeight: 1080,
+    pageYOffset: 0,
+  } as any;
   global.document = {
     createElement: () => ({}),
     getElementById: () => null,
     querySelector: () => null,
     querySelectorAll: () => [],
     head: { appendChild: () => {}, querySelector: () => null, removeChild: () => {} },
-    body: { appendChild: () => {}, removeChild: () => {} },
+    body: { appendChild: () => {}, removeChild: () => {}, style: {} },
+    cookie: '',
+    hidden: false,
   } as any;
-  global.navigator = { userAgent: 'SSR' } as any;
+  global.navigator = { 
+    userAgent: 'SSR',
+    language: 'pt-BR',
+    userLanguage: 'pt-BR',
+  } as any;
   global.location = { href: '', pathname: '', search: '', hash: '' } as any;
   global.history = { replaceState: () => {}, pushState: () => {} } as any;
+  global.localStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
+  } as any;
+  global.sessionStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
+  } as any;
+  global.Intl = {
+    DateTimeFormat: () => ({
+      resolvedOptions: () => ({ timeZone: 'America/Sao_Paulo' }),
+    }),
+  } as any;
 }
 
 export function render(url: string) {
   try {
     // Normalizar URL para remover query params e hash
     const normalizedUrl = url.split('?')[0].split('#')[0] || '/';
+    
+    // Atualizar mock do window.location com a URL atual
+    if (typeof window === 'undefined') {
+      global.window.location.pathname = normalizedUrl;
+      global.window.location.href = `https://yanmantovani.com${normalizedUrl}`;
+      global.location.pathname = normalizedUrl;
+      global.location.href = `https://yanmantovani.com${normalizedUrl}`;
+    }
     
     // Timeout para evitar travamentos
     const timeout = 10000; // 10 segundos

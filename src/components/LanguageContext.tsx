@@ -373,8 +373,14 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [isInitialized, setIsInitialized] = useState(false);
   const [showLanguageNotification, setShowLanguageNotification] = useState(false);
 
-  // Detecta idioma automaticamente na inicialização
+  // Detecta idioma automaticamente na inicialização (apenas no cliente)
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined') {
+      setIsInitialized(true);
+      return;
+    }
+
     const detectLanguage = (): Language => {
       // 1. Verifica se é página legal - NÃO REDIRECIONA
       const path = window.location.pathname;
@@ -393,13 +399,17 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       }
 
       // 3. Verifica localStorage
-      const savedLang = localStorage.getItem('preferred-language') as Language;
-      if (savedLang && ['pt', 'en', 'es'].includes(savedLang)) {
-        return savedLang;
+      try {
+        const savedLang = localStorage.getItem('preferred-language') as Language;
+        if (savedLang && ['pt', 'en', 'es'].includes(savedLang)) {
+          return savedLang;
+        }
+      } catch (e) {
+        // localStorage pode não estar disponível
       }
 
       // 4. Detecta idioma do navegador
-      const browserLang = navigator.language || (navigator as any).userLanguage || 'pt-BR';
+      const browserLang = (typeof navigator !== 'undefined' && navigator.language) || (typeof navigator !== 'undefined' && (navigator as any).userLanguage) || 'pt-BR';
 
       // Mapeia códigos de idioma do navegador
       const langMap: { [key: string]: Language } = {
@@ -437,6 +447,11 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       // Detecta por geolocalização se disponível
       const detectByLocation = (): Language | null => {
         try {
+          // Verifica se Intl está disponível
+          if (typeof Intl === 'undefined' || !Intl.DateTimeFormat) {
+            return null;
+          }
+          
           // Lista de países de língua portuguesa
           const portugueseCountries = ['BR', 'PT', 'AO', 'MZ', 'GW', 'CV', 'ST', 'TL'];
           // Lista de países de língua espanhola
@@ -452,7 +467,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
           if (spanishCountries.includes(countryCode)) return 'es';
           if (englishCountries.includes(countryCode)) return 'en';
         } catch (e) {
-          console.log('Location detection failed:', e);
+          // Silenciosamente falha se não conseguir detectar
         }
         return null;
       };
@@ -467,9 +482,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
       // Fallback para idioma do navegador
       const detected = langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'pt';
-      console.log('🌐 Language detected by browser:', browserLang, '->', detected);
-      console.log('🔧 Navigator language:', navigator.language);
-      console.log('🔧 User language:', (navigator as any).userLanguage);
+      if (typeof console !== 'undefined' && console.log) {
+        console.log('🌐 Language detected by browser:', browserLang, '->', detected);
+        if (typeof navigator !== 'undefined') {
+          console.log('🔧 Navigator language:', navigator.language);
+          console.log('🔧 User language:', (navigator as any).userLanguage);
+        }
+      }
       return detected;
     };
 
@@ -478,56 +497,70 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     setIsInitialized(true);
     
     // Salva preferência APENAS se não for página legal
-    const path = window.location.pathname;
-    const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
-    const isLegalPage = legalPages.some(page => path.startsWith(page));
-    
-    if (!isLegalPage) {
-      // Verifica se foi detectado automaticamente (não estava salvo)
-      const savedLang = localStorage.getItem('preferred-language');
-      if (!savedLang || savedLang !== detected) {
-        setShowLanguageNotification(true);
-        // Auto-hide após 5 segundos
-        setTimeout(() => setShowLanguageNotification(false), 5000);
+    try {
+      const path = window.location.pathname;
+      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
+      const isLegalPage = legalPages.some(page => path.startsWith(page));
+      
+      if (!isLegalPage) {
+        // Verifica se foi detectado automaticamente (não estava salvo)
+        const savedLang = localStorage.getItem('preferred-language');
+        if (!savedLang || savedLang !== detected) {
+          setShowLanguageNotification(true);
+          // Auto-hide após 5 segundos
+          setTimeout(() => setShowLanguageNotification(false), 5000);
+        }
+        localStorage.setItem('preferred-language', detected);
       }
-      localStorage.setItem('preferred-language', detected);
+    } catch (e) {
+      // Silenciosamente falha se localStorage não estiver disponível
     }
   }, []);
 
-  // Atualiza URL quando idioma muda
+  // Atualiza URL quando idioma muda (apenas no cliente)
   useEffect(() => {
-    if (!isInitialized) return;
+    if (!isInitialized || typeof window === 'undefined') return;
 
-    const currentPath = window.location.pathname;
-    const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
-    const isLegalPage = legalPages.some(page => currentPath.startsWith(page));
-    
-    // NUNCA altera URL para páginas legais - BLOQUEIA COMPLETAMENTE
-    if (isLegalPage) {
-      console.log('Legal page detected - blocking URL changes');
-      return;
-    }
+    try {
+      const currentPath = window.location.pathname;
+      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
+      const isLegalPage = legalPages.some(page => currentPath.startsWith(page));
+      
+      // NUNCA altera URL para páginas legais - BLOQUEIA COMPLETAMENTE
+      if (isLegalPage) {
+        if (typeof console !== 'undefined' && console.log) {
+          console.log('Legal page detected - blocking URL changes');
+        }
+        return;
+      }
 
-    const currentLang = currentPath.split('/')[1];
-    
-    // Remove idioma atual da URL se existir
-    let newPath = currentPath;
-    if (['pt', 'en', 'es'].includes(currentLang)) {
-      newPath = currentPath.replace(`/${currentLang}`, '');
+      const currentLang = currentPath.split('/')[1];
+      
+      // Remove idioma atual da URL se existir
+      let newPath = currentPath;
+      if (['pt', 'en', 'es'].includes(currentLang)) {
+        newPath = currentPath.replace(`/${currentLang}`, '');
+      }
+      
+      // Adiciona novo idioma (exceto para português que é o padrão)
+      if (language !== 'pt') {
+        newPath = `/${language}${newPath || '/'}`;
+      }
+      
+      // Atualiza URL sem recarregar a página
+      if (newPath !== currentPath && window.history) {
+        window.history.replaceState({}, '', newPath);
+      }
+      
+      // Salva preferência
+      try {
+        localStorage.setItem('preferred-language', language);
+      } catch (e) {
+        // localStorage pode não estar disponível
+      }
+    } catch (e) {
+      // Silenciosamente falha se houver erro
     }
-    
-    // Adiciona novo idioma (exceto para português que é o padrão)
-    if (language !== 'pt') {
-      newPath = `/${language}${newPath || '/'}`;
-    }
-    
-    // Atualiza URL sem recarregar a página
-    if (newPath !== currentPath) {
-      window.history.replaceState({}, '', newPath);
-    }
-    
-    // Salva preferência
-    localStorage.setItem('preferred-language', language);
   }, [language, isInitialized]);
 
   const t = (key: string): string => {
