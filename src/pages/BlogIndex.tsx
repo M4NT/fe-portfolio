@@ -135,13 +135,16 @@ export default function BlogIndex() {
     }
   }, [language, sortBy]);
 
-  // Scroll ao topo quando mudar o filtro
+  // Scroll ao topo quando mudar o filtro (apenas no cliente)
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [sortBy]);
 
-  // Fechar dropdown quando clicar fora
+  // Fechar dropdown quando clicar fora (apenas no cliente)
   useEffect(() => {
+    if (typeof document === 'undefined' || !isDropdownOpen) return;
+    
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
       if (!target.closest('.dropdown-container')) {
@@ -149,10 +152,7 @@ export default function BlogIndex() {
       }
     };
 
-    if (isDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
