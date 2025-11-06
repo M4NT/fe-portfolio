@@ -49,6 +49,11 @@ const Footer = () => {
 
 
   const scrollToSection = (sectionId: string) => {
+    // Não executar no servidor
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

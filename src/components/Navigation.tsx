@@ -12,6 +12,11 @@ const Navigation = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
+    // Não executar no servidor
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 50);
@@ -80,6 +85,11 @@ const Navigation = () => {
     // Track navigation
     trackPortfolioEvents.scrollToSection(sectionId);
     
+    // Não executar no servidor
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
     // Se for "home", navegar para a home
     if (sectionId === 'home') {
       window.location.href = '/';
@@ -190,8 +200,13 @@ const Navigation = () => {
               {/* CTA Button */}
               <motion.button
                 onClick={() => {
+                  if (typeof window === 'undefined') return;
                   let ref = '';
-                  try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                  try { 
+                    if (typeof localStorage !== 'undefined') {
+                      ref = localStorage.getItem('referrer') || ref;
+                    }
+                  } catch {}
                   const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e gostaria de avançar com um projeto de Landing Page/Site Institucional. Podemos conversar agora?`;
                   const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
                   trackGAEvent('whatsapp_click', { location: 'navbar', label: 'whatsapp_nav', ref });
@@ -221,8 +236,13 @@ const Navigation = () => {
               {/* WhatsApp CTA Mobile */}
               <motion.button
                 onClick={() => {
+                  if (typeof window === 'undefined') return;
                   let ref = '';
-                  try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                  try { 
+                    if (typeof localStorage !== 'undefined') {
+                      ref = localStorage.getItem('referrer') || ref;
+                    }
+                  } catch {}
                   const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e quero fechar um projeto (Landing Page/Site). Podemos falar?`;
                   const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
                   trackGAEvent('whatsapp_click', { location: 'navbar_mobile', label: 'whatsapp_nav_mobile', ref });
@@ -344,8 +364,13 @@ const Navigation = () => {
                 {/* Mobile CTA */}
                 <motion.button
                   onClick={() => {
+                    if (typeof window === 'undefined') return;
                     let ref = '';
-                    try { ref = localStorage.getItem('referrer') || ref; } catch {}
+                    try { 
+                      if (typeof localStorage !== 'undefined') {
+                        ref = localStorage.getItem('referrer') || ref;
+                      }
+                    } catch {}
                     const msg = `Oi, Yan! 🔥 Fui indicado por ${ref || '___'} e quero fechar um projeto (Landing Page/Site). Podemos falar?`;
                     const url = `https://wa.me/5516992233365?text=${encodeURIComponent(msg)}`;
                     trackGAEvent('whatsapp_click', { location: 'navbar_mobile_menu', label: 'whatsapp_nav_mobile_menu', ref });
