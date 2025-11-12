@@ -382,23 +382,29 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
 
     const detectLanguage = (): Language => {
-      // 1. Verifica se é página legal - NÃO REDIRECIONA
+      // 1. Verifica se é página legal, blog ou post - NÃO REDIRECIONA, SEMPRE PT
       const path = window.location.pathname;
-      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
-      const isLegalPage = legalPages.some(page => path.startsWith(page));
+      const specialPages = [
+        '/privacy-policy', 
+        '/terms-of-use', 
+        '/cookie-policy',
+        '/blog'
+      ];
+      const isSpecialPage = specialPages.some(page => path.startsWith(page));
       
-      if (isLegalPage) {
-        // Para páginas legais, força PT e NÃO altera URL
+      if (isSpecialPage) {
+        // Para páginas especiais, força PT e NÃO altera URL
         return 'pt';
       }
 
-      // 2. Verifica URL path
-      const urlLang = path.split('/')[1];
-      if (urlLang === 'en' || urlLang === 'es' || urlLang === 'pt') {
-        return urlLang;
-      }
+      // 2. REMOVIDO: Verificação de URL path - não usamos mais /en ou /es na URL
+      // Isso estava causando problemas de redirecionamento
+      // const urlLang = path.split('/')[1];
+      // if (urlLang === 'en' || urlLang === 'es' || urlLang === 'pt') {
+      //   return urlLang;
+      // }
 
-      // 3. Verifica localStorage
+      // 3. Verifica localStorage (preferência do usuário)
       try {
         const savedLang = localStorage.getItem('preferred-language') as Language;
         if (savedLang && ['pt', 'en', 'es'].includes(savedLang)) {
@@ -496,13 +502,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     setLanguage(detected);
     setIsInitialized(true);
     
-    // Salva preferência APENAS se não for página legal
+    // Salva preferência APENAS se não for página especial (legal, blog, etc)
     try {
       const path = window.location.pathname;
-      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
-      const isLegalPage = legalPages.some(page => path.startsWith(page));
+      const specialPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy', '/blog'];
+      const isSpecialPage = specialPages.some(page => path.startsWith(page));
       
-      if (!isLegalPage) {
+      if (!isSpecialPage) {
         // Verifica se foi detectado automaticamente (não estava salvo)
         const savedLang = localStorage.getItem('preferred-language');
         if (!savedLang || savedLang !== detected) {
@@ -517,51 +523,16 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
   }, []);
 
-  // Atualiza URL quando idioma muda (apenas no cliente)
-  useEffect(() => {
-    if (!isInitialized || typeof window === 'undefined') return;
-
-    try {
-      const currentPath = window.location.pathname;
-      const legalPages = ['/privacy-policy', '/terms-of-use', '/cookie-policy'];
-      const isLegalPage = legalPages.some(page => currentPath.startsWith(page));
-      
-      // NUNCA altera URL para páginas legais - BLOQUEIA COMPLETAMENTE
-      if (isLegalPage) {
-        if (typeof console !== 'undefined' && console.log) {
-          console.log('Legal page detected - blocking URL changes');
-        }
-        return;
-      }
-
-      const currentLang = currentPath.split('/')[1];
-      
-      // Remove idioma atual da URL se existir
-      let newPath = currentPath;
-      if (['pt', 'en', 'es'].includes(currentLang)) {
-        newPath = currentPath.replace(`/${currentLang}`, '');
-      }
-      
-      // Adiciona novo idioma (exceto para português que é o padrão)
-      if (language !== 'pt') {
-        newPath = `/${language}${newPath || '/'}`;
-      }
-      
-      // Atualiza URL sem recarregar a página
-      if (newPath !== currentPath && window.history) {
-        window.history.replaceState({}, '', newPath);
-      }
-      
-      // Salva preferência
-      try {
-        localStorage.setItem('preferred-language', language);
-      } catch (e) {
-        // localStorage pode não estar disponível
-      }
-    } catch (e) {
-      // Silenciosamente falha se houver erro
-    }
-  }, [language, isInitialized]);
+  // REMOVIDO: Atualização automática de URL quando idioma muda
+  // Isso estava causando problemas de redirecionamento detectados pelo Google
+  // O idioma agora é detectado apenas via localStorage/navegador, SEM alterar a URL
+  // Isso garante que não há redirecionamentos que impeçam a indexação
+  // 
+  // IMPORTANTE: O idioma é detectado e salvo no localStorage, mas a URL NÃO é alterada
+  // Isso evita redirecionamentos que o Google interpreta como erros
+  // useEffect(() => {
+  //   ... código removido para evitar redirecionamentos
+  // }, [language, isInitialized]);
 
   const t = (key: string): string => {
     return translations[key]?.[language] || key;

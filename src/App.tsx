@@ -96,23 +96,56 @@ function AppContent() {
               </main>
             </>
           } />
-          {/* Language-prefixed routes for EN/ES */}
-          <Route path=":lang(en|es)" element={
+          
+          {/* Rotas /en e /es - Retornam homepage SEM redirecionamento para evitar erro no Google */}
+          <Route path="/en" element={
             <>
               <Hero />
-              <SectionDivider />
+              <main id="main-content">
+                <SectionDivider />
               <SelectedWorks />
               <SectionDivider />
               <About />
               <SectionDivider />
               <Services />
               <SectionDivider />
+              <Affiliates />
+              <SectionDivider />
+              <Process />
+              <SectionDivider />
               <PaymentTerms />
               <SectionDivider />
+              <LatestPosts />
               <Contact />
               <SectionDivider />
               <FAQ />
               <Footer />
+              </main>
+            </>
+          } />
+          <Route path="/es" element={
+            <>
+              <Hero />
+              <main id="main-content">
+                <SectionDivider />
+              <SelectedWorks />
+              <SectionDivider />
+              <About />
+              <SectionDivider />
+              <Services />
+              <SectionDivider />
+              <Affiliates />
+              <SectionDivider />
+              <Process />
+              <SectionDivider />
+              <PaymentTerms />
+              <SectionDivider />
+              <LatestPosts />
+              <Contact />
+              <SectionDivider />
+              <FAQ />
+              <Footer />
+              </main>
             </>
           } />
           
@@ -123,6 +156,19 @@ function AppContent() {
           {/* Blog - Import direto para SSR funcionar */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          
+          {/* Fallback para qualquer rota não encontrada - retorna 404 mas sem redirecionamento */}
+          <Route path="*" element={
+            <div className="min-h-screen bg-black text-white flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold mb-4">404</h1>
+                <p className="text-gray-400 mb-6">Página não encontrada</p>
+                <a href="/" className="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
+                  Voltar para Home
+                </a>
+              </div>
+            </div>
+          } />
         </Routes>
         
         {!isLoading && <BackToTop />}
